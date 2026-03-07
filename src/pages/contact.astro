@@ -3,7 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Footer from '../components/layout/Footer.astro';
 ---
 
-<Layout title="Contacto — edd n' dev" description="Hablemos sobre tu próximo proyecto.">
+<Layout
+    title="Contacto — edd n' dev"
+    description="Cuéntanos qué necesitas construir y te diremos si conviene un sitio, un e-commerce, una automatización o software a medida."
+>
     
     <!-- HEADER / HERO -->
     <div id="contact-hero" class="relative pt-32 lg:pt-48 pb-16 lg:pb-32 px-6 sm:px-12 max-w-[1800px] mx-auto min-h-[50vh] flex flex-col justify-end">
@@ -14,16 +17,16 @@ import Footer from '../components/layout/Footer.astro';
         <div class="lg:w-3/4 relative z-10">
             <div class="flex items-center gap-3 mb-6 opacity-70">
                 <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                <span class="font-mono text-sm tracking-widest uppercase text-gray-300">ESTAMOS LISTOS</span>
+                <span class="font-mono text-sm tracking-widest uppercase text-gray-300">CUÉNTANOS EL CONTEXTO</span>
             </div>
 
             <h1 class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(3.5rem,10vw,10rem)] mix-blend-screen mb-8">
-                HABLEMOS <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">HOY MISMO.</span>
+                CUÉNTANOS <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">QUÉ NECESITAS.</span>
             </h1>
 
             <p class="text-lg sm:text-xl text-gray-300 font-light leading-relaxed max-w-2xl">
-                ¿Tienes una idea, un proyecto o un desafío técnico? Estamos aquí para ayudarte a construir soluciones digitales de alto impacto.
+                Si necesitas una web distinta, un e-commerce propio, una automatización con IA o software a medida, escríbenos con el problema y la meta del proyecto. Te diremos si conviene construir, iterar o replantear el enfoque.
             </p>
         </div>
     </div>
@@ -34,6 +37,17 @@ import Footer from '../components/layout/Footer.astro';
             
             <!-- COLUMN 1: CONTACT METHODS -->
             <div class="px-6 sm:px-12 py-24 lg:py-32 space-y-12">
+
+                <div class="bg-[#080808] border border-white/10 p-8 sm:p-12">
+                    <span class="block font-mono text-xs text-purple-400 tracking-widest uppercase mb-4">Antes de escribir</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Qué nos ayuda a responder mejor</h2>
+                    <ul class="space-y-3 text-gray-400 text-sm sm:text-base font-light leading-relaxed">
+                        <li>Qué necesitas construir o mejorar.</li>
+                        <li>Qué problema de negocio quieres resolver.</li>
+                        <li>Si ya existe una web, tienda, sistema o proceso manual.</li>
+                        <li>Tiempos, alcance y cualquier restricción importante.</li>
+                    </ul>
+                </div>
                 
                 <!-- Email Card -->
                 <div class="group relative bg-[#080808] border border-white/10 p-8 sm:p-12 transition-colors hover:border-purple-500/50">
@@ -45,7 +59,7 @@ import Footer from '../components/layout/Footer.astro';
                         contacto@eddndev.com
                     </a>
                     <p class="mt-4 text-gray-400 text-sm font-light">
-                        Ideal para consultas detalladas, RFPs y colaboraciones formales. Respondemos en &lt; 24h.
+                        Ideal para proyectos con contexto, alcance o requerimientos específicos. Respondemos en menos de 24 horas.
                     </p>
                 </div>
 
@@ -59,7 +73,7 @@ import Footer from '../components/layout/Footer.astro';
                         +52 56 1943 3938
                     </a>
                     <p class="mt-4 text-gray-400 text-sm font-light">
-                        Vía WhatsApp. Perfecto para consultas rápidas o agendar una llamada.
+                        Mejor para primeras preguntas, validar encaje o coordinar una llamada breve.
                     </p>
                 </div>
 
@@ -98,11 +112,17 @@ import Footer from '../components/layout/Footer.astro';
                  <div class="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-[#020202] pointer-events-none z-10"></div>
                  <div class="absolute inset-0 bg-gradient-to-r from-[#020202]/50 via-transparent to-[#020202]/50 pointer-events-none z-10"></div>
                 
-                <!-- Central Label (Optional - keeps it from being too empty) -->
-                <div class="relative z-20 text-center pointer-events-none select-none">
-                     <span class="font-mono text-[10px] text-purple-500 tracking-[0.5em] uppercase opacity-50">
-                        Signal Detected
-                     </span>
+                <div class="relative z-20 px-6 sm:px-12 py-16 lg:py-20">
+                    <div class="max-w-xl border border-white/10 bg-black/40 backdrop-blur-sm p-8 sm:p-10">
+                        <span class="block font-mono text-xs text-purple-400 tracking-widest uppercase mb-4">Encaje ideal</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Trabajamos mejor cuando el proyecto necesita claridad técnica y criterio de producto</h2>
+                        <ul class="space-y-3 text-gray-300 text-sm sm:text-base font-light leading-relaxed">
+                            <li>Marcas que necesitan una presencia digital con identidad fuerte.</li>
+                            <li>Negocios que quieren dejar atrás plataformas o procesos que limitan su operación.</li>
+                            <li>Equipos que necesitan automatizar tareas reales, no solo añadir herramientas.</li>
+                            <li>Proyectos donde rendimiento, control y experiencia visual importan al mismo tiempo.</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
