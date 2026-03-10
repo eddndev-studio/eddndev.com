@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@tailwindcss/vite": "^4.1.18",
+    "@tailwindplus/elements": "^1.0.22",
     "astro": "^5.16.11",
     "gsap": "^3.14.2",
     "ledding": "^2.0.0",
