@@ -1,13 +1,17 @@
-name: Deploy Astro to Hostgator
+name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
+    name: Build & Deploy
     runs-on: self-hosted
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,47 +19,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+          cache: 'npm'
 
-      - name: Install & Build (Astro)
-        run: |
-          npm ci
-          npm run build
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Clean Server Directory
-        uses: appleboy/ssh-action@master
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2222
-          script: |
-            # Clean public_html for fresh deployment
-            # We keep cgi-bin just in case
-            find /home/edndevco/public_html/ -mindepth 1 -not -name 'cgi-bin' -delete
-
-      - name: Upload Files
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2222
-          source: "dist/*"
-          target: "/home/edndevco/public_html"
-          strip_components: 1
-
-      - name: Fix Permissions & Config
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2222
-          script: |
-            cd /home/edndevco/public_html
-            # Fix standard directory permissions
-            find . -type d -exec chmod 755 {} \;
-            # Fix standard file permissions
-            find . -type f -exec chmod 644 {} \;
-            echo "✅ Permissions fixed."
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=eddndev-com --commit-dirty=true
