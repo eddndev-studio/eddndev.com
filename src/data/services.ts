@@ -30,7 +30,7 @@ export const services: Service[] = [
     title: 'Sitios web',
     tagline: 'Sitios rápidos, distintivos y orientados a conversión',
     description:
-      'Diseñamos y desarrollamos sitios web que explican mejor tu valor, cargan rápido y reducen fricción en la decisión del usuario. No partimos de plantillas cerradas: cada interacción responde a la identidad y objetivos de tu marca.',
+      'Diseñamos y desarrollamos sitios que explican mejor tu valor, cargan rápido y reducen fricción en la decisión del usuario. Cada interacción responde a la identidad y objetivos de tu marca.',
     highlights: [
       'Arquitectura visual alineada a tu marca',
       'Performance y SEO técnico desde la base',
@@ -45,7 +45,7 @@ export const services: Service[] = [
     title: 'E-commerce',
     tagline: 'Tiendas online con identidad, rendimiento y control',
     description:
-      'Construimos e-commerce a medida para vender sin depender de plataformas que limitan catálogo, contenido o márgenes. Integramos pagos, inventario, logística y operación con una experiencia coherente con tu marca.',
+      'E-commerce a medida con control total sobre catálogo, contenido y márgenes. Integramos pagos, inventario, logística y operación con una experiencia coherente con tu marca.',
     highlights: [
       'Checkout y catálogo optimizados para conversión',
       'Backoffice y CMS adaptados a tu operación',
