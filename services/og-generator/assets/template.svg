@@ -1,0 +1,25 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light background -->
+  <rect width="1200" height="630" fill="#f8fafc" />
+  
+  <!-- Top brand bar -->
+  <rect x="0" y="0" width="1200" height="12" fill="#8b5cf6" />
+  
+  <!-- Decorative elements -->
+  <circle cx="1050" cy="50" r="400" fill="#f1f5f9" opacity="0.8" />
+  <circle cx="150" cy="550" r="250" fill="#e2e8f0" opacity="0.6" />
+  
+  <!-- Subtle Grid pattern for engineering feel -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#cbd5e1" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)" />
+  
+  <!-- Branding / Site URL -->
+  <text x="80" y="100" font-family="monospace" font-size="32" font-weight="900" fill="#8b5cf6">eddn.dev</text>
+  <text x="250" y="100" font-family="monospace" font-size="32" font-weight="900" fill="#94a3b8">//</text>
+  <text x="300" y="100" font-family="monospace" font-size="32" font-weight="900" fill="#475569">engineering_notes</text>
+  
+  <!-- Bottom watermark -->
+  <text x="80" y="550" font-family="monospace" font-size="28" fill="#64748b" font-weight="bold">ARCHITECTURE. PERFORMANCE. SYSTEMS.</text>
+</svg>

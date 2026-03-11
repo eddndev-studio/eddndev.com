@@ -1,0 +1,42 @@
+name: Deploy OG Generator
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'services/og-generator/**'
+      - '.github/workflows/deploy-og.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy OG Service
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Release Binary
+        run: |
+          cd services/og-generator
+          cargo build --release
+
+      - name: Stop Service
+        run: sudo systemctl stop eddndev-og-generator || true
+
+      - name: Deploy Binary and Assets
+        run: |
+          sudo mkdir -p /opt/eddndev-og-generator/assets
+          sudo cp services/og-generator/target/release/og-generator /opt/eddndev-og-generator/
+          sudo cp -r services/og-generator/assets/* /opt/eddndev-og-generator/assets/
+          sudo chmod +x /opt/eddndev-og-generator/og-generator
+
+      - name: Start Service
+        run: sudo systemctl start eddndev-og-generator
+        
+      - name: Check Service Status
+        run: sudo systemctl status eddndev-og-generator --no-pager

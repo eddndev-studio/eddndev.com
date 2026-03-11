@@ -16,20 +16,32 @@ interface Props {
 const { 
     title = "edd n' dev", 
     description = "Estudio de ingeniería digital en México. Sitios web, e-commerce, automatización y software a medida.",
-    image = "/og-image.png",
+    image,
     project 
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+// Dynamic OG Generator Base URL hosted on the API subdomain
+const defaultOgUrl = new URL('https://api.eddn.dev/api/og');
+defaultOgUrl.searchParams.set('title', title);
+defaultOgUrl.searchParams.set('tag', 'eddndev');
+defaultOgUrl.searchParams.set('og_type', project ? 'Project' : 'Page');
+
+const resolvedImage = image || defaultOgUrl.href;
+
 // Resolve image URL
 let socialImageURL = "";
-if (typeof image === 'string') {
-    socialImageURL = new URL(image, Astro.site).href;
-} else if (image && typeof image === 'object' && 'src' in image) {
+if (typeof resolvedImage === 'string') {
+    // If it's already an absolute URL (like our generator), use it directly, otherwise resolve it
+    if (resolvedImage.startsWith('http')) {
+        socialImageURL = resolvedImage;
+    } else {
+        socialImageURL = new URL(resolvedImage, Astro.site).href;
+    }
+} else if (resolvedImage && typeof resolvedImage === 'object' && 'src' in resolvedImage) {
     // Handle ImageMetadata (from Content Collections or imports)
-    // Note: Ideally use getImage() for optimized resizing, but .src works for raw asset path in build
-    socialImageURL = new URL(image.src, Astro.site).href;
+    socialImageURL = new URL(resolvedImage.src, Astro.site).href;
 }
 ---
 
