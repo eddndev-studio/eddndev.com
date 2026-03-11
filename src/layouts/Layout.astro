@@ -22,8 +22,8 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Dynamic OG Generator Base URL hosted on the OG subdomain
-const defaultOgUrl = new URL('https://og.eddn.dev/generate');
+// Dynamic OG Generator Base URL hosted on the new OG subdomain
+const defaultOgUrl = new URL('https://og.eddndev.com/generate');
 defaultOgUrl.searchParams.set('title', title);
 defaultOgUrl.searchParams.set('tag', 'eddndev');
 defaultOgUrl.searchParams.set('og_type', project ? 'Project' : 'Page');
