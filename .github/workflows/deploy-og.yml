@@ -30,10 +30,10 @@ jobs:
 
       - name: Deploy Binary and Assets
         run: |
-          sudo mkdir -p /opt/eddndev-og-generator/assets
-          sudo cp services/og-generator/target/release/og-generator /opt/eddndev-og-generator/
-          sudo cp -r services/og-generator/assets/* /opt/eddndev-og-generator/assets/
-          sudo chmod +x /opt/eddndev-og-generator/og-generator
+          mkdir -p /opt/eddndev-og-generator/assets
+          cp services/og-generator/target/release/og-generator /opt/eddndev-og-generator/
+          cp -r services/og-generator/assets/* /opt/eddndev-og-generator/assets/
+          chmod +x /opt/eddndev-og-generator/og-generator
 
       - name: Start Service
         run: sudo systemctl start eddndev-og-generator
