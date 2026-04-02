@@ -2,12 +2,16 @@ import { gsap } from "gsap";
 
 export function initCursor() {
     const isDesktop = window.matchMedia("(pointer: fine)").matches;
-    if (!isDesktop) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isDesktop || prefersReducedMotion) return;
 
     const cursor = document.getElementById("custom-cursor");
     const label = document.getElementById("cursor-label");
-    
+
     if (!cursor || !label) return;
+
+    // Enable custom cursor styles (hides system cursor via CSS)
+    document.documentElement.classList.add("custom-cursor-active");
 
     // State
     let mouseX = 0;

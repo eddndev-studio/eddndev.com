@@ -32,8 +32,11 @@ body.no-scroll, html.no-scroll {
     text-fill-color: transparent;
 }
 
-@media (min-width: 1024px) {
-    body, a, button, [role="button"] {
+@media (min-width: 1024px) and (pointer: fine) {
+    .custom-cursor-active body,
+    .custom-cursor-active a,
+    .custom-cursor-active button,
+    .custom-cursor-active [role="button"] {
         cursor: none !important;
     }
 }
@@ -44,4 +47,14 @@ body.no-scroll, html.no-scroll {
     outline-offset: 4px;
     border-radius: 4px;
     transition: outline-color 0.2s ease;
+}
+
+/* A11y: Respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
