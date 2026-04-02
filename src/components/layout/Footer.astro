@@ -24,7 +24,7 @@ const taglines: Record<string, string> = {
                         <li class="reveal-footer">
                             <a href={`/services#${service.id}`} class="group flex items-baseline justify-between border-b border-white/10 pb-4 hover:border-purple-500 transition-colors cursor-none" data-cursor-text="VER MÁS">
                                 <span class="text-2xl sm:text-3xl md:text-4xl lg:text-3xl 2xl:text-4xl font-bold text-gray-300 group-hover:text-white transition-colors">{service.title}</span>
-                                <span class="text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-base font-mono text-gray-600 group-hover:text-purple-400 transition-colors">{taglines[service.id]}</span>
+                                <span class="text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-base font-mono text-gray-500 group-hover:text-purple-400 transition-colors">{taglines[service.id]}</span>
                             </a>
                         </li>
                     ))}
@@ -34,7 +34,7 @@ const taglines: Record<string, string> = {
             <!-- CTA / Contact -->
             <div class="flex flex-col justify-between h-full">
                  <div>
-                    <h3 class="text-5xl sm:text-6xl md:text-7xl lg:text-7xl 2xl:text-8xl font-black tracking-tighter leading-[0.9] mb-8 reveal-footer">
+                    <h3 lang="en" class="text-5xl sm:text-6xl md:text-7xl lg:text-7xl 2xl:text-8xl font-black tracking-tighter leading-[0.9] mb-8 reveal-footer">
                         LET'S <br> <span class="text-purple-500">BUILD.</span>
                     </h3>
                     <p class="text-gray-400 text-lg sm:text-xl md:text-2xl lg:text-lg 2xl:text-xl max-w-md 2xl:max-w-xl mb-12 reveal-footer">
@@ -58,8 +58,8 @@ const taglines: Record<string, string> = {
         </div>
 
         <!-- Minimal Footer Info -->
-        <div class="mt-24 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-600 font-mono reveal-footer">
-            <span>&copy; 2020 - {currentYear} EDDNDEV STUDIO. ALL RIGHTS RESERVED.</span>
+        <div class="mt-24 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 font-mono reveal-footer">
+            <span lang="en">&copy; 2020 - {currentYear} EDDNDEV STUDIO. ALL RIGHTS RESERVED.</span>
             <div class="flex gap-4 mt-4 sm:mt-0">
                 <a href="https://github.com/achronyme" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">ACHRONYME</a>
                 <a href="https://github.com/eddndev" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GITHUB</a>
