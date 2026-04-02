@@ -18,10 +18,12 @@ const { project } = Astro.props;
     <div class="flex items-center gap-6 h-full w-full max-w-[1800px] mx-auto">
         
         <!-- Menu Trigger -->
-        <button 
+        <button
             id="sidebar-menu-btn"
             class="group flex flex-col justify-center items-center border-r border-white/10 h-full w-16 lg:w-20 2xl:w-24 hover:bg-white/5 transition-colors -ml-6 sm:-ml-12"
-            aria-label="Menu"
+            aria-label="Abrir menú de navegación"
+            aria-expanded="false"
+            aria-controls="nav-panel"
         >
             <div class="relative w-6 h-6 flex flex-col justify-center items-center gap-1.5 overflow-hidden">
                  <span class="w-full h-[2px] bg-white transform transition-transform duration-300 group-hover:translate-x-1"></span>
@@ -44,7 +46,7 @@ const { project } = Astro.props;
         <div class="flex items-center flex-1">
             {project ? (
                 <div class="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500">
-                    <span class="text-[9px] lg:text-[10px] font-mono text-purple-400 uppercase tracking-widest border border-purple-500/30 px-2 py-0.5 rounded bg-purple-500/10">CASE STUDY</span>
+                    <span lang="en" class="text-[9px] lg:text-[10px] font-mono text-purple-400 uppercase tracking-widest border border-purple-500/30 px-2 py-0.5 rounded bg-purple-500/10">CASE STUDY</span>
                     <span class="text-sm lg:text-base font-bold text-white tracking-tight">{project.title}</span>
                 </div>
             ) : (

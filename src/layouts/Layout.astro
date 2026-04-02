@@ -140,6 +140,10 @@ if (typeof resolvedImage === 'string') {
         <ClientRouter />
 	</head>
 	<body class="bg-black text-white antialiased overflow-x-hidden">
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded focus:text-sm focus:font-bold">
+            Saltar al contenido
+        </a>
+
         <div id="custom-cursor" transition:persist class="hidden lg:flex fixed top-0 left-0 z-[9999] pointer-events-none w-4 h-4 rounded-full bg-white mix-blend-difference items-center justify-center transform -translate-x-1/2 -translate-y-1/2 will-change-[width,height,transform]">
             <span id="cursor-label" class="text-xs font-black text-white opacity-0 tracking-widest font-mono uppercase whitespace-nowrap"></span>
         </div>
@@ -161,7 +165,7 @@ if (typeof resolvedImage === 'string') {
                 id="page-content"
                 class="flex flex-col min-w-0 relative z-10 bg-black transition-opacity duration-500"
             >
-                <main class="flex-1 relative z-10">
+                <main id="main-content" class="flex-1 relative z-10">
                     <slot />
                 </main>
             </div>
@@ -183,8 +187,14 @@ if (typeof resolvedImage === 'string') {
 
                 function toggleMenu() {
                     if (!navPanel) return;
-                    
+
                     isOpen = !isOpen;
+
+                    // Update ARIA state
+                    if (trigger) {
+                        trigger.setAttribute('aria-expanded', String(isOpen));
+                        trigger.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+                    }
 
                     if (isOpen) {
                         // 1. Lock Scroll (Class based)
@@ -193,6 +203,8 @@ if (typeof resolvedImage === 'string') {
 
                         // 2. Reveal Nav Panel
                         navPanel.classList.remove('opacity-0', 'pointer-events-none', 'scale-[0.98]');
+                        navPanel.setAttribute('aria-hidden', 'false');
+                        navPanel.removeAttribute('inert');
 
                         // 3. Hide Content (Opacity 0)
                         if (pageContent) {
@@ -213,6 +225,8 @@ if (typeof resolvedImage === 'string') {
 
                         // 2. Hide Nav Panel
                         navPanel.classList.add('opacity-0', 'pointer-events-none', 'scale-[0.98]');
+                        navPanel.setAttribute('aria-hidden', 'true');
+                        navPanel.setAttribute('inert', '');
 
                         // 3. Restore Content
                         if (pageContent) {

@@ -12,6 +12,10 @@ const navItems = [
 
 <aside
     id="nav-panel"
+    role="dialog"
+    aria-label="Menú de navegación"
+    aria-hidden="true"
+    inert
     class="fixed inset-0 z-30 bg-black/95 backdrop-blur-3xl flex flex-col
            top-16 lg:top-20 2xl:top-24
            left-0
@@ -54,7 +58,7 @@ const navItems = [
                             ]}>
                                 0{index + 1}
                             </span>
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600 group-hover:text-white group-hover:-rotate-45 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                            <svg aria-hidden="true" class="w-5 h-5 md:w-6 md:h-6 text-gray-500 group-hover:text-white group-hover:-rotate-45 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
 
                         <!-- Label -->
