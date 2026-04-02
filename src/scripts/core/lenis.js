@@ -1,9 +1,11 @@
 import { ScrollTrigger } from './gsap-core';
 import Lenis from 'lenis';
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const lenis = new Lenis({
-  lerp: 0.12,
-  smoothWheel: true,
+  lerp: prefersReducedMotion ? 1 : 0.12,
+  smoothWheel: !prefersReducedMotion,
   smoothTouch: false,
 });
 
