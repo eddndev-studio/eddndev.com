@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 import mdx from '@astrojs/mdx';
 
@@ -21,5 +22,5 @@ export default defineConfig({
     },
   },
 
-  integrations: [mdx()]
+  integrations: [mdx(), sitemap()]
 });
