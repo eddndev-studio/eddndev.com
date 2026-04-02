@@ -11,16 +11,65 @@ interface Props {
     description?: string;
     image?: string | ImageMetadata;
     project?: { title: string };
+    breadcrumbs?: { name: string; url: string }[];
 }
 
-const { 
-    title = "edd n' dev", 
+const {
+    title = "edd n' dev — Estudio de ingeniería digital",
     description = "Estudio de ingeniería digital en México. Sitios web, e-commerce, automatización y software a medida.",
     image,
-    project 
+    project,
+    breadcrumbs = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// JSON-LD: Organization (always present)
+const organizationLD = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "edd n' dev",
+    "url": "https://eddndev.com",
+    "logo": "https://eddndev.com/favicon.png",
+    "description": "Estudio de ingeniería digital en México. Sitios web, e-commerce, automatización y software a medida.",
+    "sameAs": [
+        "https://github.com/eddndev",
+        "https://linkedin.com/in/eddndev",
+        "https://instagram.com/_eddndev"
+    ],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contacto@eddndev.com",
+        "contactType": "sales",
+        "availableLanguage": ["Spanish", "English"]
+    }
+};
+
+// JSON-LD: WebSite (only on homepage)
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const webSiteLD = isHome ? {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "edd n' dev",
+    "url": "https://eddndev.com",
+    "description": description,
+    "inLanguage": "es"
+} : null;
+
+// JSON-LD: BreadcrumbList (when breadcrumbs provided)
+const breadcrumbLD = breadcrumbs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://eddndev.com" },
+        ...breadcrumbs.map((crumb, i) => ({
+            "@type": "ListItem",
+            "position": i + 2,
+            "name": crumb.name,
+            "item": new URL(crumb.url, "https://eddndev.com").href
+        }))
+    ]
+} : null;
 
 // Dynamic OG Generator Base URL hosted on the new OG subdomain
 const defaultOgUrl = new URL('https://og.eddndev.com/generate');
@@ -59,10 +108,12 @@ if (typeof resolvedImage === 'string') {
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
         <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#050505" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content={Astro.url} />
+        <meta property="og:locale" content="es_MX" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={socialImageURL} />
@@ -85,6 +136,11 @@ if (typeof resolvedImage === 'string') {
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 		
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json" set:html={JSON.stringify(organizationLD)} />
+        {webSiteLD && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
+        {breadcrumbLD && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLD)} />}
+
         <ClientRouter />
 	</head>
 	<body class="bg-black text-white antialiased overflow-x-hidden">
