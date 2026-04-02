@@ -35,7 +35,7 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
 
 <section id="services" class="bg-[#050505] text-white border-t border-white/10 relative overflow-hidden">
     <!-- Stroke Draw: Large nested diamonds -->
-    <svg data-index-draw class="absolute top-[10%] right-[3%] w-64 h-64 lg:w-[500px] lg:h-[500px] pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+    <svg aria-hidden="true" data-index-draw class="absolute top-[10%] right-[3%] w-64 h-64 lg:w-[500px] lg:h-[500px] pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
         <rect x="30" y="30" width="140" height="140" rx="2" transform="rotate(45, 100, 100)" stroke="rgba(139,92,246,0.2)" stroke-width="1" class="draw-path" />
         <rect x="55" y="55" width="90" height="90" rx="2" transform="rotate(45, 100, 100)" stroke="rgba(168,85,247,0.25)" stroke-width="1.2" class="draw-path" />
         <circle cx="100" cy="100" r="20" stroke="rgba(192,132,252,0.3)" stroke-width="1.5" class="draw-path" />
@@ -89,7 +89,7 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
                             {isAutomation && (
                                 <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-blue-400 font-medium text-sm lg:text-base group-hover:text-blue-300 transition-colors">
                                     <span>Ver cómo funciona</span>
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg aria-hidden="true" class="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M5 12h14M13 5l7 7-7 7"/>
                                     </svg>
                                 </div>
@@ -103,7 +103,7 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
             <div class="mt-16 flex justify-center reveal-text">
                 <a href="/services" data-cursor-text="VER TODO" class="group flex items-center gap-3 text-white font-medium 2xl:text-lg hover:text-purple-300 transition-colors">
                     <span>Explorar servicios</span>
-                    <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
             </div>
         </div>

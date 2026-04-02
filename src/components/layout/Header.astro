@@ -37,7 +37,7 @@ const navItems = [
 
             <!-- Crosshair Bottom Right -->
             <div class="absolute -bottom-[5px] -right-[5px] text-white/20 pointer-events-none">
-                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg aria-hidden="true" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.5 0V9M0 4.5H9" stroke="currentColor" stroke-width="1"/>
                 </svg>
             </div>
@@ -46,13 +46,13 @@ const navItems = [
         <!-- 2. Global Nav (Desktop) - Moved to Left -->
         <nav class="hidden md:flex h-full">
             {navItems.map((item) => (
-                <a href={item.url} data-cursor-text="NAVEGAR" 
+                <a href={item.url} data-cursor-text="NAVEGAR"
                    class="relative flex items-center px-10 2xl:px-12 text-sm 2xl:text-base font-bold font-sans uppercase tracking-widest text-white/70 hover:text-white bg-transparent hover:bg-white/5 transition-all border-r border-white/10 group h-full">
                     {item.label}
                     <span class="absolute top-0 left-0 w-full h-[2px] bg-[#8b5cf6] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                    
+
                     <div class="absolute -bottom-[5px] -right-[5px] text-white/20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.5 0V9M0 4.5H9" stroke="currentColor" stroke-width="1"/>
                         </svg>
                     </div>
@@ -135,7 +135,7 @@ const navItems = [
                     </div>
 
                     <!-- Arrow Icon -->
-                    <svg class="ml-auto w-6 h-6 text-gray-600 group-hover:text-[#8b5cf6] group-hover:-rotate-45 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="ml-auto w-6 h-6 text-gray-500 group-hover:text-[#8b5cf6] group-hover:-rotate-45 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </a>

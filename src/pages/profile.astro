@@ -18,12 +18,12 @@ import Footer from '../components/layout/Footer.astro';
       <div data-profile-orb class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-violet-500/15 blur-[100px] pointer-events-none z-[1]"></div>
 
       <!-- Floating Geometric SVGs -->
-      <svg data-profile-float data-speed="0.8" class="absolute top-[20%] right-[15%] w-16 h-16 lg:w-24 lg:h-24 text-purple-500/20 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+      <svg aria-hidden="true" data-profile-float data-speed="0.8" class="absolute top-[20%] right-[15%] w-16 h-16 lg:w-24 lg:h-24 text-purple-500/20 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
         <rect x="10" y="10" width="80" height="80" rx="4" />
         <rect x="25" y="25" width="50" height="50" rx="2" />
       </svg>
 
-      <svg data-profile-float data-speed="1.2" class="absolute top-[35%] right-[8%] w-10 h-10 lg:w-14 lg:h-14 text-purple-400/15 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg aria-hidden="true" data-profile-float data-speed="1.2" class="absolute top-[35%] right-[8%] w-10 h-10 lg:w-14 lg:h-14 text-purple-400/15 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="50" cy="50" r="40" />
         <circle cx="50" cy="50" r="15" />
         <line x1="50" y1="10" x2="50" y2="35" />
@@ -32,16 +32,16 @@ import Footer from '../components/layout/Footer.astro';
         <line x1="65" y1="50" x2="90" y2="50" />
       </svg>
 
-      <svg data-profile-float data-speed="0.5" class="absolute bottom-[25%] right-[25%] w-8 h-8 lg:w-12 lg:h-12 text-violet-400/20 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
+      <svg aria-hidden="true" data-profile-float data-speed="0.5" class="absolute bottom-[25%] right-[25%] w-8 h-8 lg:w-12 lg:h-12 text-violet-400/20 z-[2] pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
         <polygon points="50,5 95,95 5,95" opacity="0.6" />
       </svg>
 
-      <svg data-profile-float data-speed="1.5" class="absolute top-[60%] left-[8%] w-6 h-6 lg:w-10 lg:h-10 text-purple-300/15 z-[2] pointer-events-none hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+      <svg aria-hidden="true" data-profile-float data-speed="1.5" class="absolute top-[60%] left-[8%] w-6 h-6 lg:w-10 lg:h-10 text-purple-300/15 z-[2] pointer-events-none hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M50 5 L95 50 L50 95 L5 50 Z" />
       </svg>
 
       <!-- Stroke Draw: Large crosshair/scope in hero -->
-      <svg data-profile-draw class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] pointer-events-none z-[2] opacity-60" viewBox="0 0 200 200" fill="none">
+      <svg aria-hidden="true" data-profile-draw class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] pointer-events-none z-[2] opacity-60" viewBox="0 0 200 200" fill="none">
           <circle cx="100" cy="100" r="90" stroke="rgba(139,92,246,0.2)" stroke-width="1" class="draw-path" />
           <circle cx="100" cy="100" r="60" stroke="rgba(139,92,246,0.25)" stroke-width="1.2" class="draw-path" />
           <circle cx="100" cy="100" r="30" stroke="rgba(168,85,247,0.3)" stroke-width="1.5" class="draw-path" />
@@ -90,13 +90,13 @@ import Footer from '../components/layout/Footer.astro';
     <section id="profile-about" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
 
         <!-- Decorative Line SVG (scroll-drawn) -->
-        <svg data-profile-line class="absolute top-0 left-6 sm:left-12 w-px h-full pointer-events-none z-0 overflow-visible" preserveAspectRatio="none">
+        <svg aria-hidden="true" data-profile-line class="absolute top-0 left-6 sm:left-12 w-px h-full pointer-events-none z-0 overflow-visible" preserveAspectRatio="none">
             <line x1="0" y1="0" x2="0" y2="100%" stroke="rgba(139,92,246,0.3)" stroke-width="1" class="profile-line-bg" />
             <line x1="0" y1="0" x2="0" y2="100%" stroke="url(#line-gradient-1)" stroke-width="1.5" stroke-dasharray="8 12" class="profile-line-draw" />
         </svg>
 
         <!-- Stroke Draw: Concentric rings -->
-        <svg data-profile-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+        <svg aria-hidden="true" data-profile-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
             <circle cx="100" cy="100" r="90" stroke="rgba(139,92,246,0.3)" stroke-width="1.2" class="draw-path" />
             <circle cx="100" cy="100" r="65" stroke="rgba(139,92,246,0.22)" stroke-width="1" class="draw-path" />
             <circle cx="100" cy="100" r="40" stroke="rgba(139,92,246,0.35)" stroke-width="1.5" class="draw-path" />
@@ -140,15 +140,15 @@ import Footer from '../components/layout/Footer.astro';
         <div data-profile-orb class="absolute top-[30%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[150px] pointer-events-none z-0"></div>
 
         <!-- Corner Crosshairs -->
-        <svg class="absolute top-8 right-8 w-6 h-6 text-white/10 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <svg aria-hidden="true" class="absolute top-8 right-8 w-6 h-6 text-white/10 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
             <line x1="12" y1="0" x2="12" y2="24" /><line x1="0" y1="12" x2="24" y2="12" />
         </svg>
-        <svg class="absolute bottom-8 left-8 w-6 h-6 text-white/10 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <svg aria-hidden="true" class="absolute bottom-8 left-8 w-6 h-6 text-white/10 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
             <line x1="12" y1="0" x2="12" y2="24" /><line x1="0" y1="12" x2="24" y2="12" />
         </svg>
 
         <!-- Stroke Draw: Hexagonal frame -->
-        <svg data-profile-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
+        <svg aria-hidden="true" data-profile-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
             <path d="M100 10 L180 55 L180 145 L100 190 L20 145 L20 55 Z" stroke="rgba(139,92,246,0.25)" stroke-width="1.5" class="draw-path" />
             <path d="M100 40 L155 67 L155 133 L100 160 L45 133 L45 67 Z" stroke="rgba(168,85,247,0.2)" stroke-width="1.2" class="draw-path" />
             <circle cx="100" cy="100" r="25" stroke="rgba(192,132,252,0.3)" stroke-width="1.2" class="draw-path" />
@@ -233,13 +233,13 @@ import Footer from '../components/layout/Footer.astro';
     <section id="profile-process" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
 
         <!-- Vertical circuit line (right side) -->
-        <svg data-profile-line class="absolute top-0 right-6 sm:right-12 w-px h-full pointer-events-none z-0 overflow-visible hidden lg:block" preserveAspectRatio="none">
+        <svg aria-hidden="true" data-profile-line class="absolute top-0 right-6 sm:right-12 w-px h-full pointer-events-none z-0 overflow-visible hidden lg:block" preserveAspectRatio="none">
             <line x1="0" y1="0" x2="0" y2="100%" stroke="rgba(139,92,246,0.25)" stroke-width="1" />
             <line x1="0" y1="0" x2="0" y2="100%" stroke="rgba(139,92,246,0.5)" stroke-width="1.5" stroke-dasharray="4 16" class="profile-line-draw" />
         </svg>
 
         <!-- Floating Orbital SVG -->
-        <svg data-profile-orbital class="absolute top-[15%] right-[8%] w-40 h-40 lg:w-64 lg:h-64 pointer-events-none z-0 opacity-[0.15]" viewBox="0 0 200 200" fill="none" stroke="white" stroke-width="1">
+        <svg aria-hidden="true" data-profile-orbital class="absolute top-[15%] right-[8%] w-40 h-40 lg:w-64 lg:h-64 pointer-events-none z-0 opacity-[0.15]" viewBox="0 0 200 200" fill="none" stroke="white" stroke-width="1">
             <circle cx="100" cy="100" r="95" stroke-dasharray="4 8" />
             <circle cx="100" cy="100" r="70" stroke-dasharray="2 6" />
             <circle cx="100" cy="100" r="45" />
@@ -251,7 +251,7 @@ import Footer from '../components/layout/Footer.astro';
         </svg>
 
         <!-- Stroke Draw: Connected nodes (process flow) -->
-        <svg data-profile-draw class="absolute bottom-[5%] left-[4%] w-32 h-64 lg:w-40 lg:h-80 pointer-events-none z-0 hidden lg:block" viewBox="0 0 100 250" fill="none">
+        <svg aria-hidden="true" data-profile-draw class="absolute bottom-[5%] left-[4%] w-32 h-64 lg:w-40 lg:h-80 pointer-events-none z-0 hidden lg:block" viewBox="0 0 100 250" fill="none">
             <!-- Vertical spine -->
             <line x1="50" y1="20" x2="50" y2="230" stroke="rgba(139,92,246,0.18)" stroke-width="1" class="draw-path" />
             <!-- Nodes -->
@@ -357,20 +357,20 @@ import Footer from '../components/layout/Footer.astro';
         </div>
 
         <!-- Stroke Draw: Arc frame for CTA -->
-        <svg data-profile-draw class="absolute top-[50%] left-[3%] -translate-y-1/2 w-40 h-40 lg:w-56 lg:h-56 pointer-events-none z-0 hidden lg:block" viewBox="0 0 200 200" fill="none">
+        <svg aria-hidden="true" data-profile-draw class="absolute top-[50%] left-[3%] -translate-y-1/2 w-40 h-40 lg:w-56 lg:h-56 pointer-events-none z-0 hidden lg:block" viewBox="0 0 200 200" fill="none">
             <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" class="draw-path" />
             <path d="M100 15 A85 85 0 0 1 185 100" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" class="draw-path" />
             <path d="M100 185 A85 85 0 0 1 15 100" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" class="draw-path" />
         </svg>
 
         <!-- Floating shapes -->
-        <svg data-profile-float data-speed="0.6" class="absolute top-[10%] left-[5%] w-24 h-24 lg:w-40 lg:h-40 text-white/10 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+        <svg aria-hidden="true" data-profile-float data-speed="0.6" class="absolute top-[10%] left-[5%] w-24 h-24 lg:w-40 lg:h-40 text-white/10 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
             <circle cx="50" cy="50" r="45" />
             <circle cx="50" cy="50" r="30" stroke-dasharray="4 4" />
             <circle cx="50" cy="50" r="15" />
         </svg>
 
-        <svg data-profile-float data-speed="1.0" class="absolute bottom-[15%] right-[10%] w-16 h-16 lg:w-28 lg:h-28 text-white/10 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+        <svg aria-hidden="true" data-profile-float data-speed="1.0" class="absolute bottom-[15%] right-[10%] w-16 h-16 lg:w-28 lg:h-28 text-white/10 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <rect x="15" y="15" width="70" height="70" transform="rotate(45, 50, 50)" />
         </svg>
 
@@ -396,7 +396,7 @@ import Footer from '../components/layout/Footer.astro';
                     <div class="reveal-text">
                         <a href="/contact" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full overflow-hidden transition-transform hover:scale-105">
                             <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Hablemos de tu proyecto</span>
-                            <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                         </a>
                     </div>
                 </div>

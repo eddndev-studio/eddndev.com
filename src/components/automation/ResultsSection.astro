@@ -8,7 +8,7 @@ import { results } from '../../data/automation';
     <div data-automation-orb class="absolute top-[30%] right-[20%] w-[500px] h-[500px] rounded-full bg-violet-900/10 blur-[150px] pointer-events-none z-0"></div>
 
     <!-- Stroke Draw: Upward arrow/chart -->
-    <svg data-automation-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
+    <svg aria-hidden="true" data-automation-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
         <line x1="20" y1="180" x2="180" y2="180" stroke="rgba(139,92,246,0.2)" stroke-width="1.2" class="draw-path" />
         <line x1="20" y1="180" x2="20" y2="20" stroke="rgba(139,92,246,0.2)" stroke-width="1.2" class="draw-path" />
         <path d="M40 160 L80 120 L120 140 L160 40" stroke="rgba(139,92,246,0.35)" stroke-width="2" fill="none" class="draw-path" />
@@ -33,7 +33,7 @@ import { results } from '../../data/automation';
                 <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
                     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-violet-500/0 via-violet-500/50 to-violet-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     <div class="flex items-center gap-3 mb-6">
-                        <svg class="w-7 h-7 text-violet-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg aria-hidden="true" class="w-7 h-7 text-violet-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <Fragment set:html={result.icon} />
                         </svg>
                         <h3 class="text-lg sm:text-xl 2xl:text-2xl font-bold text-gray-300">{result.title}</h3>
@@ -48,7 +48,7 @@ import { results } from '../../data/automation';
                                     : 'text-3xl sm:text-4xl 2xl:text-5xl',
                             ]}>{result.before}</div>
                         </div>
-                        <svg class="w-6 h-6 text-violet-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        <svg aria-hidden="true" class="w-6 h-6 text-violet-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                         <div class="flex-1">
                             <div class="text-xs font-mono text-violet-400 tracking-widest uppercase mb-2">Después</div>
                             <div class:list={[

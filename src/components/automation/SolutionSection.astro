@@ -5,7 +5,7 @@ import { capabilities } from '../../data/automation';
 <section id="automation-solution" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
 
     <!-- Stroke Draw: Connected nodes -->
-    <svg data-automation-draw class="absolute bottom-[5%] left-[4%] w-32 h-64 lg:w-40 lg:h-80 pointer-events-none z-0 hidden lg:block" viewBox="0 0 100 250" fill="none">
+    <svg aria-hidden="true" data-automation-draw class="absolute bottom-[5%] left-[4%] w-32 h-64 lg:w-40 lg:h-80 pointer-events-none z-0 hidden lg:block" viewBox="0 0 100 250" fill="none">
         <line x1="50" y1="20" x2="50" y2="230" stroke="rgba(6,182,212,0.18)" stroke-width="1" class="draw-path" />
         <circle cx="50" cy="35" r="10" stroke="rgba(6,182,212,0.35)" stroke-width="1.5" class="draw-path" />
         <circle cx="50" cy="105" r="10" stroke="rgba(6,182,212,0.3)" stroke-width="1.5" class="draw-path" />
@@ -20,7 +20,7 @@ import { capabilities } from '../../data/automation';
     <div data-automation-orb class="absolute top-[30%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-cyan-900/10 blur-[150px] pointer-events-none z-0"></div>
 
     <!-- Floating SVG -->
-    <svg data-automation-float data-speed="1.0" class="absolute bottom-[15%] right-[10%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+    <svg aria-hidden="true" data-automation-float data-speed="1.0" class="absolute bottom-[15%] right-[10%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
       <rect x="15" y="15" width="70" height="70" rx="8" class="text-cyan-400" />
       <circle cx="50" cy="50" r="15" class="text-cyan-400" />
     </svg>
@@ -50,7 +50,7 @@ import { capabilities } from '../../data/automation';
                 <div class="bg-black p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
                     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/50 to-cyan-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     <div class="flex items-center gap-3 mb-6">
-                        <svg class="w-8 h-8 text-cyan-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg aria-hidden="true" class="w-8 h-8 text-cyan-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <Fragment set:html={cap.icon} />
                         </svg>
                         <span class="font-mono text-xs text-cyan-400 tracking-widest uppercase">{cap.tag}</span>

@@ -48,7 +48,7 @@ const colorMap: Record<string, {
 // SVG decoratives per service (unique shapes)
 const svgDecos = [
   // Agentes de automatización — gear/loop
-  `<svg data-service-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
+  `<svg aria-hidden="true" data-service-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
     <circle cx="100" cy="100" r="80" stroke="rgba(59,130,246,0.2)" stroke-width="1.2" stroke-dasharray="6 4" class="draw-path" />
     <circle cx="100" cy="100" r="50" stroke="rgba(59,130,246,0.28)" stroke-width="1.5" class="draw-path" />
     <circle cx="100" cy="100" r="20" stroke="rgba(59,130,246,0.35)" stroke-width="1.8" class="draw-path" />
@@ -58,7 +58,7 @@ const svgDecos = [
     <path d="M20 100 L35 92 L35 108 Z" stroke="rgba(59,130,246,0.25)" stroke-width="1.5" class="draw-path" />
   </svg>`,
   // Sitios web — browser frame
-  `<svg data-service-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
+  `<svg aria-hidden="true" data-service-draw class="absolute bottom-[10%] right-[6%] w-36 h-36 lg:w-56 lg:h-56 pointer-events-none z-0 hidden md:block" viewBox="0 0 200 200" fill="none">
     <rect x="15" y="30" width="170" height="140" rx="6" stroke="rgba(34,197,94,0.25)" stroke-width="1.5" class="draw-path" />
     <line x1="15" y1="55" x2="185" y2="55" stroke="rgba(34,197,94,0.2)" stroke-width="1" class="draw-path" />
     <circle cx="35" cy="42" r="4" stroke="rgba(34,197,94,0.3)" stroke-width="1.5" class="draw-path" />
@@ -69,14 +69,14 @@ const svgDecos = [
     <rect x="30" y="102" width="100" height="4" rx="1" stroke="rgba(34,197,94,0.14)" stroke-width="1" class="draw-path" />
   </svg>`,
   // E-commerce — shopping bag
-  `<svg data-service-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+  `<svg aria-hidden="true" data-service-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
     <path d="M50 70 L50 170 Q50 180 60 180 L140 180 Q150 180 150 170 L150 70" stroke="rgba(249,115,22,0.25)" stroke-width="1.5" class="draw-path" />
     <path d="M70 70 L70 50 Q70 25 100 25 Q130 25 130 50 L130 70" stroke="rgba(249,115,22,0.3)" stroke-width="1.5" class="draw-path" />
     <line x1="45" y1="70" x2="155" y2="70" stroke="rgba(249,115,22,0.2)" stroke-width="1" class="draw-path" />
     <circle cx="100" cy="120" r="15" stroke="rgba(249,115,22,0.22)" stroke-width="1.2" class="draw-path" />
   </svg>`,
   // Software a medida — circuit/nodes
-  `<svg data-service-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+  `<svg aria-hidden="true" data-service-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
     <rect x="20" y="20" width="160" height="160" rx="8" stroke="rgba(168,85,247,0.25)" stroke-width="1.2" class="draw-path" />
     <rect x="50" y="50" width="100" height="100" rx="4" stroke="rgba(168,85,247,0.2)" stroke-width="1" class="draw-path" />
     <circle cx="100" cy="100" r="20" stroke="rgba(168,85,247,0.35)" stroke-width="1.5" class="draw-path" />
@@ -154,7 +154,7 @@ const svgDecos = [
           <Fragment set:html={svgDeco} />
 
           <!-- Floating SVG -->
-          <svg data-service-float data-speed="0.8" class="absolute top-[20%] right-[12%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+          <svg aria-hidden="true" data-service-float data-speed="0.8" class="absolute top-[20%] right-[12%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <circle cx="50" cy="50" r="40" class={c.text} />
             <circle cx="50" cy="50" r="15" class={c.text} />
           </svg>
@@ -200,13 +200,13 @@ const svgDecos = [
                       </a>
                       <a href="/contact" class={`group flex items-center gap-2 text-white/70 font-medium 2xl:text-lg ${c.ctaHover} transition-colors`}>
                         <span>Cuéntanos tu operación</span>
-                        <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                       </a>
                     </>
                   ) : (
                     <a href="/contact" data-cursor-text="CONTACTO" class={`group flex items-center gap-2 text-white font-medium 2xl:text-lg ${c.ctaHover} transition-colors`}>
                       <span>Cuéntanos tu proyecto</span>
-                      <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                      <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
                   )}
                 </div>
@@ -244,11 +244,11 @@ const svgDecos = [
                     <div class="reveal-text flex flex-col sm:flex-row gap-4 items-start">
                         <a href="/contact" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full overflow-hidden transition-transform hover:scale-105">
                             <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Agendar conversación</span>
-                            <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                         </a>
                         <a href="/work" class="group inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 border border-white/20 text-white font-bold rounded-full transition-colors hover:bg-white hover:text-[#6A0DAD]">
                             <span class="relative z-10 transition-colors 2xl:text-lg">Ver casos de estudio</span>
-                            <svg class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                         </a>
                     </div>
                 </div>

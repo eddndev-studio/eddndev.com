@@ -5,7 +5,7 @@ import { painPoints } from '../../data/automation';
 <section id="automation-problem" class="bg-[#050505] text-white border-b border-white/10 relative overflow-hidden">
 
     <!-- Stroke Draw: Warning triangle -->
-    <svg data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+    <svg aria-hidden="true" data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
         <polygon points="100,20 180,170 20,170" stroke="rgba(244,63,94,0.2)" stroke-width="1.2" class="draw-path" />
         <polygon points="100,50 160,150 40,150" stroke="rgba(244,63,94,0.15)" stroke-width="1" class="draw-path" />
         <line x1="100" y1="80" x2="100" y2="120" stroke="rgba(244,63,94,0.3)" stroke-width="1.5" class="draw-path" />
@@ -13,7 +13,7 @@ import { painPoints } from '../../data/automation';
     </svg>
 
     <!-- Floating SVG -->
-    <svg data-automation-float data-speed="0.8" class="absolute top-[20%] right-[12%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+    <svg aria-hidden="true" data-automation-float data-speed="0.8" class="absolute top-[20%] right-[12%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
       <circle cx="50" cy="50" r="40" class="text-rose-400" />
       <circle cx="50" cy="50" r="15" class="text-rose-400" />
     </svg>
@@ -41,7 +41,7 @@ import { painPoints } from '../../data/automation';
                         <div class="bg-[#050505] p-8 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
                             <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-rose-500/0 via-rose-500/50 to-rose-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                             <div class="flex items-center gap-3 mb-4">
-                                <svg class="w-7 h-7 text-rose-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg aria-hidden="true" class="w-7 h-7 text-rose-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <Fragment set:html={point.icon} />
                                 </svg>
                                 <span class="font-mono text-xs text-rose-400 tracking-widest uppercase">{point.number}</span>

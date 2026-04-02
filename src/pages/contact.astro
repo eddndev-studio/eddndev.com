@@ -53,13 +53,13 @@ import Footer from '../components/layout/Footer.astro';
                 <!-- Email Card -->
                 <div class="group relative bg-[#080808] border border-white/10 p-8 sm:p-12 transition-colors hover:border-purple-500/50">
                     <div class="absolute top-0 right-0 p-6 opacity-50 group-hover:opacity-100 transition-opacity">
-                        <svg class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        <svg aria-hidden="true" class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     </div>
                     <div class="flex items-center justify-between mb-4">
                         <span class="block font-mono text-xs text-gray-500 tracking-widest uppercase">Correo Electrónico</span>
                         <button command="--copy" commandfor="email-snippet" type="button" class="text-xs font-mono text-gray-500 hover:text-purple-400 transition-colors flex items-center gap-1.5" title="Copiar correo">
-                            <svg class="w-3.5 h-3.5 in-data-copied:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-                            <svg class="w-3.5 h-3.5 hidden in-data-copied:block text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" /></svg>
+                            <svg aria-hidden="true" class="w-3.5 h-3.5 in-data-copied:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+                            <svg aria-hidden="true" class="w-3.5 h-3.5 hidden in-data-copied:block text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" /></svg>
                             <span class="in-data-copied:hidden">Copiar</span>
                             <span class="hidden in-data-copied:block text-green-400">Copiado</span>
                         </button>
@@ -76,7 +76,7 @@ import Footer from '../components/layout/Footer.astro';
                  <!-- WhatsApp Card -->
                  <div class="group relative bg-[#080808] border border-white/10 p-8 sm:p-12 transition-colors hover:border-green-500/50">
                     <div class="absolute top-0 right-0 p-6 opacity-50 group-hover:opacity-100 transition-opacity">
-                        <svg class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        <svg aria-hidden="true" class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                     </div>
                     <span class="block font-mono text-xs text-gray-500 tracking-widest uppercase mb-4">Chat Directo</span>
                     <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="block text-2xl sm:text-3xl font-bold text-white group-hover:text-green-300 transition-colors">

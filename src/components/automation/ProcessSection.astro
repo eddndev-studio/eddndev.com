@@ -5,7 +5,7 @@ import { processSteps } from '../../data/automation';
 <section id="automation-process" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
 
     <!-- Floating Orbital SVG -->
-    <svg data-automation-draw class="absolute top-[15%] right-[8%] w-40 h-40 lg:w-64 lg:h-64 pointer-events-none z-0 opacity-[0.15]" viewBox="0 0 200 200" fill="none" stroke="rgba(245,158,11,1)" stroke-width="1">
+    <svg aria-hidden="true" data-automation-draw class="absolute top-[15%] right-[8%] w-40 h-40 lg:w-64 lg:h-64 pointer-events-none z-0 opacity-[0.15]" viewBox="0 0 200 200" fill="none" stroke="rgba(245,158,11,1)" stroke-width="1">
         <circle cx="100" cy="100" r="95" stroke-dasharray="4 8" class="draw-path" />
         <circle cx="100" cy="100" r="70" stroke-dasharray="2 6" class="draw-path" />
         <circle cx="100" cy="100" r="45" class="draw-path" />
@@ -16,7 +16,7 @@ import { processSteps } from '../../data/automation';
     </svg>
 
     <!-- Floating SVG -->
-    <svg data-automation-float data-speed="0.6" class="absolute bottom-[20%] left-[5%] w-10 h-10 lg:w-16 lg:h-16 pointer-events-none z-0 opacity-20 hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+    <svg aria-hidden="true" data-automation-float data-speed="0.6" class="absolute bottom-[20%] left-[5%] w-10 h-10 lg:w-16 lg:h-16 pointer-events-none z-0 opacity-20 hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
       <circle cx="50" cy="50" r="40" stroke-dasharray="4 4" class="text-amber-400" />
       <circle cx="50" cy="50" r="20" class="text-amber-400" />
     </svg>
@@ -48,7 +48,7 @@ import { processSteps } from '../../data/automation';
                                 <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-amber-500/30 transition-colors leading-none">{step.number}</span>
                                 <div>
                                     <div class="flex items-center gap-2 mb-3">
-                                        <svg class="w-7 h-7 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg aria-hidden="true" class="w-7 h-7 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <Fragment set:html={step.icon} />
                                         </svg>
                                         <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold group-hover:text-amber-300 transition-colors">{step.title}</h3>

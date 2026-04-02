@@ -5,7 +5,7 @@ import { useCases } from '../../data/automation';
 <section id="automation-cases" class="bg-[#050505] text-white border-b border-white/10 relative overflow-hidden">
 
     <!-- Stroke Draw: Grid pattern -->
-    <svg data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
+    <svg aria-hidden="true" data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
         <rect x="20" y="20" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.2)" stroke-width="1" class="draw-path" />
         <rect x="110" y="20" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.15)" stroke-width="1" class="draw-path" />
         <rect x="20" y="110" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.15)" stroke-width="1" class="draw-path" />
@@ -33,7 +33,7 @@ import { useCases } from '../../data/automation';
                 <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
                     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/50 to-emerald-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     <div class="flex items-center gap-3 mb-4">
-                        <svg class="w-7 h-7 text-emerald-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg aria-hidden="true" class="w-7 h-7 text-emerald-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <Fragment set:html={uc.icon} />
                         </svg>
                     </div>
