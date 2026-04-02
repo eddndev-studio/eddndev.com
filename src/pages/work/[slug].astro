@@ -34,10 +34,14 @@ const colorStyle = `--project-color: ${entry.data.color}; --project-color-rgb: $
 ---
 
 <Layout
-    title={`${entry.data.title} — Case Study`}
+    title={`${entry.data.title} — edd n' dev`}
     description={entry.data.description}
     image={entry.data.cover}
     project={{ title: entry.data.title }}
+    breadcrumbs={[
+        { name: "Proyectos", url: "/work" },
+        { name: entry.data.title, url: `/work/${entry.slug}` }
+    ]}
 >
 
     <!-- Dynamic Style Wrapper -->
@@ -119,7 +123,7 @@ const colorStyle = `--project-color: ${entry.data.color}; --project-color-rgb: $
         <div class="relative z-20 bg-[#020202] border-b border-white/10">
             <div class={`grid grid-cols-1 sm:grid-cols-${Math.min(Object.keys(entry.data.links).length, 4)} divide-y sm:divide-y-0 sm:divide-x divide-white/10`}>
                 {Object.entries(entry.data.links).map(([label, url]) => (
-                    <a href={url} target="_blank" data-cursor-text="OPEN" class="group relative p-8 flex items-center justify-between overflow-hidden transition-all duration-500">
+                    <a href={url} target="_blank" rel="noopener noreferrer" data-cursor-text="OPEN" class="group relative p-8 flex items-center justify-between overflow-hidden transition-all duration-500">
                         <div class="absolute inset-0 bg-white/[0.02] group-hover:bg-[var(--project-color)]/10 transition-colors duration-500"></div>
                         <div class="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--project-color)] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
 
