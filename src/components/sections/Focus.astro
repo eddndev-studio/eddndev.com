@@ -1,4 +1,12 @@
-<section id="focus" class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-20">
+---
+const manifesto = [
+    { num: '01', html: 'Tu marca necesita <span class="font-medium text-white">presencia con identidad</span> — y una web que convierta visitas en clientes.' },
+    { num: '02', html: 'Ya no quieres depender de <span class="font-medium text-white">plantillas ni plataformas</span> que limitan cómo operas.' },
+    { num: '03', html: 'Tu equipo pierde horas en <span class="font-medium text-white">trabajo que debería ejecutarse solo</span>.' },
+    { num: '04', html: 'Te importa cómo <span class="font-medium text-white">se ve</span> tanto como que <span class="font-medium text-white">funcione en serio</span>.' },
+];
+---
+<section id="focus" class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-24 lg:py-36">
     <!-- Stroke Draw: Large arcs -->
     <svg aria-hidden="true" data-index-draw class="absolute top-1/2 -right-[10%] -translate-y-1/2 w-64 h-64 lg:w-[500px] lg:h-[500px] pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
         <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.12)" stroke-width="1" class="draw-path" />
@@ -7,37 +15,39 @@
         <circle cx="100" cy="100" r="40" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" class="draw-path" />
     </svg>
 
-    <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 h-full">
-        
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-5 relative">
-                <div class="absolute -top-12 left-0 text-xs sm:text-sm md:text-base lg:text-xs font-mono text-purple-200 tracking-widest mb-4 reveal-text">
-                    [ 00 · ENCAJE ]
+    <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+
+            <!-- Sticky heading column -->
+            <div class="lg:col-span-5">
+                <div class="lg:sticky lg:top-24">
+                    <div class="text-xs sm:text-sm font-mono text-purple-200 tracking-widest mb-6 reveal-text" data-readout>
+                        [ 00 · ENCAJE ]
+                    </div>
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
+                        CUANDO LO GENÉRICO <br>
+                        <span class="text-purple-200"><em>se queda corto</em>.</span>
+                    </h2>
+                    <p class="mt-8 text-lg sm:text-xl text-purple-100 font-light leading-relaxed max-w-md reveal-text">
+                        Entro cuando hace falta <span class="text-white font-medium">una base propia</span> y una solución técnicamente seria.
+                    </p>
+                    <a href="/profile" data-cursor-text="PERFIL" class="reveal-text group mt-10 inline-flex items-center gap-3 text-white font-medium 2xl:text-lg hover:text-purple-200 transition-colors">
+                        <span>Conoce quién está detrás</span>
+                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    CUANDO LO <br>
-                    <span class="text-purple-200">GENÉRICO FALLA.</span>
-                </h2>
             </div>
-            
-            <div class="lg:col-span-7 flex flex-col justify-end pl-0 lg:pl-12 border-l border-white/0 lg:border-white/0 relative">
-                <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-purple-100 font-light leading-relaxed max-w-2xl reveal-text">
-                    Entramos cuando hace falta <span class="text-white font-medium">una base propia</span> y una solución técnicamente seria.
-                </p>
-                <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl reveal-text">
-                    <li class="border border-white/15 bg-white/5 px-5 py-4 text-sm sm:text-base text-purple-100">
-                        Marcas que necesitan una presencia digital con identidad fuerte y mejor conversión.
-                    </li>
-                    <li class="border border-white/15 bg-white/5 px-5 py-4 text-sm sm:text-base text-purple-100">
-                        Negocios que ya no quieren depender de herramientas genéricas o plataformas que limitan su operación.
-                    </li>
-                    <li class="border border-white/15 bg-white/5 px-5 py-4 text-sm sm:text-base text-purple-100">
-                        Equipos que necesitan automatizar procesos reales y reducir trabajo manual.
-                    </li>
-                    <li class="border border-white/15 bg-white/5 px-5 py-4 text-sm sm:text-base text-purple-100">
-                        Proyectos donde importan tanto la experiencia visual como la arquitectura técnica.
-                    </li>
-                </ul>
+
+            <!-- Manifesto rows -->
+            <div class="lg:col-span-7">
+                {manifesto.map((item) => (
+                    <div class="group relative py-10 lg:py-14" data-manifesto-row>
+                        <span data-row-line aria-hidden="true" class="absolute top-0 left-0 block h-px w-full bg-white/15"></span>
+                        <span data-ghost-num aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 text-[5rem] lg:text-[8rem] font-black leading-none tracking-tighter text-white/5 group-hover:text-white/10 transition-colors duration-500 select-none pointer-events-none">{item.num}</span>
+                        <p class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-light leading-snug text-purple-100 max-w-2xl" set:html={item.html} />
+                    </div>
+                ))}
+                <span data-row-line aria-hidden="true" class="block h-px w-full bg-white/15"></span>
             </div>
         </div>
     </div>

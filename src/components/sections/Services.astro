@@ -1,35 +1,11 @@
 ---
 import { services } from '../../data/services';
 
-const colorMap: Record<string, { dot: string; text: string; num: string; glow: string; gradient: string }> = {
-  purple: {
-    dot: 'bg-purple-500',
-    text: 'group-hover:text-purple-300',
-    num: 'text-purple-400',
-    glow: 'group-hover:shadow-[0_0_12px_#a855f7]',
-    gradient: 'from-purple-500/0 via-purple-500/50 to-purple-500/0',
-  },
-  green: {
-    dot: 'bg-green-500',
-    text: 'group-hover:text-green-300',
-    num: 'text-green-400',
-    glow: 'group-hover:shadow-[0_0_12px_#22c55e]',
-    gradient: 'from-green-500/0 via-green-500/50 to-green-500/0',
-  },
-  orange: {
-    dot: 'bg-orange-500',
-    text: 'group-hover:text-orange-300',
-    num: 'text-orange-400',
-    glow: 'group-hover:shadow-[0_0_12px_#f97316]',
-    gradient: 'from-orange-500/0 via-orange-500/50 to-orange-500/0',
-  },
-  blue: {
-    dot: 'bg-blue-500',
-    text: 'group-hover:text-blue-300',
-    num: 'text-blue-400',
-    glow: 'group-hover:shadow-[0_0_12px_#3b82f6]',
-    gradient: 'from-blue-500/0 via-blue-500/50 to-blue-500/0',
-  },
+const colorMap: Record<string, { num: string; wash: string; tagline: string }> = {
+  purple: { num: 'text-purple-400', wash: 'bg-gradient-to-r from-purple-500/10 via-purple-500/[0.03] to-transparent', tagline: 'group-hover:text-purple-200' },
+  green:  { num: 'text-green-400',  wash: 'bg-gradient-to-r from-green-500/10 via-green-500/[0.03] to-transparent',   tagline: 'group-hover:text-green-200' },
+  orange: { num: 'text-orange-400', wash: 'bg-gradient-to-r from-orange-500/10 via-orange-500/[0.03] to-transparent', tagline: 'group-hover:text-orange-200' },
+  blue:   { num: 'text-blue-400',   wash: 'bg-gradient-to-r from-blue-500/10 via-blue-500/[0.03] to-transparent',     tagline: 'group-hover:text-blue-200' },
 };
 ---
 
@@ -39,21 +15,19 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
         <rect x="30" y="30" width="140" height="140" rx="2" transform="rotate(45, 100, 100)" stroke="rgba(139,92,246,0.2)" stroke-width="1" class="draw-path" />
         <rect x="55" y="55" width="90" height="90" rx="2" transform="rotate(45, 100, 100)" stroke="rgba(168,85,247,0.25)" stroke-width="1.2" class="draw-path" />
         <circle cx="100" cy="100" r="20" stroke="rgba(192,132,252,0.3)" stroke-width="1.5" class="draw-path" />
-        <line x1="100" y1="10" x2="100" y2="80" stroke="rgba(139,92,246,0.15)" stroke-width="0.8" class="draw-path" />
-        <line x1="100" y1="120" x2="100" y2="190" stroke="rgba(139,92,246,0.15)" stroke-width="0.8" class="draw-path" />
     </svg>
 
     <div class="mx-auto max-w-[1800px] relative z-10">
 
         <!-- Header -->
-        <div class="px-6 sm:px-12 py-24 lg:pt-32 lg:pb-20">
+        <div class="px-6 sm:px-12 py-24 lg:pt-32 lg:pb-16">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div class="lg:col-span-5">
-                    <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-4 reveal-text">
-                        [ 03 · SERVICIOS ]
+                    <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-4 reveal-text" data-readout>
+                        [ 02 · SERVICIOS ]
                     </div>
                     <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                        LO QUE <br> <span class="text-purple-400">CONSTRUIMOS.</span>
+                        LO QUE <br> <span class="text-purple-400"><em>construyo</em>.</span>
                     </h2>
                 </div>
                 <div class="lg:col-span-7 flex flex-col justify-end pl-0 lg:pl-12">
@@ -64,39 +38,42 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
             </div>
         </div>
 
-        <!-- Card Grid -->
-        <div class="px-6 sm:px-12 pb-24 lg:pb-32">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
+        <!-- Index rows -->
+        <div class="pb-24 lg:pb-32">
+            <div>
                 {services.map((service) => {
                     const c = colorMap[service.color];
                     const isAutomation = service.id === 'agentes-de-automatizacion';
                     return (
                         <a
                             href={isAutomation ? "/automation" : `/services#${service.id}`}
-                            class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden flex flex-col justify-between"
                             data-service-card
+                            data-magnetic-zone
+                            data-cursor-text="VER MÁS"
+                            class="group relative grid grid-cols-12 items-center gap-x-4 gap-y-2 px-6 sm:px-12 py-10 lg:py-14 overflow-hidden transition-colors hover:bg-white/[0.02]"
                         >
-                            <div class={`absolute top-0 left-0 w-full h-px bg-gradient-to-r ${c.gradient} scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
-                            <div>
-                                <div class="flex items-center gap-3 mb-6">
-                                    <span class={`w-2 h-2 ${c.dot} rounded-full ${c.glow} transition-shadow`}></span>
-                                    <span class={`font-mono text-xs ${c.num} tracking-widest uppercase`}>{service.number}</span>
+                            <span data-row-line aria-hidden="true" class="absolute top-0 left-0 block h-px w-full bg-white/10"></span>
+                            <div class={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${c.wash}`}></div>
+
+                            <span data-row-reveal class={`relative z-10 col-span-12 sm:col-span-1 font-mono text-xs tracking-widest ${c.num}`}>{service.number}</span>
+
+                            <h3 data-row-reveal class="relative z-10 col-span-12 sm:col-span-6 text-3xl sm:text-5xl 2xl:text-6xl font-black tracking-tighter text-white group-hover:translate-x-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                                {service.title}
+                            </h3>
+
+                            <p data-row-reveal class={`relative z-10 col-span-12 sm:col-span-4 text-gray-500 font-light text-sm sm:text-base 2xl:text-lg ${c.tagline} transition-colors`}>
+                                {service.tagline}
+                            </p>
+
+                            <div data-row-reveal class="relative z-10 hidden sm:flex sm:col-span-1 justify-end">
+                                <div data-magnetic="0.5" class="w-12 h-12 2xl:w-14 2xl:h-14 rounded-full border border-white/15 flex items-center justify-center transition-colors duration-300 group-hover:bg-white group-hover:text-black">
+                                    <svg aria-hidden="true" class="transition-transform duration-300 group-hover:-rotate-45" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                                 </div>
-                                <h3 class={`text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 ${c.text} transition-colors`}>{service.title}</h3>
-                                <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg mb-8">{service.tagline}</p>
                             </div>
-                            
-                            {isAutomation && (
-                                <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-blue-400 font-medium text-sm lg:text-base group-hover:text-blue-300 transition-colors">
-                                    <span>Ver cómo funciona</span>
-                                    <svg aria-hidden="true" class="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M5 12h14M13 5l7 7-7 7"/>
-                                    </svg>
-                                </div>
-                            )}
                         </a>
                     );
                 })}
+                <span data-row-line aria-hidden="true" class="block h-px w-full bg-white/10"></span>
             </div>
 
             <!-- CTA -->
@@ -107,6 +84,5 @@ const colorMap: Record<string, { dot: string; text: string; num: string; glow: s
                 </a>
             </div>
         </div>
-
     </div>
 </section>

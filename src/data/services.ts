@@ -15,12 +15,12 @@ export const services: Service[] = [
     title: 'Automatización con IA',
     tagline: 'Menos trabajo manual, más operación resuelta',
     description:
-      'Automatizamos tareas repetitivas y flujos operativos con agentes, integraciones y reglas que monitorean, responden y ejecutan por ti. Ideal cuando el equipo pierde tiempo copiando datos, persiguiendo pendientes o conectando herramientas a mano.',
+      'Automatizo tareas repetitivas y flujos operativos con agentes, integraciones y reglas que monitorean, responden y ejecutan por ti. Ideal cuando el equipo pierde tiempo copiando datos, persiguiendo pendientes o conectando herramientas a mano.',
     highlights: [
       'Automatización de tareas y seguimientos repetitivos',
       'Agentes con IA para clasificar, responder y ejecutar',
       'Integraciones entre CRM, formularios, correo y operaciones',
-      'Monitoreo, alertas y trazabilidad en tiempo real',
+      'Te enteras de todo: alertas y reportes en tiempo real',
     ],
     color: 'blue',
   },
@@ -28,12 +28,12 @@ export const services: Service[] = [
     id: 'sitios-web',
     number: '02',
     title: 'Sitios web',
-    tagline: 'Sitios rápidos, distintivos y orientados a conversión',
+    tagline: 'Sitios que se ven premium y convierten visitas en clientes',
     description:
-      'Diseñamos y desarrollamos sitios que explican mejor tu valor, cargan rápido y reducen fricción en la decisión del usuario. Cada interacción responde a la identidad y objetivos de tu marca.',
+      'Diseño y desarrollo sitios que explican mejor tu valor, cargan rápido y reducen fricción en la decisión del usuario. Cada interacción responde a la identidad y objetivos de tu marca.',
     highlights: [
-      'Arquitectura visual alineada a tu marca',
-      'Performance y SEO técnico desde la base',
+      'Diseño alineado a tu marca, no a una plantilla',
+      'Aparece en Google y abre al instante',
       'Experiencias inmersivas sin sacrificar velocidad',
       'Estructura pensada para captar leads o ventas',
     ],
@@ -43,14 +43,14 @@ export const services: Service[] = [
     id: 'e-commerce',
     number: '03',
     title: 'E-commerce',
-    tagline: 'Tiendas online con identidad, rendimiento y control',
+    tagline: 'Tu tienda, tus reglas: vende sin pagar comisiones',
     description:
-      'E-commerce a medida con control total sobre catálogo, contenido y márgenes. Integramos pagos, inventario, logística y operación con una experiencia coherente con tu marca.',
+      'E-commerce a medida con control total sobre catálogo, contenido y márgenes. Integro pagos, inventario, logística y operación con una experiencia coherente con tu marca.',
     highlights: [
       'Checkout y catálogo optimizados para conversión',
       'Backoffice y CMS adaptados a tu operación',
       'Pagos, inventario y logística integrados',
-      'Menos dependencia de fees y restricciones externas',
+      'Sin comisiones por venta ni restricciones de plataforma',
     ],
     color: 'orange',
   },
@@ -60,12 +60,12 @@ export const services: Service[] = [
     title: 'Software a medida',
     tagline: 'Sistemas diseñados alrededor de tu operación',
     description:
-      'Desarrollamos paneles, plataformas internas, herramientas de gestión y software propietario para negocios cuya lógica ya no cabe en soluciones genéricas. El sistema se adapta a tu proceso, no al revés.',
+      'Desarrollo paneles, plataformas internas, herramientas de gestión y software propietario para negocios cuya lógica ya no cabe en soluciones genéricas. El sistema se adapta a tu proceso, no al revés.',
     highlights: [
       'Paneles internos y herramientas de gestión',
-      'APIs, automatizaciones y servicios propios',
+      'Conexiones y automatizaciones entre tus herramientas',
       'Integración con tu stack actual',
-      'Arquitectura escalable y mantenible',
+      'Hecho para durar años, no meses',
     ],
     color: 'purple',
   }

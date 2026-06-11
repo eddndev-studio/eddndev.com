@@ -3,7 +3,7 @@ import '../styles/global.css';
 import '@tailwindplus/elements';
 import SvgSprite from '../components/SvgSprite.astro';
 import { ClientRouter } from 'astro:transitions';
-import TopBar from '../components/layout/TopBar.astro';
+import DockNav from '../components/layout/DockNav.astro';
 import NavigationPanel from '../components/layout/NavigationPanel.astro';
 
 interface Props {
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-    title = "edd n' dev — Estudio de ingeniería digital",
-    description = "Estudio de ingeniería digital en México. Sitios web, e-commerce, automatización y software a medida.",
+    title = "edd n' dev — Ingeniería digital freelance",
+    description = "Soy Eduardo Alonso (eddndev), ingeniero digital freelance en México. Diseño y construyo sitios web, e-commerce, automatización y software a medida.",
     image,
     project,
     breadcrumbs = [],
@@ -24,25 +24,27 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// JSON-LD: Organization (always present)
-const organizationLD = {
+// JSON-LD: Person (freelance personal brand)
+const personLD = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "edd n' dev",
+    "@type": "Person",
+    "name": "Eduardo Alonso",
+    "alternateName": "eddndev",
+    "jobTitle": "Ingeniero digital freelance",
     "url": "https://eddndev.com",
-    "logo": "https://eddndev.com/favicon.png",
-    "description": "Estudio de ingeniería digital en México. Sitios web, e-commerce, automatización y software a medida.",
+    "image": "https://eddndev.com/favicon.png",
+    "description": "Ingeniero digital freelance en México. Sitios web, e-commerce, automatización y software a medida.",
     "sameAs": [
         "https://github.com/eddndev",
-        "https://linkedin.com/in/eddndev",
-        "https://instagram.com/_eddndev"
+        "https://www.linkedin.com/in/eddndev",
+        "https://x.com/eddndev",
+        "https://instagram.com/eddn.dev",
+        "https://tiktok.com/@eddndev",
+        "https://threads.net/@eddn.dev",
+        "https://eddn.dev"
     ],
-    "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "contacto@eddndev.com",
-        "contactType": "sales",
-        "availableLanguage": ["Spanish", "English"]
-    }
+    "email": "contacto@eddndev.com",
+    "knowsLanguage": ["es", "en"]
 };
 
 // JSON-LD: WebSite (only on homepage)
@@ -133,7 +135,7 @@ if (typeof resolvedImage === 'string') {
         <!-- Fonts (self-hosted) -->
 		
         <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json" set:html={JSON.stringify(organizationLD)} />
+        <script type="application/ld+json" set:html={JSON.stringify(personLD)} />
         {webSiteLD && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
         {breadcrumbLD && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLD)} />}
 
@@ -152,99 +154,25 @@ if (typeof resolvedImage === 'string') {
         
         <div class="min-h-screen bg-black">
             
-            <!-- 1. INFRASTRUCTURE (Always Visible / Fixed) -->
-            <TopBar project={project} />
+            <!-- 1. INFRASTRUCTURE — floating dock nav (fixed bottom) -->
+            <DockNav project={project} />
             
             <!-- 2. NAVIGATION GRID (Overlay under Header, right of Sidebar) -->
             <NavigationPanel />
 
             <!-- 3. PAGE CONTENT (Scrollable area) -->
-            <!-- Top padding creates space for the fixed TopBar -->
+            <!-- Heroes manage their own top padding (no fixed top bar) -->
             <!-- Left padding creates space for the fixed Sidebar -->
             <div 
                 id="page-content"
                 class="flex flex-col min-w-0 relative z-10 bg-black transition-opacity duration-500"
             >
-                <main id="main-content" class="flex-1 relative z-10">
+                <main id="main-content" class="flex-1 relative z-10" data-project-title={project?.title}>
                     <slot />
                 </main>
             </div>
         </div>
-        
+
         <script src="../scripts/main.js"></script>
-
-        <!-- MENU TOGGLE SCRIPT -->
-        <script>
-            import { gsap } from 'gsap';
-
-            document.addEventListener('astro:page-load', () => {
-                const trigger = document.getElementById('sidebar-menu-btn');
-                const navPanel = document.getElementById('nav-panel');
-                const pageContent = document.getElementById('page-content');
-                const navCards = document.querySelectorAll('.nav-card');
-
-                let isOpen = false;
-
-                function toggleMenu() {
-                    if (!navPanel) return;
-
-                    isOpen = !isOpen;
-
-                    // Update ARIA state
-                    if (trigger) {
-                        trigger.setAttribute('aria-expanded', String(isOpen));
-                        trigger.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
-                    }
-
-                    if (isOpen) {
-                        // 1. Lock Scroll (Class based)
-                        document.documentElement.classList.add('no-scroll');
-                        document.body.classList.add('no-scroll');
-
-                        // 2. Reveal Nav Panel
-                        navPanel.classList.remove('opacity-0', 'pointer-events-none', 'scale-[0.98]');
-                        navPanel.setAttribute('aria-hidden', 'false');
-                        navPanel.removeAttribute('inert');
-
-                        // 3. Hide Content (Opacity 0)
-                        if (pageContent) {
-                            gsap.to(pageContent, { opacity: 0, duration: 0.5, ease: "power2.out" });
-                            pageContent.style.pointerEvents = 'none';
-                        }
-
-                        // 4. Animate Grid Items
-                        gsap.fromTo(navCards, 
-                            { y: 20, opacity: 0 },
-                            { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, delay: 0.1, ease: "power2.out" }
-                        );
-
-                    } else {
-                        // 1. Unlock Scroll
-                        document.documentElement.classList.remove('no-scroll');
-                        document.body.classList.remove('no-scroll');
-
-                        // 2. Hide Nav Panel
-                        navPanel.classList.add('opacity-0', 'pointer-events-none', 'scale-[0.98]');
-                        navPanel.setAttribute('aria-hidden', 'true');
-                        navPanel.setAttribute('inert', '');
-
-                        // 3. Restore Content
-                        if (pageContent) {
-                            gsap.to(pageContent, { opacity: 1, duration: 0.5, ease: "power2.out" });
-                            pageContent.style.pointerEvents = 'auto';
-                        }
-                    }
-                }
-
-                if(trigger) trigger.addEventListener('click', toggleMenu);
-                
-                // Close on link click
-                navCards.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if(isOpen) toggleMenu();
-                    });
-                });
-            });
-        </script>
 	</body>
 </html>

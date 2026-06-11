@@ -1,11 +1,25 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
 @import "@fontsource-variable/instrument-sans";
 @import "@fontsource-variable/instrument-sans/wght-italic.css";
 
 @theme {
     --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand tokens — ledding purple family */
+    --color-led: #a756ff;
+    --color-led-soft: #c895ff;
+    --color-led-deep: #6a0dad;
+
+    /* Motion tokens — one easing family for the whole site */
+    --ease-panel: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Editorial signature: light italic accents inside black display caps */
+h1 em, h2 em, h3 em {
+    font-style: italic;
+    font-weight: 480;
+    letter-spacing: -0.03em;
 }
 
 body {
@@ -22,6 +36,12 @@ html {
 body.no-scroll, html.no-scroll {
     overflow: hidden !important;
     height: 100vh !important;
+}
+
+/* Page content recedes while the menu is open (swap-proof: pure CSS state) */
+html.menu-open #page-content {
+    opacity: 0 !important;
+    pointer-events: none;
 }
 
 .hero-text-gradient {
@@ -57,4 +77,71 @@ body.no-scroll, html.no-scroll {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
 }
+
+/* Outline display text — ticker */
+.text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); }
+.text-outline-purple { color: transparent; -webkit-text-stroke: 1px rgba(192, 132, 252, 0.45); }
+
+/* ─────────────────────────────────────────────
+   Dock — persistent chrome
+   ───────────────────────────────────────────── */
+@keyframes dock-up {
+    from { transform: translateY(140%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+.dock-enter { animation: dock-up 0.7s var(--ease-panel) 0.35s both; }
+
+/* Active page: an LED lights under the link */
+.dock-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background: var(--color-led);
+    transform: translateX(-50%) scale(0);
+    box-shadow: 0 0 8px var(--color-led);
+    transition: transform 0.4s var(--ease-panel);
+}
+.dock-link[aria-current="page"] {
+    color: #ffffff;
+}
+.dock-link[aria-current="page"]::after {
+    transform: translateX(-50%) scale(1);
+}
+
+/* Project pill: display is CSS-managed so chrome.js only toggles .hidden */
+.dock-pill { display: none; }
+@media (min-width: 768px) {
+    .dock-pill:not(.hidden) { display: inline-flex; }
+}
+
+/* ─────────────────────────────────────────────
+   View transitions — content lifts out, settles in;
+   persistent chrome stays put in its own snapshot layer
+   ───────────────────────────────────────────── */
+@keyframes vt-out {
+    to { opacity: 0; transform: translateY(-16px) scale(0.995); }
+}
+@keyframes vt-in {
+    from { opacity: 0; transform: translateY(22px); }
+}
+::view-transition-old(root) { animation: vt-out 0.26s cubic-bezier(0.45, 0, 0.55, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.45s var(--ease-panel) both; }
+
+#dock-wrap { view-transition-name: dock; }
+#custom-cursor { view-transition-name: cursor; }
+#nav-panel { view-transition-name: nav-panel; }
+::view-transition-group(dock),
+::view-transition-group(cursor),
+::view-transition-group(nav-panel) { animation-duration: 0.01ms; }
+::view-transition-old(dock), ::view-transition-new(dock),
+::view-transition-old(cursor), ::view-transition-new(cursor),
+::view-transition-old(nav-panel), ::view-transition-new(nav-panel) { animation: none; }

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo.png';
+
+interface Props {
+  project?: {
+    title: string;
+  };
+}
+
+const { project } = Astro.props;
+
+const links = [
+  { label: 'Trabajo', url: '/work' },
+  { label: 'Servicios', url: '/services' },
+  { label: 'Perfil', url: '/profile' },
+];
+---
+
+<!-- Floating dock — persists across page transitions; active state synced by chrome.js -->
+<div id="dock-wrap" transition:persist="dock" class="fixed inset-x-0 bottom-4 sm:bottom-6 z-50 flex justify-center pointer-events-none px-4">
+    <nav
+        id="dock-nav"
+        aria-label="Navegación principal"
+        class="dock-enter pointer-events-auto flex items-center gap-1 p-1.5 rounded-full border border-white/10 bg-black/70 backdrop-blur-2xl shadow-[0_12px_48px_rgba(0,0,0,0.65)]"
+    >
+        <!-- Brand + availability pulse -->
+        <a href="/" data-dock-link data-cursor-text="INICIO" class="group flex items-center gap-2.5 pl-4 pr-3 py-2.5 rounded-full hover:bg-white/10 transition-colors" aria-label="Inicio — eddndev">
+            <Image src={logoImg} alt="eddndev" class="h-4 sm:h-5 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+            <span class="relative flex h-1.5 w-1.5" title="Disponible para proyectos">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+            </span>
+        </a>
+
+        <span lang="en" id="dock-project-pill" class:list={[
+            'dock-pill items-center px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 font-mono text-[10px] uppercase tracking-widest text-purple-300 max-w-[220px] truncate',
+            !project?.title && 'hidden',
+        ]}>
+            {project?.title}
+        </span>
+
+        <!-- Primary links (desktop) -->
+        <div class="hidden sm:flex items-center">
+            {links.map((link) => (
+                <a href={link.url} data-dock-link data-cursor-text="IR" class="dock-link relative px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                    {link.label}
+                </a>
+            ))}
+        </div>
+
+        <span class="hidden sm:block h-5 w-px bg-white/10 mx-1" aria-hidden="true"></span>
+
+        <!-- Full menu (bento overlay) -->
+        <button
+            id="sidebar-menu-btn"
+            class="group flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Abrir menú de navegación"
+            aria-expanded="false"
+            aria-controls="nav-panel"
+        >
+            <span class="font-mono text-purple-400 transition-transform duration-300 group-hover:rotate-90 group-aria-expanded:rotate-45">+</span>
+            <span>Menú</span>
+        </button>
+
+        <!-- CTA -->
+        <a href="/contact" data-cursor-text="INICIAR" class="ml-1 px-4 sm:px-5 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-purple-400 hover:text-white transition-colors">
+            Hablemos
+        </a>
+    </nav>
+</div>

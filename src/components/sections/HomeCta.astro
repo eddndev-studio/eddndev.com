@@ -1,44 +1,61 @@
 ---
 ---
-<section class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-24 lg:py-32">
-    <!-- Decorative SVG pattern background -->
+<section class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden">
+    <!-- Decorative dot pattern -->
     <div class="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
          style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;">
     </div>
 
-    <!-- Stroke Draw: Arc frame for CTA -->
-    <svg aria-hidden="true" data-index-draw class="absolute top-[50%] left-[3%] -translate-y-1/2 w-40 h-40 lg:w-56 lg:h-56 pointer-events-none z-0 hidden lg:block" viewBox="0 0 200 200" fill="none">
-        <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" class="draw-path" />
-        <path d="M100 15 A85 85 0 0 1 185 100" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" class="draw-path" />
-        <path d="M100 185 A85 85 0 0 1 15 100" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" class="draw-path" />
-    </svg>
-
-    <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 z-10">
+    <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 pt-24 lg:pt-32 z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-6 relative">
-                <div class="text-xs sm:text-sm md:text-base lg:text-xs font-mono text-purple-200 tracking-widest mb-6 reveal-text">
-                    [ 05 · PRÓXIMO PASO ]
+
+            <!-- Copy + CTAs -->
+            <div class="lg:col-span-7">
+                <div class="text-xs sm:text-sm font-mono text-purple-200 tracking-widest mb-8 reveal-text" data-readout>
+                    [ 03 · PRÓXIMO PASO ]
                 </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    ¿SITIO, TIENDA <br>
-                    <span class="text-purple-200">O SISTEMA?</span>
+
+                <h2 class="reveal-text font-black tracking-tighter leading-[0.85] text-[clamp(3rem,8.5vw,10rem)]">
+                    TU PROYECTO <br>
+                    <span class="text-purple-200"><em>empieza aquí</em>.</span>
                 </h2>
+
+                <p class="reveal-text mt-8 max-w-xl text-lg sm:text-xl 2xl:text-2xl text-purple-100 font-light leading-relaxed">
+                    Cuéntame qué necesitas y te diré cómo abordarlo — y si soy la persona correcta para hacerlo.
+                </p>
+
+                <div class="reveal-text mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                    <a href="/contact" data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full overflow-hidden transition-colors">
+                        <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Cuéntame tu proyecto</span>
+                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="/work" data-cursor-text="CASOS" class="group inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 border border-white/25 text-white font-bold rounded-full transition-colors hover:bg-white hover:text-[#6A0DAD]">
+                        <span class="2xl:text-lg">Ver el trabajo</span>
+                    </a>
+                </div>
             </div>
 
-            <div class="lg:col-span-6 flex flex-col items-start lg:items-end justify-center">
-                <p class="text-lg sm:text-xl md:text-2xl text-purple-100 font-light leading-relaxed max-w-xl mb-10 reveal-text lg:text-right">
-                    Cuéntanos qué necesitas y te diremos cómo abordarlo — y si somos el equipo correcto.
-                </p>
-                <div class="reveal-text flex flex-col sm:flex-row gap-4 lg:justify-end">
-                    <a href="/contact" data-cursor-text="INICIAR" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full overflow-hidden transition-transform hover:scale-105">
-                        <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Agendar conversación</span>
-                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="/work" data-cursor-text="CASOS" class="group inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 border border-white/20 text-white font-bold rounded-full transition-colors hover:bg-white hover:text-[#6A0DAD]">
-                        <span class="relative z-10 transition-colors 2xl:text-lg">Ver casos de estudio</span>
-                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
+            <!-- Ledding chat bubble -->
+            <div class="lg:col-span-5 relative hidden lg:block" aria-hidden="true">
+                <div id="ledding-cta-container" class="relative h-[420px] 2xl:h-[500px]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact info strip -->
+    <div class="relative z-10 mt-16 lg:mt-24 border-t border-white/15">
+        <div class="mx-auto max-w-[1800px] px-6 sm:px-12 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/15">
+            <a href="mailto:contacto@eddndev.com" class="group py-8 lg:py-10 sm:pr-10">
+                <span class="block font-mono text-[10px] tracking-widest uppercase text-purple-200/70 mb-2">Correo</span>
+                <span class="text-lg sm:text-xl 2xl:text-2xl font-bold group-hover:text-purple-200 transition-colors break-words">contacto@eddndev.com</span>
+            </a>
+            <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="group py-8 lg:py-10 sm:px-10">
+                <span class="block font-mono text-[10px] tracking-widest uppercase text-purple-200/70 mb-2">WhatsApp</span>
+                <span class="text-lg sm:text-xl 2xl:text-2xl font-bold group-hover:text-green-300 transition-colors">+52 56 1943 3938</span>
+            </a>
+            <div class="py-8 lg:py-10 sm:pl-10">
+                <span class="block font-mono text-[10px] tracking-widest uppercase text-purple-200/70 mb-2">Respuesta</span>
+                <span class="text-lg sm:text-xl 2xl:text-2xl font-bold">&lt; 24 horas · CDMX, MX</span>
             </div>
         </div>
     </div>

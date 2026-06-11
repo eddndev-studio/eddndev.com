@@ -1,14 +1,15 @@
 ---
 title: "Achronyme"
-description: "Lenguaje funcional para computación matemática y UI reactiva. VM basada en registros, sintaxis expresiva y rendimiento nativo en Rust."
+description: "Lenguaje para pruebas zero-knowledge con tri-arquitectura de VMs: Akron ejecuta tu código, Artik calcula los witnesses y Lysis construye el circuito. Rust de punta a punta."
 year: 2024
 category: "Language Design"
 color: "#8b5cf6"
-stack: ["Rust", "WebAssembly", "VM Design", "Compiler Theory"]
+stack: ["Rust", "Zero-Knowledge", "VM Design", "Compiler Theory"]
 heroStyle: "bg-gradient-to-br from-purple-950 to-black"
 cover: "../../assets/images/projects/achronyme/landing.png"
 links:
   Live Site: "https://achrony.me"
+  Playground: "https://achrony.me/playground"
   Documentation: "https://docs.achrony.me"
   GitHub: "https://github.com/achronyme"
 featured: true
@@ -16,42 +17,34 @@ featured: true
 import TextBlock from '../../components/blocks/TextBlock.astro';
 import ImageFull from '../../components/blocks/ImageFull.astro';
 import StatsGrid from '../../components/blocks/StatsGrid.astro';
-import CodeComparison from '../../components/blocks/CodeComparison.astro';
 import landingImg from '../../assets/images/projects/achronyme/landing.png';
 
 <TextBlock
-  heading="Matemáticas como Código"
-  body="Wolfram Mathematica es propietario y cerrado. Las alternativas open source carecen de expresividad o requieren entornos pesados. Achronyme nace de la necesidad de un lenguaje ligero, portable y diseñado específicamente para expresar matemáticas y construir interfaces reactivas sin el caos de los event listeners."
+  heading="Código que Genera Pruebas"
+  body="Demostrar que un cómputo ocurrió sin revelar sus datos exigía frameworks pesados y conocimiento criptográfico profundo. Achronyme lo reduce a escribir código: un lenguaje con tres máquinas virtuales de bytecode que ejecutan, atestiguan y traducen el mismo programa a una prueba zero-knowledge. Three machines. One language. Zero trust."
 />
 
 <ImageFull
   src={landingImg}
   alt="Landing page de Achronyme mostrando el hero y la navegación."
-  caption="Interfaz principal de la plataforma web."
+  caption="La tri-arquitectura: Akron, Artik y Lysis sobre un mismo lenguaje."
 />
 
 <StatsGrid
   items={[
-    {value: '800+', label: 'Tests Unitarios'},
-    {value: '60fps', label: 'Reactividad UI'},
-    {value: 'v0.6.6', label: 'Versión Actual'},
-    {value: 'Rust', label: 'Core Rewrite'},
+    {value: '3', label: 'Máquinas Virtuales'},
+    {value: 'ZK', label: 'Pruebas sin revelar datos'},
+    {value: 'v0.1.0-beta', label: 'Versión Actual'},
+    {value: 'Rust', label: 'De Punta a Punta'},
   ]}
 />
 
-<CodeComparison
-  heading="El Modelo de Reactividad"
-  description="Sin callbacks. Sin observadores manuales. Defines la señal, y la UI reacciona automáticamente."
-  language="soc"
-  code={`let frequency = signal(1.0)
-let amplitude = signal(0.5)
-
-// Operación vectorizada reactiva
-let y = amplitude * sin(x * frequency + p)`}
-  caption="Sintaxis nativa de Achronyme para una onda senoidal reactiva."
+<TextBlock
+  heading="Tres Máquinas, Un Lenguaje"
+  body="Escribes el programa una vez. Akron lo ejecuta como cualquier runtime; Artik re-ejecuta el cómputo para producir el witness; Lysis traduce la misma lógica a un circuito aritmético. El resultado: una prueba criptográfica de que el cómputo ocurrió — sin exponer los datos de entrada y sin confiar en terceros."
 />
 
 <TextBlock
   heading="Ingeniería Profunda: La Migración"
-  body="El proyecto comenzó en C++, pero la gestión de memoria manual se convirtió en un cuello de botella para la seguridad numérica. La reescritura total en Rust no fue solo una traducción: implicó rediseñar la Máquina Virtual (VM) de una arquitectura basada en pila (stack-based) a una basada en registros (register-based), desbloqueando un nuevo nivel de rendimiento y seguridad."
+  body="El proyecto comenzó en C++, pero la gestión de memoria manual se convirtió en un cuello de botella para la seguridad. La reescritura total en Rust implicó rediseñar la VM de una arquitectura de pila a una de registros — y esa base es la que hoy sostiene a las tres máquinas que generan pruebas zero-knowledge."
 />

@@ -4,29 +4,9 @@ export default function initCaseContent() {
   const container = document.querySelector('[data-case-content]');
   if (!container) return;
 
-  // 1. Reveal .reveal-text inside [data-case-block]
-  container.querySelectorAll('[data-case-block]').forEach(block => {
-    const reveals = block.querySelectorAll('.reveal-text');
-    if (!reveals.length) return;
+  // .reveal-text is handled generically in animations/reveals.js
 
-    gsap.fromTo(reveals,
-      { y: 30, autoAlpha: 0 },
-      {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: block,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        }
-      }
-    );
-  });
-
-  // 2. Stats stagger (profile-card pattern)
+  // 1. Stats stagger (profile-card pattern)
   gsap.utils.toArray('[data-case-stat]').forEach((stat, i) => {
     gsap.fromTo(stat,
       { scale: 0.95, y: 20, autoAlpha: 0 },

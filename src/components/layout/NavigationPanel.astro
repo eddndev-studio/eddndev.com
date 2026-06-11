@@ -1,26 +1,23 @@
 ---
-// NavigationPanel.astro: Bento-box navigation grid
+// NavigationPanel.astro: Bento-box navigation grid (persisted; chrome.js drives open/close)
 const navItems = [
   { label: 'Proyectos', url: '/work', sub: 'Casos de Estudio', col: 'col-span-2', featured: true },
   { label: 'Inicio', url: '/', sub: 'Index', col: 'col-span-1' },
-  { label: 'Servicios', url: '/services', sub: 'Lo que hacemos', col: 'col-span-1' },
+  { label: 'Servicios', url: '/services', sub: 'Lo que hago', col: 'col-span-1' },
   { label: 'Automatización', url: '/automation', sub: 'Agentes de IA', col: 'col-span-1' },
-  { label: 'Perfil', url: '/profile', sub: 'El estudio', col: 'col-span-1' },
+  { label: 'Perfil', url: '/profile', sub: 'Quién soy', col: 'col-span-1' },
   { label: 'Contacto', url: '/contact', sub: 'Hablemos', col: 'col-span-1', accent: true },
 ];
 ---
 
 <aside
     id="nav-panel"
+    transition:persist="nav-panel"
     role="dialog"
     aria-label="Menú de navegación"
     aria-hidden="true"
     inert
-    class="fixed inset-0 z-30 bg-black/95 backdrop-blur-3xl flex flex-col
-           top-16 lg:top-20 2xl:top-24
-           left-0
-           opacity-0 pointer-events-none scale-[0.98]
-           transition-all duration-300 ease-out origin-top"
+    class="fixed inset-0 z-30 bg-black/95 backdrop-blur-3xl flex flex-col top-0 left-0 opacity-0 pointer-events-none"
 >
     <!-- Background Grid Effect -->
     <div class="absolute inset-0 z-0 opacity-20 pointer-events-none border-t border-white/10"
@@ -28,7 +25,7 @@ const navItems = [
     </div>
 
     <!-- Content Container -->
-    <div class="flex-1 w-full h-full overflow-y-auto overscroll-contain p-4 md:p-6 lg:p-12 relative z-10">
+    <div class="flex-1 w-full h-full overflow-y-auto overscroll-contain p-4 pb-32 md:p-6 md:pb-32 lg:p-12 lg:pb-36 relative z-10">
 
         <div class="max-w-[1600px] mx-auto h-full flex flex-col">
             <!-- BENTO GRID -->
@@ -36,13 +33,12 @@ const navItems = [
                 {navItems.map((item, index) => (
                     <a href={item.url}
                        class:list={[
-                         'nav-card group relative flex flex-col justify-between p-4 md:p-6 lg:p-8 rounded-sm overflow-hidden transition-all duration-300',
+                         'nav-card group relative flex flex-col justify-between p-4 md:p-6 lg:p-8 rounded-sm overflow-hidden transition-colors duration-300 will-change-transform',
                          item.col,
                          item.accent
                            ? 'border border-purple-500/30 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-400/60'
                            : 'border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/50',
-                       ]}
-                       data-astro-reload>
+                       ]}>
 
                         <!-- Hover Glow -->
                         <div class:list={[

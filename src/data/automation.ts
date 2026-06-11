@@ -118,7 +118,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '01',
     title: 'Diagnóstico',
-    description: 'Mapeamos tus flujos actuales e identificamos las oportunidades de automatización con mayor impacto en tu operación.',
+    description: 'Mapeo tus flujos actuales e identifico las oportunidades de automatización con mayor impacto en tu operación.',
     icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
   },
   {
@@ -130,7 +130,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '03',
     title: 'Construcción',
-    description: 'Construimos, probamos y refinamos hasta que funcione impecablemente en tu entorno real.',
+    description: 'Construyo, pruebo y refino hasta que funcione impecablemente en tu entorno real.',
     icon: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
   },
   {

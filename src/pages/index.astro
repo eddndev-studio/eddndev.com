@@ -1,24 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 import Footer from '../components/layout/Footer.astro';
+import Ticker from '../components/sections/Ticker.astro';
 import Focus from '../components/sections/Focus.astro';
-import HomeProof from '../components/sections/HomeProof.astro';
+import Work from '../components/sections/Work.astro';
 import Services from '../components/sections/Services.astro';
-import TechStack from '../components/sections/TechStack.astro';
-import Philosophy from '../components/sections/Philosophy.astro';
 import HomeCta from '../components/sections/HomeCta.astro';
-import ProjectGrid from '../components/work/ProjectGrid.astro';
-
-// Get all projects for the list
-const projects = await getCollection('work');
-// Sort by year desc
-projects.sort((a, b) => (Number(b.data.year) - Number(a.data.year)));
 ---
 
 <Layout
-    title="edd n' dev — Estudio de ingeniería digital"
-    description="Diseñamos y construimos sitios web, e-commerce, automatizaciones y software a medida con infraestructura propia. Estudio fundado en México."
+    title="edd n' dev — Ingeniería digital freelance"
+    description="Soy Eduardo Alonso (eddndev). Diseño y construyo sitios web, e-commerce, automatizaciones y software a medida con infraestructura propia, desde México."
 >
 
     <!-- HERO -->
@@ -33,33 +25,45 @@ projects.sort((a, b) => (Number(b.data.year) - Number(a.data.year)));
 
       <!-- Contenido Principal -->
       <div class="relative z-20 w-full px-6 sm:px-12 max-w-[1800px] mx-auto">
-        <header class="flex flex-col items-start">
-          <div class="flex items-center gap-3 mb-4 lg:mb-6 opacity-70">
-            <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <span class="font-mono text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-base tracking-widest uppercase text-gray-300">eddndev studio &bull; ingeniería digital</span>
+        <header class="flex flex-col items-start" data-hero-entrance>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 lg:mb-6" data-hero-eyebrow>
+            <div class="flex items-center gap-3 opacity-70">
+              <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+              <span class="font-mono text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-base tracking-widest uppercase text-gray-300">eddndev &bull; ingeniería digital freelance</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span class="font-mono text-xs sm:text-sm lg:text-xs 2xl:text-sm tracking-widest uppercase text-green-400/90">disponible para proyectos</span>
+            </div>
           </div>
 
-      <!-- Título Masivo -->
-      <h1 class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(3.5rem,11vw,12rem)] 2xl:text-[clamp(5rem,11vw,16rem)] mix-blend-screen">
-        SITIOS. <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">SISTEMAS.</span>
-      </h1>
+          <!-- Título Masivo -->
+          <h1 data-hero-title class="font-black tracking-tighter text-white leading-[0.9] text-[clamp(2.75rem,7.5vw,8.5rem)] 2xl:text-[clamp(3.5rem,7.5vw,11rem)] mix-blend-screen">
+            SITIOS QUE <em class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">venden</em>. <br>
+            SISTEMAS QUE <em class="hero-text-gradient">trabajan</em>.
+          </h1>
 
-          <div class="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full border-t border-white/10 pt-8">
+          <div class="mt-8 lg:mt-12 w-full">
+            <span data-hero-rule class="block h-px w-full bg-white/10 origin-left" aria-hidden="true"></span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full pt-8">
                     <div class="lg:col-span-5">
-                      <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-xl 2xl:max-w-2xl">
-                        Ingeniería digital para marcas que necesitan <span class="text-white font-medium">más que una plantilla</span> — sitios, e-commerce, automatización y software construido desde cero.
+                      <p data-hero-intro class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-xl 2xl:max-w-2xl">
+                        Soy Eduardo. Construyo la presencia digital de marcas que quieren <span class="text-white font-medium">verse serias y vender más</span> — sitios, tiendas en línea y automatización, todo a la medida. Nada de plantillas.
                       </p>
                     </div>
             <div class="lg:col-span-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 lg:justify-end">
-               <a href="/contact" data-cursor-text="INICIAR" class="group relative px-8 py-4 2xl:px-10 2xl:py-5 2xl:text-lg bg-white text-black font-bold rounded-full overflow-hidden transition-transform hover:scale-105">
-                  <span class="relative z-10 group-hover:text-purple-700 transition-colors">Cuéntanos tu proyecto</span>
+               <a href="/contact" data-hero-cta data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative px-8 py-4 2xl:px-10 2xl:py-5 2xl:text-lg bg-white text-black font-bold rounded-full overflow-hidden transition-colors hover:bg-purple-100">
+                  <span class="relative z-10 group-hover:text-purple-700 transition-colors">Cuéntame tu proyecto</span>
                </a>
-               
-               <a href="#work" data-cursor-text="CASOS" class="group flex items-center gap-2 text-white font-medium 2xl:text-lg hover:text-purple-300 transition-colors">
+
+               <a href="#work" data-hero-cta data-cursor-text="CASOS" class="group flex items-center gap-2 text-white font-medium 2xl:text-lg hover:text-purple-300 transition-colors">
                   <span>Ver casos de estudio</span>
                   <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                </a>
+            </div>
             </div>
           </div>
         </header>
@@ -67,41 +71,10 @@ projects.sort((a, b) => (Number(b.data.year) - Number(a.data.year)));
     </div>
 
     <!-- SECTIONS -->
-    <TechStack />
+    <Ticker />
     <Focus />
-    <HomeProof />
-    <Philosophy />
+    <Work />
     <Services />
-
-    <!-- PROJECTS PREVIEW -->
-    <section id="work" class="bg-black text-white border-t border-white/10 relative overflow-hidden">
-        <!-- Structural Grid -->
-        <div class="absolute inset-0 pointer-events-none select-none max-w-[1800px] mx-auto px-6 sm:px-12">
-        </div>
-    
-        <div class="mx-auto max-w-[1800px] relative z-10">
-            <!-- Header -->
-            <div class="px-6 sm:px-12 py-24 lg:pt-32 lg:pb-20">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-5">
-                        <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-4 reveal-text">
-                            [ 04 · INDEX ]
-                        </div>
-                        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                            NUESTRO <br> <span class="text-purple-400">TRABAJO.</span>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- Project Grid Component -->
-            <div class="px-6 sm:px-12 pb-32">
-                <ProjectGrid projects={projects} />
-            </div>
-    
-        </div>
-    </section>
-
     <HomeCta />
 
     <Footer />

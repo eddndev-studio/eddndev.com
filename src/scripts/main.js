@@ -1,46 +1,32 @@
-import { ScrollTrigger } from './core/gsap-core';
+import './core/gsap-core';
 import './core/lenis';
-import { onReady } from './core/dom';
+import { startLifecycle } from './core/lifecycle';
 
-import initHero from './animations/hero';
-import initFocus from './animations/focus';
-import initMicro from './animations/micro';
-import initVignette from './animations/vignette';
+import { initCursor } from './features/cursor';
+import { initChrome, syncChrome } from './features/chrome';
 import initLeddingHero from './features/ledding-hero';
-import initSections from './animations/sections';
-import initProjects from './animations/projects';
-import initFooterReveal from './animations/footer';
-import initNavigation from './features/navigation';
-import initProjectHero from './animations/project-hero';
-import initProfile from './animations/profile';
+
+import initReveals from './animations/reveals';
+import initHome from './animations/home';
 import initServices from './animations/services';
+import initProfile from './animations/profile';
+import initProjectHero from './animations/project-hero';
 import initCaseContent from './animations/case-content';
 import initAutomation from './animations/automation';
-import { initCursor } from './features/cursor';
 
-const init = () => {
-  console.log('Astro app booting...');
-  
-  // Reset ScrollTrigger instances to avoid duplicates on navigation
-  ScrollTrigger.getAll().forEach(t => t.kill());
-  ScrollTrigger.clearMatchMedia();
-  
-  initCursor();
-  initHero();
-  initMicro();
-  initVignette();
-  initLeddingHero();
-  initFocus();
-  initSections();
-  initProjects();
-  initFooterReveal();
-  initNavigation();
-  initProjectHero();
-  initProfile();
-  initServices();
-  initCaseContent();
-  initAutomation();
-};
+// Session singletons — bound once, survive view transitions
+initCursor();
+initChrome();
 
-// Boot on initial load and on every page transition
-document.addEventListener('astro:page-load', init);
+// Per-page modules — initialized once per page, fully reverted on swap
+startLifecycle([
+  syncChrome,
+  initLeddingHero,
+  initReveals,
+  initHome,
+  initServices,
+  initProfile,
+  initProjectHero,
+  initCaseContent,
+  initAutomation,
+]);
