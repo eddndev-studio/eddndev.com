@@ -9,6 +9,7 @@ import initLeddingHero from './features/ledding-hero';
 import initReveals from './animations/reveals';
 import initHome from './animations/home';
 import initServices from './animations/services';
+import initWork from './animations/work';
 import initProfile from './animations/profile';
 import initCase from './animations/case';
 import initAutomation from './animations/automation';
@@ -24,6 +25,7 @@ startLifecycle([
   initReveals,
   initHome,
   initServices,
+  initWork,
   initProfile,
   initCase,
   initAutomation,

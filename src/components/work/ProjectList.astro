@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -7,49 +7,60 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+
+// Pre-optimized cover URLs for the floating cursor preview
+const previews = await Promise.all(
+  projects.map(async (p) =>
+    p.data.cover ? (await getImage({ src: p.data.cover, width: 720 })).src : null
+  )
+);
 ---
 
-<div class="w-full border-t border-white/10">
+<div class="w-full border-t border-white/10" data-project-list>
     {projects.map((project, index) => (
-        <a href={`/work/${project.slug}`} 
+        <a href={`/work/${project.slug}`}
            data-cursor-text="VER CASO"
-           data-project-card
-           class="group relative w-full flex flex-col md:flex-row items-baseline md:items-center py-12 px-6 sm:px-12 border-b border-white/10 overflow-hidden bg-[#020202] transition-colors duration-500 hover:bg-[#050505]"
+           data-work-row
+           data-preview-src={previews[index]}
+           class="group relative w-full flex flex-col md:flex-row items-baseline md:items-center py-12 lg:py-16 px-6 sm:px-12 border-b border-white/10 overflow-hidden bg-[#020202] transition-colors duration-500 hover:bg-[#050505]"
            style={`--project-color: ${project.data.color ?? '#ffffff'};`}>
-            
-            {/* 1. Ghost Image Layer (The Manifest Reveal) */}
-            <div class="absolute inset-0 z-0 pointer-events-none opacity-10 group-hover:opacity-30 transition-opacity duration-700 ease-out mix-blend-luminosity">
+
+            {/* Ghost image (touch devices — desktop uses the floating preview) */}
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-10 group-hover:opacity-30 transition-opacity duration-700 ease-out mix-blend-luminosity lg:hidden">
                  {project.data.cover && (
-                    <Image 
-                        src={project.data.cover} 
-                        alt={`${project.data.title} background`} 
+                    <Image
+                        src={project.data.cover}
+                        alt=""
                         class="w-full h-full object-cover object-center scale-110 group-hover:scale-100 transition-transform duration-[1.5s] ease-out"
                     />
                  )}
             </div>
 
-            {/* 2. Color Wash Layer */}
+            {/* Color wash on hover */}
             <div class="absolute inset-0 z-0 bg-[var(--project-color)] opacity-0 group-hover:opacity-10 mix-blend-screen transition-opacity duration-500 pointer-events-none"></div>
 
-            {/* 3. Content Layer */}
-            <div class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
-                
-                {/* ID Column */}
+            {/* Content */}
+            <div class="relative z-10 w-full grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center">
+
+                {/* Index */}
                 <div class="md:col-span-1 flex items-center">
                     <span class="font-mono text-xs font-bold text-[var(--project-color)] tracking-widest">
                         {(index + 1).toString().padStart(2, '0')}
                     </span>
                 </div>
 
-                {/* Title Column */}
-                <div class="md:col-span-4">
-                    <h3 class="text-4xl md:text-3xl lg:text-6xl font-black text-white tracking-tighter group-hover:translate-x-2 transition-transform duration-500">
-                        {project.data.title.toUpperCase()}
+                {/* Title + category */}
+                <div class="md:col-span-5">
+                    <h3 class="text-4xl md:text-3xl lg:text-6xl font-black text-white tracking-tighter group-hover:translate-x-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                        {project.data.title.toUpperCase()}<span class="text-[var(--project-color)]">.</span>
                     </h3>
+                    <span class="mt-2 block font-mono text-xs text-gray-500 uppercase tracking-widest group-hover:text-gray-300 transition-colors">
+                        {project.data.category}
+                    </span>
                 </div>
 
-                {/* Tech Stack */}
-                <div class="md:col-span-5 flex flex-wrap gap-2 md:justify-end">
+                {/* Stack chips */}
+                <div class="md:col-span-4 flex flex-wrap gap-2 md:justify-end">
                     {project.data.stack && project.data.stack.slice(0, 3).map(tech => (
                         <span class="font-mono text-xs uppercase tracking-wider border border-white/30 bg-white/5 px-3 py-1 rounded-full text-gray-300 group-hover:border-[var(--project-color)] group-hover:text-[var(--project-color)] transition-colors">
                             {tech}
@@ -57,28 +68,20 @@ const { projects } = Astro.props;
                     ))}
                 </div>
 
-                {/* Status / Year & Arrow */}
+                {/* Year + arrow */}
                 <div class="md:col-span-2 flex items-center justify-end gap-4">
                     <span class="font-mono text-sm font-bold text-gray-400 group-hover:text-white transition-colors hidden sm:inline-block">
                         {project.data.year}
                     </span>
-                    
-                    {/* Call To Action */}
-                    <div class="flex items-center gap-3">
-                        <span class="font-mono text-xs font-bold text-white/60 uppercase tracking-wider group-hover:text-[var(--project-color)] transition-colors duration-300 hidden md:block">
-                            Ver Caso
-                        </span>
-                        {/* Arrow Icon */}
-                        <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-[var(--project-color)] group-hover:border-[var(--project-color)] transition-all duration-300 group-hover:rotate-[-45deg]">
-                            <svg aria-hidden="true" class="w-4 h-4 text-gray-200 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </div>
+                    <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-[var(--project-color)] group-hover:border-[var(--project-color)] transition-all duration-300 group-hover:rotate-[-45deg]">
+                        <svg aria-hidden="true" class="w-4 h-4 text-gray-200 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
                     </div>
                 </div>
             </div>
 
-            {/* Konpo Decorators (Crosshairs) */}
+            {/* Crosshair decorators */}
             <div class="absolute bottom-0 left-6 sm:left-12 w-px h-4 bg-white/20 hidden md:block"></div>
             <div class="absolute bottom-0 right-6 sm:right-12 w-px h-4 bg-white/20 hidden md:block"></div>
         </a>
