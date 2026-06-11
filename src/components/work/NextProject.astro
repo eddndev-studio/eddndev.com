@@ -37,71 +37,59 @@ const nextColorRgb = hexToRgb(nextColor);
   <!-- Ambient blob -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[var(--next-color)] opacity-[0.04] blur-[150px] pointer-events-none z-0"></div>
 
-  <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+  <div class="relative z-10 mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32">
 
-      {/* Left column — Label + Link */}
-      <div class="lg:col-span-5 flex flex-col justify-between gap-8">
-        <div class="space-y-6">
-          <span class="font-mono text-xs tracking-widest uppercase text-[var(--next-color)]">
-            [ SIGUIENTE PROYECTO ]
-          </span>
-          <div class="h-px bg-white/10"></div>
-        </div>
+    <!-- Meta row -->
+    <div class="flex items-center justify-between gap-6 mb-10 lg:mb-14 font-mono text-xs tracking-widest uppercase">
+      <span data-readout style="color: var(--next-color)">[ SIGUIENTE CASO ]</span>
+      <span class="text-gray-500 reveal-text">{next.data.year}</span>
+    </div>
 
-        <a href="/work" class="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors">
-          <span class="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-white transition-all"></span>
-          VER TODOS
-        </a>
-      </div>
+    <!-- The whole piece is one link: title + cover power on together -->
+    <a href={`/work/${next.slug}`} data-magnetic-zone data-cursor-text="VER" class="group block">
+      <h3 class="reveal-text text-[clamp(2.75rem,9vw,9rem)] font-black tracking-tighter leading-[0.85] text-white">
+        {next.data.title.toUpperCase()}<span style="color: var(--next-color)">.</span>
+      </h3>
 
-      {/* Right column — Next project card */}
-      <div class="lg:col-span-7">
-        <a href={`/work/${next.slug}`} data-cursor-text="VER" class="group relative block overflow-hidden border border-white/10 bg-[#050505] transition-colors duration-500 hover:bg-[#080808]">
-
-          {/* Ghost background image */}
+      <figure class="mt-10 lg:mt-12" data-case-media>
+        <div data-media-frame class="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden border border-white/10 bg-[#0a0a0a]">
           {next.data.cover && (
-            <div class="absolute inset-0 z-0 pointer-events-none opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-700 mix-blend-luminosity">
+            <div data-media-inner class="absolute inset-0 will-change-transform">
               <Image
                 src={next.data.cover}
-                alt=""
-                class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.5s]"
+                alt={next.data.title}
+                class="w-full h-full object-cover opacity-50 group-hover:opacity-90 transition-opacity duration-700"
               />
             </div>
           )}
+          <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+          <div aria-hidden="true" class="absolute top-0 inset-x-0 h-px opacity-60" style="background: linear-gradient(90deg, var(--next-color), transparent 65%)"></div>
 
-          {/* Content */}
-          <div class="relative z-10 p-8 sm:p-12 space-y-6">
-            {/* Category */}
-            <div class="flex items-center gap-3">
-              <div class="w-2 h-2 bg-[var(--next-color)] shadow-[0_0_8px_var(--next-color)]"></div>
-              <span class="font-mono text-xs text-[var(--next-color)] uppercase tracking-widest">{next.data.category}</span>
-            </div>
-
-            {/* Title */}
-            <h3 class="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-[0.9] group-hover:translate-x-2 transition-transform duration-500">
-              {next.data.title.toUpperCase()}<span class="text-[var(--next-color)]">.</span>
-            </h3>
-
-            {/* Description + Meta */}
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-4 border-t border-white/10">
-              <p class="text-base text-gray-400 font-light leading-relaxed line-clamp-2 max-w-lg">
+          <!-- Meta inside the frame: revealed by the clip wipe -->
+          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10 flex items-end justify-between gap-6">
+            <div class="min-w-0">
+              <div class="flex items-center gap-3 mb-3">
+                <span aria-hidden="true" class="w-2 h-2 rounded-full" style="background: var(--next-color); box-shadow: 0 0 8px var(--next-color)"></span>
+                <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--next-color)">{next.data.category}</span>
+              </div>
+              <p class="text-gray-300 font-light leading-relaxed line-clamp-2 max-w-xl hidden sm:block">
                 {next.data.description}
               </p>
-
-              <div class="flex items-center gap-4 shrink-0">
-                <span class="font-mono text-sm font-bold text-gray-500">{next.data.year}</span>
-                <div class="w-10 h-10 border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-[var(--next-color)] group-hover:border-[var(--next-color)] transition-all duration-300 group-hover:rotate-[-45deg]">
-                  <svg aria-hidden="true" class="w-4 h-4 text-gray-200 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
-              </div>
+            </div>
+            <div data-magnetic="0.5" class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full border border-white/20 bg-white/5 flex items-center justify-center transition-colors duration-300 group-hover:bg-[var(--next-color)] group-hover:border-[var(--next-color)]">
+              <svg aria-hidden="true" class="w-5 h-5 text-white transition-transform duration-300 group-hover:-rotate-45 group-hover:text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </div>
           </div>
-        </a>
-      </div>
+        </div>
+      </figure>
+    </a>
 
+    <!-- Archive link -->
+    <div class="mt-10 flex justify-end">
+      <a href="/work" class="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors reveal-text">
+        <span class="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-white transition-all" aria-hidden="true"></span>
+        VER TODOS LOS CASOS
+      </a>
     </div>
   </div>
 </section>

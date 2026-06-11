@@ -2,7 +2,8 @@
 title: "Yatagarasu"
 description: "Portafolio web para un desarrollador indie. Una experiencia retro-arcade construida con Astro que mimetiza la estética de los juegos desarrollados en Godot."
 year: 2025
-category: "Game Dev Portfolio"
+category: "Portafolio game dev"
+role: "Diseño & front-end"
 color: "#dc2626"
 stack: ["Astro", "CSS Modules", "Godot", "Pixel Art"]
 heroStyle: "bg-black"
@@ -16,8 +17,10 @@ import StatsGrid from '../../components/blocks/StatsGrid.astro';
 import previewImg from '../../assets/images/projects/yatagarasu/preview.png';
 
 <TextBlock
+  number="01"
+  section="Contexto"
   heading="El Menú de Inicio"
-  body="Yasu no necesitaba un sitio web corporativo; necesitaba una extensión de su universo creativo. Yatagarasu es un portafolio diseñado para sentirse como el menú de inicio de un juego retro. Construido sobre **Astro**, priorizamos la velocidad bruta y la ausencia de JavaScript innecesario, delegando la carga visual a un sistema de grids CSS que simula píxeles y scanlines CRT."
+  body="Yasu no necesitaba un sitio web corporativo; necesitaba una extensión de su universo creativo. Yatagarasu es un portafolio diseñado para sentirse como el menú de inicio de un juego retro. Construido sobre Astro, priorizamos la velocidad bruta y la ausencia de JavaScript innecesario, delegando la carga visual a un sistema de grids CSS que simula píxeles y scanlines CRT."
 />
 
 <ImageFull
@@ -28,14 +31,16 @@ import previewImg from '../../assets/images/projects/yatagarasu/preview.png';
 
 <StatsGrid
   items={[
-    {value: 'WIP', label: 'Status'},
+    {value: 'WIP', label: 'Estado'},
     {value: 'Astro', label: 'Framework'},
-    {value: '0kb', label: 'JS Runtime'},
-    {value: 'CRT', label: 'Vibe'},
+    {value: '0kb', label: 'JS en el navegador'},
+    {value: 'CRT', label: 'Estética'},
   ]}
 />
 
 <TextBlock
+  number="02"
+  section="El reto"
   heading="Coherencia Visual"
   body="El mayor desafío fue traducir la identidad 'low-res' de los juegos de Godot a la web moderna de alta resolución. En lugar de usar imágenes estáticas pesadas, creamos patrones de renderizado usando CSS nativo para dibujar la silueta del cuervo Yatagarasu, permitiendo que el sitio escale infinitamente sin perder su esencia pixelada."
 />

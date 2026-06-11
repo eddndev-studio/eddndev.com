@@ -2,7 +2,8 @@
 title: "Achronyme"
 description: "Lenguaje para pruebas zero-knowledge con tri-arquitectura de VMs: Akron ejecuta tu código, Artik calcula los witnesses y Lysis construye el circuito. Rust de punta a punta."
 year: 2024
-category: "Language Design"
+category: "Diseño de lenguaje"
+role: "Arquitectura & código"
 color: "#8b5cf6"
 stack: ["Rust", "Zero-Knowledge", "VM Design", "Compiler Theory"]
 heroStyle: "bg-gradient-to-br from-purple-950 to-black"
@@ -20,6 +21,8 @@ import StatsGrid from '../../components/blocks/StatsGrid.astro';
 import landingImg from '../../assets/images/projects/achronyme/landing.png';
 
 <TextBlock
+  number="01"
+  section="Contexto"
   heading="Código que Genera Pruebas"
   body="Demostrar que un cómputo ocurrió sin revelar sus datos exigía frameworks pesados y conocimiento criptográfico profundo. Achronyme lo reduce a escribir código: un lenguaje con tres máquinas virtuales de bytecode que ejecutan, atestiguan y traducen el mismo programa a una prueba zero-knowledge. Three machines. One language. Zero trust."
 />
@@ -40,11 +43,15 @@ import landingImg from '../../assets/images/projects/achronyme/landing.png';
 />
 
 <TextBlock
+  number="02"
+  section="Arquitectura"
   heading="Tres Máquinas, Un Lenguaje"
   body="Escribes el programa una vez. Akron lo ejecuta como cualquier runtime; Artik re-ejecuta el cómputo para producir el witness; Lysis traduce la misma lógica a un circuito aritmético. El resultado: una prueba criptográfica de que el cómputo ocurrió — sin exponer los datos de entrada y sin confiar en terceros."
 />
 
 <TextBlock
+  number="03"
+  section="Migración"
   heading="Ingeniería Profunda: La Migración"
   body="El proyecto comenzó en C++, pero la gestión de memoria manual se convirtió en un cuello de botella para la seguridad. La reescritura total en Rust implicó rediseñar la VM de una arquitectura de pila a una de registros — y esa base es la que hoy sostiene a las tres máquinas que generan pruebas zero-knowledge."
 />

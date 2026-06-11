@@ -6,6 +6,7 @@ const work = defineCollection({
 		description: z.string(),
 		year: z.union([z.number(), z.string()]),
         category: z.string(),
+        role: z.string().optional(),
         color: z.string(),
         stack: z.array(z.string()),
         links: z.record(z.string()).optional(),

@@ -10,8 +10,7 @@ import initReveals from './animations/reveals';
 import initHome from './animations/home';
 import initServices from './animations/services';
 import initProfile from './animations/profile';
-import initProjectHero from './animations/project-hero';
-import initCaseContent from './animations/case-content';
+import initCase from './animations/case';
 import initAutomation from './animations/automation';
 
 // Session singletons — bound once, survive view transitions
@@ -26,7 +25,6 @@ startLifecycle([
   initHome,
   initServices,
   initProfile,
-  initProjectHero,
-  initCaseContent,
+  initCase,
   initAutomation,
 ]);

@@ -7,11 +7,18 @@ interface Props {
 }
 const { heading, body, section, number } = Astro.props;
 ---
-<div class="space-y-8" data-case-block>
-    {/* Optional label: [ 01 · CONTEXT ] */}
+<div class="relative space-y-8" data-case-block>
+    {/* Ghost numeral drifting in the margin (desktop) */}
+    {number && (
+        <span aria-hidden="true" data-ghost-num
+              class="hidden xl:block absolute -left-36 2xl:-left-44 -top-2 font-mono font-black text-7xl 2xl:text-8xl leading-none text-transparent select-none pointer-events-none"
+              style="-webkit-text-stroke: 1px rgba(var(--project-color-rgb), 0.3)">{number}</span>
+    )}
+
+    {/* Section readout: [ 01 · CONTEXTO ] */}
     {section && (
         <div class="reveal-text">
-            <span class="font-mono text-xs tracking-widest uppercase text-[var(--project-color)]">
+            <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--project-color)">
                 [ {number ? `${number} · ` : ''}{section} ]
             </span>
         </div>
@@ -19,10 +26,10 @@ const { heading, body, section, number } = Astro.props;
 
     {heading && (
         <div class="space-y-6">
-            <h2 class="text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tighter leading-[0.9] reveal-text">
+            <h2 class="text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tighter leading-[0.92] reveal-text">
                 {heading}
             </h2>
-            <div class="h-px bg-white/10 reveal-text"></div>
+            <span data-case-line aria-hidden="true" class="block h-px bg-white/10 origin-left"></span>
         </div>
     )}
 

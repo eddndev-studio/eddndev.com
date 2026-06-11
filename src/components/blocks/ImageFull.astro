@@ -7,21 +7,21 @@ interface Props {
 }
 const { src, alt, caption } = Astro.props;
 ---
-<div class="space-y-4" data-case-block>
-    <div class="relative w-full overflow-hidden border border-white/10 bg-[#111] group reveal-text">
-        <Image
-            src={src}
-            alt={alt}
-            class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.01]"
-        />
+<figure class="space-y-4" data-case-media data-case-block>
+    <div data-media-frame class="relative w-full overflow-hidden border border-white/10 bg-[#0a0a0a]">
+        <div data-media-inner class="will-change-transform">
+            <Image src={src} alt={alt} class="w-full h-auto object-cover" />
+        </div>
         <!-- Scanline effect overlay -->
-        <div class="absolute inset-0 bg-repeat opacity-10 pointer-events-none mix-blend-overlay" style="background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent); background-size: 4px 4px;"></div>
+        <div aria-hidden="true" class="absolute inset-0 bg-repeat opacity-10 pointer-events-none mix-blend-overlay" style="background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent); background-size: 4px 4px;"></div>
+        <!-- Top glint in project color -->
+        <div aria-hidden="true" class="absolute top-0 inset-x-0 h-px opacity-60" style="background: linear-gradient(90deg, var(--project-color), transparent 65%)"></div>
     </div>
 
     {caption && (
-        <figcaption class="flex items-center justify-end gap-3 text-xs font-mono text-gray-500 reveal-text">
-            <span class="h-px w-8 bg-white/20"></span>
+        <figcaption data-media-caption class="flex items-center justify-end gap-3 font-mono text-xs text-gray-500">
+            <span class="h-px w-8 bg-white/20" aria-hidden="true"></span>
             {caption}
         </figcaption>
     )}
-</div>
+</figure>
