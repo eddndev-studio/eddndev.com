@@ -18,6 +18,12 @@ import HomeCta from '../components/sections/HomeCta.astro';
       <!-- Fondo Animado -->
       <div id="ledding-animation-container" class="absolute inset-0 z-0"></div>
 
+      <!-- Scrim: protege la columna de texto sin apagar la matriz a la derecha -->
+      <div aria-hidden="true"
+           class="absolute inset-0 pointer-events-none z-[5]"
+           style="background: linear-gradient(100deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.86) 32%, rgba(0,0,0,0.55) 54%, rgba(0,0,0,0.18) 74%, transparent 90%);">
+      </div>
+
       <!-- Vignette -->
       <div id="hero-vignette"
            class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none z-10">
@@ -41,7 +47,7 @@ import HomeCta from '../components/sections/HomeCta.astro';
           </div>
 
           <!-- Título Masivo -->
-          <h1 data-hero-title class="font-black tracking-tighter text-white leading-[0.9] text-[clamp(2.75rem,7.5vw,8.5rem)] 2xl:text-[clamp(3.5rem,7.5vw,11rem)] mix-blend-screen">
+          <h1 data-hero-title class="font-black tracking-tighter text-white leading-[0.9] text-[clamp(2.75rem,7.5vw,8.5rem)] 2xl:text-[clamp(3.5rem,7.5vw,11rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]">
             SITIOS QUE <em class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">venden</em>. <br>
             SISTEMAS QUE <em class="hero-text-gradient">trabajan</em>.
           </h1>
