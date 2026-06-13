@@ -32,7 +32,7 @@ export const services: Service[] = [
     description:
       'Diseño y desarrollo sitios que explican mejor tu valor, cargan rápido y reducen fricción en la decisión del usuario. Cada interacción responde a la identidad y objetivos de tu marca.',
     highlights: [
-      'Diseño alineado a tu marca, no a una plantilla',
+      'Diseño 100% alineado a la identidad de tu marca',
       'Aparece en Google y abre al instante',
       'Experiencias inmersivas sin sacrificar velocidad',
       'Estructura pensada para captar leads o ventas',
@@ -43,14 +43,14 @@ export const services: Service[] = [
     id: 'e-commerce',
     number: '03',
     title: 'E-commerce',
-    tagline: 'Tu tienda, tus reglas: vende sin pagar comisiones',
+    tagline: 'Tu tienda, tus reglas: cada venta es 100% tuya',
     description:
       'E-commerce a medida con control total sobre catálogo, contenido y márgenes. Integro pagos, inventario, logística y operación con una experiencia coherente con tu marca.',
     highlights: [
       'Checkout y catálogo optimizados para conversión',
       'Backoffice y CMS adaptados a tu operación',
       'Pagos, inventario y logística integrados',
-      'Sin comisiones por venta ni restricciones de plataforma',
+      'Tus márgenes y tus reglas, completos y bajo tu control',
     ],
     color: 'orange',
   },
@@ -60,12 +60,12 @@ export const services: Service[] = [
     title: 'Software a medida',
     tagline: 'Sistemas diseñados alrededor de tu operación',
     description:
-      'Desarrollo paneles, plataformas internas, herramientas de gestión y software propietario para negocios cuya lógica ya no cabe en soluciones genéricas. El sistema se adapta a tu proceso, no al revés.',
+      'Desarrollo paneles, plataformas internas, herramientas de gestión y software propietario para negocios con una lógica propia que merece un sistema hecho a su medida. El sistema se adapta a tu proceso, exactamente como necesitas.',
     highlights: [
       'Paneles internos y herramientas de gestión',
       'Conexiones y automatizaciones entre tus herramientas',
       'Integración con tu stack actual',
-      'Hecho para durar años, no meses',
+      'Hecho para acompañarte durante años',
     ],
     color: 'purple',
   }

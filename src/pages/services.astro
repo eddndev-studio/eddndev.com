@@ -1,14 +1,34 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
+import PageIntro from '../components/studio/PageIntro.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
+import FadeIn from '../components/studio/FadeIn.astro';
+import FadeInStagger from '../components/studio/FadeInStagger.astro';
+import Border from '../components/studio/Border.astro';
 import List from '../components/studio/List.astro';
 import ListItem from '../components/studio/ListItem.astro';
+import GridListItem from '../components/studio/GridListItem.astro';
+import StatList from '../components/studio/StatList.astro';
+import StatListItem from '../components/studio/StatListItem.astro';
 import Button from '../components/studio/Button.astro';
-import PageIntro from '../components/studio/PageIntro.astro';
-import FadeIn from '../components/studio/FadeIn.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
 import { services } from '../data/services';
+
+import syleHero from '../assets/images/projects/syle/hero.png';
+import syleProyectos from '../assets/images/projects/syle/proyectos.png';
+import syleNav from '../assets/images/projects/syle/navegacion.png';
+import yatagarasuImg from '../assets/images/projects/yatagarasu/preview.png';
+import achronymeImg from '../assets/images/projects/achronyme/landing.png';
+
+const [automation, sitios, ecommerce, software] = services;
+
+const FRAME = 'aspect-16/10 w-full rounded-3xl object-cover grayscale transition duration-500 hover:grayscale-0';
+
+// Category labels for the feature-card grids (UI labels, not marketing claims).
+const autoCards = ['Operación', 'Decisión', 'Conexión', 'Visibilidad'];
+const softwareCards = ['Gestión', 'Flujos', 'Tu stack', 'Para durar'];
 ---
 
 <Layout
@@ -17,38 +37,124 @@ import { services } from '../data/services';
     breadcrumbs={[{ name: "Servicios", url: "/services" }]}
 >
   <!-- HERO -->
-  <PageIntro eyebrow="Servicios" title="Lo que sí resuelvo.">
+  <PageIntro eyebrow="Servicios" title="Lo que resuelvo.">
     <p>
-      Cuatro líneas de servicio, cero plantillas. Tú eliges el problema — yo pongo el sistema que lo resuelve.
+      Cuatro líneas de servicio, todo 100% a la medida. Tú eliges el problema — yo pongo el sistema que lo resuelve.
     </p>
   </PageIntro>
 
-  <!-- DECK DE SERVICIOS -->
-  {services.map((service) => (
-    <>
-      <SectionIntro
-        id={service.id}
-        eyebrow={service.number}
-        title={service.title}
-        class="mt-24 sm:mt-32 lg:mt-40"
-      >
-        <p class="font-semibold text-neutral-950">{service.tagline}.</p>
-        <p class="mt-4">{service.description}</p>
-      </SectionIntro>
-      <Container class="mt-16">
-        <List>
-          {service.highlights.map((highlight) => (
-            <ListItem>{highlight}</ListItem>
-          ))}
-        </List>
-        {service.id === 'agentes-de-automatizacion' && (
-          <FadeIn class="mt-12">
-            <Button href="/automation">Ver cómo funciona</Button>
-          </FadeIn>
-        )}
-      </Container>
-    </>
-  ))}
+  <!-- ÍNDICE -->
+  <Container class="mt-24 sm:mt-32 lg:mt-40">
+    <FadeInStagger as="ul" role="list" class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
+      {services.map((service) => (
+        <FadeIn as="li">
+          <a href={`#${service.id}`} class="group block">
+            <Border position="top" class="pt-8">
+              <p class="font-display text-base font-semibold text-neutral-950">{service.number}</p>
+              <h2 class="mt-4 font-display text-xl font-semibold text-neutral-950 transition group-hover:text-neutral-600">{service.title}</h2>
+              <p class="mt-2 text-sm text-neutral-600">{service.tagline}.</p>
+            </Border>
+          </a>
+        </FadeIn>
+      ))}
+    </FadeInStagger>
+  </Container>
+
+  <!-- 01 · AUTOMATIZACIÓN — panel oscuro destacado -->
+  <div class="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-24 lg:mt-40">
+    <SectionIntro id={automation.id} eyebrow={automation.number} title={automation.title} invert class="scroll-mt-24">
+      <p class="font-semibold text-white">{automation.tagline}.</p>
+      <p class="mt-4 text-neutral-300">{automation.description}</p>
+    </SectionIntro>
+    <Container class="mt-16">
+      <FadeInStagger as="ul" role="list" class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+        {automation.highlights.map((h, i) => (
+          <GridListItem title={autoCards[i]} invert>{h}</GridListItem>
+        ))}
+      </FadeInStagger>
+      <StatList class="mt-16">
+        <StatListItem invert label="Reporta en" value="Tiempo real" />
+      </StatList>
+      <FadeIn class="mt-12">
+        <Button href="/automation" invert>Ver cómo funciona</Button>
+      </FadeIn>
+    </Container>
+  </div>
+
+  <!-- 02 · SITIOS WEB — dos columnas: captura + lista -->
+  <SectionIntro id={sitios.id} eyebrow={sitios.number} title={sitios.title} class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
+    <p class="font-semibold text-neutral-950">{sitios.tagline}.</p>
+    <p class="mt-4">{sitios.description}</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <div class="lg:flex lg:items-center lg:gap-x-12">
+      <FadeIn class="lg:w-1/2">
+        <Image src={yatagarasuImg} alt="Yatagarasu — experiencia web inmersiva" class={FRAME} />
+      </FadeIn>
+      <List class="mt-12 lg:mt-0 lg:w-1/2">
+        {sitios.highlights.map((h) => (
+          <ListItem>{h}</ListItem>
+        ))}
+      </List>
+    </div>
+    <StatList class="mt-16">
+      <StatListItem label="Carga" value="Abre al instante" />
+    </StatList>
+  </Container>
+
+  <!-- 03 · E-COMMERCE — galería mosaico (la pieza visual) -->
+  <SectionIntro id={ecommerce.id} eyebrow={ecommerce.number} title={ecommerce.title} class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
+    <p class="font-semibold text-neutral-950">{ecommerce.tagline}.</p>
+    <p class="mt-4">{ecommerce.description}</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <FadeInStagger class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <FadeIn class="lg:row-span-2">
+        <Image src={syleHero} alt="Syle Studio — tienda de streetwear a la medida" class="aspect-3/4 w-full rounded-3xl object-cover grayscale transition duration-500 hover:grayscale-0 lg:aspect-auto lg:h-full" />
+      </FadeIn>
+      <FadeIn>
+        <Image src={syleProyectos} alt="Syle Studio — catálogo de proyectos" class={FRAME} />
+      </FadeIn>
+      <FadeIn>
+        <Image src={syleNav} alt="Syle Studio — navegación de la tienda" class={FRAME} />
+      </FadeIn>
+    </FadeInStagger>
+    <div class="mt-16 lg:flex lg:items-start lg:gap-x-12">
+      <List class="lg:w-2/3">
+        {ecommerce.highlights.map((h) => (
+          <ListItem>{h}</ListItem>
+        ))}
+      </List>
+      <StatList class="mt-12 lg:mt-0 lg:w-1/3">
+        <StatListItem label="Comisiones por venta" value="0%" />
+      </StatList>
+    </div>
+    <FadeIn class="mt-12">
+      <a href="/work/sylestudio" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+        Ver el caso Syle Studio
+        <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </FadeIn>
+  </Container>
+
+  <!-- 04 · SOFTWARE A MEDIDA — banner ancho + tarjetas -->
+  <SectionIntro id={software.id} eyebrow={software.number} title={software.title} class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
+    <p class="font-semibold text-neutral-950">{software.tagline}.</p>
+    <p class="mt-4">{software.description}</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <FadeIn>
+      <Image src={achronymeImg} alt="Achronyme — herramienta a medida construida de cero" class="aspect-2/1 w-full rounded-3xl object-cover grayscale transition duration-500 hover:grayscale-0" />
+    </FadeIn>
+    <FadeInStagger as="ul" role="list" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2">
+      {software.highlights.map((h, i) => (
+        <GridListItem title={softwareCards[i]}>{h}</GridListItem>
+      ))}
+    </FadeInStagger>
+    <StatList class="mt-16">
+      <StatListItem label="Alcance" value="De cero a producto" />
+    </StatList>
+  </Container>
 
   <!-- CTA -->
   <ContactSection
