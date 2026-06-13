@@ -17,15 +17,15 @@ import profileImg from '../assets/images/profile.jpg';
 // Manifiesto de encaje — cuándo entra una solución propia (copy original, verbatim)
 const manifesto = [
   'Tu marca necesita presencia con identidad — y una web que convierta visitas en clientes.',
-  'Ya no quieres depender de plantillas ni plataformas que limitan cómo operas.',
+  'Quieres una base propia que se adapte exactamente a cómo operas.',
   'Tu equipo pierde horas en trabajo que debería ejecutarse solo.',
   'Te importa cómo se ve tanto como que funcione en serio.',
 ];
 
 // Promesas que un cliente entiende — lo técnico vive en eddn.dev (copy original)
 const promises = [
-  'Nada de plantillas', 'Cada venta es tuya', 'Abre al instante', 'Se administra solo',
-  'Menos trabajo manual', 'Tu marca en serio', 'Sin comisiones de plataforma',
+  '100% a la medida de tu marca', 'Cada venta es 100% tuya', 'Abre al instante', 'Se administra solo',
+  'Menos trabajo manual', 'Tu marca en serio', 'Tus márgenes, completos',
   'Diseño a la medida', 'Trato directo', 'Hecho en México',
 ];
 
@@ -33,7 +33,7 @@ const promises = [
 const proof = {
   sylestudio: { stat: '0% comisiones', detail: 'Tienda en línea propia: catálogo, pagos y envíos bajo su control. Cada peso de cada venta se queda con la marca.' },
   yatagarasu: { stat: 'Abre al instante', detail: 'Una experiencia que se siente como videojuego y abre de inmediato en cualquier celular. Nadie se va por esperar.' },
-  achronyme: { stat: 'De cero a producto', detail: 'Una herramienta profesional construida completa, desde la idea hasta producción. Ningún sistema es demasiado ambicioso.' },
+  achronyme: { stat: 'De cero a producto', detail: 'Una herramienta profesional construida completa, desde la idea hasta producción. Cualquier sistema, por ambicioso que sea, lo construyo completo.' },
 };
 
 const projects = await getCollection('work');
@@ -61,7 +61,7 @@ const ordered = [featured, ...projects.filter((p) => p.slug !== featured.slug)].
       </h1>
       <p class="mt-6 text-xl text-neutral-600">
         Soy Eduardo. Construyo la presencia digital de marcas que quieren verse serias y vender más
-        — sitios, tiendas en línea y automatización, todo a la medida. Nada de plantillas.
+        — sitios, tiendas en línea y automatización, todo hecho a la medida de tu marca.
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
         <Button href="/contact">Cuéntame tu proyecto</Button>
@@ -95,7 +95,7 @@ const ordered = [featured, ...projects.filter((p) => p.slug !== featured.slug)].
   <!-- ENCAJE -->
   <SectionIntro
     eyebrow="Encaje"
-    title="Cuando lo genérico se queda corto."
+    title="Cuando quieres algo hecho a tu medida."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>Entro cuando hace falta una base propia y una solución técnicamente seria. <a href="/profile" class="font-semibold text-neutral-950 underline decoration-1 underline-offset-2">Conoce quién está detrás →</a></p>
