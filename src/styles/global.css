@@ -56,17 +56,31 @@
   /* One motion easing family — framer's default layout/tween curves */
   --ease-layout: cubic-bezier(0.4, 0, 0.1, 1);
   --ease-fade: cubic-bezier(0.25, 0.1, 0.35, 1);
+
+  /* Brand violet — eddndev accent. One source of truth for the dark
+     panels (panel-brand), the CTA pill (Button brand) and the nav
+     wordmark (Brand brand). Tailwind v4 also exposes these as
+     text-brand / bg-brand-button / etc. */
+  --color-brand: #8b5cf6;        /* accent / wordmark / gradient bloom */
+  --color-brand-button: #6d28d9; /* CTA pill fill */
+  --color-brand-mid: #5b21b6;    /* gradient mid / pill hover */
+  --color-brand-deep: #2e1065;   /* gradient deep — bears white text */
 }
 
 /* ─────────────────────────────────────────────
    Brand dark panel — replaces flat bg-neutral-950 on the
    signature dark islands (automation, promesas, contacto).
    Deep violet where text lives, blooming to the brand violet
-   (#8b5cf6) in the open corner. Keeps white/neutral-300 legible.
+   in the open corner. Keeps white/neutral-300 legible.
    ───────────────────────────────────────────── */
 @utility panel-brand {
-  background-color: #2e1065;
-  background-image: linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #8b5cf6 100%);
+  background-color: var(--color-brand-deep);
+  background-image: linear-gradient(
+    135deg,
+    var(--color-brand-deep) 0%,
+    var(--color-brand-mid) 50%,
+    var(--color-brand) 100%
+  );
 }
 
 html {
