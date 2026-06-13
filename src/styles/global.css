@@ -58,6 +58,17 @@
   --ease-fade: cubic-bezier(0.25, 0.1, 0.35, 1);
 }
 
+/* ─────────────────────────────────────────────
+   Brand dark panel — replaces flat bg-neutral-950 on the
+   signature dark islands (automation, promesas, contacto).
+   Deep violet where text lives, blooming to the brand violet
+   (#8b5cf6) in the open corner. Keeps white/neutral-300 legible.
+   ───────────────────────────────────────────── */
+@utility panel-brand {
+  background-color: #2e1065;
+  background-image: linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #8b5cf6 100%);
+}
+
 html {
   scrollbar-gutter: stable;
   background-color: var(--color-neutral-950);
