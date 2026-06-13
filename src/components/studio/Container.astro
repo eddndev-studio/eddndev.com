@@ -1,0 +1,15 @@
+---
+// Studio Container — centered max-w-7xl gutter with an inner editorial column.
+interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  [key: string]: unknown;
+}
+const { as = 'div', class: className, ...rest } = Astro.props;
+const Tag = as;
+---
+<Tag class:list={['mx-auto max-w-7xl px-6 lg:px-8', className]} {...rest}>
+  <div class="mx-auto max-w-2xl lg:max-w-none">
+    <slot />
+  </div>
+</Tag>

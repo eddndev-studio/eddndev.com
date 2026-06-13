@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import FadeIn from '../studio/FadeIn.astro';
+import FadeInStagger from '../studio/FadeInStagger.astro';
 
 interface Props {
   projects: CollectionEntry<'work'>[];
@@ -9,56 +11,26 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
-    {projects.map((project, index) => (
-        <a href={`/work/${project.slug}`} 
-           data-project-card
-           class="group relative flex flex-col bg-[#080808] overflow-hidden border border-white/10"
-           style={`--project-color: ${project.data.color ?? '#ffffff'};`}>
-            
-            {/* 1. Image Container (Aspect Video) */}
-            <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#050505]">
-                {/* Image */}
-                {project.data.cover ? (
-                    <Image 
-                        src={project.data.cover} 
-                        alt={project.data.title} 
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                    />
-                ) : (
-                    <div class="w-full h-full flex items-center justify-center bg-white/5 text-white/20 font-mono text-xs">
-                        [NO SIGNAL]
-                    </div>
-                )}
-
-                {/* Overlay Gradient */}
-                <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60"></div>
-            </div>
-
-            {/* 2. Content Body */}
-            <div class="p-8 2xl:p-10 flex flex-col flex-1 relative">
-                {/* Header */}
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <span class="block font-mono text-xs sm:text-sm md:text-base lg:text-xs 2xl:text-sm text-gray-500 uppercase tracking-widest mb-2 group-hover:text-[var(--project-color)] transition-colors">
-                            {project.data.year}
-                        </span>
-                        <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl font-bold text-white tracking-tight leading-none">
-                            {project.data.title}
-                        </h3>
-                    </div>
-                    
-                    {/* Arrow Icon */}
-                    <div class="w-12 h-12 2xl:w-14 2xl:h-14 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-[var(--project-color)] group-hover:border-[var(--project-color)] transition-all duration-300 group-hover:rotate-[-45deg]">
-                        <svg aria-hidden="true" width="20" height="20" class="2xl:w-7 2xl:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                    </div>
-                </div>
-
-                {/* Description (Truncated) */}
-                <p class="text-base sm:text-lg md:text-xl lg:text-base 2xl:text-lg text-gray-400 leading-relaxed line-clamp-2">
-                    {project.data.description}
-                </p>
-            </div>
-        </a>
-    ))}
-</div>
+<FadeInStagger class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+  {projects.map((project) => (
+    <FadeIn class="group flex">
+      <article class="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+        {project.data.cover && (
+          <Image src={project.data.cover} alt={project.data.title} class="aspect-16/10 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+        )}
+        <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">
+          <a href={`/work/${project.slug}`}>
+            <span class="absolute inset-0 rounded-3xl"></span>
+            {project.data.title}
+          </a>
+        </h3>
+        <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
+          <time datetime={String(project.data.year)} class="font-semibold">{project.data.year}</time>
+          <span class="text-neutral-300" aria-hidden="true">/</span>
+          <span>{project.data.category}</span>
+        </p>
+        <p class="mt-4 text-base text-neutral-600">{project.data.description}</p>
+      </article>
+    </FadeIn>
+  ))}
+</FadeInStagger>

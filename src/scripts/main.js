@@ -1,32 +1,26 @@
 import './core/gsap-core';
-import './core/lenis';
+import { lenis } from './core/lenis';
 import { startLifecycle } from './core/lifecycle';
 
-import { initCursor } from './features/cursor';
-import { initChrome, syncChrome } from './features/chrome';
-import initLeddingHero from './features/ledding-hero';
+import initStudioNav from './features/studio-nav';
+import initStudioGridPattern from './features/studio-gridpattern';
+import initStudioReveals from './animations/studio-reveals';
 
-import initReveals from './animations/reveals';
-import initHome from './animations/home';
-import initServices from './animations/services';
-import initWork from './animations/work';
-import initProfile from './animations/profile';
-import initCase from './animations/case';
-import initAutomation from './animations/automation';
-
-// Session singletons — bound once, survive view transitions
-initCursor();
-initChrome();
-
-// Per-page modules — initialized once per page, fully reverted on swap
+// Per-page modules — initialized once per page, reverted on view-transition swap.
 startLifecycle([
-  syncChrome,
-  initLeddingHero,
-  initReveals,
-  initHome,
-  initServices,
-  initWork,
-  initProfile,
-  initCase,
-  initAutomation,
+  initStudioNav,
+  initStudioGridPattern,
+  initStudioReveals,
 ]);
+
+// Session singleton — smooth in-page anchor scrolling through Lenis.
+document.addEventListener('click', (e) => {
+  const link = e.target.closest?.('a[href*="#"]');
+  if (!link || link.origin !== location.origin || link.pathname !== location.pathname) return;
+  const hash = link.hash;
+  if (!hash || hash === '#') return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  e.preventDefault();
+  lenis.scrollTo(target, { duration: 1.2, easing: (t) => 1 - Math.pow(1 - t, 4) });
+});

@@ -1,0 +1,20 @@
+---
+import FadeIn from './FadeIn.astro';
+import Border from './Border.astro';
+interface Props { title: string; invert?: boolean; class?: string }
+const { title, invert = false, class: className } = Astro.props;
+---
+<li
+  class:list={[
+    'text-base',
+    invert ? 'text-neutral-300 before:bg-white after:bg-white/10' : 'text-neutral-600 before:bg-neutral-950 after:bg-neutral-100',
+    className,
+  ]}
+>
+  <FadeIn>
+    <Border position="left" class="pl-8" invert={invert}>
+      <strong class:list={['font-semibold', invert ? 'text-white' : 'text-neutral-950']}>{title}.</strong>{' '}
+      <slot />
+    </Border>
+  </FadeIn>
+</li>

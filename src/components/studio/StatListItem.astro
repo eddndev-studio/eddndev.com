@@ -1,0 +1,12 @@
+---
+import FadeIn from './FadeIn.astro';
+import Border from './Border.astro';
+interface Props { label: string; value: string; invert?: boolean }
+const { label, value, invert = false } = Astro.props;
+---
+<FadeIn>
+  <Border position="left" class="flex flex-col-reverse pl-8" invert={invert}>
+    <dt class:list={['mt-2 text-base', invert ? 'text-neutral-300' : 'text-neutral-600']}>{label}</dt>
+    <dd class:list={['font-display text-3xl font-semibold sm:text-4xl', invert ? 'text-white' : 'text-neutral-950']}>{value}</dd>
+  </Border>
+</FadeIn>

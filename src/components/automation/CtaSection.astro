@@ -1,36 +1,10 @@
 ---
+import ContactSection from '../studio/ContactSection.astro';
 ---
 
-<section class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-24 lg:py-32">
-    <!-- Dot pattern background -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
-         style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;">
-    </div>
-
-    <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-5 relative">
-                <div class="text-xs sm:text-sm md:text-base lg:text-xs font-mono text-purple-200 tracking-widest mb-6 reveal-text" data-readout>
-                    [ SIGUIENTE PASO ]
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    TU PRIMER AGENTE <br> PUEDE ESTAR <br> FUNCIONANDO EN <br>
-                    <span class="text-purple-200">SEMANAS.</span>
-                </h2>
-            </div>
-
-            <div class="lg:col-span-7 flex flex-col justify-end pl-0 lg:pl-12">
-                <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-purple-100 font-light leading-relaxed max-w-2xl mb-8 reveal-text">
-                    Cuéntame qué procesos te quitan más tiempo y te digo honestamente
-                    <span class="text-white font-medium">cómo un agente puede resolverlo</span> — o si no soy la opción correcta.
-                </p>
-                <div class="reveal-text">
-                    <a href="/contact" data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full transition-colors hover:bg-purple-100">
-                        <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Iniciar conversación</span>
-                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<ContactSection
+  title="Tu primer agente puede estar funcionando en semanas."
+  buttonText="Iniciar conversación"
+>
+  <p>Cuéntame qué procesos te quitan más tiempo y te digo honestamente cómo un agente puede resolverlo — o si no soy la opción correcta.</p>
+</ContactSection>

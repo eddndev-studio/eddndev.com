@@ -1,66 +1,28 @@
 ---
 import { capabilities } from '../../data/automation';
+import SectionIntro from '../studio/SectionIntro.astro';
+import Container from '../studio/Container.astro';
+import GridList from '../studio/GridList.astro';
+import GridListItem from '../studio/GridListItem.astro';
 ---
 
-<section id="automation-solution" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
-
-    <!-- Stroke Draw: Connected nodes -->
-    <svg aria-hidden="true" data-automation-draw class="absolute bottom-[5%] left-[4%] w-32 h-64 lg:w-40 lg:h-80 pointer-events-none z-0 hidden lg:block" viewBox="0 0 100 250" fill="none">
-        <line x1="50" y1="20" x2="50" y2="230" stroke="rgba(6,182,212,0.18)" stroke-width="1" class="draw-path" />
-        <circle cx="50" cy="35" r="10" stroke="rgba(6,182,212,0.35)" stroke-width="1.5" class="draw-path" />
-        <circle cx="50" cy="105" r="10" stroke="rgba(6,182,212,0.3)" stroke-width="1.5" class="draw-path" />
-        <circle cx="50" cy="175" r="10" stroke="rgba(6,182,212,0.25)" stroke-width="1.5" class="draw-path" />
-        <circle cx="50" cy="230" r="6" stroke="rgba(6,182,212,0.4)" stroke-width="1.8" class="draw-path" />
-        <line x1="60" y1="35" x2="90" y2="35" stroke="rgba(6,182,212,0.22)" stroke-width="1" class="draw-path" />
-        <line x1="40" y1="105" x2="10" y2="105" stroke="rgba(6,182,212,0.22)" stroke-width="1" class="draw-path" />
-        <line x1="60" y1="175" x2="90" y2="175" stroke="rgba(6,182,212,0.22)" stroke-width="1" class="draw-path" />
-    </svg>
-
-    <!-- Gradient Orb -->
-    <div data-automation-orb class="absolute top-[30%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-cyan-900/10 blur-[150px] pointer-events-none z-0"></div>
-
-    <!-- Floating SVG -->
-    <svg aria-hidden="true" data-automation-float data-speed="1.0" class="absolute bottom-[15%] right-[10%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
-      <rect x="15" y="15" width="70" height="70" rx="8" class="text-cyan-400" />
-      <circle cx="50" cy="50" r="15" class="text-cyan-400" />
-    </svg>
-
-    <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
-
-            <div class="lg:col-span-5">
-                <div class="text-xs 2xl:text-sm font-mono text-cyan-400 tracking-widest mb-6 reveal-text">
-                    [ 02 · LA SOLUCIÓN ]
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    AUTOMATIZACIÓN <br> <span class="text-cyan-400">A MEDIDA.</span>
-                </h2>
-            </div>
-
-            <div class="lg:col-span-7 flex flex-col justify-center">
-                <p class="text-gray-300 text-lg sm:text-xl lg:text-lg 2xl:text-xl font-light leading-relaxed max-w-3xl reveal-text">
-                    No construyo chatbots genéricos. Diseño <span class="text-white font-medium">agentes inteligentes que entienden tu negocio</span> — capturan información, toman decisiones basadas en tus reglas y ejecutan acciones reales en tus sistemas existentes.
-                </p>
-            </div>
-        </div>
-
-        <!-- 3 Capability Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/10">
-            {capabilities.map((cap) => (
-                <div class="bg-black p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/50 to-cyan-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <svg aria-hidden="true" class="w-8 h-8 text-cyan-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <Fragment set:html={cap.icon} />
-                        </svg>
-                        <span class="font-mono text-xs text-cyan-400 tracking-widest uppercase">{cap.tag}</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 group-hover:text-cyan-300 transition-colors">{cap.title}</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        {cap.description}
-                    </p>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
+<div id="automation-solution">
+  <SectionIntro
+    eyebrow="La solución"
+    title="Automatización a medida."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>
+      No construyo chatbots genéricos. Diseño <strong class="font-semibold text-neutral-950">agentes
+      inteligentes que entienden tu negocio</strong> — capturan información, toman decisiones basadas
+      en tus reglas y ejecutan acciones reales en tus sistemas existentes.
+    </p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <GridList>
+      {capabilities.map((cap) => (
+        <GridListItem title={cap.title}>{cap.description}</GridListItem>
+      ))}
+    </GridList>
+  </Container>
+</div>

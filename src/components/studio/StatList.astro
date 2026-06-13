@@ -1,0 +1,8 @@
+---
+import FadeInStagger from './FadeInStagger.astro';
+interface Props { class?: string }
+const { class: className } = Astro.props;
+---
+<FadeInStagger as="dl" class:list={['grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none', className]}>
+  <slot />
+</FadeInStagger>

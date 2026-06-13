@@ -1,0 +1,124 @@
+---
+import Container from './Container.astro';
+import Button from './Button.astro';
+import Brand from './Brand.astro';
+import SocialMedia from './SocialMedia.astro';
+
+// Studio navigation: a black panel that expands from an 8px sliver to full-screen,
+// pushing the white page card down to reveal the menu. Animation driven by studio-nav.js.
+const rows = [
+  [{ label: 'Trabajo', href: '/work' }, { label: 'Servicios', href: '/services' }],
+  [{ label: 'Automatización', href: '/automation' }, { label: 'Perfil', href: '/profile' }],
+];
+---
+<header>
+  <!-- Collapsed bar — floats over the top of the white page card -->
+  <div class="absolute top-2 right-0 left-0 z-40 pt-14" data-nav-bar>
+    <Container>
+      <div class="flex items-center justify-between">
+        <Brand />
+        <div class="flex items-center gap-x-8">
+          <Button href="/contact">Hablemos</Button>
+          <button
+            type="button"
+            data-nav-open
+            aria-expanded="false"
+            aria-controls="nav-panel"
+            aria-label="Abrir navegación"
+            class="group -m-2.5 rounded-full p-2.5 transition hover:bg-neutral-950/10"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-neutral-950 group-hover:fill-neutral-700">
+              <path d="M2 6h20v2H2zM2 16h20v2H2z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Expanding panel -->
+  <div
+    id="nav-panel"
+    data-nav-panel
+    class="relative z-50 overflow-hidden bg-neutral-950 pt-2"
+    style="height: 0.5rem"
+    aria-hidden="true"
+    inert
+  >
+    <div class="bg-neutral-800">
+      <!-- Inverted bar with close (X) — sits over the collapsed bar's position -->
+      <div class="bg-neutral-950 pt-14 pb-16">
+        <Container>
+          <div class="flex items-center justify-between">
+            <Brand invert />
+            <div class="flex items-center gap-x-8">
+              <Button href="/contact" invert>Hablemos</Button>
+              <button
+                type="button"
+                data-nav-close
+                aria-label="Cerrar navegación"
+                class="group -m-2.5 rounded-full p-2.5 transition hover:bg-white/10"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-white group-hover:fill-neutral-200">
+                  <path d="m5.636 4.223 14.142 14.142-1.414 1.414L4.222 5.637z" />
+                  <path d="M4.222 18.363 18.364 4.22l1.414 1.414L5.636 19.777z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <!-- Big navigation -->
+      <nav class="mt-px font-display text-5xl font-medium tracking-tight text-white">
+        {rows.map((row) => (
+          <div class="even:mt-px sm:bg-neutral-950">
+            <Container>
+              <div class="grid grid-cols-1 sm:grid-cols-2">
+                {row.map((item) => (
+                  <a
+                    href={item.href}
+                    data-nav-link
+                    class="group relative isolate -mx-6 bg-neutral-950 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-neutral-800 sm:even:pl-16"
+                  >
+                    {item.label}
+                    <span class="absolute inset-y-0 -z-10 w-screen bg-neutral-900 opacity-0 transition group-odd:right-0 group-even:left-0 group-hover:opacity-100"></span>
+                  </a>
+                ))}
+              </div>
+            </Container>
+          </div>
+        ))}
+      </nav>
+
+      <!-- Contact + social -->
+      <div class="relative bg-neutral-950 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
+        <Container>
+          <div class="grid grid-cols-1 gap-y-10 pt-10 pb-16 sm:grid-cols-2 sm:pt-16">
+            <div>
+              <h2 class="font-display text-base font-semibold text-white">Contacto</h2>
+              <ul role="list" class="mt-6 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2">
+                <li>
+                  <strong class="text-white">Correo</strong><br />
+                  <a href="mailto:contacto@eddndev.com" data-nav-link class="transition hover:text-white">contacto@eddndev.com</a>
+                </li>
+                <li>
+                  <strong class="text-white">WhatsApp</strong><br />
+                  <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">+52 56 1943 3938</a>
+                </li>
+                <li>
+                  <strong class="text-white">Ubicación</strong><br />
+                  CDMX, México · remoto
+                </li>
+              </ul>
+            </div>
+            <div class="sm:border-l sm:border-transparent sm:pl-16">
+              <h2 class="font-display text-base font-semibold text-white">Sígueme</h2>
+              <SocialMedia class="mt-6" invert />
+            </div>
+          </div>
+        </Container>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,74 @@
+---
+import Container from './Container.astro';
+import FadeIn from './FadeIn.astro';
+import Brand from './Brand.astro';
+import Button from './Button.astro';
+
+const currentYear = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Explora',
+    links: [
+      { title: 'Trabajo', href: '/work' },
+      { title: 'Servicios', href: '/services' },
+      { title: 'Automatización', href: '/automation' },
+      { title: 'Perfil', href: '/profile' },
+    ],
+  },
+  {
+    title: 'eddndev',
+    links: [
+      { title: 'Contacto', href: '/contact' },
+      { title: 'Blog técnico — eddn.dev', href: 'https://eddn.dev' },
+      { title: 'Achronyme', href: 'https://github.com/achronyme' },
+    ],
+  },
+  {
+    title: 'Conecta',
+    links: [
+      { title: 'GitHub', href: 'https://github.com/eddndev' },
+      { title: 'LinkedIn', href: 'https://linkedin.com/in/eddndev' },
+      { title: 'X', href: 'https://x.com/eddndev' },
+      { title: 'Instagram', href: 'https://instagram.com/eddn.dev' },
+    ],
+  },
+];
+---
+<Container as="footer" class="mt-24 w-full sm:mt-32 lg:mt-40">
+  <FadeIn>
+    <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+      <nav>
+        <ul role="list" class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {columns.map((section) => (
+            <li>
+              <div class="font-display text-sm font-semibold tracking-wider text-neutral-950">{section.title}</div>
+              <ul role="list" class="mt-4 text-sm text-neutral-700">
+                {section.links.map((link) => (
+                  <li class="mt-4">
+                    <a href={link.href} class="transition hover:text-neutral-950">{link.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="flex lg:justify-end">
+        <div class="max-w-sm">
+          <h2 class="font-display text-sm font-semibold tracking-wider text-neutral-950">¿Tienes un proyecto en mente?</h2>
+          <p class="mt-4 text-sm text-neutral-700">
+            Cuéntame qué necesitas y te diré cómo abordarlo — y si soy la persona correcta para hacerlo.
+          </p>
+          <div class="mt-6">
+            <Button href="/contact">Iniciar conversación</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-24 mb-20 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
+      <Brand />
+      <p class="text-sm text-neutral-700">© 2020–{currentYear} eddndev. Todos los derechos reservados.</p>
+    </div>
+  </FadeIn>
+</Container>

@@ -1,6 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/layout/Footer.astro';
+import Container from '../components/studio/Container.astro';
+import FadeIn from '../components/studio/FadeIn.astro';
+import PageIntro from '../components/studio/PageIntro.astro';
+import SectionIntro from '../components/studio/SectionIntro.astro';
+import Border from '../components/studio/Border.astro';
+import List from '../components/studio/List.astro';
+import ListItem from '../components/studio/ListItem.astro';
+import TagList from '../components/studio/TagList.astro';
+import TagListItem from '../components/studio/TagListItem.astro';
+
+// Lo que me ayuda a responder mejor (copy original preservado)
+const briefing = [
+  'Qué necesitas construir o mejorar.',
+  'Qué problema de negocio quieres resolver.',
+  'Si ya existe una web, tienda, sistema o proceso manual.',
+  'Tiempos, alcance y cualquier restricción importante.',
+];
+
+// Métodos de contacto (copy original preservado)
+const methods = [
+  {
+    label: 'Correo',
+    value: 'contacto@eddndev.com',
+    href: 'mailto:contacto@eddndev.com',
+    detail: 'Ideal para proyectos con contexto, alcance o requerimientos específicos. Respondo en menos de 24 horas.',
+  },
+  {
+    label: 'Chat directo',
+    value: '+52 56 1943 3938',
+    href: 'https://wa.me/525619433938',
+    external: true,
+    detail: 'Mejor para primeras preguntas, validar encaje o coordinar una llamada breve.',
+  },
+];
+
+// Datos operativos (copy original preservado)
+const facts = [
+  { label: 'Respuesta', value: '< 24 horas' },
+  { label: 'Base', value: 'México · GMT-6' },
+];
+
+// Redes (copy original preservado)
+const socials = [
+  { label: 'LinkedIn', url: 'https://linkedin.com/in/eddndev' },
+  { label: 'GitHub', url: 'https://github.com/eddndev' },
+  { label: 'Instagram', url: 'https://instagram.com/eddn.dev' },
+  { label: 'Achronyme', url: 'https://github.com/achronyme' },
+];
 ---
 
 <Layout
@@ -8,141 +55,91 @@ import Footer from '../components/layout/Footer.astro';
     description="Escríbeme con el problema y la meta del proyecto. Respondo en menos de 24 horas."
     breadcrumbs={[{ name: "Contacto", url: "/contact" }]}
 >
-    
-    <!-- HEADER / HERO -->
-    <div id="contact-hero" class="relative pt-32 lg:pt-48 pb-16 lg:pb-32 px-6 sm:px-12 max-w-[1800px] mx-auto min-h-[50vh] flex flex-col justify-end">
-        
-        <!-- Decoration: Message Bubble -->
-        <div id="ledding-hero-message" class="hidden lg:block absolute top-0 right-0 w-1/2 h-full z-0 opacity-60 mix-blend-screen pointer-events-none"></div>
+  <!-- HERO -->
+  <PageIntro eyebrow="Respuesta en menos de 24 h" title="Cuéntame qué necesitas.">
+    <p>
+      Escríbeme con el problema y la meta del proyecto. Te digo cómo abordarlo, qué conviene
+      construir y si soy la persona correcta para hacerlo.
+    </p>
+  </PageIntro>
 
-        <div class="lg:w-3/4 relative z-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse shadow-[0_0_8px_#a855f7]"></div>
-                <span data-readout class="font-mono text-xs sm:text-sm tracking-widest uppercase text-gray-300">[ RESPUESTA EN MENOS DE 24 H ]</span>
-            </div>
-
-            <h1 class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(3.5rem,10vw,10rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)] mb-8">
-                CUÉNTAME <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200"><em>qué necesitas</em>.</span>
-            </h1>
-
-            <p class="text-lg sm:text-xl text-gray-300 font-light leading-relaxed max-w-2xl">
-                Escríbeme con el problema y la meta del proyecto. Te digo cómo abordarlo, qué conviene construir y si soy la persona correcta para hacerlo.
-            </p>
+  <!-- MÉTODOS DE CONTACTO -->
+  <Container class="mt-24 sm:mt-32 lg:mt-40">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <FadeIn>
+          <h2 class="font-display text-base font-semibold text-neutral-950">Cómo escribirme</h2>
+        </FadeIn>
+        <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+          {methods.map((method) => (
+            <FadeIn>
+              <Border class="pt-8">
+                <h3 class="font-display text-base font-semibold text-neutral-950">{method.label}</h3>
+                <a
+                  href={method.href}
+                  {...(method.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  class="mt-4 block font-display text-2xl font-medium tracking-tight text-neutral-950 break-words transition hover:text-neutral-600 sm:text-3xl"
+                >
+                  {method.value}
+                </a>
+                <p class="mt-4 text-base text-neutral-600">{method.detail}</p>
+              </Border>
+            </FadeIn>
+          ))}
         </div>
-    </div>
+      </div>
 
-    <!-- MAIN GRID -->
-    <div class="border-t border-white/10 bg-[#050505] w-full">
-        <div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-white/10 border-b border-white/10">
-            
-            <!-- COLUMN 1: CONTACT METHODS -->
-            <div class="px-6 sm:px-12 py-24 lg:py-32 space-y-12">
-
-                <div class="bg-[#080808] border border-white/10 p-8 sm:p-12 reveal-text">
-                    <span data-readout class="block font-mono text-xs text-purple-400 tracking-widest uppercase mb-4">[ ANTES DE ESCRIBIR ]</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6 reveal-text">Qué me ayuda a responderte mejor</h2>
-                    <ul class="space-y-4 text-gray-400 text-sm sm:text-base font-light leading-relaxed">
-                        <li class="flex items-start gap-3"><span aria-hidden="true" class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_#a855f7] mt-2 shrink-0"></span>Qué necesitas construir o mejorar.</li>
-                        <li class="flex items-start gap-3"><span aria-hidden="true" class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_#a855f7] mt-2 shrink-0"></span>Qué problema de negocio quieres resolver.</li>
-                        <li class="flex items-start gap-3"><span aria-hidden="true" class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_#a855f7] mt-2 shrink-0"></span>Si ya existe una web, tienda, sistema o proceso manual.</li>
-                        <li class="flex items-start gap-3"><span aria-hidden="true" class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_#a855f7] mt-2 shrink-0"></span>Tiempos, alcance y cualquier restricción importante.</li>
-                    </ul>
-                </div>
-                
-                <!-- Email Card -->
-                <div class="group relative bg-[#080808] border border-white/10 p-8 sm:p-12 transition-colors hover:border-purple-500/50">
-                    <div class="absolute top-0 right-0 p-6 opacity-50 group-hover:opacity-100 transition-opacity">
-                        <svg aria-hidden="true" class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span data-readout class="block font-mono text-xs text-purple-400 tracking-widest uppercase">[ CORREO ]</span>
-                        <button command="--copy" commandfor="email-snippet" type="button" class="text-xs font-mono text-gray-500 hover:text-purple-400 transition-colors flex items-center gap-1.5" title="Copiar correo">
-                            <svg aria-hidden="true" class="w-3.5 h-3.5 in-data-copied:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-                            <svg aria-hidden="true" class="w-3.5 h-3.5 hidden in-data-copied:block text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" /></svg>
-                            <span class="in-data-copied:hidden">Copiar</span>
-                            <span class="hidden in-data-copied:block text-green-400">Copiado</span>
-                        </button>
-                    </div>
-                    <el-copyable id="email-snippet" class="hidden">contacto@eddndev.com</el-copyable>
-                    <a href="mailto:contacto@eddndev.com" class="block text-2xl sm:text-3xl font-bold text-white group-hover:text-purple-300 transition-colors break-words">
-                        contacto@eddndev.com
-                    </a>
-                    <p class="mt-4 text-gray-400 text-sm font-light">
-                        Ideal para proyectos con contexto, alcance o requerimientos específicos. Respondo en menos de 24 horas.
-                    </p>
-                </div>
-
-                 <!-- WhatsApp Card -->
-                 <div class="group relative bg-[#080808] border border-white/10 p-8 sm:p-12 transition-colors hover:border-green-500/50">
-                    <div class="absolute top-0 right-0 p-6 opacity-50 group-hover:opacity-100 transition-opacity">
-                        <svg aria-hidden="true" class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                    </div>
-                    <span data-readout class="block font-mono text-xs text-green-400 tracking-widest uppercase mb-4">[ CHAT DIRECTO ]</span>
-                    <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="block text-2xl sm:text-3xl font-bold text-white group-hover:text-green-300 transition-colors">
-                        +52 56 1943 3938
-                    </a>
-                    <p class="mt-4 text-gray-400 text-sm font-light">
-                        Mejor para primeras preguntas, validar encaje o coordinar una llamada breve.
-                    </p>
-                </div>
-
-                <!-- Social chips -->
-                <div>
-                     <span data-readout class="block font-mono text-xs text-purple-400 tracking-widest uppercase mb-6 pl-1">[ REDES ]</span>
-                     <div class="flex flex-wrap gap-3">
-                        {[
-                            { label: 'LinkedIn', url: 'https://linkedin.com/in/eddndev', dot: 'bg-blue-500' },
-                            { label: 'GitHub', url: 'https://github.com/eddndev', dot: 'bg-white' },
-                            { label: 'Instagram', url: 'https://instagram.com/eddn.dev', dot: 'bg-pink-500' },
-                            { label: 'Achronyme', url: 'https://github.com/achronyme', dot: 'bg-purple-500' },
-                        ].map((social) => (
-                            <a href={social.url} target="_blank" rel="noopener noreferrer" data-magnetic="0.4" data-cursor-text="ABRIR"
-                               class="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] pl-5 pr-2 py-2 font-mono text-sm text-gray-300 hover:text-white hover:border-purple-500/60 transition-colors">
-                                <span aria-hidden="true" class={`w-1.5 h-1.5 rounded-full ${social.dot}`}></span>
-                                <span>{social.label}</span>
-                                <span class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-purple-500">
-                                    <svg aria-hidden="true" class="w-3 h-3 transition-transform duration-300 group-hover:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                                </span>
-                            </a>
-                        ))}
-                     </div>
-                </div>
-
+      <FadeIn class="lg:col-span-1">
+        <Border class="pt-8">
+          <h2 class="font-display text-base font-semibold text-neutral-950">En corto</h2>
+          <dl class="mt-6 grid grid-cols-1 gap-6">
+            {facts.map((fact) => (
+              <div>
+                <dt class="text-sm text-neutral-600">{fact.label}</dt>
+                <dd class="mt-1 font-display text-xl font-medium text-neutral-950">{fact.value}</dd>
+              </div>
+            ))}
+            <div>
+              <dt class="text-sm text-neutral-600">Ubicación</dt>
+              <dd class="mt-1 font-display text-xl font-medium text-neutral-950">CDMX, México · remoto</dd>
             </div>
-
-            <!-- COLUMN 2: OFFICE / FORM PLACEHOLDER / MAP -->
-            <div class="relative bg-[#020202] overflow-hidden min-h-[500px] flex flex-col justify-center">
-                
-                <!-- Ledding Decoration -->
-                <div id="ledding-contact-container" class="absolute inset-0 z-0 opacity-60"></div>
-
-                <!-- Vignette / Overlay -->
-                 <div class="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-[#020202] pointer-events-none z-10"></div>
-                 <div class="absolute inset-0 bg-gradient-to-r from-[#020202]/50 via-transparent to-[#020202]/50 pointer-events-none z-10"></div>
-                
-                <div class="relative z-20 text-center pointer-events-none select-none">
-                     <span data-readout class="font-mono text-[10px] text-purple-500 tracking-[0.5em] uppercase opacity-60">
-                        [ SEÑAL DETECTADA ]
-                     </span>
-                </div>
-
-                <!-- Operational readouts -->
-                <div class="absolute bottom-0 inset-x-0 z-20 grid grid-cols-2 divide-x divide-white/10 border-t border-white/10 bg-black/50 backdrop-blur-md">
-                    <div class="p-6 sm:p-8">
-                        <div class="font-mono text-[10px] tracking-widest uppercase mb-2 text-purple-400">[ RESPUESTA ]</div>
-                        <div data-readout class="text-lg sm:text-xl font-bold text-white font-mono">&lt; 24 HORAS</div>
-                    </div>
-                    <div class="p-6 sm:p-8">
-                        <div class="font-mono text-[10px] tracking-widest uppercase mb-2 text-purple-400">[ BASE ]</div>
-                        <div data-readout class="text-lg sm:text-xl font-bold text-white font-mono">MÉXICO · GMT-6</div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+          </dl>
+        </Border>
+      </FadeIn>
     </div>
+  </Container>
 
-    <Footer />
+  <!-- ANTES DE ESCRIBIR -->
+  <SectionIntro
+    eyebrow="Antes de escribir"
+    title="Qué me ayuda a responderte mejor."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Entre más claro el contexto, mejor te puedo decir cómo abordarlo y qué conviene construir.</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <List>
+      {briefing.map((item) => (
+        <ListItem>{item}</ListItem>
+      ))}
+    </List>
+  </Container>
+
+  <!-- REDES -->
+  <SectionIntro
+    eyebrow="Redes"
+    title="También me encuentras aquí."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  />
+  <Container class="mt-12">
+    <FadeIn>
+      <TagList>
+        {socials.map((social) => (
+          <TagListItem class="transition hover:bg-neutral-200">
+            <a href={social.url} target="_blank" rel="noopener noreferrer">{social.label}</a>
+          </TagListItem>
+        ))}
+      </TagList>
+    </FadeIn>
+  </Container>
 </Layout>

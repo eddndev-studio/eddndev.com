@@ -1,10 +1,10 @@
 ---
 import '../styles/global.css';
 import '@tailwindplus/elements';
-import SvgSprite from '../components/SvgSprite.astro';
 import { ClientRouter } from 'astro:transitions';
-import DockNav from '../components/layout/DockNav.astro';
-import NavigationPanel from '../components/layout/NavigationPanel.astro';
+import SiteNav from '../components/studio/SiteNav.astro';
+import Footer from '../components/studio/Footer.astro';
+import GridPattern from '../components/studio/GridPattern.astro';
 
 interface Props {
 	title?: string;
@@ -81,36 +81,36 @@ defaultOgUrl.searchParams.set('og_type', project ? 'Project' : 'Page');
 
 const resolvedImage = image || defaultOgUrl.href;
 
-// Resolve image URL
 let socialImageURL = "";
 if (typeof resolvedImage === 'string') {
-    // If it's already an absolute URL (like our generator), use it directly, otherwise resolve it
     if (resolvedImage.startsWith('http')) {
         socialImageURL = resolvedImage;
     } else {
         socialImageURL = new URL(resolvedImage, Astro.site).href;
     }
 } else if (resolvedImage && typeof resolvedImage === 'object' && 'src' in resolvedImage) {
-    // Handle ImageMetadata (from Content Collections or imports)
     socialImageURL = new URL(resolvedImage.src, Astro.site).href;
 }
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="h-full">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        
+
+        <!-- Set early so reveal targets only hide when scripting is live -->
+        <script is:inline>document.documentElement.classList.add('js');</script>
+
         <!-- SEO / Metadata -->
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
         <meta name="generator" content={Astro.generator} />
-        <meta name="theme-color" content="#050505" />
+        <meta name="theme-color" content="#ffffff" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
@@ -133,7 +133,8 @@ if (typeof resolvedImage === 'string') {
         <meta property="twitter:image:alt" content={`Portada de: ${title}`} />
 
         <!-- Fonts (self-hosted) -->
-		
+        <link rel="preload" href="/fonts/Mona-Sans.var.woff2" as="font" type="font/woff2" crossorigin />
+
         <!-- JSON-LD Structured Data -->
         <script type="application/ld+json" set:html={JSON.stringify(personLD)} />
         {webSiteLD && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
@@ -141,35 +142,25 @@ if (typeof resolvedImage === 'string') {
 
         <ClientRouter />
 	</head>
-	<body class="bg-black text-white antialiased overflow-x-hidden">
-        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded focus:text-sm focus:font-bold">
+	<body class="flex min-h-full flex-col bg-neutral-950 text-neutral-950 antialiased">
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:rounded-full focus:bg-neutral-950 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
             Saltar al contenido
         </a>
 
-        <div id="custom-cursor" transition:persist class="hidden lg:flex fixed top-0 left-0 z-[9999] pointer-events-none w-4 h-4 rounded-full bg-white mix-blend-difference items-center justify-center transform -translate-x-1/2 -translate-y-1/2 will-change-[width,height,transform]">
-            <span id="cursor-label" class="text-xs font-black text-white opacity-0 tracking-widest font-mono uppercase whitespace-nowrap"></span>
-        </div>
+        <SiteNav />
 
-        <SvgSprite />
-        
-        <div class="min-h-screen bg-black">
-            
-            <!-- 1. INFRASTRUCTURE — floating dock nav (fixed bottom) -->
-            <DockNav project={project} />
-            
-            <!-- 2. NAVIGATION GRID (Overlay under Header, right of Sidebar) -->
-            <NavigationPanel />
-
-            <!-- 3. PAGE CONTENT (Scrollable area) -->
-            <!-- Heroes manage their own top padding (no fixed top bar) -->
-            <!-- Left padding creates space for the fixed Sidebar -->
-            <div 
-                id="page-content"
-                class="flex flex-col min-w-0 relative z-10 bg-black transition-opacity duration-500"
-            >
-                <main id="main-content" class="flex-1 relative z-10" data-project-title={project?.title}>
+        <!-- White page card — pushed down by the nav panel to reveal the menu -->
+        <div data-nav-content class="relative flex flex-auto overflow-hidden rounded-t-4xl bg-white pt-14">
+            <div class="relative isolate flex w-full flex-col pt-9">
+                <GridPattern
+                    class="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full mask-[linear-gradient(to_bottom_left,white_40%,transparent_50%)] fill-neutral-50 stroke-neutral-950/5"
+                    yOffset={-96}
+                    interactive
+                />
+                <main id="main-content" class="w-full flex-auto" data-project-title={project?.title}>
                     <slot />
                 </main>
+                <Footer />
             </div>
         </div>
 

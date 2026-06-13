@@ -1,15 +1,13 @@
 ---
+import StatList from '../studio/StatList.astro';
+import StatListItem from '../studio/StatListItem.astro';
 interface Props {
   items: { value: string; label: string }[];
 }
 const { items } = Astro.props;
 ---
-<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10" data-stats-grid data-case-block>
-    {items.map((item) => (
-        <div class="relative bg-[#050505] p-6 sm:p-8" data-case-stat>
-            <span aria-hidden="true" class="absolute top-3 right-3 w-1 h-1 rounded-full opacity-50" style="background: var(--project-color); box-shadow: 0 0 6px var(--project-color)"></span>
-            <div data-stat-value class="text-3xl sm:text-4xl xl:text-5xl font-black text-white tracking-tighter mb-3">{item.value}</div>
-            <div class="font-mono text-[10px] sm:text-xs uppercase tracking-widest" style="color: var(--project-color)">{item.label}</div>
-        </div>
-    ))}
-</div>
+<StatList>
+  {items.map((item) => (
+    <StatListItem label={item.label} value={item.value} />
+  ))}
+</StatList>

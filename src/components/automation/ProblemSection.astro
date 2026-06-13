@@ -1,60 +1,29 @@
 ---
 import { painPoints } from '../../data/automation';
+import SectionIntro from '../studio/SectionIntro.astro';
+import Container from '../studio/Container.astro';
+import GridList from '../studio/GridList.astro';
+import GridListItem from '../studio/GridListItem.astro';
 ---
 
-<section id="automation-problem" class="bg-[#050505] text-white border-b border-white/10 relative overflow-hidden">
-
-    <!-- Stroke Draw: Warning triangle -->
-    <svg aria-hidden="true" data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
-        <polygon points="100,20 180,170 20,170" stroke="rgba(244,63,94,0.2)" stroke-width="1.2" class="draw-path" />
-        <polygon points="100,50 160,150 40,150" stroke="rgba(244,63,94,0.15)" stroke-width="1" class="draw-path" />
-        <line x1="100" y1="80" x2="100" y2="120" stroke="rgba(244,63,94,0.3)" stroke-width="1.5" class="draw-path" />
-        <circle cx="100" cy="135" r="4" stroke="rgba(244,63,94,0.3)" stroke-width="1.5" class="draw-path" />
-    </svg>
-
-    <!-- Floating SVG -->
-    <svg aria-hidden="true" data-automation-float data-speed="0.8" class="absolute top-[20%] right-[12%] w-12 h-12 lg:w-20 lg:h-20 pointer-events-none z-0 opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
-      <circle cx="50" cy="50" r="40" class="text-rose-400" />
-      <circle cx="50" cy="50" r="15" class="text-rose-400" />
-    </svg>
-
-    <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-
-            <div class="lg:col-span-5">
-                <div class="text-xs 2xl:text-sm font-mono text-rose-400 tracking-widest mb-6 reveal-text">
-                    [ 01 · EL PROBLEMA ]
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    TU EQUIPO <br> <span class="text-rose-400">MERECE MEJOR.</span>
-                </h2>
-            </div>
-
-            <div class="lg:col-span-7 flex flex-col justify-center">
-                <p class="text-gray-300 text-lg sm:text-xl lg:text-lg 2xl:text-xl font-light leading-relaxed max-w-3xl mb-10 reveal-text">
-                    Tu equipo pasa horas en tareas repetitivas que una máquina podría hacer en segundos. Mientras tanto, los procesos críticos dependen de una sola persona, los datos viven en silos y <span class="text-white font-medium">escalar significa contratar más gente para hacer lo mismo</span>.
-                </p>
-
-                <!-- Pain-point cards 2x2 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
-                    {painPoints.map((point) => (
-                        <div class="bg-[#050505] p-8 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
-                            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-rose-500/0 via-rose-500/50 to-rose-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                            <div class="flex items-center gap-3 mb-4">
-                                <svg aria-hidden="true" class="w-7 h-7 text-rose-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <Fragment set:html={point.icon} />
-                                </svg>
-                                <span class="font-mono text-xs text-rose-400 tracking-widest uppercase">{point.number}</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-rose-300 transition-colors">{point.title}</h3>
-                            <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                {point.description}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+<div id="automation-problem">
+  <SectionIntro
+    eyebrow="El problema"
+    title="Tu equipo merece mejor."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>
+      Tu equipo pasa horas en tareas repetitivas que una máquina podría hacer en segundos. Mientras
+      tanto, los procesos críticos dependen de una sola persona, los datos viven en silos y
+      <strong class="font-semibold text-neutral-950">escalar significa contratar más gente para
+      hacer lo mismo</strong>.
+    </p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <GridList>
+      {painPoints.map((point) => (
+        <GridListItem title={point.title}>{point.description}</GridListItem>
+      ))}
+    </GridList>
+  </Container>
+</div>

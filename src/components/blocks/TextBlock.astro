@@ -1,4 +1,5 @@
 ---
+import FadeIn from '../studio/FadeIn.astro';
 interface Props {
   heading?: string;
   body: string;
@@ -6,34 +7,18 @@ interface Props {
   number?: string;
 }
 const { heading, body, section, number } = Astro.props;
+const eyebrow = section ? `${number ? `${number} · ` : ''}${section}` : undefined;
 ---
-<div class="relative space-y-8" data-case-block>
-    {/* Ghost numeral drifting in the margin (desktop) */}
-    {number && (
-        <span aria-hidden="true" data-ghost-num
-              class="hidden xl:block absolute -left-36 2xl:-left-44 -top-2 font-mono font-black text-7xl 2xl:text-8xl leading-none text-transparent select-none pointer-events-none"
-              style="-webkit-text-stroke: 1px rgba(var(--project-color-rgb), 0.3)">{number}</span>
-    )}
-
-    {/* Section readout: [ 01 · CONTEXTO ] */}
-    {section && (
-        <div class="reveal-text">
-            <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--project-color)">
-                [ {number ? `${number} · ` : ''}{section} ]
-            </span>
-        </div>
-    )}
-
-    {heading && (
-        <div class="space-y-6">
-            <h2 class="text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tighter leading-[0.92] reveal-text">
-                {heading}
-            </h2>
-            <span data-case-line aria-hidden="true" class="block h-px bg-white/10 origin-left"></span>
-        </div>
-    )}
-
-    <div class="text-lg text-gray-300 font-light leading-relaxed whitespace-pre-line reveal-text">
-        {body}
-    </div>
-</div>
+<FadeIn as="div" class="space-y-6">
+  {eyebrow && (
+    <span class="block font-display text-base font-semibold text-neutral-950">{eyebrow}</span>
+  )}
+  {heading && (
+    <h2 class="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl">
+      {heading}
+    </h2>
+  )}
+  <div class="text-xl whitespace-pre-line text-neutral-600">
+    {body}
+  </div>
+</FadeIn>

@@ -1,67 +1,35 @@
 ---
 import { processSteps } from '../../data/automation';
+import SectionIntro from '../studio/SectionIntro.astro';
+import Container from '../studio/Container.astro';
+import FadeIn from '../studio/FadeIn.astro';
+import FadeInStagger from '../studio/FadeInStagger.astro';
+import Border from '../studio/Border.astro';
 ---
 
-<section id="automation-process" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
-
-    <!-- Floating Orbital SVG -->
-    <svg aria-hidden="true" data-automation-draw class="absolute top-[15%] right-[8%] w-40 h-40 lg:w-64 lg:h-64 pointer-events-none z-0 opacity-[0.15]" viewBox="0 0 200 200" fill="none" stroke="rgba(245,158,11,1)" stroke-width="1">
-        <circle cx="100" cy="100" r="95" stroke-dasharray="4 8" class="draw-path" />
-        <circle cx="100" cy="100" r="70" stroke-dasharray="2 6" class="draw-path" />
-        <circle cx="100" cy="100" r="45" class="draw-path" />
-        <circle cx="100" cy="100" r="4" fill="rgba(245,158,11,1)" stroke="none" />
-        <circle cx="100" cy="5" r="3" fill="rgba(245,158,11,1)" stroke="none" />
-        <circle cx="170" cy="100" r="2" fill="rgba(245,158,11,1)" stroke="none" />
-        <circle cx="55" cy="100" r="2.5" fill="rgba(245,158,11,1)" stroke="none" />
-    </svg>
-
-    <!-- Floating SVG -->
-    <svg aria-hidden="true" data-automation-float data-speed="0.6" class="absolute bottom-[20%] left-[5%] w-10 h-10 lg:w-16 lg:h-16 pointer-events-none z-0 opacity-20 hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
-      <circle cx="50" cy="50" r="40" stroke-dasharray="4 4" class="text-amber-400" />
-      <circle cx="50" cy="50" r="20" class="text-amber-400" />
-    </svg>
-
-    <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-
-            <div class="lg:col-span-5">
-                <div class="text-xs 2xl:text-sm font-mono text-amber-400 tracking-widest mb-6">
-                    [ 04 · CÓMO FUNCIONA ]
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] mb-8">
-                    DE IDEA A <br> AGENTE EN <br> <span class="text-amber-400">SEMANAS.</span>
-                </h2>
-                <p class="text-gray-300 text-lg sm:text-xl lg:text-lg 2xl:text-xl font-light leading-relaxed max-w-xl">
-                    Un proceso claro y probado para que tu primer agente esté operando <span class="text-white font-medium">lo más rápido posible</span>, sin sacrificar calidad.
-                </p>
-            </div>
-
-            <div class="lg:col-span-7">
-                <div class="space-y-0">
-                    {processSteps.map((step, i) => (
-                        <div class:list={[
-                            'py-8 lg:py-10 group relative',
-                            i < processSteps.length - 1 && 'border-b border-white/10',
-                        ]}>
-                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
-                            <div class="flex items-start gap-6 pl-4">
-                                <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-amber-500/30 transition-colors leading-none">{step.number}</span>
-                                <div>
-                                    <div class="flex items-center gap-2 mb-3">
-                                        <svg aria-hidden="true" class="w-7 h-7 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <Fragment set:html={step.icon} />
-                                        </svg>
-                                        <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold group-hover:text-amber-300 transition-colors">{step.title}</h3>
-                                    </div>
-                                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                        {step.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<div id="automation-process">
+  <SectionIntro
+    eyebrow="Cómo funciona"
+    title="De idea a agente en semanas."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>
+      Un proceso claro y probado para que tu primer agente esté operando
+      <strong class="font-semibold text-neutral-950">lo más rápido posible</strong>, sin sacrificar
+      calidad.
+    </p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <FadeInStagger as="ol" role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((step) => (
+        <FadeIn as="li">
+          <Border position="left" class="pl-8">
+            <span class="font-display text-base font-semibold text-neutral-950">{step.number}</span>
+            <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">{step.title}</h3>
+            <p class="mt-4 text-base text-neutral-600">{step.description}</p>
+          </Border>
+        </FadeIn>
+      ))}
+    </FadeInStagger>
+  </Container>
+</div>

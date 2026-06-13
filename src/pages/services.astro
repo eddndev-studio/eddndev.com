@@ -1,21 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/layout/Footer.astro';
+import Container from '../components/studio/Container.astro';
+import SectionIntro from '../components/studio/SectionIntro.astro';
+import List from '../components/studio/List.astro';
+import ListItem from '../components/studio/ListItem.astro';
+import Button from '../components/studio/Button.astro';
+import PageIntro from '../components/studio/PageIntro.astro';
+import FadeIn from '../components/studio/FadeIn.astro';
+import ContactSection from '../components/studio/ContactSection.astro';
 import { services } from '../data/services';
-
-// Accent per service — one CSS var drives every colored element in its panel
-const ACCENTS: Record<string, { hex: string; rgb: string }> = {
-  blue:   { hex: '#3b82f6', rgb: '59,130,246' },
-  green:  { hex: '#22c55e', rgb: '34,197,94' },
-  orange: { hex: '#f97316', rgb: '249,115,22' },
-  purple: { hex: '#a855f7', rgb: '168,85,247' },
-};
-
-function splitTitle(title: string) {
-  const words = title.split(' ');
-  if (words.length === 1) return { head: '', tail: title };
-  return { head: words.slice(0, -1).join(' '), tail: words[words.length - 1] };
-}
 ---
 
 <Layout
@@ -23,173 +16,46 @@ function splitTitle(title: string) {
     description="Cada servicio resuelve un problema distinto: sitios que convierten, tiendas con control total, automatización real y software que se adapta a tu operación."
     breadcrumbs={[{ name: "Servicios", url: "/services" }]}
 >
-    <!-- HERO — switchboard: massive title + functional service index -->
-    <header data-services-hero class="relative min-h-[100dvh] w-full flex flex-col overflow-hidden border-b border-white/10 bg-[#020202]">
-      <div id="ledding-services-container" class="absolute inset-0 z-0 opacity-40"></div>
+  <!-- HERO -->
+  <PageIntro eyebrow="Servicios" title="Lo que sí resuelvo.">
+    <p>
+      Cuatro líneas de servicio, cero plantillas. Tú eliges el problema — yo pongo el sistema que lo resuelve.
+    </p>
+  </PageIntro>
 
-      <!-- Scrim: protege la columna de texto sin apagar la matriz -->
-      <div aria-hidden="true"
-           class="absolute inset-0 pointer-events-none z-[5]"
-           style="background: linear-gradient(105deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.82) 34%, rgba(0,0,0,0.5) 58%, rgba(0,0,0,0.14) 78%, transparent 92%);">
-      </div>
+  <!-- DECK DE SERVICIOS -->
+  {services.map((service) => (
+    <>
+      <SectionIntro
+        id={service.id}
+        eyebrow={service.number}
+        title={service.title}
+        class="mt-24 sm:mt-32 lg:mt-40"
+      >
+        <p class="font-semibold text-neutral-950">{service.tagline}.</p>
+        <p class="mt-4">{service.description}</p>
+      </SectionIntro>
+      <Container class="mt-16">
+        <List>
+          {service.highlights.map((highlight) => (
+            <ListItem>{highlight}</ListItem>
+          ))}
+        </List>
+        {service.id === 'agentes-de-automatizacion' && (
+          <FadeIn class="mt-12">
+            <Button href="/automation">Ver cómo funciona</Button>
+          </FadeIn>
+        )}
+      </Container>
+    </>
+  ))}
 
-      <div class="relative z-20 flex-1 flex flex-col justify-center w-full max-w-[1800px] mx-auto px-6 sm:px-12 pt-28 pb-16">
-        <div class="flex items-center gap-3 mb-6">
-          <span data-services-rule aria-hidden="true" class="h-px w-12 origin-left bg-purple-400 shadow-[0_0_8px_#a855f7]"></span>
-          <span data-readout class="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-purple-400">[ EDDNDEV · SERVICIOS ]</span>
-        </div>
-
-        <h1 data-services-title class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(3rem,10vw,11rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]">
-          LO QUE <br>
-          <em class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">sí resuelvo</em>.
-        </h1>
-
-        <p data-services-intro class="mt-8 text-lg sm:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl">
-          Cuatro líneas de servicio, cero plantillas. <span class="text-white font-medium">Tú eliges el problema</span> — yo pongo el sistema que lo resuelve.
-        </p>
-      </div>
-
-      <!-- Índice: ancla directo a cada panel del deck (despegado del borde para no pelear con el dock) -->
-      <nav aria-label="Índice de servicios" class="relative z-20 border-y border-white/10 bg-black/60 backdrop-blur-xl mb-20 sm:mb-24">
-        <div class="max-w-[1800px] mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-white/10">
-          {services.map((service) => {
-            const a = ACCENTS[service.color];
-            return (
-              <a href={`#${service.id}`} data-index-item data-cursor-text="IR" class="group p-5 sm:p-6 lg:p-8 hover:bg-white/[0.03] transition-colors" style={`--accent: ${a.hex}`}>
-                <span class="font-mono text-[10px] tracking-widest uppercase block mb-2" style="color: var(--accent)">[ {service.number} ]</span>
-                <span class="text-sm sm:text-base 2xl:text-lg font-bold text-white/80 group-hover:text-white transition-colors flex items-center justify-between gap-2">
-                  {service.title}
-                  <svg aria-hidden="true" class="w-3.5 h-3.5 shrink-0 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                </span>
-              </a>
-            );
-          })}
-        </div>
-      </nav>
-    </header>
-
-    <!-- THE DECK — each service is a screen that covers the previous one -->
-    <div data-services-deck class="relative">
-      {services.map((service) => {
-        const a = ACCENTS[service.color];
-        const { head, tail } = splitTitle(service.title);
-        const isAutomation = service.id === 'agentes-de-automatizacion';
-        return (
-          <section
-            id={service.id}
-            data-service-panel
-            class="relative lg:sticky lg:top-0 min-h-[100dvh] lg:h-[100dvh] flex items-center overflow-hidden bg-[#040404] border-t"
-            style={`--accent: ${a.hex}; --accent-rgb: ${a.rgb}; border-color: rgba(${a.rgb}, 0.3);`}
-          >
-            <!-- Ambient tint in service color -->
-            <div aria-hidden="true" class="absolute -top-1/4 -right-1/4 w-[70vw] h-[70vw] rounded-full pointer-events-none z-0" style="background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12), transparent 60%)"></div>
-
-            <!-- Ghost numeral -->
-            <span aria-hidden="true" data-panel-ghost
-                  class="absolute right-[3%] bottom-[4%] font-mono font-black leading-none text-transparent select-none pointer-events-none z-0 text-[clamp(9rem,28vw,24rem)]"
-                  style="-webkit-text-stroke: 1.5px rgba(var(--accent-rgb), 0.2)">{service.number}</span>
-
-            <!-- Dimmer: el deck oscurece este panel cuando el siguiente lo cubre -->
-            <div aria-hidden="true" data-panel-dimmer class="absolute inset-0 bg-black opacity-0 pointer-events-none z-20"></div>
-
-            <div class="relative z-10 w-full max-w-[1800px] mx-auto px-6 sm:px-12 py-24 lg:py-0">
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-
-                <!-- Left: readout, title, tagline, description -->
-                <div class="lg:col-span-7">
-                  <div class="flex items-center gap-3 mb-6">
-                    <span data-panel-rule aria-hidden="true" class="h-px w-12 origin-left" style="background: var(--accent); box-shadow: 0 0 8px var(--accent)"></span>
-                    <span data-readout class="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase" style="color: var(--accent)">[ {service.number} · {service.title.toUpperCase()} ]</span>
-                  </div>
-
-                  <h2 class="reveal-text text-[clamp(2.5rem,5.2vw,5.5rem)] font-black tracking-tighter leading-[0.88] text-white">
-                    {head && <>{head.toUpperCase()} <br /></>}
-                    <em style="color: var(--accent)">{tail}</em>.
-                  </h2>
-
-                  <p data-panel-tagline class="mt-6 text-xl sm:text-2xl 2xl:text-3xl font-light tracking-tight" style="color: var(--accent)">
-                    <em>{service.tagline}</em>
-                  </p>
-
-                  <p data-panel-desc class="mt-6 text-gray-300 text-base sm:text-lg 2xl:text-xl font-light leading-relaxed max-w-2xl">
-                    {service.description}
-                  </p>
-                </div>
-
-                <!-- Right: LED checklist + CTA -->
-                <div class="lg:col-span-5">
-                  <ul class="border-t border-white/10">
-                    {service.highlights.map((highlight) => (
-                      <li data-panel-highlight class="flex items-start gap-4 py-4 lg:py-5 border-b border-white/10">
-                        <span aria-hidden="true" class="w-1.5 h-1.5 rounded-full mt-2.5 shrink-0" style="background: var(--accent); box-shadow: 0 0 8px var(--accent)"></span>
-                        <span class="text-gray-300 font-light 2xl:text-lg">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div data-panel-cta class="mt-8 lg:mt-10 flex flex-wrap items-center gap-6">
-                    {isAutomation ? (
-                      <>
-                        <a href="/automation" data-magnetic="0.3" data-cursor-text="EXPLORAR" class="group relative px-8 py-4 bg-white text-black font-bold rounded-full transition-colors hover:bg-blue-50">
-                          <span class="group-hover:text-blue-700 transition-colors">Ver cómo funciona</span>
-                        </a>
-                        <a href="/contact" class="group flex items-center gap-2 text-white/70 font-medium 2xl:text-lg hover:text-white transition-colors">
-                          <span>Cuéntame tu operación</span>
-                          <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
-                      </>
-                    ) : (
-                      <a href="/contact" data-magnetic="0.3" data-cursor-text="CONTACTO" class="group flex items-center gap-3 text-white font-medium 2xl:text-lg transition-colors">
-                        <span class="border-b border-white/30 group-hover:border-[var(--accent)] pb-0.5 transition-colors">Cuéntame tu proyecto</span>
-                        <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-        );
-      })}
-    </div>
-
-    <!-- CTA -->
-    <section class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-24 lg:py-32">
-        <div class="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
-             style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;">
-        </div>
-
-        <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-5 relative">
-                    <div class="text-xs sm:text-sm md:text-base lg:text-xs font-mono text-purple-200 tracking-widest mb-6 reveal-text" data-readout>
-                        [ SIGUIENTE PASO ]
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                        ¿NO SABES SI <br>
-                        <span class="text-purple-200">ES WEB O SISTEMA?</span>
-                    </h2>
-                </div>
-
-                <div class="lg:col-span-7 flex flex-col justify-end pl-0 lg:pl-12">
-                    <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-purple-100 font-light leading-relaxed max-w-2xl mb-8 reveal-text">
-                        Cuéntame el problema y la meta. Te diré qué conviene construir y cómo abordarlo.
-                    </p>
-                    <div class="reveal-text flex flex-col sm:flex-row gap-4 items-start">
-                        <a href="/contact" data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full transition-colors hover:bg-purple-100">
-                            <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Agendar conversación</span>
-                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
-                        <a href="/work" data-cursor-text="CASOS" class="group inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 border border-white/20 text-white font-bold rounded-full transition-colors hover:bg-white hover:text-[#6A0DAD]">
-                            <span class="relative z-10 transition-colors 2xl:text-lg">Ver casos de estudio</span>
-                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <Footer />
+  <!-- CTA -->
+  <ContactSection
+    title="¿No sabes si es web o sistema?"
+    buttonText="Agendar conversación"
+    buttonHref="/contact"
+  >
+    <p>Cuéntame el problema y la meta. Te diré qué conviene construir y cómo abordarlo. <a href="/work" class="font-semibold text-white underline decoration-1 underline-offset-2">Ver casos de estudio →</a></p>
+  </ContactSection>
 </Layout>

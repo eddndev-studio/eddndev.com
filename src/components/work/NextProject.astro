@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import Container from '../studio/Container.astro';
+import FadeIn from '../studio/FadeIn.astro';
 
 interface Props {
   current: CollectionEntry<'work'>;
@@ -13,83 +15,56 @@ const { current, projects } = Astro.props;
 const currentIndex = projects.findIndex(p => p.slug === current.slug);
 const nextIndex = (currentIndex + 1) % projects.length;
 const next = projects[nextIndex];
-
-function hexToRgb(hex: string) {
-  let c;
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    c = hex.substring(1).split('');
-    if (c.length === 3) c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-    c = '0x' + c.join('');
-    return [(+c >> 16) & 255, (+c >> 8) & 255, +c & 255].join(',');
-  }
-  return '255,255,255';
-}
-
-const nextColor = next.data.color ?? '#ffffff';
-const nextColorRgb = hexToRgb(nextColor);
 ---
 
-<section
-  class="relative z-10 bg-[#020202] border-t border-white/10 overflow-hidden"
-  style={`--next-color: ${nextColor}; --next-color-rgb: ${nextColorRgb};`}
-  data-next-project
->
-  <!-- Ambient blob -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[var(--next-color)] opacity-[0.04] blur-[150px] pointer-events-none z-0"></div>
-
-  <div class="relative z-10 mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32">
-
-    <!-- Meta row -->
-    <div class="flex items-center justify-between gap-6 mb-10 lg:mb-14 font-mono text-xs tracking-widest uppercase">
-      <span data-readout style="color: var(--next-color)">[ SIGUIENTE CASO ]</span>
-      <span class="text-gray-500 reveal-text">{next.data.year}</span>
+<Container class="mt-24 sm:mt-32 lg:mt-40">
+  <FadeIn>
+    <div class="flex items-center gap-x-8">
+      <h2 class="font-display text-base font-semibold text-neutral-950">
+        Siguiente caso
+      </h2>
+      <div class="h-px flex-auto bg-neutral-200"></div>
     </div>
+  </FadeIn>
 
-    <!-- The whole piece is one link: title + cover power on together -->
-    <a href={`/work/${next.slug}`} data-magnetic-zone data-cursor-text="VER" class="group block">
-      <h3 class="reveal-text text-[clamp(2.75rem,9vw,9rem)] font-black tracking-tighter leading-[0.85] text-white">
-        {next.data.title.toUpperCase()}<span style="color: var(--next-color)">.</span>
-      </h3>
-
-      <figure class="mt-10 lg:mt-12" data-case-media>
-        <div data-media-frame class="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden border border-white/10 bg-[#0a0a0a]">
-          {next.data.cover && (
-            <div data-media-inner class="absolute inset-0 will-change-transform">
-              <Image
-                src={next.data.cover}
-                alt={next.data.title}
-                class="w-full h-full object-cover opacity-50 group-hover:opacity-90 transition-opacity duration-700"
-              />
-            </div>
-          )}
-          <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-          <div aria-hidden="true" class="absolute top-0 inset-x-0 h-px opacity-60" style="background: linear-gradient(90deg, var(--next-color), transparent 65%)"></div>
-
-          <!-- Meta inside the frame: revealed by the clip wipe -->
-          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10 flex items-end justify-between gap-6">
-            <div class="min-w-0">
-              <div class="flex items-center gap-3 mb-3">
-                <span aria-hidden="true" class="w-2 h-2 rounded-full" style="background: var(--next-color); box-shadow: 0 0 8px var(--next-color)"></span>
-                <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--next-color)">{next.data.category}</span>
-              </div>
-              <p class="text-gray-300 font-light leading-relaxed line-clamp-2 max-w-xl hidden sm:block">
-                {next.data.description}
-              </p>
-            </div>
-            <div data-magnetic="0.5" class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full border border-white/20 bg-white/5 flex items-center justify-center transition-colors duration-300 group-hover:bg-[var(--next-color)] group-hover:border-[var(--next-color)]">
-              <svg aria-hidden="true" class="w-5 h-5 text-white transition-transform duration-300 group-hover:-rotate-45 group-hover:text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </div>
-          </div>
+  <FadeIn class="group mt-10">
+    <article class="relative flex flex-col overflow-hidden rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+      {next.data.cover && (
+        <Image
+          src={next.data.cover}
+          alt={next.data.title}
+          class="aspect-21/9 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0"
+        />
+      )}
+      <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div class="max-w-2xl">
+          <h3 class="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl">
+            <a href={`/work/${next.slug}`}>
+              <span class="absolute inset-0 rounded-3xl"></span>
+              {next.data.title}
+            </a>
+          </h3>
+          <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
+            <time datetime={String(next.data.year)} class="font-semibold">{next.data.year}</time>
+            <span class="text-neutral-300" aria-hidden="true">/</span>
+            <span>{next.data.category}</span>
+          </p>
+          <p class="mt-4 text-base text-neutral-600">{next.data.description}</p>
         </div>
-      </figure>
-    </a>
+        <span
+          aria-hidden="true"
+          class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-neutral-950 text-white transition group-hover:bg-neutral-800"
+        >
+          <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </article>
+  </FadeIn>
 
-    <!-- Archive link -->
-    <div class="mt-10 flex justify-end">
-      <a href="/work" class="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors reveal-text">
-        <span class="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-white transition-all" aria-hidden="true"></span>
-        VER TODOS LOS CASOS
-      </a>
-    </div>
-  </div>
-</section>
+  <FadeIn class="mt-12 flex justify-end">
+    <a href="/work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+      Ver todos los casos
+      <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </FadeIn>
+</Container>

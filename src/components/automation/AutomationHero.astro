@@ -1,51 +1,24 @@
 ---
+import PageIntro from '../studio/PageIntro.astro';
+import Container from '../studio/Container.astro';
+import FadeIn from '../studio/FadeIn.astro';
+import Button from '../studio/Button.astro';
 ---
 
-<div id="hero" class="relative min-h-[100dvh] w-full flex flex-col justify-center lg:justify-end pt-32 pb-0 lg:pb-24 overflow-hidden border-b border-white/10" data-automation-hero>
-  <!-- Ledding Background -->
-  <div id="ledding-automation-container" class="absolute inset-0 z-0 opacity-40"></div>
+<PageIntro eyebrow="Automatización" title="Agentes que trabajan.">
+  <p>
+    No vendo promesas de IA. Construyo agentes que capturan datos, toman decisiones y ejecutan
+    acciones reales dentro de tu operación — <strong class="font-semibold text-neutral-950">sin
+    intervención humana</strong>.
+  </p>
+</PageIntro>
 
-  <!-- Scrim: protege la columna de texto sin apagar la matriz -->
-  <div aria-hidden="true"
-       class="absolute inset-0 pointer-events-none z-[5]"
-       style="background: linear-gradient(105deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 34%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0.12) 78%, transparent 92%);">
-  </div>
-
-  <!-- Vignette -->
-  <div id="hero-vignette"
-       class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
-  </div>
-
-  <!-- Content -->
-  <div class="relative z-20 w-full px-6 sm:px-12 max-w-[1800px] mx-auto">
-    <header class="flex flex-col items-start">
-      <div class="flex items-center gap-3 mb-4 lg:mb-6">
-        <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_#3b82f6]"></div>
-        <span data-readout class="font-mono text-xs sm:text-sm 2xl:text-base tracking-widest uppercase text-gray-300">[ EDDNDEV · AUTOMATIZACIÓN ]</span>
-      </div>
-
-      <h1 class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(2.5rem,10vw,12rem)] 2xl:text-[clamp(5rem,11vw,16rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]">
-        AGENTES QUE <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">TRABAJAN.</span>
-      </h1>
-
-      <div class="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full border-t border-white/10 pt-8">
-        <div class="lg:col-span-6">
-          <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-xl 2xl:max-w-2xl">
-            No vendo promesas de IA. Construyo agentes que capturan datos, toman decisiones y ejecutan acciones reales dentro de tu operación — <span class="text-white font-medium">sin intervención humana</span>.
-          </p>
-          <div class="flex flex-wrap items-center gap-4 mt-8">
-            <a href="/contact" data-magnetic="0.3" data-cursor-text="AGENDAR" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-bold rounded-full transition-colors hover:bg-blue-500">
-              <span class="relative z-10 2xl:text-lg">Agenda una consulta gratis</span>
-              <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </a>
-            <a href="#automation-problem" class="group flex items-center gap-2 text-gray-400 hover:text-blue-300 font-medium transition-colors 2xl:text-lg">
-              <span>Ver cómo funciona</span>
-              <svg aria-hidden="true" class="w-4 h-4 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
-</div>
+<Container class="mt-10">
+  <FadeIn class="flex flex-wrap items-center gap-x-6 gap-y-4">
+    <Button href="/contact">Agenda una consulta gratis</Button>
+    <a href="#automation-problem" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+      Ver cómo funciona
+      <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </FadeIn>
+</Container>

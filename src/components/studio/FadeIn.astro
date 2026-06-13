@@ -1,0 +1,14 @@
+---
+// Studio FadeIn — rises 24px + fades in on scroll. Driven by studio-reveals.js.
+// Inside a FadeInStagger, the parent sequences these; standalone, each self-triggers.
+interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  [key: string]: unknown;
+}
+const { as = 'div', class: className, ...rest } = Astro.props;
+const Tag = as;
+---
+<Tag data-fade-in class:list={[className]} {...rest}>
+  <slot />
+</Tag>

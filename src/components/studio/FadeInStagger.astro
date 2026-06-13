@@ -1,0 +1,14 @@
+---
+// Studio FadeInStagger — sequences its child FadeIns when the group scrolls into view.
+interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  faster?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+const { as = 'div', faster = false, class: className, ...rest } = Astro.props;
+const Tag = as;
+---
+<Tag data-fade-in-stagger={faster ? 'faster' : ''} class:list={[className]} {...rest}>
+  <slot />
+</Tag>

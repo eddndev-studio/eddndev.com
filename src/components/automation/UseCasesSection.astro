@@ -1,48 +1,22 @@
 ---
 import { useCases } from '../../data/automation';
+import SectionIntro from '../studio/SectionIntro.astro';
+import Container from '../studio/Container.astro';
+import GridList from '../studio/GridList.astro';
+import GridListItem from '../studio/GridListItem.astro';
 ---
 
-<section id="automation-cases" class="bg-[#050505] text-white border-b border-white/10 relative overflow-hidden">
-
-    <!-- Stroke Draw: Grid pattern -->
-    <svg aria-hidden="true" data-automation-draw class="absolute top-[8%] right-[4%] w-48 h-48 lg:w-72 lg:h-72 pointer-events-none z-0" viewBox="0 0 200 200" fill="none">
-        <rect x="20" y="20" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.2)" stroke-width="1" class="draw-path" />
-        <rect x="110" y="20" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.15)" stroke-width="1" class="draw-path" />
-        <rect x="20" y="110" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.15)" stroke-width="1" class="draw-path" />
-        <rect x="110" y="110" width="70" height="70" rx="4" stroke="rgba(16,185,129,0.2)" stroke-width="1" class="draw-path" />
-        <line x1="90" y1="55" x2="110" y2="55" stroke="rgba(16,185,129,0.18)" stroke-width="1" class="draw-path" />
-        <line x1="90" y1="145" x2="110" y2="145" stroke="rgba(16,185,129,0.18)" stroke-width="1" class="draw-path" />
-        <line x1="55" y1="90" x2="55" y2="110" stroke="rgba(16,185,129,0.18)" stroke-width="1" class="draw-path" />
-        <line x1="145" y1="90" x2="145" y2="110" stroke="rgba(16,185,129,0.18)" stroke-width="1" class="draw-path" />
-    </svg>
-
-    <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-
-        <div class="mb-16 lg:mb-20">
-            <div class="text-xs 2xl:text-sm font-mono text-emerald-400 tracking-widest mb-6 reveal-text">
-                [ 03 · CASOS DE USO ]
-            </div>
-            <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                QUÉ PUEDES <br> <span class="text-emerald-400">AUTOMATIZAR.</span>
-            </h2>
-        </div>
-
-        <!-- 2x3 Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
-            {useCases.map((uc) => (
-                <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-automation-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/50 to-emerald-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <svg aria-hidden="true" class="w-7 h-7 text-emerald-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <Fragment set:html={uc.icon} />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-emerald-300 transition-colors">{uc.title}</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        {uc.description}
-                    </p>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
+<div id="automation-cases">
+  <SectionIntro
+    eyebrow="Casos de uso"
+    title="Qué puedes automatizar."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  />
+  <Container class="mt-16">
+    <GridList>
+      {useCases.map((uc) => (
+        <GridListItem title={uc.title}>{uc.description}</GridListItem>
+      ))}
+    </GridList>
+  </Container>
+</div>

@@ -1,8 +1,56 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/layout/Footer.astro';
+import Container from '../components/studio/Container.astro';
+import FadeIn from '../components/studio/FadeIn.astro';
+import PageIntro from '../components/studio/PageIntro.astro';
+import SectionIntro from '../components/studio/SectionIntro.astro';
+import List from '../components/studio/List.astro';
+import ListItem from '../components/studio/ListItem.astro';
+import GridList from '../components/studio/GridList.astro';
+import GridListItem from '../components/studio/GridListItem.astro';
+import StylizedImage from '../components/studio/StylizedImage.astro';
+import ContactSection from '../components/studio/ContactSection.astro';
 import profileImg from '../assets/images/profile.jpg';
+
+// Lo que me diferencia — copy original preservado del diseño anterior
+const values = [
+  {
+    title: 'Infraestructura gestionada',
+    body: 'Administro servidores dedicados, seguridad y rendimiento. Tú te enfocas en tu negocio, yo me encargo de que todo funcione.',
+  },
+  {
+    title: 'Automatización con criterio',
+    body: 'Identifico los procesos que le cuestan tiempo y dinero a tu operación y construyo flujos a medida que trabajan sin que tengas que pensar en ellos.',
+  },
+  {
+    title: 'Velocidad que se siente',
+    body: 'Un sistema lento es un sistema que pierde clientes. Construyo software que abre al instante y consume menos recursos — lo que se traduce en menos gasto mensual para tu negocio.',
+  },
+  {
+    title: 'Sistemas, no páginas',
+    body: 'Diseño la lógica completa de tu operación digital para que funcione con la misma seriedad que tu negocio exige.',
+  },
+];
+
+// Cómo trabajo — pasos del proceso, copy original preservado
+const process = [
+  {
+    title: 'Entender antes de proponer',
+    body: 'Antes de escribir una sola línea, entiendo cómo opera tu negocio, qué le duele y qué necesita para crecer. Si la mejor solución es no construir nada, te lo digo.',
+  },
+  {
+    title: 'Diseñar con intención',
+    body: 'Cada decisión de diseño y arquitectura tiene una razón. No agrego complejidad innecesaria ni funciones que nadie va a usar.',
+  },
+  {
+    title: 'Construir para durar',
+    body: 'Elijo las herramientas correctas para el problema, no las de moda. Lo que entrego funciona hoy y sigue funcionando en tres años.',
+  },
+  {
+    title: 'Operar sin que lo notes',
+    body: 'Me encargo de la infraestructura, las actualizaciones y la seguridad de forma continua. Tu sistema evoluciona y se mantiene estable sin que tengas que intervenir.',
+  },
+];
 ---
 
 <Layout
@@ -10,297 +58,103 @@ import profileImg from '../assets/images/profile.jpg';
     description="Soy Eduardo Alonso (eddndev), ingeniero digital freelance. Construyo sistemas que controlas, no plataformas que te controlan a ti."
     breadcrumbs={[{ name: "Perfil", url: "/profile" }]}
 >
-    <!-- HERO -->
-    <div id="hero" class="relative min-h-[100dvh] w-full flex flex-col justify-center lg:justify-end pt-32 pb-0 lg:pb-24 overflow-hidden border-b border-white/10">
-      <!-- Ledding Background (higher opacity for profile) -->
-      <div id="ledding-profile-container" class="absolute inset-0 z-0 opacity-50"></div>
+  <!-- HERO -->
+  <PageIntro eyebrow="eddndev · Ingeniería digital · México" title="Construyo independencia.">
+    <p>
+      Tu negocio necesita sistemas que trabajan para ti, no plataformas de las que dependes.
+      Eso es lo que construyo.
+    </p>
+  </PageIntro>
 
-      <!-- Scrim: protege la columna de texto sin apagar la matriz -->
-      <div aria-hidden="true"
-           class="absolute inset-0 pointer-events-none z-[5]"
-           style="background: linear-gradient(105deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 34%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0.12) 78%, transparent 92%);">
+  <!-- QUIÉN SOY -->
+  <SectionIntro
+    eyebrow="Quién soy"
+    title="Ingeniería con nombre y apellido."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Construyo sistemas completos: desde la infraestructura donde vive tu proyecto hasta la interfaz que tocan tus usuarios.</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <div class="lg:flex lg:items-start lg:gap-x-12">
+      <div class="flex justify-center lg:w-1/2 lg:justify-start">
+        <FadeIn class="w-135 flex-none lg:w-180">
+          <figure>
+            <StylizedImage src={profileImg} alt="Eduardo Alonso, eddndev" shape={1} />
+            <figcaption class="mt-4 text-sm text-neutral-600">Eduardo Alonso · México · desde 2020</figcaption>
+          </figure>
+        </FadeIn>
       </div>
-
-      <!-- Vignette -->
-      <div id="hero-vignette"
-           class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
-      </div>
-
-      <!-- Contenido Principal -->
-      <div class="relative z-20 w-full px-6 sm:px-12 max-w-[1800px] mx-auto">
-        <header class="flex flex-col items-start" data-profile-hero>
-          <div class="flex items-center gap-3 mb-4 lg:mb-6">
-            <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse shadow-[0_0_8px_#a855f7]"></div>
-            <span data-readout class="font-mono text-xs sm:text-sm 2xl:text-base tracking-widest uppercase text-gray-300">[ EDDNDEV · INGENIERÍA DIGITAL · MÉXICO ]</span>
-          </div>
-
-          <h1 class="font-black tracking-tighter text-white leading-[0.85] text-[clamp(2.5rem,10vw,12rem)] 2xl:text-[clamp(5rem,11vw,16rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]">
-            CONSTRUYO <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200"><em>independencia</em>.</span>
-          </h1>
-
-          <div class="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full border-t border-white/10 pt-8">
-            <div class="lg:col-span-5">
-              <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-xl 2xl:max-w-2xl">
-                Tu negocio necesita sistemas que <span class="text-white font-medium">trabajan para ti</span>, no plataformas de las que dependes. Eso es lo que construyo.
-              </p>
-            </div>
-          </div>
-        </header>
-      </div>
+      <FadeIn class="mt-12 lg:mt-0 lg:w-1/2">
+        <div class="typography text-neutral-600">
+          <p>
+            Soy <strong class="font-semibold text-neutral-950">Eduardo Alonso</strong> — eddndev. Ingeniero digital
+            independiente desde 2020, en México. Construyo sistemas completos: desde la infraestructura
+            donde vive tu proyecto hasta la interfaz que tocan tus usuarios.
+          </p>
+          <p>
+            Gestiono servidores, seguridad, rendimiento y actualizaciones —
+            <strong class="font-semibold text-neutral-950">todo pasa por mis manos</strong>.
+            Sin intermediarios ni subcontratos: hablas directo con la persona que construye tu proyecto.
+          </p>
+          <p>
+            ¿Te interesa el detalle técnico? Documento cómo pienso y construyo en
+            <a href="https://eddn.dev" target="_blank" rel="noopener noreferrer" class="font-semibold text-neutral-950 underline decoration-1 underline-offset-2">eddn.dev</a>.
+          </p>
+        </div>
+      </FadeIn>
     </div>
+  </Container>
 
-    <!-- QUIÉN SOY -->
-    <section id="profile-about" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
-        <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+  <!-- LO QUE ME IMPORTA -->
+  <SectionIntro
+    eyebrow="Lo que me importa"
+    title="Lo que me diferencia."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Cuatro principios que guían cada proyecto que construyo.</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <GridList class="lg:grid-cols-2">
+      {values.map((value) => (
+        <GridListItem title={value.title}>{value.body}</GridListItem>
+      ))}
+    </GridList>
+  </Container>
 
-                <div class="lg:col-span-5">
-                    <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-6 reveal-text" data-readout>
-                        [ 01 · QUIÉN SOY ]
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                        INGENIERÍA <br> <span class="text-purple-400"><em>con nombre <br> y apellido</em>.</span>
-                    </h2>
+  <!-- CÓMO TRABAJO -->
+  <SectionIntro
+    eyebrow="Proceso"
+    title="Cómo trabajo."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>
+      Cada proyecto es diferente, pero mi obsesión es la misma: que lo que construya
+      resuelva un problema real y que no necesites un manual de 200 páginas para usarlo.
+    </p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <List>
+      {process.map((step) => (
+        <ListItem title={step.title}>{step.body}</ListItem>
+      ))}
+    </List>
+  </Container>
 
-                    <!-- Retrato: enciende con clip-wipe como toda figura del sitio -->
-                    <figure class="mt-12 max-w-md space-y-4" data-case-media>
-                        <div data-media-frame class="relative w-full aspect-[4/5] overflow-hidden border border-white/10 bg-[#0a0a0a]">
-                            <div data-media-inner class="absolute inset-0 will-change-transform">
-                                <Image src={profileImg} alt="Eduardo Alonso, eddndev" class="w-full h-full object-cover grayscale-[35%] contrast-105" />
-                            </div>
-                            <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                            <div aria-hidden="true" class="absolute inset-0 bg-repeat opacity-10 pointer-events-none mix-blend-overlay" style="background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent); background-size: 4px 4px;"></div>
-                            <div aria-hidden="true" class="absolute top-0 inset-x-0 h-px opacity-60" style="background: linear-gradient(90deg, #a855f7, transparent 65%)"></div>
-                        </div>
-                        <figcaption data-media-caption class="flex items-center justify-end gap-3 font-mono text-xs text-gray-500">
-                            <span class="h-px w-8 bg-white/20" aria-hidden="true"></span>
-                            [ EDUARDO ALONSO · MÉXICO · DESDE 2020 ]
-                        </figcaption>
-                    </figure>
-                </div>
+  <!-- FILOSOFÍA -->
+  <SectionIntro
+    eyebrow="Filosofía"
+    title="Tu proyecto, mi obsesión."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>
+      Infraestructura, código, seguridad y evolución continua —
+      gestiono cada capa para que tu proyecto funcione sin fricciones.
+    </p>
+  </SectionIntro>
 
-                <div class="lg:col-span-7 flex flex-col justify-center">
-                    <div class="space-y-6 text-gray-300 text-lg sm:text-xl lg:text-lg 2xl:text-xl font-light leading-relaxed max-w-3xl">
-                        <p class="reveal-text">
-                            Soy <span class="text-white font-medium">Eduardo Alonso</span> — eddndev. Ingeniero digital
-                            independiente desde 2020, en México. Construyo sistemas completos: desde la infraestructura
-                            donde vive tu proyecto hasta la interfaz que tocan tus usuarios.
-                        </p>
-                        <p class="reveal-text">
-                            Gestiono servidores, seguridad, rendimiento y actualizaciones —
-                            <span class="text-white font-medium">todo pasa por mis manos</span>.
-                            Sin intermediarios ni subcontratos: hablas directo con la persona que construye tu proyecto.
-                        </p>
-                        <p class="reveal-text text-base sm:text-lg lg:text-base 2xl:text-lg text-gray-500">
-                            ¿Te interesa el detalle técnico? Documento cómo pienso y construyo en
-                            <a href="https://eddn.dev" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 underline decoration-purple-500/40 underline-offset-4 transition-colors">eddn.dev</a>.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LO QUE NOS IMPORTA -->
-    <section id="profile-values" class="bg-[#050505] text-white border-b border-white/10 relative overflow-hidden">
-        <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-
-            <div class="mb-16 lg:mb-20">
-                <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-6 reveal-text" data-readout>
-                    [ 02 · LO QUE ME IMPORTA ]
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                    LO QUE ME <br> <span class="text-purple-400"><em>diferencia</em>.</span>
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
-
-                <!-- Card 1 -->
-                <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-profile-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-purple-500/0 via-purple-500/50 to-purple-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="w-2 h-2 bg-purple-500 rounded-full group-hover:shadow-[0_0_12px_#a855f7] transition-shadow"></span>
-                        <span class="font-mono text-xs text-purple-400 tracking-widest uppercase">01</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 group-hover:text-purple-300 transition-colors">Infraestructura gestionada</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        Administro servidores dedicados, seguridad y rendimiento.
-                        Tú te enfocas en tu negocio, <span class="text-gray-200">yo me encargo de que todo funcione</span>.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-profile-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-green-500/0 via-green-500/50 to-green-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="w-2 h-2 bg-green-500 rounded-full group-hover:shadow-[0_0_12px_#22c55e] transition-shadow"></span>
-                        <span class="font-mono text-xs text-green-400 tracking-widest uppercase">02</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 group-hover:text-green-300 transition-colors">Automatización con criterio</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        Identifico los procesos que le cuestan tiempo y dinero a tu operación
-                        y construyo flujos a medida que
-                        <span class="text-gray-200">trabajan sin que tengas que pensar en ellos</span>.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-profile-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-orange-500/0 via-orange-500/50 to-orange-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="w-2 h-2 bg-orange-500 rounded-full group-hover:shadow-[0_0_12px_#f97316] transition-shadow"></span>
-                        <span class="font-mono text-xs text-orange-400 tracking-widest uppercase">03</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 group-hover:text-orange-300 transition-colors">Velocidad que se siente</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        Un sistema lento es un sistema que pierde clientes. Construyo software
-                        que abre al instante y consume menos recursos —
-                        lo que se traduce en <span class="text-gray-200">menos gasto mensual</span> para tu negocio.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-[#050505] p-8 sm:p-12 group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden" data-profile-card>
-                    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="w-2 h-2 bg-blue-500 rounded-full group-hover:shadow-[0_0_12px_#3b82f6] transition-shadow"></span>
-                        <span class="font-mono text-xs text-blue-400 tracking-widest uppercase">04</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl 2xl:text-4xl font-bold mb-4 group-hover:text-blue-300 transition-colors">Sistemas, no páginas</h3>
-                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                        Diseño la lógica completa de tu operación digital
-                        para que <span class="text-gray-200">funcione con la misma seriedad que tu negocio exige</span>.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CÓMO TRABAJO -->
-    <section id="profile-process" class="bg-black text-white border-b border-white/10 relative overflow-hidden">
-        <div class="mx-auto max-w-[1800px] px-6 sm:px-12 py-24 lg:py-32 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-
-                <div class="lg:col-span-5">
-                    <div class="text-xs 2xl:text-sm font-mono text-purple-400 tracking-widest mb-6 reveal-text" data-readout>
-                        [ 03 · PROCESO ]
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] mb-8 reveal-text">
-                        CÓMO <br> <span class="text-purple-400"><em>trabajo</em>.</span>
-                    </h2>
-                    <p class="text-gray-300 text-lg sm:text-xl lg:text-lg 2xl:text-xl font-light leading-relaxed max-w-xl reveal-text">
-                        Cada proyecto es diferente, pero mi obsesión es la misma:
-                        que lo que construya <span class="text-white font-medium">resuelva un problema real</span> y que no necesites
-                        un manual de 200 páginas para usarlo.
-                    </p>
-                </div>
-
-                <div class="lg:col-span-7">
-                    <div class="space-y-0">
-
-                        <div class="border-b border-white/10 py-8 lg:py-10 group reveal-text relative" data-profile-step>
-                            <!-- Active indicator on hover -->
-                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-purple-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
-                            <div class="flex items-start gap-6 pl-4">
-                                <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-purple-500/30 transition-colors leading-none">01</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-purple-300 transition-colors">Entender antes de proponer</h3>
-                                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                        Antes de escribir una sola línea, entiendo cómo opera tu negocio,
-                                        qué le duele y qué necesita para crecer. Si la mejor solución es no construir nada, te lo digo.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-b border-white/10 py-8 lg:py-10 group reveal-text relative" data-profile-step>
-                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-purple-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
-                            <div class="flex items-start gap-6 pl-4">
-                                <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-purple-500/30 transition-colors leading-none">02</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-purple-300 transition-colors">Diseñar con intención</h3>
-                                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                        Cada decisión de diseño y arquitectura tiene una razón.
-                                        No agrego complejidad innecesaria ni funciones que nadie va a usar.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-b border-white/10 py-8 lg:py-10 group reveal-text relative" data-profile-step>
-                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-purple-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
-                            <div class="flex items-start gap-6 pl-4">
-                                <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-purple-500/30 transition-colors leading-none">03</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-purple-300 transition-colors">Construir para durar</h3>
-                                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                        Elijo las herramientas correctas para el problema, no las de moda.
-                                        Lo que entrego funciona hoy y sigue funcionando en tres años.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="py-8 lg:py-10 group reveal-text relative" data-profile-step>
-                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-purple-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
-                            <div class="flex items-start gap-6 pl-4">
-                                <span class="font-mono text-3xl sm:text-4xl 2xl:text-5xl font-black text-white/10 group-hover:text-purple-500/30 transition-colors leading-none">04</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl 2xl:text-3xl font-bold mb-3 group-hover:text-purple-300 transition-colors">Operar sin que lo notes</h3>
-                                    <p class="text-gray-400 font-light leading-relaxed 2xl:text-lg">
-                                        Me encargo de la infraestructura, las actualizaciones y la seguridad de forma continua.
-                                        Tu sistema evoluciona y se mantiene estable sin que tengas que intervenir.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FILOSOFÍA / CTA -->
-    <section id="profile-cta" class="relative z-20 bg-[#6A0DAD] text-white overflow-hidden py-24 lg:py-32">
-
-        <!-- Dot pattern background -->
-        <div class="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
-             style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;">
-        </div>
-
-        <div class="relative mx-auto max-w-[1800px] px-6 sm:px-12 z-10">
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-5 relative">
-                    <div class="text-xs sm:text-sm md:text-base lg:text-xs font-mono text-purple-200 tracking-widest mb-6 reveal-text" data-readout>
-                        [ 04 · FILOSOFÍA ]
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-black tracking-tighter leading-[0.9] reveal-text">
-                        TU PROYECTO. <br>
-                        <span class="text-purple-200"><em>mi obsesión</em>.</span>
-                    </h2>
-                </div>
-
-                <div class="lg:col-span-7 flex flex-col justify-end pl-0 lg:pl-12">
-                    <p class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-purple-100 font-light leading-relaxed max-w-2xl mb-8 reveal-text">
-                        Infraestructura, código, seguridad y evolución continua —
-                        gestiono cada capa para que tu proyecto
-                        <span class="text-white font-medium">funcione sin fricciones</span>.
-                    </p>
-                    <div class="reveal-text">
-                        <a href="/contact" data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative inline-flex items-center gap-3 px-8 py-4 2xl:px-10 2xl:py-5 bg-white text-[#6A0DAD] font-bold rounded-full transition-colors hover:bg-purple-100">
-                            <span class="relative z-10 group-hover:text-purple-900 transition-colors 2xl:text-lg">Hablemos de tu proyecto</span>
-                            <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <Footer />
+  <!-- CTA -->
+  <ContactSection
+    title="Tu proyecto, mi obsesión."
+    buttonText="Hablemos de tu proyecto"
+  />
 </Layout>

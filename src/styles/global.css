@@ -1,147 +1,123 @@
 @import "tailwindcss";
-@import "@fontsource-variable/instrument-sans";
-@import "@fontsource-variable/instrument-sans/wght-italic.css";
+@import "./typography.css" layer(components);
+
+/* ─────────────────────────────────────────────
+   Mona Sans — Studio's variable display/text face
+   ───────────────────────────────────────────── */
+@font-face {
+  font-family: 'Mona Sans';
+  font-weight: 200 900;
+  font-display: block;
+  font-style: normal;
+  font-stretch: 75% 125%;
+  src: url('/fonts/Mona-Sans.var.woff2') format('woff2');
+}
 
 @theme {
-    --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+  /* Replace Tailwind's default type scale with Studio's editorial scale */
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2.25rem;
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 2.5rem;
+  --text-5xl--line-height: 3rem;
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 3.5rem;
+  --text-7xl: 4rem;
+  --text-7xl--line-height: 4.5rem;
 
-    /* Brand tokens — ledding purple family */
-    --color-led: #a756ff;
-    --color-led-soft: #c895ff;
-    --color-led-deep: #6a0dad;
+  --radius-4xl: 2.5rem;
 
-    /* Motion tokens — one easing family for the whole site */
-    --ease-panel: cubic-bezier(0.16, 1, 0.3, 1);
-}
+  --font-sans:
+    'Mona Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-/* Editorial signature: light italic accents inside black display caps */
-h1 em, h2 em, h3 em {
-    font-style: italic;
-    font-weight: 480;
-    letter-spacing: -0.03em;
-}
+  --font-display:
+    'Mona Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-body {
-    font-family: 'Instrument Sans Variable', sans-serif;
-    background-color: #050505;
-    color: #ffffff;
+  /* Tailwind v4 auto-applies this with the `font-display` utility */
+  --font-display--font-variation-settings: 'wdth' 125;
+  --font-display-length: 2;
+
+  /* One motion easing family — framer's default layout/tween curves */
+  --ease-layout: cubic-bezier(0.4, 0, 0.1, 1);
+  --ease-fade: cubic-bezier(0.25, 0.1, 0.35, 1);
 }
 
 html {
-    scrollbar-gutter: stable;
+  scrollbar-gutter: stable;
+  background-color: var(--color-neutral-950);
 }
 
-/* Scroll Lock Robusto */
-body.no-scroll, html.no-scroll {
-    overflow: hidden !important;
-    height: 100vh !important;
+body {
+  font-family: var(--font-sans);
 }
-
-/* Page content recedes while the menu is open (swap-proof: pure CSS state) */
-html.menu-open #page-content {
-    opacity: 0 !important;
-    pointer-events: none;
-}
-
-.hero-text-gradient {
-    background: linear-gradient(to right, #be88ff, #b5d8fd);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-}
-
-@media (min-width: 1024px) and (pointer: fine) {
-    .custom-cursor-active body,
-    .custom-cursor-active a,
-    .custom-cursor-active button,
-    .custom-cursor-active [role="button"] {
-        cursor: none !important;
-    }
-}
-
-/* Accesibilidad (A11y): Estilos globales para navegación por teclado */
-:focus-visible {
-    outline: 2px solid #a855f7; /* purple-500 */
-    outline-offset: 4px;
-    border-radius: 4px;
-    transition: outline-color 0.2s ease;
-}
-
-/* A11y: Respetar preferencia de movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    ::view-transition-old(*),
-    ::view-transition-new(*) {
-        animation: none !important;
-    }
-}
-
-/* Outline display text — ticker */
-.text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); }
-.text-outline-purple { color: transparent; -webkit-text-stroke: 1px rgba(192, 132, 252, 0.45); }
 
 /* ─────────────────────────────────────────────
-   Dock — persistent chrome
+   Reveal grammar — Studio FadeIn (opacity + 24px rise).
+   Hidden only when JS is live (`.js` set inline in <head>),
+   so content stays visible if scripting fails.
    ───────────────────────────────────────────── */
-@keyframes dock-up {
-    from { transform: translateY(140%); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
-}
-.dock-enter { animation: dock-up 0.7s var(--ease-panel) 0.35s both; }
-
-/* Active page: an LED lights under the link */
-.dock-link::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 3px;
-    width: 4px;
-    height: 4px;
-    border-radius: 9999px;
-    background: var(--color-led);
-    transform: translateX(-50%) scale(0);
-    box-shadow: 0 0 8px var(--color-led);
-    transition: transform 0.4s var(--ease-panel);
-}
-.dock-link[aria-current="page"] {
-    color: #ffffff;
-}
-.dock-link[aria-current="page"]::after {
-    transform: translateX(-50%) scale(1);
+.js [data-fade-in] {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
 }
 
-/* Project pill: display is CSS-managed so chrome.js only toggles .hidden */
-.dock-pill { display: none; }
-@media (min-width: 768px) {
-    .dock-pill:not(.hidden) { display: inline-flex; }
+/* Scroll lock while the navigation panel is open */
+html.nav-open,
+body.nav-open {
+  overflow: hidden;
 }
 
 /* ─────────────────────────────────────────────
-   View transitions — content lifts out, settles in;
-   persistent chrome stays put in its own snapshot layer
+   Accessibility
+   ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-neutral-950);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-fade-in] {
+    opacity: 1;
+    transform: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   View transitions — content lifts out, settles in
    ───────────────────────────────────────────── */
 @keyframes vt-out {
-    to { opacity: 0; transform: translateY(-16px) scale(0.995); }
+  to { opacity: 0; transform: translateY(-12px); }
 }
 @keyframes vt-in {
-    from { opacity: 0; transform: translateY(22px); }
+  from { opacity: 0; transform: translateY(16px); }
 }
-::view-transition-old(root) { animation: vt-out 0.26s cubic-bezier(0.45, 0, 0.55, 1) both; }
-::view-transition-new(root) { animation: vt-in 0.45s var(--ease-panel) both; }
-
-#dock-wrap { view-transition-name: dock; }
-#custom-cursor { view-transition-name: cursor; }
-#nav-panel { view-transition-name: nav-panel; }
-::view-transition-group(dock),
-::view-transition-group(cursor),
-::view-transition-group(nav-panel) { animation-duration: 0.01ms; }
-::view-transition-old(dock), ::view-transition-new(dock),
-::view-transition-old(cursor), ::view-transition-new(cursor),
-::view-transition-old(nav-panel), ::view-transition-new(nav-panel) { animation: none; }
+::view-transition-old(root) { animation: vt-out 0.24s cubic-bezier(0.45, 0, 0.55, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.4s var(--ease-layout) both; }

@@ -1,88 +1,189 @@
 ---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/layout/Footer.astro';
-import Ticker from '../components/sections/Ticker.astro';
-import Focus from '../components/sections/Focus.astro';
-import Work from '../components/sections/Work.astro';
-import Services from '../components/sections/Services.astro';
-import HomeCta from '../components/sections/HomeCta.astro';
+import Container from '../components/studio/Container.astro';
+import FadeIn from '../components/studio/FadeIn.astro';
+import FadeInStagger from '../components/studio/FadeInStagger.astro';
+import Button from '../components/studio/Button.astro';
+import SectionIntro from '../components/studio/SectionIntro.astro';
+import List from '../components/studio/List.astro';
+import ListItem from '../components/studio/ListItem.astro';
+import StylizedImage from '../components/studio/StylizedImage.astro';
+import ContactSection from '../components/studio/ContactSection.astro';
+import { services } from '../data/services';
+import profileImg from '../assets/images/profile.jpg';
+
+// Manifiesto de encaje — cuándo entra una solución propia (copy original, verbatim)
+const manifesto = [
+  'Tu marca necesita presencia con identidad — y una web que convierta visitas en clientes.',
+  'Ya no quieres depender de plantillas ni plataformas que limitan cómo operas.',
+  'Tu equipo pierde horas en trabajo que debería ejecutarse solo.',
+  'Te importa cómo se ve tanto como que funcione en serio.',
+];
+
+// Promesas que un cliente entiende — lo técnico vive en eddn.dev (copy original)
+const promises = [
+  'Nada de plantillas', 'Cada venta es tuya', 'Abre al instante', 'Se administra solo',
+  'Menos trabajo manual', 'Tu marca en serio', 'Sin comisiones de plataforma',
+  'Diseño a la medida', 'Trato directo', 'Hecho en México',
+];
+
+// Trabajo + prueba: cada caso entra con su resultado de negocio (copy original)
+const proof = {
+  sylestudio: { stat: '0% comisiones', detail: 'Tienda en línea propia: catálogo, pagos y envíos bajo su control. Cada peso de cada venta se queda con la marca.' },
+  yatagarasu: { stat: 'Abre al instante', detail: 'Una experiencia que se siente como videojuego y abre de inmediato en cualquier celular. Nadie se va por esperar.' },
+  achronyme: { stat: 'De cero a producto', detail: 'Una herramienta profesional construida completa, desde la idea hasta producción. Ningún sistema es demasiado ambicioso.' },
+};
+
+const projects = await getCollection('work');
+projects.sort((a, b) => Number(b.data.year) - Number(a.data.year));
+const featured = projects.find((p) => p.slug === 'sylestudio') ?? projects[0];
+const ordered = [featured, ...projects.filter((p) => p.slug !== featured.slug)].slice(0, 3);
 ---
 
 <Layout
     title="edd n' dev — Ingeniería digital freelance"
     description="Soy Eduardo Alonso (eddndev). Diseño y construyo sitios web, e-commerce, automatizaciones y software a medida con infraestructura propia, desde México."
 >
-
-    <!-- HERO -->
-    <div id="hero" class="relative min-h-[100dvh] w-full flex flex-col justify-center lg:justify-end pt-32 pb-0 lg:pb-24 overflow-hidden">
-      <!-- Fondo Animado -->
-      <div id="ledding-animation-container" class="absolute inset-0 z-0"></div>
-
-      <!-- Scrim: protege la columna de texto sin apagar la matriz a la derecha -->
-      <div aria-hidden="true"
-           class="absolute inset-0 pointer-events-none z-[5]"
-           style="background: linear-gradient(100deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.86) 32%, rgba(0,0,0,0.55) 54%, rgba(0,0,0,0.18) 74%, transparent 90%);">
+  <!-- HERO -->
+  <Container class="mt-24 sm:mt-32 md:mt-48">
+    <FadeIn class="max-w-3xl">
+      <div class="flex items-center gap-x-3 text-sm font-semibold tracking-wide text-neutral-950">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+        </span>
+        Ingeniería digital freelance · Disponible para proyectos
       </div>
-
-      <!-- Vignette -->
-      <div id="hero-vignette"
-           class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none z-10">
+      <h1 class="mt-6 font-display text-5xl font-medium tracking-tight text-balance text-neutral-950 sm:text-7xl">
+        Sitios que <em class="italic">venden</em>. Sistemas que <em class="italic">trabajan</em>.
+      </h1>
+      <p class="mt-6 text-xl text-neutral-600">
+        Soy Eduardo. Construyo la presencia digital de marcas que quieren verse serias y vender más
+        — sitios, tiendas en línea y automatización, todo a la medida. Nada de plantillas.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <Button href="/contact">Cuéntame tu proyecto</Button>
+        <a href="#work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+          Ver casos de estudio
+          <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
+    </FadeIn>
+  </Container>
 
-      <!-- Contenido Principal -->
-      <div class="relative z-20 w-full px-6 sm:px-12 max-w-[1800px] mx-auto">
-        <header class="flex flex-col items-start" data-hero-entrance>
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 lg:mb-6" data-hero-eyebrow>
-            <div class="flex items-center gap-3 opacity-70">
-              <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-              <span class="font-mono text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-base tracking-widest uppercase text-gray-300">eddndev &bull; ingeniería digital freelance</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span class="font-mono text-xs sm:text-sm lg:text-xs 2xl:text-sm tracking-widest uppercase text-green-400/90">disponible para proyectos</span>
-            </div>
-          </div>
+  <!-- PROMESAS (Studio "clients" band) -->
+  <div class="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-24 lg:mt-40">
+    <Container>
+      <FadeIn class="flex items-center gap-x-8">
+        <h2 class="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
+          Lo que obtienes al trabajar conmigo
+        </h2>
+        <div class="h-px flex-auto bg-neutral-800"></div>
+      </FadeIn>
+      <FadeInStagger faster>
+        <ul role="list" class="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
+          {promises.map((promise) => (
+            <FadeIn as="li" class="font-display text-base font-semibold text-neutral-300">{promise}</FadeIn>
+          ))}
+        </ul>
+      </FadeInStagger>
+    </Container>
+  </div>
 
-          <!-- Título Masivo -->
-          <h1 data-hero-title class="font-black tracking-tighter text-white leading-[0.9] text-[clamp(2.75rem,7.5vw,8.5rem)] 2xl:text-[clamp(3.5rem,7.5vw,11rem)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]">
-            SITIOS QUE <em class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">venden</em>. <br>
-            SISTEMAS QUE <em class="hero-text-gradient">trabajan</em>.
-          </h1>
+  <!-- ENCAJE -->
+  <SectionIntro
+    eyebrow="Encaje"
+    title="Cuando lo genérico se queda corto."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Entro cuando hace falta una base propia y una solución técnicamente seria. <a href="/profile" class="font-semibold text-neutral-950 underline decoration-1 underline-offset-2">Conoce quién está detrás →</a></p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <List>
+      {manifesto.map((item) => (
+        <ListItem>{item}</ListItem>
+      ))}
+    </List>
+  </Container>
 
-          <div class="mt-8 lg:mt-12 w-full">
-            <span data-hero-rule class="block h-px w-full bg-white/10 origin-left" aria-hidden="true"></span>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full pt-8">
-                    <div class="lg:col-span-5">
-                      <p data-hero-intro class="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-gray-300 font-light leading-relaxed max-w-xl 2xl:max-w-2xl">
-                        Soy Eduardo. Construyo la presencia digital de marcas que quieren <span class="text-white font-medium">verse serias y vender más</span> — sitios, tiendas en línea y automatización, todo a la medida. Nada de plantillas.
-                      </p>
-                    </div>
-            <div class="lg:col-span-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 lg:justify-end">
-               <a href="/contact" data-hero-cta data-magnetic="0.3" data-cursor-text="INICIAR" class="group relative px-8 py-4 2xl:px-10 2xl:py-5 2xl:text-lg bg-white text-black font-bold rounded-full overflow-hidden transition-colors hover:bg-purple-100">
-                  <span class="relative z-10 group-hover:text-purple-700 transition-colors">Cuéntame tu proyecto</span>
-               </a>
+  <!-- TRABAJO / PRUEBA -->
+  <SectionIntro
+    eyebrow="Prueba"
+    title="Resultados reales."
+    id="work"
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Proyectos reales con resultados que cualquiera entiende: más control, menos costos, mejor experiencia.</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <FadeInStagger class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      {ordered.map((project) => (
+        <FadeIn class="group flex">
+          <article class="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+            {project.data.cover && (
+              <Image src={project.data.cover} alt={project.data.title} class="aspect-16/10 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+            )}
+            <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">
+              <a href={`/work/${project.slug}`}>
+                <span class="absolute inset-0 rounded-3xl"></span>
+                {project.data.title}
+              </a>
+            </h3>
+            <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
+              <time datetime={String(project.data.year)} class="font-semibold">{project.data.year}</time>
+              <span class="text-neutral-300" aria-hidden="true">/</span>
+              <span>{project.data.category}</span>
+            </p>
+            <p class="mt-4 text-base text-neutral-600">{proof[project.slug]?.detail}</p>
+            {proof[project.slug]?.stat && (
+              <p class="mt-6 font-display text-sm font-semibold tracking-wider text-neutral-950 uppercase">{proof[project.slug].stat}</p>
+            )}
+          </article>
+        </FadeIn>
+      ))}
+    </FadeInStagger>
+    <FadeIn class="mt-12 flex justify-center">
+      <a href="/work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+        Ver todo el trabajo
+        <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </FadeIn>
+  </Container>
 
-               <a href="#work" data-hero-cta data-cursor-text="CASOS" class="group flex items-center gap-2 text-white font-medium 2xl:text-lg hover:text-purple-300 transition-colors">
-                  <span>Ver casos de estudio</span>
-                  <svg aria-hidden="true" class="w-4 h-4 2xl:w-5 2xl:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-               </a>
-            </div>
-            </div>
-          </div>
-        </header>
+  <!-- SERVICIOS -->
+  <SectionIntro
+    eyebrow="Servicios"
+    title="Lo que construyo."
+    class="mt-24 sm:mt-32 lg:mt-40"
+  >
+    <p>Cuatro líneas de servicio, un mismo estándar: soluciones propias que escalan con tu negocio.</p>
+  </SectionIntro>
+  <Container class="mt-16">
+    <div class="lg:flex lg:items-center lg:justify-end">
+      <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
+        <FadeIn class="w-135 flex-none lg:w-180">
+          <StylizedImage src={profileImg} alt="Eduardo Alonso — eddndev" class="justify-center lg:justify-end" />
+        </FadeIn>
       </div>
+      <List class="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-132 lg:pl-4">
+        {services.map((service) => (
+          <ListItem title={service.title}>{service.tagline}.</ListItem>
+        ))}
+      </List>
     </div>
+    <FadeIn class="mt-12 flex justify-center">
+      <a href="/services" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
+        Explorar servicios
+        <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </FadeIn>
+  </Container>
 
-    <!-- SECTIONS -->
-    <Ticker />
-    <Focus />
-    <Work />
-    <Services />
-    <HomeCta />
-
-    <Footer />
-
+  <!-- CTA -->
+  <ContactSection
+    title="Tu proyecto empieza aquí."
+    buttonText="Cuéntame tu proyecto"
+  />
 </Layout>
