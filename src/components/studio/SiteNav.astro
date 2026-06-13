@@ -18,7 +18,7 @@ const rows = [
       <div class="flex items-center justify-between">
         <Brand />
         <div class="flex items-center gap-x-8">
-          <Button href="/contact">Hablemos</Button>
+          <Button href="/contact" brand>Hablemos</Button>
           <button
             type="button"
             data-nav-open
@@ -50,9 +50,9 @@ const rows = [
       <div class="bg-neutral-950 pt-14 pb-16">
         <Container>
           <div class="flex items-center justify-between">
-            <Brand invert />
+            <Brand brand />
             <div class="flex items-center gap-x-8">
-              <Button href="/contact" invert>Hablemos</Button>
+              <Button href="/contact" brand>Hablemos</Button>
               <button
                 type="button"
                 data-nav-close
@@ -92,7 +92,7 @@ const rows = [
       </nav>
 
       <!-- Contact + social -->
-      <div class="relative bg-neutral-950 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
+      <div class="relative panel-brand before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
         <Container>
           <div class="grid grid-cols-1 gap-y-10 pt-10 pb-16 sm:grid-cols-2 sm:pt-16">
             <div>
