@@ -1,5 +1,6 @@
 ---
-// Studio Button — pill, solid neutral-950 (or inverted white, or brand violet).
+// Studio Button — pill. Default CTA is brand violet; `invert` is the white pill
+// for dark/violet panels. `brand` stays as an explicit alias (same as default).
 interface Props {
   href?: string;
   invert?: boolean;
@@ -13,7 +14,7 @@ const variant = brand
   ? 'bg-brand-button text-white hover:bg-brand-mid'
   : invert
     ? 'bg-white text-neutral-950 hover:bg-neutral-200'
-    : 'bg-neutral-950 text-white hover:bg-neutral-800';
+    : 'bg-brand-button text-white hover:bg-brand-mid';
 const classes = [
   'inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition',
   variant,
