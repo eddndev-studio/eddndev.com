@@ -1,0 +1,56 @@
+---
+title: "Ataulfo"
+description: "Plataforma propia para operar atención por WhatsApp, trabajo, agenda, automatizaciones y asistentes con IA desde una aplicación móvil."
+year: 2026
+status: "Producto propio"
+signal: "Backend en Go, aplicación Flutter y operación multitenant"
+category: "Software operativo"
+role: "Creador y desarrollador principal"
+color: "#f7b500"
+stack: ["Go", "Flutter", "PostgreSQL", "Redis", "WhatsApp", "LLM orchestration"]
+cover: "../../assets/images/projects/ataulfo/overview.svg"
+links:
+  Live Site: "https://ataulfo.app"
+  GitHub: "https://github.com/eddndev-studio"
+featured: true
+---
+import TextBlock from '../../components/blocks/TextBlock.astro';
+import ImageFull from '../../components/blocks/ImageFull.astro';
+import StatsGrid from '../../components/blocks/StatsGrid.astro';
+import overviewImg from '../../assets/images/projects/ataulfo/overview.svg';
+
+<TextBlock
+  number="01"
+  section="Producto"
+  heading="La operación reunida"
+  body="Ataulfo es mi producto principal. Reúne conversaciones de WhatsApp, clientes, tareas, agenda, documentos, automatizaciones y asistentes con IA en una aplicación móvil. El objetivo es que una organización pueda atender y coordinar trabajo desde el mismo contexto."
+/>
+
+<ImageFull
+  src={overviewImg}
+  alt="Mapa de producto de Ataulfo con bandeja, trabajo, agenda y copiloto."
+  caption="Mapa de producto: conversaciones, trabajo y decisiones conectadas."
+/>
+
+<StatsGrid
+  items={[
+    {value: 'Go', label: 'Backend'},
+    {value: 'Flutter', label: 'Aplicación'},
+    {value: 'Postgres', label: 'Persistencia'},
+    {value: 'Redis', label: 'Tiempo real'},
+  ]}
+/>
+
+<TextBlock
+  number="02"
+  section="Arquitectura"
+  heading="Un sistema que conserva contexto"
+  body="El backend multitenant coordina APIs REST y SSE, persistencia, mensajería y proveedores de IA. La aplicación Flutter concentra bandeja, trabajo, asistentes, agenda y copiloto. Las acciones externas pueden pasar por revisión y aprobación antes de ejecutarse."
+/>
+
+<TextBlock
+  number="03"
+  section="Estado"
+  heading="Desarrollo activo"
+  body="Ataulfo se desarrolla, prueba y publica por versiones. Este caso muestra arquitectura y alcance del producto. Las métricas comerciales aparecerán cuando existan datos de uso que puedan verificarse y publicarse con permiso."
+/>

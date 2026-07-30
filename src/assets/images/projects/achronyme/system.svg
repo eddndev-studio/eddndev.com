@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitectura de Achronyme</title>
+  <desc id="desc">Akron, Artik y Lysis procesan un programa para ejecutarlo, generar witnesses y construir circuitos.</desc>
+  <defs>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <radialGradient id="aura"><stop stop-color="#7c3aed" stop-opacity=".28"/><stop offset="1" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="1000" rx="56" fill="#08080c"/><circle cx="840" cy="460" r="520" fill="url(#aura)"/>
+  <g fill="none" stroke="#252330" stroke-width="2"><path d="M80 166h1440M80 842h1440"/><path d="M416 80v840M1184 80v840" stroke-dasharray="9 13"/></g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="4">
+    <text x="86" y="106" fill="#8f8b9d" font-size="22">ACHRONYME / TRI-ARCHITECTURE</text><text x="1514" y="106" text-anchor="end" fill="#a78bfa" font-size="22">PUBLIC BETA</text>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <text x="96" y="260" fill="#f4f1fa" font-size="62" font-weight="650">One program.</text><text x="96" y="326" fill="#9e99aa" font-size="62" font-weight="650">Three machines.</text>
+    <rect x="98" y="394" width="300" height="246" rx="28" fill="#121119" stroke="#302d3a"/>
+    <text x="132" y="442" fill="#8f8b9d" font-size="18">SOURCE / .ACH</text><text x="132" y="500" fill="#c4b5fd" font-family="ui-monospace, monospace" font-size="20">prove(public: x) {</text>
+    <text x="158" y="544" fill="#f4f1fa" font-family="ui-monospace, monospace" font-size="20">assert(secret == x)</text><text x="132" y="588" fill="#c4b5fd" font-family="ui-monospace, monospace" font-size="20">}</text>
+    <path d="M430 518h112M826 518h86M1196 518h94" fill="none" stroke="#625d70" stroke-width="3" stroke-dasharray="8 10"/>
+    <g>
+      <rect x="544" y="370" width="282" height="296" rx="32" fill="#17141f" stroke="#5b4d7a"/><circle cx="594" cy="422" r="22" fill="url(#violet)"/>
+      <text x="594" y="430" text-anchor="middle" fill="#0a080d" font-size="22" font-weight="800">A</text><text x="632" y="431" fill="#f4f1fa" font-size="32" font-weight="700">Akron</text>
+      <text x="584" y="496" fill="#9e99aa" font-size="20">Surface VM</text><text x="584" y="540" fill="#e1ddeb" font-size="23">Ejecuta el lenguaje</text>
+      <rect x="584" y="584" width="162" height="36" rx="18" fill="#292334"/><text x="665" y="608" text-anchor="middle" fill="#c4b5fd" font-size="16">VM MODE</text>
+    </g>
+    <g>
+      <rect x="914" y="370" width="282" height="296" rx="32" fill="#17141f" stroke="#5b4d7a"/><circle cx="964" cy="422" r="22" fill="url(#violet)"/>
+      <text x="964" y="430" text-anchor="middle" fill="#0a080d" font-size="22" font-weight="800">A</text><text x="1002" y="431" fill="#f4f1fa" font-size="32" font-weight="700">Artik</text>
+      <text x="954" y="496" fill="#9e99aa" font-size="20">Witness VM</text><text x="954" y="540" fill="#e1ddeb" font-size="23">Calcula witnesses</text>
+      <rect x="954" y="584" width="178" height="36" rx="18" fill="#292334"/><text x="1043" y="608" text-anchor="middle" fill="#c4b5fd" font-size="16">FIELD OPS</text>
+    </g>
+    <g>
+      <rect x="1292" y="370" width="220" height="296" rx="32" fill="#17141f" stroke="#5b4d7a"/><circle cx="1342" cy="422" r="22" fill="url(#violet)"/>
+      <text x="1342" y="430" text-anchor="middle" fill="#0a080d" font-size="22" font-weight="800">L</text><text x="1380" y="431" fill="#f4f1fa" font-size="32" font-weight="700">Lysis</text>
+      <text x="1332" y="496" fill="#9e99aa" font-size="20">Circuit VM</text><text x="1332" y="540" fill="#e1ddeb" font-size="23">Construye R1CS</text>
+      <text x="1332" y="588" fill="#c4b5fd" font-family="ui-monospace, monospace" font-size="17">.r1cs  .wtns</text>
+    </g>
+    <text x="96" y="900" fill="#8f8b9d" font-family="ui-monospace, monospace" font-size="20" letter-spacing="3">RUST / GROTH16 / PLONK / CIRCOM INTEROP</text>
+  </g>
+</svg>

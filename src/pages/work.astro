@@ -7,18 +7,19 @@ import ProjectGrid from '../components/work/ProjectGrid.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('work');
-projects.sort((a, b) => (Number(b.data.year) - Number(a.data.year)));
+const preferredOrder = ['ataulfo', 'sylestudio', 'achronyme'];
+projects.sort((a, b) => preferredOrder.indexOf(a.slug) - preferredOrder.indexOf(b.slug));
 ---
 
 <Layout
-    title="Proyectos — edd n' dev"
-    description="Proyectos seleccionados: sitios, e-commerce, software y sistemas construidos desde cero para marcas reales."
+    title="Proyectos | edd n' dev"
+    description="Proyectos propios y colaboraciones con su estado actual, alcance y evidencia disponible."
     breadcrumbs={[{ name: "Proyectos", url: "/work" }]}
 >
     <!-- HERO -->
     <PageIntro eyebrow="Archivo" title="Proyectos seleccionados.">
       <p>
-        Sistemas reales construidos para <span class="font-semibold text-neutral-950">marcas reales</span> — del concepto a producción.
+        Productos propios y colaboraciones presentados con su estado actual, alcance y evidencia disponible.
       </p>
     </PageIntro>
 
@@ -29,7 +30,7 @@ projects.sort((a, b) => (Number(b.data.year) - Number(a.data.year)));
 
     <!-- CTA -->
     <ContactSection
-      title="Tu proyecto empieza aquí."
-      buttonText="Cuéntame tu proyecto"
+      title="¿Hay un proceso que podamos volver más claro?"
+      buttonText="Platicar el contexto"
     />
 </Layout>

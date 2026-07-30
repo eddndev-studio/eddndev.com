@@ -1,189 +1,127 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
 import FadeInStagger from '../components/studio/FadeInStagger.astro';
 import Button from '../components/studio/Button.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
-import List from '../components/studio/List.astro';
-import ListItem from '../components/studio/ListItem.astro';
-import StylizedImage from '../components/studio/StylizedImage.astro';
+import ServiceField from '../components/studio/ServiceField.astro';
+import StudioStatement from '../components/studio/StudioStatement.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
+import ProjectGrid from '../components/work/ProjectGrid.astro';
 import { services } from '../data/services';
-import profileImg from '../assets/images/profile.jpg';
 
-// Manifiesto de encaje — cuándo entra una solución propia (copy original, verbatim)
-const manifesto = [
-  'Tu marca necesita presencia con identidad — y una web que convierta visitas en clientes.',
-  'Quieres una base propia que se adapte exactamente a cómo operas.',
-  'Tu equipo pierde horas en trabajo que debería ejecutarse solo.',
-  'Te importa cómo se ve tanto como que funcione en serio.',
+const offers = [
+  { number: '01', title: 'Landing medible', price: 'Desde $20,000 MXN', time: '2 a 3 semanas', body: 'Una página con diseño propio, acciones medibles, publicación y panel privado.' },
+  { number: '02', title: 'Landing de captación', price: 'Desde $35,000 MXN', time: '3 a 5 semanas', body: 'Oferta, formulario con reglas, seguimiento de solicitudes y una integración comercial.' },
+  { number: '03', title: 'Sitio profesional', price: 'Desde $55,000 MXN', time: '5 a 8 semanas', body: 'Varias páginas, contenido administrable, medición y un panel para operar el sitio.' },
 ];
-
-// Promesas que un cliente entiende — lo técnico vive en eddn.dev (copy original)
-const promises = [
-  '100% a la medida de tu marca', 'Cada venta es 100% tuya', 'Abre al instante', 'Se administra solo',
-  'Menos trabajo manual', 'Tu marca en serio', 'Tus márgenes, completos',
-  'Diseño a la medida', 'Trato directo', 'Hecho en México',
-];
-
-// Trabajo + prueba: cada caso entra con su resultado de negocio (copy original)
-const proof = {
-  sylestudio: { stat: '0% comisiones', detail: 'Tienda en línea propia: catálogo, pagos y envíos bajo su control. Cada peso de cada venta se queda con la marca.' },
-  yatagarasu: { stat: 'Abre al instante', detail: 'Una experiencia que se siente como videojuego y abre de inmediato en cualquier celular. Nadie se va por esperar.' },
-  achronyme: { stat: 'De cero a producto', detail: 'Una herramienta profesional construida completa, desde la idea hasta producción. Cualquier sistema, por ambicioso que sea, lo construyo completo.' },
-};
 
 const projects = await getCollection('work');
-projects.sort((a, b) => Number(b.data.year) - Number(a.data.year));
-const featured = projects.find((p) => p.slug === 'sylestudio') ?? projects[0];
-const ordered = [featured, ...projects.filter((p) => p.slug !== featured.slug)].slice(0, 3);
+const preferredOrder = ['ataulfo', 'sylestudio', 'achronyme'];
+const ordered = preferredOrder
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project): project is NonNullable<typeof project> => Boolean(project));
 ---
 
 <Layout
-    title="edd n' dev — Ingeniería digital freelance"
-    description="Soy Eduardo Alonso (eddndev). Diseño y construyo sitios web, e-commerce, automatizaciones y software a medida con infraestructura propia, desde México."
+  title="edd n' dev | Desarrollo de software independiente"
+  description="Diseño y construyo sitios medibles, sistemas operativos y automatizaciones con alcance, pruebas y seguimiento claros."
 >
-  <!-- HERO -->
-  <Container class="mt-24 sm:mt-32 md:mt-48">
-    <FadeIn class="max-w-3xl">
-      <div class="flex items-center gap-x-3 text-sm font-semibold tracking-wide text-neutral-950">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-        </span>
-        Ingeniería digital freelance · Disponible para proyectos
+  <Container class="mt-24 sm:mt-32 lg:mt-40">
+    <FadeIn class="relative grid min-h-[50rem] grid-cols-1 content-start gap-x-8 lg:min-h-[55rem] lg:grid-cols-12">
+      <div class="relative lg:col-span-12">
+        <p class="section-code">Desarrollo independiente / México / Proyectos selectos</p>
+        <h1 class="type-wide mt-12 font-display text-[clamp(3rem,12.5vw,11rem)] leading-[0.76] font-medium tracking-[-0.07em] text-white sm:text-[clamp(4rem,11.5vw,11rem)]">
+          <span class="block">Sitios.</span>
+          <span class="block lg:ml-[16vw]">Sistemas.</span>
+          <span class="block text-[var(--signal-on-dark)]">Automatización.</span>
+        </h1>
       </div>
-      <h1 class="mt-6 font-display text-5xl font-medium tracking-tight text-balance text-neutral-950 sm:text-7xl">
-        Sitios que <em class="italic">venden</em>. Sistemas que <em class="italic">trabajan</em>.
-      </h1>
-      <p class="mt-6 text-xl text-neutral-600">
-        Soy Eduardo. Construyo la presencia digital de marcas que quieren verse serias y vender más
-        — sitios, tiendas en línea y automatización, todo hecho a la medida de tu marca.
-      </p>
-      <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-        <Button href="/contact">Cuéntame tu proyecto</Button>
-        <a href="#work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
-          Ver casos de estudio
-          <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
+      <div class="relative mt-16 border-t border-white/20 pt-6 lg:col-span-4 lg:col-start-8 lg:mt-20">
+        <p class="text-xl text-neutral-700">Soy Eduardo. Diseño y construyo productos digitales para negocios que necesitan ordenar un proceso, atender mejor o lanzar una idea propia.</p>
+        <p class="mt-5 text-base text-neutral-500">El alcance, la evidencia y la responsabilidad quedan visibles desde el inicio.</p>
+        <div class="mt-8 flex flex-wrap items-center gap-6">
+          <Button href="/contact">Platicar una necesidad</Button>
+          <a href="#work" class="type-narrow border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">Ver trabajo verificable</a>
+        </div>
       </div>
     </FadeIn>
   </Container>
 
-  <!-- PROMESAS (Studio "clients" band) -->
-  <div class="mt-24 rounded-4xl panel-brand py-20 sm:mt-32 sm:py-24 lg:mt-40">
-    <Container>
-      <FadeIn class="flex items-center gap-x-8">
-        <h2 class="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-          Lo que obtienes al trabajar conmigo
-        </h2>
-        <div class="h-px flex-auto bg-neutral-800"></div>
-      </FadeIn>
-      <FadeInStagger faster>
-        <ul role="list" class="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
-          {promises.map((promise) => (
-            <FadeIn as="li" class="font-display text-base font-semibold text-neutral-300">{promise}</FadeIn>
-          ))}
-        </ul>
-      </FadeInStagger>
-    </Container>
-  </div>
+  <StudioStatement />
 
-  <!-- ENCAJE -->
-  <SectionIntro
-    eyebrow="Encaje"
-    title="Cuando quieres algo hecho a tu medida."
-    class="mt-24 sm:mt-32 lg:mt-40"
-  >
-    <p>Entro cuando hace falta una base propia y una solución técnicamente seria. <a href="/profile" class="font-semibold text-neutral-950 underline decoration-1 underline-offset-2">Conoce quién está detrás →</a></p>
+  <section id="services" data-services-section class="service-section section-plane scroll-mt-20 py-24 sm:py-32 lg:py-40">
+    <ServiceField />
+    <Container class="service-section__content">
+      <FadeIn class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-8">
+          <p class="section-code">Servicios</p>
+          <h2 class="type-wide mt-8 max-w-5xl font-display text-[clamp(3rem,7vw,7.5rem)] leading-[0.84] font-medium tracking-[-0.06em] text-white">Qué ofrezco</h2>
+        </div>
+        <p class="max-w-md text-lg text-neutral-700 lg:col-span-4">Diseño, desarrollo y operación para presentar una oferta, conectar herramientas o construir un producto propio.</p>
+      </FadeIn>
+
+      <div data-service-explorer class="service-explorer mt-20">
+        <FadeInStagger as="ol" class="service-explorer__list editorial-list">
+          {services.map((service, index) => (
+            <FadeIn
+              as="li"
+              data-service-row
+              data-service-index={index}
+              data-editorial-row
+              class="service-row group py-10 sm:py-12"
+            >
+              <a href={`/services#${service.id}`} class="service-row__link">
+                <div class="service-row__heading">
+                  <p class="section-code">{service.number}</p>
+                  <h3 class="type-wide mt-8 font-display text-[clamp(2.4rem,5vw,5rem)] leading-[0.9] font-medium tracking-[-0.045em] text-white">{service.title}</h3>
+                </div>
+                <div class="service-row__detail">
+                  <p class="max-w-lg text-lg text-neutral-700">{service.tagline}.</p>
+                  <p class="type-narrow mt-7 text-xs tracking-[0.08em] text-neutral-500 uppercase">{service.highlights.slice(0, 2).join(' / ')}</p>
+                </div>
+                <span class="service-row__arrow text-sm text-neutral-500" aria-hidden="true">-&gt;</span>
+              </a>
+            </FadeIn>
+          ))}
+        </FadeInStagger>
+      </div>
+    </Container>
+  </section>
+
+  <SectionIntro eyebrow="Evidencia" title="Trabajo que se puede revisar." id="work" class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
+    <p>Cada caso indica su estado actual. Los resultados aparecen únicamente cuando existen datos verificables y permiso para publicarlos.</p>
   </SectionIntro>
   <Container class="mt-16">
-    <List>
-      {manifesto.map((item) => (
-        <ListItem>{item}</ListItem>
-      ))}
-    </List>
+    <ProjectGrid projects={ordered} />
+    <FadeIn class="mt-10 flex justify-end">
+      <a href="/work" class="type-narrow border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">Ver todo el trabajo</a>
+    </FadeIn>
   </Container>
 
-  <!-- TRABAJO / PRUEBA -->
-  <SectionIntro
-    eyebrow="Prueba"
-    title="Resultados reales."
-    id="work"
-    class="mt-24 sm:mt-32 lg:mt-40"
-  >
-    <p>Proyectos reales con resultados que cualquiera entiende: más control, menos costos, mejor experiencia.</p>
+  <SectionIntro id="pricing" eyebrow="Inversión" title="Tres puntos de entrada." class="mt-24 scroll-mt-20 sm:mt-32 lg:mt-40">
+    <p>Precios base para proyectos web. Comercio, software a medida e integraciones se cotizan después de revisar el proceso.</p>
   </SectionIntro>
   <Container class="mt-16">
-    <FadeInStagger class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-      {ordered.map((project) => (
-        <FadeIn class="group flex">
-          <article class="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
-            {project.data.cover && (
-              <Image src={project.data.cover} alt={project.data.title} class="aspect-16/10 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0" />
-            )}
-            <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">
-              <a href={`/work/${project.slug}`}>
-                <span class="absolute inset-0 rounded-3xl"></span>
-                {project.data.title}
-              </a>
-            </h3>
-            <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
-              <time datetime={String(project.data.year)} class="font-semibold">{project.data.year}</time>
-              <span class="text-neutral-300" aria-hidden="true">/</span>
-              <span>{project.data.category}</span>
-            </p>
-            <p class="mt-4 text-base text-neutral-600">{proof[project.slug]?.detail}</p>
-            {proof[project.slug]?.stat && (
-              <p class="mt-6 font-display text-sm font-semibold tracking-wider text-neutral-950 uppercase">{proof[project.slug].stat}</p>
-            )}
-          </article>
+    <FadeInStagger class="editorial-list grid grid-cols-1">
+      {offers.map((offer) => (
+        <FadeIn as="article" data-editorial-row class="grid grid-cols-1 gap-x-8 gap-y-5 py-8 sm:grid-cols-2 sm:py-10 lg:grid-cols-12 lg:items-center">
+          <p class="section-code lg:col-span-1">{offer.number}</p>
+          <h3 class="type-wide font-display text-3xl font-semibold text-white lg:col-span-3">{offer.title}</h3>
+          <p class="text-neutral-700 lg:col-span-4">{offer.body}</p>
+          <div class="sm:text-right lg:col-span-3 lg:col-start-10">
+            <p class="font-display text-xl font-semibold text-white">{offer.price}</p>
+            <p class="mt-1 text-sm text-neutral-500">{offer.time}</p>
+          </div>
         </FadeIn>
       ))}
     </FadeInStagger>
-    <FadeIn class="mt-12 flex justify-center">
-      <a href="/work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
-        Ver todo el trabajo
-        <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+    <FadeIn class="mt-8 max-w-3xl text-sm text-neutral-600">
+      <p>Los montos son precios de entrada en MXN. Dominio, pauta, suscripciones, contenido especializado e integraciones externas se dimensionan por separado.</p>
     </FadeIn>
   </Container>
 
-  <!-- SERVICIOS -->
-  <SectionIntro
-    eyebrow="Servicios"
-    title="Lo que construyo."
-    class="mt-24 sm:mt-32 lg:mt-40"
-  >
-    <p>Cuatro líneas de servicio, un mismo estándar: soluciones propias que escalan con tu negocio.</p>
-  </SectionIntro>
-  <Container class="mt-16">
-    <div class="lg:flex lg:items-center lg:justify-end">
-      <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
-        <FadeIn class="w-135 flex-none lg:w-180">
-          <StylizedImage src={profileImg} alt="Eduardo Alonso — eddndev" class="justify-center lg:justify-end" />
-        </FadeIn>
-      </div>
-      <List class="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-132 lg:pl-4">
-        {services.map((service) => (
-          <ListItem title={service.title}>{service.tagline}.</ListItem>
-        ))}
-      </List>
-    </div>
-    <FadeIn class="mt-12 flex justify-center">
-      <a href="/services" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
-        Explorar servicios
-        <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </FadeIn>
-  </Container>
-
-  <!-- CTA -->
-  <ContactSection
-    title="Tu proyecto empieza aquí."
-    buttonText="Cuéntame tu proyecto"
-  />
+  <ContactSection title="Cuéntame dónde se atasca el trabajo." buttonText="Iniciar conversación" />
 </Layout>

@@ -12,89 +12,78 @@ import StylizedImage from '../components/studio/StylizedImage.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
 import profileImg from '../assets/images/profile.jpg';
 
-// Lo que me diferencia — copy original preservado del diseño anterior
 const values = [
   {
-    title: 'Infraestructura gestionada',
-    body: 'Administro servidores dedicados, seguridad y rendimiento. Tú te enfocas en tu negocio, yo me encargo de que todo funcione.',
+    title: 'Responsabilidad técnica clara',
+    body: 'El alcance deja por escrito qué construyo, qué opero y qué queda en manos de cada proveedor. Así también queda claro quién responde cuando algo requiere atención.',
   },
   {
     title: 'Automatización con criterio',
-    body: 'Identifico los procesos que le cuestan tiempo y dinero a tu operación y construyo flujos a medida que trabajan sin que tengas que pensar en ellos.',
+    body: 'Los flujos sensibles conservan bitácoras, permisos y puntos de aprobación. Automatizar tiene sentido cuando el equipo puede entender y controlar lo que ocurre.',
   },
   {
-    title: 'Velocidad que se siente',
-    body: 'Un sistema lento es un sistema que pierde clientes. Construyo software que abre al instante y consume menos recursos — lo que se traduce en menos gasto mensual para tu negocio.',
+    title: 'Rendimiento medido',
+    body: 'Defino objetivos de carga y reviso el comportamiento real antes de publicar. Las decisiones de infraestructura se apoyan en datos del proyecto.',
   },
   {
-    title: 'Sistemas, no páginas',
-    body: 'Diseño la lógica completa de tu operación digital para que funcione con la misma seriedad que tu negocio exige.',
+    title: 'Continuidad',
+    body: 'Documento decisiones, preparo despliegues repetibles y ofrezco mantenimiento cuando el proyecto necesita acompañamiento después de su lanzamiento.',
   },
 ];
 
-// Cómo trabajo — pasos del proceso, copy original preservado
 const process = [
   {
     title: 'Entender antes de proponer',
-    body: 'Antes de escribir una sola línea, entiendo cómo opera tu negocio, qué le duele y qué necesita para crecer. Si la mejor solución es no construir nada, te lo digo.',
+    body: 'Primero reviso cómo funciona el proceso actual, dónde se detiene y qué resultado importa. Si basta con una solución más simple, esa será mi recomendación.',
   },
   {
-    title: 'Diseñar con intención',
-    body: 'Cada decisión de diseño y arquitectura tiene una razón. No agrego complejidad innecesaria ni funciones que nadie va a usar.',
+    title: 'Definir una primera etapa',
+    body: 'Convierto el problema en un alcance, entregables, supuestos y señales de éxito. También señalo las dependencias que pueden cambiar el costo o el calendario.',
   },
   {
-    title: 'Construir para durar',
-    body: 'Elijo las herramientas correctas para cada problema, las que de verdad le sirven a tu negocio. Lo que entrego funciona hoy y sigue funcionando en tres años.',
+    title: 'Construir y comprobar',
+    body: 'Desarrollo por incrementos revisables, pruebo los recorridos importantes y preparo la publicación con observabilidad suficiente para detectar problemas.',
   },
   {
-    title: 'Operar sin que lo notes',
-    body: 'Me encargo de la infraestructura, las actualizaciones y la seguridad de forma continua. Tu sistema evoluciona y se mantiene estable sin que tengas que intervenir.',
+    title: 'Estabilizar y acompañar',
+    body: 'Después de publicar corrijo incidencias dentro del periodo acordado. Si hace falta operación continua, la definimos como un servicio separado y visible.',
   },
 ];
 ---
 
 <Layout
-    title="Perfil — edd n' dev"
-    description="Soy Eduardo Alonso (eddndev), ingeniero digital freelance. Construyo sistemas que controlas por completo, hechos para tu negocio."
+    title="Perfil | edd n' dev"
+    description="Soy Eduardo Alonso, desarrollador de software independiente en México. Construyo y opero productos web, móviles y backends."
     breadcrumbs={[{ name: "Perfil", url: "/profile" }]}
 >
   <!-- HERO -->
-  <PageIntro eyebrow="eddndev · Ingeniería digital · México" title="Construyo independencia.">
+  <PageIntro eyebrow="eddndev · Desarrollo de software · México" title="Trabajo técnico con responsabilidad clara.">
     <p>
-      Tu negocio necesita sistemas propios que trabajan para ti y que controlas por completo.
-      Eso es lo que construyo.
+      Diseño, construyo y opero productos web, aplicaciones y backends. Trabajo directamente contigo desde el primer alcance hasta la estabilización.
     </p>
   </PageIntro>
 
   <!-- QUIÉN SOY -->
   <SectionIntro
     eyebrow="Quién soy"
-    title="Ingeniería con nombre y apellido."
+    title="Una persona a cargo del recorrido completo."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>Construyo sistemas completos: desde la infraestructura donde vive tu proyecto hasta la interfaz que tocan tus usuarios.</p>
   </SectionIntro>
   <Container class="mt-16">
-    <div class="lg:flex lg:items-start lg:gap-x-12">
-      <div class="flex justify-center lg:w-1/2 lg:justify-start">
-        <FadeIn class="w-135 flex-none lg:w-180">
-          <figure>
-            <StylizedImage src={profileImg} alt="Eduardo Alonso, eddndev" shape={1} />
-            <figcaption class="mt-4 text-sm text-neutral-600">Eduardo Alonso · México · desde 2020</figcaption>
-          </figure>
-        </FadeIn>
-      </div>
-      <FadeIn class="mt-12 lg:mt-0 lg:w-1/2">
-        <div class="typography text-neutral-600">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+      <FadeIn class="lg:col-span-5">
+        <StylizedImage src={profileImg} alt="Eduardo Alonso, eddndev" shape={1} />
+        <p class="section-code mt-5">Eduardo Alonso / México / desde 2020</p>
+      </FadeIn>
+      <FadeIn class="border-t border-neutral-950/20 pt-8 lg:col-span-5 lg:col-start-8">
+        <div class="typography text-neutral-700">
           <p>
-            Soy <strong class="font-semibold text-neutral-950">Eduardo Alonso</strong> — eddndev. Ingeniero digital
-            independiente desde 2020, en México. Construyo sistemas completos: desde la infraestructura
-            donde vive tu proyecto hasta la interfaz que tocan tus usuarios.
+            Soy <strong class="font-semibold text-neutral-950">Eduardo Alonso</strong>, también eddndev. Soy desarrollador de software independiente en México. Trabajo en productos completos, desde el backend y la infraestructura hasta la interfaz que usan las personas.
           </p>
           <p>
-            Gestiono servidores, seguridad, rendimiento y actualizaciones —
-            <strong class="font-semibold text-neutral-950">todo pasa por mis manos</strong>.
-            Trato directo de principio a fin: hablas con la misma persona que construye tu proyecto.
+            Mi experiencia se concentra en sistemas que conectan operación, datos y producto. Cuando el alcance incluye servidores, despliegues, rendimiento o mantenimiento, esas responsabilidades quedan descritas desde el inicio.
           </p>
           <p>
             ¿Te interesa el detalle técnico? Documento cómo pienso y construyo en
@@ -108,10 +97,10 @@ const process = [
   <!-- LO QUE ME IMPORTA -->
   <SectionIntro
     eyebrow="Lo que me importa"
-    title="Lo que me diferencia."
+    title="Criterios que sostienen el trabajo."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
-    <p>Cuatro principios que guían cada proyecto que construyo.</p>
+    <p>Cuatro criterios para tomar decisiones técnicas y mantener expectativas claras.</p>
   </SectionIntro>
   <Container class="mt-16">
     <GridList class="lg:grid-cols-2">
@@ -128,33 +117,33 @@ const process = [
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>
-      Cada proyecto es diferente, pero mi obsesión es la misma: que lo que construya
-      resuelva un problema real y que no necesites un manual de 200 páginas para usarlo.
+      Cada proyecto empieza con una necesidad concreta, un alcance revisable y una forma de saber si la primera etapa funcionó.
     </p>
   </SectionIntro>
   <Container class="mt-16">
-    <List>
-      {process.map((step) => (
-        <ListItem title={step.title}>{step.body}</ListItem>
-      ))}
-    </List>
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      <List class="lg:col-span-8 lg:col-start-5">
+        {process.map((step) => (
+          <ListItem title={step.title}>{step.body}</ListItem>
+        ))}
+      </List>
+    </div>
   </Container>
 
   <!-- FILOSOFÍA -->
   <SectionIntro
-    eyebrow="Filosofía"
-    title="Tu proyecto, mi obsesión."
+    eyebrow="Alcance"
+    title="Cada responsabilidad queda visible."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>
-      Infraestructura, código, seguridad y evolución continua —
-      gestiono cada capa para que tu proyecto funcione sin fricciones.
+      Código, infraestructura, seguridad y mantenimiento se dimensionan según el proyecto. Antes de comenzar sabrás qué incluye la etapa y qué requiere una decisión posterior.
     </p>
   </SectionIntro>
 
   <!-- CTA -->
   <ContactSection
-    title="Tu proyecto, mi obsesión."
-    buttonText="Hablemos de tu proyecto"
+    title="Cuéntame qué necesitas volver más claro."
+    buttonText="Platicar el contexto"
   />
 </Layout>

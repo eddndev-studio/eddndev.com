@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa de producto de Ataulfo</title>
+  <desc id="desc">Bandeja, trabajo, agenda y copiloto conectados alrededor de una conversación.</desc>
+  <defs>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd300"/><stop offset="1" stop-color="#ff7a00"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="68%" cy="36%" r="55%">
+      <stop offset="0" stop-color="#ffbd00" stop-opacity=".24"/><stop offset="1" stop-color="#ffbd00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" rx="56" fill="#071014"/><rect width="1600" height="1000" rx="56" fill="url(#glow)"/>
+  <g fill="none" stroke="#243137" stroke-width="2">
+    <path d="M80 180h1440M80 820h1440M280 80v840M1320 80v840"/><path d="M80 500h240M1280 500h240" stroke-dasharray="8 14"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="4">
+    <text x="88" y="105" fill="#91a0a7" font-size="22">ATAULFO / OPERATIONS LAYER</text>
+    <text x="1512" y="105" text-anchor="end" fill="#f7bd00" font-size="22">PRODUCT MAP / 2026</text>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <g fill="#111c21" stroke="#27343a">
+      <rect x="92" y="245" width="270" height="104" rx="24"/><rect x="92" y="375" width="270" height="104" rx="24"/>
+      <rect x="92" y="505" width="270" height="104" rx="24"/><rect x="92" y="635" width="270" height="104" rx="24"/>
+    </g>
+    <g fill="#718088" font-size="18"><text x="126" y="289">01</text><text x="126" y="419">02</text><text x="126" y="549">03</text><text x="126" y="679">04</text></g>
+    <g fill="#f6f8f8" font-size="28" font-weight="650"><text x="126" y="323">Bandeja</text><text x="126" y="453">Trabajo</text><text x="126" y="583">Agenda</text><text x="126" y="713">Copiloto</text></g>
+
+    <rect x="426" y="196" width="650" height="610" rx="34" fill="#0d171b" stroke="#334147"/>
+    <circle cx="478" cy="250" r="9" fill="#f7bd00"/><circle cx="510" cy="250" r="9" fill="#334147"/><circle cx="542" cy="250" r="9" fill="#334147"/>
+    <text x="1018" y="258" text-anchor="end" fill="#718088" font-size="17">CONVERSACIÓN ACTIVA</text>
+    <rect x="478" y="318" width="378" height="92" rx="24" fill="#172329"/>
+    <text x="510" y="353" fill="#839199" font-size="18">Cliente</text><text x="510" y="386" fill="#e6ebed" font-size="22">Necesito preparar el siguiente paso.</text>
+    <rect x="620" y="444" width="404" height="154" rx="24" fill="#292309" stroke="#665617"/>
+    <text x="652" y="480" fill="#f7bd00" font-size="18">Asistente</text><text x="652" y="518" fill="#fff8d9" font-size="22">Preparé la tarea y la fecha.</text>
+    <rect x="652" y="546" width="220" height="32" rx="16" fill="#463b0d"/><text x="674" y="568" fill="#f7bd00" font-size="15">REVISIÓN PENDIENTE</text>
+    <rect x="478" y="666" width="546" height="72" rx="22" fill="#111c21" stroke="#27343a"/><text x="512" y="710" fill="#718088" font-size="20">Escribe o elige una tarea...</text>
+
+    <rect x="1138" y="245" width="370" height="494" rx="30" fill="#111c21" stroke="#334147"/>
+    <text x="1180" y="300" fill="#f6f8f8" font-size="30" font-weight="650">Contexto operativo</text>
+    <g fill="#718088" font-size="18"><text x="1180" y="362">CANAL</text><text x="1180" y="458">SIGUIENTE PASO</text><text x="1180" y="554">RESPONSABLE</text><text x="1180" y="650">EJECUCIÓN</text></g>
+    <g fill="#e6ebed" font-size="23"><text x="1180" y="400">WhatsApp</text><text x="1180" y="496">Confirmar alcance</text><text x="1180" y="592">Equipo</text><text x="1180" y="688">Con aprobación</text></g>
+    <rect x="1138" y="768" width="370" height="72" rx="36" fill="url(#sun)"/><text x="1323" y="813" text-anchor="middle" fill="#111" font-size="24" font-weight="700">Revisar y continuar</text>
+  </g>
+</svg>

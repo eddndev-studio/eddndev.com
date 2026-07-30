@@ -13,7 +13,8 @@ import NextProject from '../../components/work/NextProject.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('work');
-  const sorted = [...projects].sort((a, b) => Number(b.data.year) - Number(a.data.year));
+  const preferredOrder = ['ataulfo', 'sylestudio', 'achronyme'];
+  const sorted = [...projects].sort((a, b) => preferredOrder.indexOf(a.slug) - preferredOrder.indexOf(b.slug));
   return sorted.map(entry => ({
     params: { slug: entry.slug },
     props: { entry, projects: sorted },
@@ -27,13 +28,14 @@ const role = entry.data.role ?? 'Diseño & construcción';
 
 const LINK_LABELS: Record<string, string> = {
     'Live Site': 'Sitio en vivo',
+    'Work in progress': 'Sitio en desarrollo',
     'Documentation': 'Documentación',
 };
 const links = Object.entries(entry.data.links ?? {});
 ---
 
 <Layout
-    title={`${entry.data.title} — edd n' dev`}
+    title={`${entry.data.title} | edd n' dev`}
     description={entry.data.description}
     image={entry.data.cover}
     project={{ title: entry.data.title }}
@@ -47,16 +49,17 @@ const links = Object.entries(entry.data.links ?? {});
         <p>{entry.data.description}</p>
     </PageIntro>
 
-    <!-- META: año / rol / stack / accesos -->
     <Container class="mt-16">
         <StatList>
             <StatListItem label="Año" value={String(entry.data.year)} />
+            <StatListItem label="Estado" value={entry.data.status} />
             <StatListItem label="Rol" value={role} />
         </StatList>
 
-        <FadeIn class="mt-12">
-            <h2 class="font-display text-base font-semibold text-neutral-950">Stack</h2>
-            <TagList class="mt-4">
+        <div class="mt-12 grid grid-cols-1 gap-10 border-t border-neutral-950/20 pt-8 lg:grid-cols-12">
+        <FadeIn class="lg:col-span-5">
+            <h2 class="section-code">Stack</h2>
+            <TagList class="mt-6">
                 {entry.data.stack.map((tech) => (
                     <TagListItem>{tech}</TagListItem>
                 ))}
@@ -64,16 +67,16 @@ const links = Object.entries(entry.data.links ?? {});
         </FadeIn>
 
         {links.length > 0 && (
-            <FadeIn class="mt-12">
-                <h2 class="font-display text-base font-semibold text-neutral-950">Accesos</h2>
-                <ul role="list" class="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+            <FadeIn class="lg:col-span-5 lg:col-start-8">
+                <h2 class="section-code">Accesos</h2>
+                <ul role="list" class="mt-6 flex flex-wrap gap-x-8 gap-y-3">
                     {links.map(([label, url]) => (
                         <li>
                             <a
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600"
+                                class="group inline-flex items-center gap-2 border-b border-neutral-950 text-sm font-semibold text-neutral-950 transition hover:border-brand hover:text-brand"
                             >
                                 {LINK_LABELS[label] ?? label}
                                 <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -83,11 +86,11 @@ const links = Object.entries(entry.data.links ?? {});
                 </ul>
             </FadeIn>
         )}
+        </div>
     </Container>
 
-    <!-- EXPEDIENTE — long-form MDX prose -->
     <Container class="mt-24 sm:mt-32 lg:mt-40">
-        <div class="typography mx-auto max-w-4xl">
+        <div class="typography">
             <Content />
         </div>
     </Container>
@@ -96,5 +99,5 @@ const links = Object.entries(entry.data.links ?? {});
     <NextProject current={entry} projects={projects} />
 
     <!-- CTA -->
-    <ContactSection title="Tu proyecto empieza aquí." buttonText="Cuéntame tu proyecto" />
+    <ContactSection title="¿Necesitas algo con un alcance parecido?" buttonText="Platicar el contexto" />
 </Layout>

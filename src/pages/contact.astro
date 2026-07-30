@@ -4,44 +4,39 @@ import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
 import PageIntro from '../components/studio/PageIntro.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
-import Border from '../components/studio/Border.astro';
 import List from '../components/studio/List.astro';
 import ListItem from '../components/studio/ListItem.astro';
 import TagList from '../components/studio/TagList.astro';
 import TagListItem from '../components/studio/TagListItem.astro';
 
-// Lo que me ayuda a responder mejor (copy original preservado)
 const briefing = [
-  'Qué necesitas construir o mejorar.',
-  'Qué problema de negocio quieres resolver.',
-  'Si ya existe una web, tienda, sistema o proceso manual.',
-  'Tiempos, alcance y cualquier restricción importante.',
+  'Qué ocurre hoy y en qué momento se detiene el trabajo.',
+  'Qué resultado te gustaría ver durante la primera etapa.',
+  'Qué herramientas, sitio o proceso ya existen.',
+  'Si hay una fecha, presupuesto o restricción que debamos considerar.',
 ];
 
-// Métodos de contacto (copy original preservado)
 const methods = [
   {
     label: 'Correo',
     value: 'contacto@eddndev.com',
     href: 'mailto:contacto@eddndev.com',
-    detail: 'Ideal para proyectos con contexto, alcance o requerimientos específicos. Respondo en menos de 24 horas.',
+    detail: 'Ideal si quieres compartir contexto, enlaces o requerimientos. Puedes empezar con cuatro o cinco líneas.',
   },
   {
     label: 'Chat directo',
     value: '+52 56 1943 3938',
     href: 'https://wa.me/525619433938',
     external: true,
-    detail: 'Mejor para primeras preguntas, validar encaje o coordinar una llamada breve.',
+    detail: 'Útil para una primera pregunta, revisar si hay encaje o coordinar una llamada breve.',
   },
 ];
 
-// Datos operativos (copy original preservado)
 const facts = [
-  { label: 'Respuesta', value: '< 24 horas' },
+  { label: 'Inicio', value: 'Contexto breve' },
   { label: 'Base', value: 'México · GMT-6' },
 ];
 
-// Redes (copy original preservado)
 const socials = [
   { label: 'LinkedIn', url: 'https://linkedin.com/in/eddndev' },
   { label: 'GitHub', url: 'https://github.com/eddndev' },
@@ -51,60 +46,62 @@ const socials = [
 ---
 
 <Layout
-    title="Contacto — edd n' dev"
-    description="Escríbeme con el problema y la meta del proyecto. Respondo en menos de 24 horas."
+    title="Contacto | edd n' dev"
+    description="Escríbeme con el proceso actual, el resultado que buscas y las restricciones principales."
     breadcrumbs={[{ name: "Contacto", url: "/contact" }]}
 >
   <!-- HERO -->
-  <PageIntro eyebrow="Respuesta en menos de 24 h" title="Cuéntame qué necesitas.">
+  <PageIntro eyebrow="Primera conversación" title="Cuéntame dónde se atasca el trabajo.">
     <p>
-      Escríbeme con el problema y la meta del proyecto. Te digo cómo abordarlo, qué conviene
-      construir y si soy la persona correcta para hacerlo.
+      Puedes empezar con el proceso actual, el resultado que buscas y una restricción importante. Con eso puedo preparar preguntas útiles y un posible primer alcance.
     </p>
   </PageIntro>
 
   <!-- MÉTODOS DE CONTACTO -->
   <Container class="mt-24 sm:mt-32 lg:mt-40">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
-      <div class="lg:col-span-2">
-        <FadeIn>
-          <h2 class="font-display text-base font-semibold text-neutral-950">Cómo escribirme</h2>
+    <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-12">
+      <div class="lg:col-span-8">
+        <FadeIn class="border-t border-neutral-950/20 pt-8">
+          <h2 class="section-code">Canales directos</h2>
         </FadeIn>
-        <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div class="editorial-list mt-10 grid grid-cols-1">
           {methods.map((method) => (
-            <FadeIn>
-              <Border class="pt-8">
-                <h3 class="font-display text-base font-semibold text-neutral-950">{method.label}</h3>
+            <FadeIn data-editorial-row class="grid grid-cols-1 gap-8 py-9 sm:grid-cols-2 sm:py-11">
+              <div>
+                <h3 class="section-code">{method.label}</h3>
                 <a
                   href={method.href}
                   {...(method.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  class="mt-4 block font-display text-2xl font-medium tracking-tight text-neutral-950 break-words transition hover:text-neutral-600 sm:text-3xl"
+                  class:list={[
+                    'mt-10 block font-display font-medium text-neutral-950 transition hover:text-brand',
+                    method.label === 'Correo'
+                      ? 'type-narrow whitespace-nowrap text-[clamp(1.25rem,6vw,1.875rem)] tracking-[-0.025em]'
+                      : 'type-wide text-2xl tracking-tight sm:text-3xl',
+                  ]}
                 >
                   {method.value}
                 </a>
-                <p class="mt-4 text-base text-neutral-600">{method.detail}</p>
-              </Border>
+              </div>
+              <p class="text-base text-neutral-700 sm:self-end">{method.detail}</p>
             </FadeIn>
           ))}
         </div>
       </div>
 
-      <FadeIn class="lg:col-span-1">
-        <Border class="pt-8">
-          <h2 class="font-display text-base font-semibold text-neutral-950">En corto</h2>
-          <dl class="mt-6 grid grid-cols-1 gap-6">
+      <FadeIn class="border-t border-neutral-950/20 pt-8 lg:col-span-3 lg:col-start-10">
+          <h2 class="section-code">Para empezar</h2>
+          <dl class="mt-10 grid grid-cols-1 gap-8">
             {facts.map((fact) => (
               <div>
-                <dt class="text-sm text-neutral-600">{fact.label}</dt>
-                <dd class="mt-1 font-display text-xl font-medium text-neutral-950">{fact.value}</dd>
+                <dt class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">{fact.label}</dt>
+                <dd class="mt-2 font-display text-xl font-medium text-neutral-950">{fact.value}</dd>
               </div>
             ))}
             <div>
-              <dt class="text-sm text-neutral-600">Ubicación</dt>
-              <dd class="mt-1 font-display text-xl font-medium text-neutral-950">CDMX, México · remoto</dd>
+              <dt class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">Ubicación</dt>
+              <dd class="mt-2 font-display text-xl font-medium text-neutral-950">CDMX, México, remoto</dd>
             </div>
           </dl>
-        </Border>
       </FadeIn>
     </div>
   </Container>
@@ -115,14 +112,16 @@ const socials = [
     title="Qué me ayuda a responderte mejor."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
-    <p>Entre más claro el contexto, mejor te puedo decir cómo abordarlo y qué conviene construir.</p>
+    <p>Un mensaje breve con estos puntos basta para iniciar. El detalle se construye durante la conversación.</p>
   </SectionIntro>
   <Container class="mt-16">
-    <List>
-      {briefing.map((item) => (
-        <ListItem>{item}</ListItem>
-      ))}
-    </List>
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      <List class="lg:col-span-8 lg:col-start-5">
+        {briefing.map((item) => (
+          <ListItem>{item}</ListItem>
+        ))}
+      </List>
+    </div>
   </Container>
 
   <!-- REDES -->
@@ -135,7 +134,7 @@ const socials = [
     <FadeIn>
       <TagList>
         {socials.map((social) => (
-          <TagListItem class="transition hover:bg-neutral-200">
+          <TagListItem class="transition hover:border-brand hover:text-white">
             <a href={social.url} target="_blank" rel="noopener noreferrer">{social.label}</a>
           </TagListItem>
         ))}

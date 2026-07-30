@@ -1,16 +1,18 @@
 ---
 title: "Syle Studio"
-description: "Plataforma digital integral para un estudio creativo. E-commerce de streetwear, portafolio editorial y sistema de gestión a medida."
-year: 2024
-category: "E-commerce & portafolio"
-role: "Diseño & construcción"
+description: "Colaboración técnica en curso para construir la presencia digital de un estudio creativo en dos superficies públicas."
+year: "2024-2026"
+status: "En desarrollo"
+signal: "Dos superficies públicas que evolucionan por etapas"
+category: "Colaboración web"
+role: "Arquitectura, desarrollo y operación"
 color: "#ffffff"
-stack: ["Laravel", "GSAP", "Spatie Media Library", "Custom Backoffice"]
-heroStyle: "bg-gradient-to-br from-gray-900 to-black"
+stack: ["Astro", "Laravel", "TypeScript", "Media pipelines"]
 cover: "../../assets/images/projects/syle/hero.png"
 links:
   Live Site: "https://sylestudio.com"
-  GitHub: "https://github.com/eddndev/sylestudio"
+  Work in progress: "https://syle.studio"
+  GitHub: "https://github.com/sylestudio"
 featured: true
 ---
 import TextBlock from '../../components/blocks/TextBlock.astro';
@@ -23,8 +25,8 @@ import projectsImg from '../../assets/images/projects/syle/proyectos.png';
 <TextBlock
   number="01"
   section="Contexto"
-  heading="Independencia Digital"
-  body="Teníamos clara la meta: una plataforma propia, construida bajo nuestros propios términos. Elegimos la libertad. Syle Studio no es solo una tienda; es una declaración de principios. Queríamos una plataforma que invitara a explorar el mundo del estudio —fotografía, eventos, comunidad— antes de pedir una transacción. Una plataforma 100% propia, hecha a la medida del estudio."
+  heading="Una colaboración en curso"
+  body="Syle Studio reúne moda, fotografía, eventos y archivo creativo. El trabajo digital avanza por etapas y hoy vive en dos superficies: sylestudio.com como presencia pública del proyecto y syle.studio como laboratorio editorial. Ambas siguen en desarrollo."
 />
 
 <ImageFull
@@ -35,20 +37,20 @@ import projectsImg from '../../assets/images/projects/syle/proyectos.png';
 
 <StatsGrid
   items={[
-    {value: '100%', label: 'CMS a medida'},
-    {value: '20MB → 1MB', label: 'Optimización'},
-    {value: '0%', label: 'Comisiones'},
-    {value: 'Editorial', label: 'Enfoque Visual'},
+    {value: '2', label: 'Superficies públicas'},
+    {value: 'Activo', label: 'Desarrollo'},
+    {value: 'Web', label: 'Producto actual'},
+    {value: 'Editorial', label: 'Dirección visual'},
   ]}
 />
 
 <TextBlock
   number="02"
-  section="El reto"
-  heading="Ingeniería de Performance"
-  body={`El desafío real no fue el e-commerce, fue el arte. Las galerías de eventos contienen docenas de imágenes de alta resolución que matarían el rendimiento de cualquier sitio estándar.
+  section="Alcance actual"
+  heading="Identidad, archivo y evolución"
+  body={`Mi trabajo abarca arquitectura de información, implementación web, tratamiento de medios, rendimiento y despliegue. La tienda todavía no está presentada como una capacidad terminada y cualquier integración de pagos se definirá con un proveedor existente cuando esa etapa entre en alcance.
 
-Implementamos un pipeline de procesamiento asíncrono: cada imagen subida al backoffice se procesa en segundo plano mediante colas de trabajo (Jobs), generando versiones AVIF y WebP optimizadas. El resultado se sirve vía CDN, permitiendo una experiencia visual rica sin sacrificar la velocidad de carga.`}
+El caso documenta el proceso real: una identidad que se prueba, una superficie pública que ya existe y un producto que continúa tomando forma.`}
 />
 
 <ImageFull
