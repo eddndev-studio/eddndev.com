@@ -1,0 +1,72 @@
+@keyframes media-reveal {
+  from {
+    clip-path: inset(10% 0 0 0);
+    transform: translateY(1rem);
+  }
+  to {
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes rule-grow {
+  from {
+    opacity: 0.25;
+    transform: scaleX(0.18);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes section-rise {
+  from {
+    opacity: 0.7;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-media {
+  clip-path: inset(0);
+  transform: translateY(0);
+  transform-origin: center;
+}
+
+.scroll-rule {
+  transform-origin: left center;
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-media {
+    animation: media-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+
+  .scroll-rule {
+    animation: rule-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 34%;
+  }
+
+  .scroll-shift {
+    animation: section-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-media,
+  .scroll-rule,
+  .scroll-shift {
+    animation: none !important;
+    clip-path: none;
+    transform: none;
+  }
+}

@@ -4,7 +4,7 @@ import '@tailwindplus/elements';
 import { ClientRouter } from 'astro:transitions';
 import SiteNav from '../components/studio/SiteNav.astro';
 import Footer from '../components/studio/Footer.astro';
-import GridPattern from '../components/studio/GridPattern.astro';
+import KineticCanvas from '../components/studio/KineticCanvas.astro';
 
 interface Props {
 	title?: string;
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-    title = "edd n' dev — Ingeniería digital freelance",
-    description = "Soy Eduardo Alonso (eddndev), ingeniero digital freelance en México. Diseño y construyo sitios web, e-commerce, automatización y software a medida.",
+    title = "edd n' dev | Desarrollo de software independiente",
+    description = "Soy Eduardo Alonso. Diseño y construyo sitios medibles, automatizaciones y software a medida desde México.",
     image,
     project,
     breadcrumbs = [],
@@ -24,16 +24,16 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// JSON-LD: Person (freelance personal brand)
+// JSON-LD: Person (independent developer)
 const personLD = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Eduardo Alonso",
     "alternateName": "eddndev",
-    "jobTitle": "Ingeniero digital freelance",
+    "jobTitle": "Desarrollador de software independiente",
     "url": "https://eddndev.com",
     "image": "https://eddndev.com/favicon.png",
-    "description": "Ingeniero digital freelance en México. Sitios web, e-commerce, automatización y software a medida.",
+    "description": "Desarrollador de software independiente en México. Sitios medibles, automatización y software a medida.",
     "sameAs": [
         "https://github.com/eddndev",
         "https://www.linkedin.com/in/eddndev",
@@ -97,20 +97,17 @@ if (typeof resolvedImage === 'string') {
 <html lang="es" class="h-full">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-        <!-- Set early so reveal targets only hide when scripting is live -->
-        <script is:inline>document.documentElement.classList.add('js');</script>
 
         <!-- SEO / Metadata -->
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
         <meta name="generator" content={Astro.generator} />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#0b0910" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
@@ -142,22 +139,18 @@ if (typeof resolvedImage === 'string') {
 
         <ClientRouter />
 	</head>
-	<body class="flex min-h-full flex-col bg-neutral-950 text-neutral-950 antialiased">
-        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:rounded-full focus:bg-neutral-950 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
+	<body class="flex min-h-full flex-col bg-[var(--void)] text-white antialiased">
+        <a href="#main-content" class="cut-corner sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:bg-[var(--void)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
             Saltar al contenido
         </a>
 
         <SiteNav />
 
-        <!-- White page card — pushed down by the nav panel to reveal the menu -->
-        <div data-nav-content class="relative flex flex-auto overflow-hidden rounded-t-4xl bg-white pt-14">
+        <!-- Normal flow lets the expanding menu push the page plane down. -->
+        <div data-nav-content class="page-surface relative flex flex-auto overflow-x-clip pt-14">
             <div class="relative isolate flex w-full flex-col pt-9">
-                <GridPattern
-                    class="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full mask-[linear-gradient(to_bottom_left,white_40%,transparent_50%)] fill-neutral-50 stroke-neutral-950/5"
-                    yOffset={-96}
-                    interactive
-                />
-                <main id="main-content" class="w-full flex-auto" data-project-title={project?.title}>
+                <KineticCanvas path={Astro.url.pathname} />
+                <main id="main-content" class="relative z-10 w-full flex-auto" data-project-title={project?.title}>
                     <slot />
                 </main>
                 <Footer />

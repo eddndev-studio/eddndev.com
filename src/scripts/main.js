@@ -3,17 +3,21 @@ import { lenis } from './core/lenis';
 import { startLifecycle } from './core/lifecycle';
 
 import initStudioNav from './features/studio-nav';
-import initStudioGridPattern from './features/studio-gridpattern';
+import initKineticCanvas from './features/kinetic-canvas';
+import initServiceFields from './features/service-field';
 import initStudioReveals from './animations/studio-reveals';
+import initStudioStatement from './animations/studio-statement';
 
-// Per-page modules — initialized once per page, reverted on view-transition swap.
+// Per-page modules - initialized once per page, reverted on view-transition swap.
 startLifecycle([
   initStudioNav,
-  initStudioGridPattern,
+  initKineticCanvas,
+  initStudioStatement,
+  initServiceFields,
   initStudioReveals,
 ]);
 
-// Session singleton — smooth in-page anchor scrolling through Lenis.
+// Session singleton - smooth in-page anchor scrolling through Lenis.
 document.addEventListener('click', (e) => {
   const link = e.target.closest?.('a[href*="#"]');
   if (!link || link.origin !== location.origin || link.pathname !== location.pathname) return;

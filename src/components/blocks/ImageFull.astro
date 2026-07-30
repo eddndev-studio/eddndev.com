@@ -9,14 +9,12 @@ interface Props {
 const { src, alt, caption } = Astro.props;
 ---
 <FadeIn as="figure" class="space-y-4">
-  <Image
-    src={src}
-    alt={alt}
-    class="w-full rounded-3xl bg-neutral-100 object-cover grayscale transition duration-500 hover:grayscale-0"
-  />
+  <div class="media-frame">
+    <Image src={src} alt={alt} class="scroll-media w-full object-cover" />
+  </div>
   {caption && (
-    <figcaption class="flex items-center justify-end gap-3 text-base text-neutral-600">
-      <span class="h-px w-8 bg-neutral-300" aria-hidden="true"></span>
+    <figcaption class="type-narrow flex items-center justify-end gap-3 text-sm tracking-wide text-neutral-600">
+      <span class="h-px w-10 bg-brand" aria-hidden="true"></span>
       {caption}
     </figcaption>
   )}

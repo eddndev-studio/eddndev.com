@@ -4,12 +4,12 @@ import { lenis } from '../core/lenis';
 import { prefersReduced } from '../core/dom';
 
 /**
- * Studio navigation — a black panel that expands from an 8px sliver to its full
- * height, pushing the white page card down (the card sits below it in normal
- * flow, so animating the panel's height reflows it for free).
+ * Studio navigation - a dark panel that expands from an 8px sliver to its full
+ * height. The page plane sits below it in normal flow, so animating the panel
+ * height produces the push-down movement without manual offsets.
  *
  * Replicates framer-motion's layout animation exactly: the height tween runs
- * framer's defaultLayoutTransition — 0.45s, cubic-bezier(0.4, 0, 0.1, 1).
+ * framer's defaultLayoutTransition - 0.45s, cubic-bezier(0.4, 0, 0.1, 1).
  */
 const COLLAPSED = '0.5rem';
 

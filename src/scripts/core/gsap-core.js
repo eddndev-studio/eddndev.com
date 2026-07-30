@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Cubic-bezier → easing function (WebKit UnitBezier, Newton-Raphson + bisection).
+/* Cubic-bezier to easing function (WebKit UnitBezier, Newton-Raphson + bisection).
    Lets us register framer-motion's exact curves as native GSAP eases. */
 function cubicBezier(p1x, p1y, p2x, p2y) {
   const cx = 3 * p1x, bx = 3 * (p2x - p1x) - cx, ax = 1 - cx - bx;
@@ -35,10 +35,10 @@ function cubicBezier(p1x, p1y, p2x, p2y) {
 
 // framer-motion default layout transition (the push-down nav): cubic-bezier(0.4, 0, 0.1, 1)
 gsap.registerEase('framerLayout', cubicBezier(0.4, 0, 0.1, 1));
-// framer-motion default tween ease (FadeIn): cubic-bezier(0.25, 0.1, 0.35, 1)
-gsap.registerEase('framerFade', cubicBezier(0.25, 0.1, 0.35, 1));
+// Organic reveal curve: quick release with a long, soft settle.
+gsap.registerEase('organicFade', cubicBezier(0.16, 1, 0.3, 1));
 
-gsap.defaults({ ease: 'framerFade', duration: 0.5 });
+gsap.defaults({ ease: 'organicFade', duration: 0.72 });
 gsap.config({ nullTargetWarn: false });
 
 // A11y: collapse all GSAP motion when the user prefers reduced motion.

@@ -1,0 +1,70 @@
+.kinetic-canvas {
+  position: absolute;
+  top: 15rem;
+  right: 0;
+  left: 0;
+  height: min(36rem, 44vw);
+  min-height: 24rem;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.78;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%);
+}
+
+.kinetic-canvas--background {
+  z-index: 0;
+}
+
+.kinetic-canvas--foreground {
+  z-index: 20;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.kinetic-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-lockup {
+  position: relative;
+  z-index: 1;
+  min-height: 2.5rem;
+  color: var(--starlight);
+  transition: opacity 180ms ease, transform 300ms var(--ease-layout);
+}
+
+.brand-lockup:hover {
+  transform: translateY(-1px);
+}
+
+.brand-lockup__mark {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+}
+
+.brand-lockup__mark img {
+  transform: scale(1.12);
+}
+
+@media (max-width: 720px) {
+  .kinetic-canvas {
+    top: 18rem;
+    height: 24rem;
+    min-height: 0;
+    opacity: 0.68;
+  }
+
+  .kinetic-canvas--foreground {
+    opacity: 0.82;
+  }
+
+  .brand-lockup__mark {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}

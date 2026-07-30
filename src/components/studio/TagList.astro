@@ -2,6 +2,6 @@
 interface Props { class?: string }
 const { class: className } = Astro.props;
 ---
-<ul role="list" class:list={['flex flex-wrap gap-4', className]}>
+<ul role="list" class:list={['flex flex-wrap gap-x-7 gap-y-4', className]}>
   <slot />
 </ul>

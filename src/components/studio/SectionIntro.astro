@@ -10,32 +10,32 @@ interface Props {
   class?: string;
   [key: string]: unknown;
 }
-const { title, eyebrow, smaller = false, invert = false, class: className, ...rest } = Astro.props;
+
+const { title, eyebrow, smaller = false, class: className, ...rest } = Astro.props;
 const hasLede = Astro.slots.has('default');
 ---
+
 <Container class={className} {...rest}>
-  <FadeIn class="max-w-2xl">
-    <h2>
+  <FadeIn class="scroll-shift relative grid grid-cols-1 gap-x-8 pt-9 lg:grid-cols-12">
+    <span class="scroll-rule absolute top-0 left-0 h-px w-full bg-white/20" aria-hidden="true"></span>
+    <h2 class="lg:col-span-8">
       {eyebrow && (
         <>
-          <span class:list={['mb-6 block font-display text-base font-semibold', invert ? 'text-white' : 'text-neutral-950']}>
-            {eyebrow}
-          </span>
+          <span class="section-code mb-8">{eyebrow}</span>
           <span class="sr-only"> - </span>
         </>
       )}
       <span
         class:list={[
-          'block font-display tracking-tight text-balance',
-          smaller ? 'text-2xl font-semibold' : 'text-4xl font-medium sm:text-5xl',
-          invert ? 'text-white' : 'text-neutral-950',
+          'type-wide block font-display tracking-[-0.035em] text-balance text-white',
+          smaller ? 'text-3xl font-semibold' : 'text-[clamp(2.5rem,5vw,5.75rem)] leading-[0.94] font-medium',
         ]}
       >
         {title}
       </span>
     </h2>
     {hasLede && (
-      <div class:list={['mt-6 text-xl', invert ? 'text-neutral-300' : 'text-neutral-600']}>
+      <div class="mt-10 border-t border-white/15 pt-6 text-lg text-neutral-700 lg:col-span-4 lg:col-start-9 lg:mt-14">
         <slot />
       </div>
     )}

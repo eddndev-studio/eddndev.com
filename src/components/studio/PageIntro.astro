@@ -7,23 +7,25 @@ interface Props {
   title: string;
   centered?: boolean;
 }
+
 const { eyebrow, title, centered = false } = Astro.props;
 ---
-<Container class:list={['mt-24 sm:mt-32 lg:mt-40', centered && 'text-center']}>
-  <FadeIn>
-    <h1>
-      <span class="block font-display text-base font-semibold text-neutral-950">{eyebrow}</span>
+
+<Container class:list={['mt-24 sm:mt-32 lg:mt-44', centered && 'text-center']}>
+  <FadeIn class="relative grid min-h-[31rem] grid-cols-1 content-start gap-x-8 sm:min-h-[35rem] lg:min-h-[40rem] lg:grid-cols-12">
+    <h1 class="relative lg:col-span-11">
+      <span class:list={['section-code', centered && 'justify-center']}>{eyebrow}</span>
       <span class="sr-only"> - </span>
       <span
         class:list={[
-          'mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-balance text-neutral-950 sm:text-6xl',
+          'cosmic-text type-wide mt-10 block max-w-6xl font-display text-[clamp(2.15rem,11vw,8rem)] leading-[0.88] font-medium tracking-[-0.055em] text-balance',
           centered && 'mx-auto',
         ]}
       >
         {title}
       </span>
     </h1>
-    <div class:list={['mt-6 max-w-3xl text-xl text-neutral-600', centered && 'mx-auto']}>
+    <div class:list={['relative mt-14 max-w-2xl border-t border-white/20 pt-6 text-lg text-neutral-700 sm:text-xl lg:col-span-5 lg:col-start-8 lg:mt-20', centered && 'mx-auto']}>
       <slot />
     </div>
   </FadeIn>

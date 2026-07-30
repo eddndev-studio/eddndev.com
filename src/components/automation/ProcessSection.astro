@@ -4,30 +4,27 @@ import SectionIntro from '../studio/SectionIntro.astro';
 import Container from '../studio/Container.astro';
 import FadeIn from '../studio/FadeIn.astro';
 import FadeInStagger from '../studio/FadeInStagger.astro';
-import Border from '../studio/Border.astro';
 ---
 
 <div id="automation-process">
   <SectionIntro
     eyebrow="Cómo funciona"
-    title="De idea a agente en semanas."
+    title="Del flujo actual a una operación observable."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>
-      Un proceso claro y probado para que tu primer agente esté operando
-      <strong class="font-semibold text-neutral-950">lo más rápido posible</strong>, sin sacrificar
-      calidad.
+      Primero se entiende el proceso. Después se definen permisos, excepciones, pruebas y una métrica que permita saber si la automatización ayuda.
     </p>
   </SectionIntro>
   <Container class="mt-16">
-    <FadeInStagger as="ol" role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <FadeInStagger as="ol" role="list" class="process-track editorial-list ml-2 grid grid-cols-1 pl-8 lg:ml-[33.333%]">
       {processSteps.map((step) => (
-        <FadeIn as="li">
-          <Border position="left" class="pl-8">
-            <span class="font-display text-base font-semibold text-neutral-950">{step.number}</span>
-            <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">{step.title}</h3>
-            <p class="mt-4 text-base text-neutral-600">{step.description}</p>
-          </Border>
+        <FadeIn as="li" data-editorial-row class="grid grid-cols-1 gap-6 py-9 lg:grid-cols-8 lg:items-start">
+          <span class="section-code lg:col-span-1">{step.number}</span>
+          <div class="lg:col-span-6 lg:col-start-3">
+            <h3 class="type-wide font-display text-3xl font-semibold text-white">{step.title}</h3>
+            <p class="mt-4 max-w-xl text-base text-neutral-700">{step.description}</p>
+          </div>
         </FadeIn>
       ))}
     </FadeInStagger>

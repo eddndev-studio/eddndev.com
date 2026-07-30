@@ -4,30 +4,28 @@ import Button from './Button.astro';
 import Brand from './Brand.astro';
 import SocialMedia from './SocialMedia.astro';
 
-// Studio navigation: a black panel that expands from an 8px sliver to full-screen,
-// pushing the white page card down to reveal the menu. Animation driven by studio-nav.js.
 const rows = [
-  [{ label: 'Trabajo', href: '/work' }, { label: 'Servicios', href: '/services' }],
-  [{ label: 'Automatización', href: '/automation' }, { label: 'Perfil', href: '/profile' }],
+  [{ code: '01', label: 'Trabajo', href: '/work' }, { code: '02', label: 'Servicios', href: '/services' }],
+  [{ code: '03', label: 'Automatización', href: '/automation' }, { code: '04', label: 'Perfil', href: '/profile' }],
 ];
 ---
 <header>
-  <!-- Collapsed bar — floats over the top of the white page card -->
-  <div class="absolute top-2 right-0 left-0 z-40 pt-14" data-nav-bar>
+  <!-- Collapsed bar -->
+  <div class="absolute top-2 right-0 left-0 z-40 pt-12 sm:pt-14" data-nav-bar>
     <Container>
       <div class="flex items-center justify-between">
         <Brand />
         <div class="flex items-center gap-x-8">
-          <Button href="/contact" brand>Hablemos</Button>
+          <span class="hidden sm:block"><Button href="/contact" brand>Hablemos</Button></span>
           <button
             type="button"
             data-nav-open
             aria-expanded="false"
             aria-controls="nav-panel"
             aria-label="Abrir navegación"
-            class="group -m-2.5 rounded-full p-2.5 transition hover:bg-neutral-950/10"
+            class="group border border-white/20 p-3 transition duration-300 hover:border-brand"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-neutral-950 group-hover:fill-neutral-700">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 fill-white transition group-hover:fill-[var(--aurora)]">
               <path d="M2 6h20v2H2zM2 16h20v2H2z" />
             </svg>
           </button>
@@ -40,26 +38,26 @@ const rows = [
   <div
     id="nav-panel"
     data-nav-panel
-    class="relative z-50 overflow-hidden bg-neutral-950 pt-2"
+    class="relative z-50 overflow-hidden bg-[var(--void)] pt-2"
     style="height: 0.5rem"
     aria-hidden="true"
     inert
   >
-    <div class="bg-neutral-800">
-      <!-- Inverted bar with close (X) — sits over the collapsed bar's position -->
-      <div class="bg-neutral-950 pt-14 pb-16">
+    <div class="bg-[var(--night)]">
+      <!-- Inverted bar with close control -->
+      <div class="border-b border-white/15 pt-12 pb-12 sm:pt-14 sm:pb-16">
         <Container>
           <div class="flex items-center justify-between">
             <Brand brand />
             <div class="flex items-center gap-x-8">
-              <Button href="/contact" brand>Hablemos</Button>
+              <span class="hidden sm:block"><Button href="/contact" brand>Hablemos</Button></span>
               <button
                 type="button"
                 data-nav-close
                 aria-label="Cerrar navegación"
-                class="group -m-2.5 rounded-full p-2.5 transition hover:bg-white/10"
+                class="group border border-white/20 p-3 transition duration-300 hover:border-brand"
               >
-                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-white group-hover:fill-neutral-200">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 fill-white transition group-hover:fill-[var(--aurora)]">
                   <path d="m5.636 4.223 14.142 14.142-1.414 1.414L4.222 5.637z" />
                   <path d="M4.222 18.363 18.364 4.22l1.414 1.414L5.636 19.777z" />
                 </svg>
@@ -70,19 +68,23 @@ const rows = [
       </div>
 
       <!-- Big navigation -->
-      <nav class="mt-px font-display text-5xl font-medium tracking-tight text-white">
+      <nav class="py-3 font-display text-5xl font-medium tracking-tight text-white sm:py-5">
         {rows.map((row) => (
-          <div class="even:mt-px sm:bg-neutral-950">
+          <div>
             <Container>
-              <div class="grid grid-cols-1 sm:grid-cols-2">
+              <div class="editorial-grid grid grid-cols-1 sm:grid-cols-2">
                 {row.map((item) => (
                   <a
                     href={item.href}
                     data-nav-link
-                    class="group relative isolate -mx-6 bg-neutral-950 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pr-16 sm:even:mt-0 sm:even:border-l sm:even:border-neutral-800 sm:even:pl-16"
+                    data-editorial-row
+                    class="group relative -mx-2 flex min-h-40 flex-col justify-between overflow-hidden px-2 py-8 sm:mx-0 sm:min-h-52 sm:px-8 sm:py-10 sm:[&:nth-child(odd)]:pl-0"
                   >
-                    {item.label}
-                    <span class="absolute inset-y-0 -z-10 w-screen bg-neutral-900 opacity-0 transition group-odd:right-0 group-even:left-0 group-hover:opacity-100"></span>
+                    <span class="section-code">{item.code}</span>
+                    <span class="flex items-end justify-between gap-6">
+                      <span class="type-wide text-[clamp(2.5rem,6vw,5.5rem)] leading-none transition-transform duration-500 group-hover:translate-x-2">{item.label}</span>
+                      <span class="mb-1 text-xl text-neutral-500 transition duration-300 group-hover:translate-x-1 group-hover:text-white" aria-hidden="true">-&gt;</span>
+                    </span>
                   </a>
                 ))}
               </div>
@@ -91,8 +93,8 @@ const rows = [
         ))}
       </nav>
 
-      <!-- Contact + social -->
-      <div class="relative panel-brand before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
+      <!-- Contact and social links -->
+      <div class="relative mt-3 border-t border-white/15">
         <Container>
           <div class="grid grid-cols-1 gap-y-10 pt-10 pb-16 sm:grid-cols-2 sm:pt-16">
             <div>
@@ -108,7 +110,7 @@ const rows = [
                 </li>
                 <li>
                   <strong class="text-white">Ubicación</strong><br />
-                  CDMX, México · remoto
+                  CDMX, México, remoto
                 </li>
               </ul>
             </div>

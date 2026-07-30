@@ -11,25 +11,38 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<FadeInStagger class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-  {projects.map((project) => (
-    <FadeIn class="group flex">
-      <article class="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+<FadeInStagger class="editorial-list grid grid-cols-1">
+  {projects.map((project, index) => (
+    <FadeIn data-editorial-row data-project-row class="project-row group py-12 sm:py-16 lg:py-24">
+      <article class="relative grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-12 lg:items-center">
+        <div class:list={['lg:row-start-1 lg:col-span-6', index % 2 === 1 && 'lg:col-start-7']}>
+          <div class="flex items-start justify-between gap-6">
+            <p class="section-code">{String(index + 1).padStart(2, '0')}</p>
+            <p class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">{project.data.status}</p>
+          </div>
+          <h3 class="type-wide mt-12 font-display text-[clamp(3rem,6vw,6.5rem)] leading-[0.86] font-medium tracking-[-0.05em] text-white">
+            <a href={`/work/${project.slug}`}>
+              <span class="absolute inset-0"></span>
+              {project.data.title}
+            </a>
+          </h3>
+          <p class="mt-7 max-w-xl text-lg text-neutral-700">{project.data.description}</p>
+          <dl class="mt-10 grid grid-cols-2 border-t border-white/10 pt-5 text-sm">
+            <div>
+              <dt class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">Periodo</dt>
+              <dd class="mt-2 font-semibold text-white">{project.data.year}</dd>
+            </div>
+            <div>
+              <dt class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">Señal</dt>
+              <dd class="mt-2 text-neutral-700">{project.data.signal}</dd>
+            </div>
+          </dl>
+        </div>
         {project.data.cover && (
-          <Image src={project.data.cover} alt={project.data.title} class="aspect-16/10 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+          <div data-project-media class:list={['media-frame lg:row-start-1 lg:col-span-5 lg:col-start-8', index % 2 === 1 && 'lg:col-start-1']}>
+            <Image src={project.data.cover} alt={project.data.title} class="scroll-media aspect-16/10 w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+          </div>
         )}
-        <h3 class="mt-6 font-display text-2xl font-semibold text-neutral-950">
-          <a href={`/work/${project.slug}`}>
-            <span class="absolute inset-0 rounded-3xl"></span>
-            {project.data.title}
-          </a>
-        </h3>
-        <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
-          <time datetime={String(project.data.year)} class="font-semibold">{project.data.year}</time>
-          <span class="text-neutral-300" aria-hidden="true">/</span>
-          <span>{project.data.category}</span>
-        </p>
-        <p class="mt-4 text-base text-neutral-600">{project.data.description}</p>
       </article>
     </FadeIn>
   ))}

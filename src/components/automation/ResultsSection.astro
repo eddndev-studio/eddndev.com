@@ -4,33 +4,25 @@ import SectionIntro from '../studio/SectionIntro.astro';
 import Container from '../studio/Container.astro';
 import FadeIn from '../studio/FadeIn.astro';
 import FadeInStagger from '../studio/FadeInStagger.astro';
-import Border from '../studio/Border.astro';
 ---
 
 <div id="automation-results">
   <SectionIntro
-    eyebrow="Resultados"
-    title="Antes y después."
+    eyebrow="Evidencia"
+    title="Qué se mide."
     class="mt-24 sm:mt-32 lg:mt-40"
-  />
+  >
+    <p>La automatización se evalúa con una línea base y señales acordadas. Los números se publican cuando existen datos comparables.</p>
+  </SectionIntro>
   <Container class="mt-16">
-    <FadeInStagger as="dl" class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
+    <FadeInStagger as="dl" class="editorial-grid grid grid-cols-1 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
       {results.map((result) => (
-        <FadeIn>
-          <Border position="left" class="flex flex-col pl-8">
-            <dt class="text-base text-neutral-600">{result.title}</dt>
-            <dd class="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span class:list={[
-                'font-display font-semibold text-neutral-400 line-through',
-                result.compact ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl',
-              ]}>{result.before}</span>
-              <span class="text-neutral-300" aria-hidden="true">→</span>
-              <span class:list={[
-                'font-display font-semibold text-neutral-950',
-                result.compact ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl',
-              ]}>{result.after}</span>
-            </dd>
-          </Border>
+        <FadeIn data-editorial-row class="flex min-h-60 flex-col justify-between py-8 sm:px-6 sm:py-10 sm:first:pl-0 sm:last:pr-0">
+          <dt class="section-code">{result.title}</dt>
+          <dd class="mt-16">
+            <span class="type-wide block font-display text-2xl font-semibold text-neutral-950">{result.signal}</span>
+            <span class="mt-4 block text-sm text-neutral-700">{result.detail}</span>
+          </dd>
         </FadeIn>
       ))}
     </FadeInStagger>

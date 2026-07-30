@@ -1,4 +1,4 @@
-/* Studio editorial prose — used by long-form MDX (case studies, profile).
+/* Studio editorial prose - used by long-form MDX (case studies, profile).
    Wrap rich text in `.typography`. Ported from the Tailwind "Studio" template. */
 .typography {
   color: var(--color-neutral-950);
@@ -96,7 +96,8 @@
   /* Code blocks */
   :where(pre) {
     display: flex;
-    background-color: var(--color-neutral-950);
+    background-color: var(--surface-soft);
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-4xl);
     overflow-x: auto;
     margin-top: --spacing(10);

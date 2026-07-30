@@ -1,148 +1,228 @@
 @import "tailwindcss";
 @import "./typography.css" layer(components);
+@import "./motion.css" layer(components);
+@import "./space.css" layer(components);
+@import "./interactions.css" layer(components);
 
-/* ─────────────────────────────────────────────
-   Mona Sans — Studio's variable display/text face
-   ───────────────────────────────────────────── */
 @font-face {
   font-family: 'Mona Sans';
   font-weight: 200 900;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
   font-stretch: 75% 125%;
   src: url('/fonts/Mona-Sans.var.woff2') format('woff2');
 }
 
 @theme {
-  /* Replace Tailwind's default type scale with Studio's editorial scale */
   --text-*: initial;
   --text-xs: 0.75rem;
   --text-xs--line-height: 1rem;
   --text-sm: 0.875rem;
-  --text-sm--line-height: 1.5rem;
+  --text-sm--line-height: 1.45rem;
   --text-base: 1rem;
-  --text-base--line-height: 1.75rem;
+  --text-base--line-height: 1.65rem;
   --text-lg: 1.125rem;
   --text-lg--line-height: 1.75rem;
   --text-xl: 1.25rem;
-  --text-xl--line-height: 2rem;
+  --text-xl--line-height: 1.8rem;
   --text-2xl: 1.5rem;
-  --text-2xl--line-height: 2.25rem;
-  --text-3xl: 1.75rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl: 2rem;
-  --text-4xl--line-height: 2.5rem;
-  --text-5xl: 2.5rem;
-  --text-5xl--line-height: 3rem;
-  --text-6xl: 3rem;
-  --text-6xl--line-height: 3.5rem;
-  --text-7xl: 4rem;
-  --text-7xl--line-height: 4.5rem;
-
-  --radius-4xl: 2.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.2rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.45rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 3.1rem;
+  --text-6xl: 4rem;
+  --text-6xl--line-height: 3.95rem;
+  --text-7xl: 5.75rem;
+  --text-7xl--line-height: 5.25rem;
 
   --font-sans:
     'Mona Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
   --font-display:
     'Mona Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
-  /* Tailwind v4 auto-applies this with the `font-display` utility */
-  --font-display--font-variation-settings: 'wdth' 125;
+  --font-display--font-variation-settings: 'wdth' 112;
   --font-display-length: 2;
 
-  /* One motion easing family — framer's default layout/tween curves */
-  --ease-layout: cubic-bezier(0.4, 0, 0.1, 1);
-  --ease-fade: cubic-bezier(0.25, 0.1, 0.35, 1);
+  --color-white: #f1edf4;
+  --color-neutral-50: #f1edf4;
+  --color-neutral-100: #e6e0e9;
+  --color-neutral-200: #d4ccd8;
+  --color-neutral-300: #beb5c4;
+  --color-neutral-400: #9f95a7;
+  --color-neutral-500: #8d8394;
+  --color-neutral-600: #a098a7;
+  --color-neutral-700: #b7afbc;
+  --color-neutral-800: #d3cdd7;
+  --color-neutral-900: #e6e0e9;
+  --color-neutral-950: #f1edf4;
 
-  /* Brand violet — eddndev accent. One source of truth for the dark
-     panels (panel-brand), the CTA pill (Button brand) and the nav
-     wordmark (Brand brand). Tailwind v4 also exposes these as
-     text-brand / bg-brand-button / etc. */
-  --color-brand: #8b5cf6;        /* accent / wordmark / gradient bloom */
-  --color-brand-button: #6d28d9; /* CTA pill fill */
-  --color-brand-mid: #5b21b6;    /* gradient mid / pill hover */
-  --color-brand-deep: #2e1065;   /* gradient deep — bears white text */
+  --color-brand: #9e88df;
+  --color-brand-button: #9e88df;
+  --color-brand-mid: #b5a6e6;
+  --color-brand-deep: #1b1625;
+
+  --ease-layout: cubic-bezier(0.4, 0, 0.1, 1);
+  --ease-fade: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─────────────────────────────────────────────
-   Brand dark panel — replaces flat bg-neutral-950 on the
-   signature dark islands (automation, promesas, contacto).
-   Deep violet where text lives, blooming to the brand violet
-   in the open corner. Keeps white/neutral-300 legible.
-   ───────────────────────────────────────────── */
-@utility panel-brand {
-  background-color: var(--color-brand-deep);
-  background-image: linear-gradient(
-    135deg,
-    var(--color-brand-deep) 0%,
-    var(--color-brand-mid) 50%,
-    var(--color-brand) 100%
-  );
+:root {
+  --void: #0b0910;
+  --night: #141119;
+  --surface: #18151d;
+  --surface-soft: #1d1922;
+  --starlight: #f1edf4;
+  --moonlight: #b7afbc;
+  --signal: #9e88df;
+  --signal-on-dark: #b7a6ec;
+  --aurora: #a99be0;
+  --hairline: rgba(224, 214, 230, 0.15);
+  --hairline-strong: rgba(224, 214, 230, 0.28);
 }
 
 html {
   scrollbar-gutter: stable;
-  background-color: var(--color-neutral-950);
+  scroll-padding-top: 6rem;
+  background: var(--void);
 }
 
 body {
+  min-width: 20rem;
+  background: var(--void);
+  color: var(--starlight);
   font-family: var(--font-sans);
 }
 
-/* ─────────────────────────────────────────────
-   Reveal grammar — Studio FadeIn (opacity + 24px rise).
-   Hidden only when JS is live (`.js` set inline in <head>),
-   so content stays visible if scripting fails.
-   ───────────────────────────────────────────── */
-.js [data-fade-in] {
-  opacity: 0;
-  transform: translateY(24px);
-  will-change: opacity, transform;
+body::before {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  opacity: 0.025;
 }
 
-/* Scroll lock while the navigation panel is open */
+::selection {
+  background: var(--signal);
+  color: var(--void);
+}
+
+.type-narrow {
+  font-variation-settings: 'wdth' 84;
+}
+
+.type-wide {
+  font-variation-settings: 'wdth' 116;
+}
+
+.page-surface {
+  position: relative;
+  color: var(--starlight);
+}
+
+.section-code {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--signal-on-dark);
+  font-size: 0.72rem;
+  font-variation-settings: 'wdth' 84;
+  font-weight: 680;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-code::after {
+  width: 2.5rem;
+  height: 1px;
+  content: '';
+  flex: 0 0 auto;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.editorial-grid,
+.editorial-list {
+  border-top: 1px solid var(--hairline);
+}
+
+[data-editorial-row] {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.section-plane {
+  position: relative;
+  background: rgba(20, 17, 25, 0.72);
+  border-block: 1px solid var(--hairline);
+}
+
+.cut-corner {
+  border-radius: 0.125rem;
+}
+
+.media-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border-block: 1px solid var(--hairline-strong);
+}
+
+.cosmic-text {
+  color: var(--starlight);
+}
+
 html.nav-open,
 body.nav-open {
   overflow: hidden;
 }
 
-/* ─────────────────────────────────────────────
-   Accessibility
-   ───────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--color-neutral-950);
+  outline: 2px solid var(--signal-on-dark);
   outline-offset: 4px;
-  border-radius: 4px;
+}
+
+@media (max-width: 720px) {
+  .section-code::after {
+    width: 1.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js [data-fade-in] {
-    opacity: 1;
-    transform: none;
-  }
   *, *::before, *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
+
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
   }
 }
 
-/* ─────────────────────────────────────────────
-   View transitions — content lifts out, settles in
-   ───────────────────────────────────────────── */
 @keyframes vt-out {
-  to { opacity: 0; transform: translateY(-12px); }
+  to {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
 }
+
 @keyframes vt-in {
-  from { opacity: 0; transform: translateY(16px); }
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
 }
-::view-transition-old(root) { animation: vt-out 0.24s cubic-bezier(0.45, 0, 0.55, 1) both; }
-::view-transition-new(root) { animation: vt-in 0.4s var(--ease-layout) both; }
+
+::view-transition-old(root) {
+  animation: vt-out 0.22s var(--ease-layout) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-in 0.38s var(--ease-layout) both;
+}

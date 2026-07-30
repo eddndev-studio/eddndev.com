@@ -1,0 +1,22 @@
+---
+import Container from './Container.astro';
+
+const statement = "edd n'dev nació para desarrollar ideas propias. Hoy seguimos uniendo al equipo adecuado para hacer realidad soluciones.";
+const words = statement.split(' ');
+---
+
+<section id="studio" data-studio-statement class="studio-statement scroll-mt-20" aria-labelledby="studio-statement-label">
+  <Container class="studio-statement__track">
+    <div class="studio-statement__layout">
+      <p id="studio-statement-label" class="section-code studio-statement__label">Estudio</p>
+      <p data-studio-copy class="studio-statement__copy type-wide font-display font-semibold">
+        <span class="sr-only">{statement}</span>
+        <span aria-hidden="true">
+          {words.map((word, index) => (
+            <span data-studio-word class="studio-statement__word">{word}{index < words.length - 1 ? ' ' : ''}</span>
+          ))}
+        </span>
+      </p>
+    </div>
+  </Container>
+</section>

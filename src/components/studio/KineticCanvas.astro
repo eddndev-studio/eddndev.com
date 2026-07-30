@@ -1,0 +1,16 @@
+---
+interface Props {
+  path?: string;
+}
+
+const { path = '/' } = Astro.props;
+---
+
+<div class="kinetic-canvas kinetic-canvas--background" aria-hidden="true">
+  <canvas data-kinetic-canvas data-path={path}></canvas>
+</div>
+{path === '/' && (
+  <div class="kinetic-canvas kinetic-canvas--foreground" aria-hidden="true">
+    <canvas data-kinetic-foreground></canvas>
+  </div>
+)}

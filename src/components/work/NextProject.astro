@@ -10,61 +10,29 @@ interface Props {
 }
 
 const { current, projects } = Astro.props;
-
-// Find current index and wrap around to next
-const currentIndex = projects.findIndex(p => p.slug === current.slug);
-const nextIndex = (currentIndex + 1) % projects.length;
-const next = projects[nextIndex];
+const currentIndex = projects.findIndex((project) => project.slug === current.slug);
+const next = projects[(currentIndex + 1) % projects.length];
 ---
 
 <Container class="mt-24 sm:mt-32 lg:mt-40">
-  <FadeIn>
-    <div class="flex items-center gap-x-8">
-      <h2 class="font-display text-base font-semibold text-neutral-950">
-        Siguiente caso
-      </h2>
-      <div class="h-px flex-auto bg-neutral-200"></div>
-    </div>
-  </FadeIn>
-
-  <FadeIn class="group mt-10">
-    <article class="relative flex flex-col overflow-hidden rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
-      {next.data.cover && (
-        <Image
-          src={next.data.cover}
-          alt={next.data.title}
-          class="aspect-21/9 w-full rounded-2xl object-cover grayscale transition duration-500 group-hover:grayscale-0"
-        />
-      )}
-      <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div class="max-w-2xl">
-          <h3 class="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl">
-            <a href={`/work/${next.slug}`}>
-              <span class="absolute inset-0 rounded-3xl"></span>
-              {next.data.title}
-            </a>
-          </h3>
-          <p class="mt-2 flex gap-x-2 text-sm text-neutral-950">
-            <time datetime={String(next.data.year)} class="font-semibold">{next.data.year}</time>
-            <span class="text-neutral-300" aria-hidden="true">/</span>
-            <span>{next.data.category}</span>
-          </p>
-          <p class="mt-4 text-base text-neutral-600">{next.data.description}</p>
-        </div>
-        <span
-          aria-hidden="true"
-          class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-neutral-950 text-white transition group-hover:bg-neutral-800"
-        >
-          <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </span>
+  <FadeIn class="border-y border-white/20 py-10 sm:py-14 lg:py-18">
+    <p class="section-code">Siguiente caso</p>
+    <article class="group relative mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-6">
+        <h2 class="type-wide font-display text-[clamp(3rem,7vw,7rem)] leading-[0.86] font-medium tracking-[-0.05em] text-white">
+          <a href={`/work/${next.slug}`}>
+            <span class="absolute inset-0"></span>
+            {next.data.title}
+          </a>
+        </h2>
+        <p class="mt-6 max-w-xl text-lg text-neutral-700">{next.data.description}</p>
+        <p class="mt-8 text-sm font-semibold text-[var(--aurora)]">Ver caso</p>
       </div>
+      {next.data.cover && (
+        <div class="media-frame lg:col-span-5 lg:col-start-8">
+          <Image src={next.data.cover} alt={next.data.title} class="scroll-media aspect-16/10 w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+        </div>
+      )}
     </article>
-  </FadeIn>
-
-  <FadeIn class="mt-12 flex justify-end">
-    <a href="/work" class="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600">
-      Ver todos los casos
-      <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-    </a>
   </FadeIn>
 </Container>

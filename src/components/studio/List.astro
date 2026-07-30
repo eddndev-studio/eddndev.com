@@ -1,8 +1,10 @@
 ---
 import FadeInStagger from './FadeInStagger.astro';
+
 interface Props { class?: string }
 const { class: className } = Astro.props;
 ---
-<FadeInStagger as="ul" role="list" class:list={['text-base text-neutral-600', className]}>
+
+<FadeInStagger as="ul" role="list" class:list={['editorial-list grid grid-cols-1 text-base text-neutral-700', className]}>
   <slot />
 </FadeInStagger>

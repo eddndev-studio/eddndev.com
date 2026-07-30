@@ -1,24 +1,25 @@
 ---
 import FadeIn from '../studio/FadeIn.astro';
+
 interface Props {
   heading?: string;
   body: string;
   section?: string;
   number?: string;
 }
+
 const { heading, body, section, number } = Astro.props;
 const eyebrow = section ? `${number ? `${number} · ` : ''}${section}` : undefined;
 ---
-<FadeIn as="div" class="space-y-6">
-  {eyebrow && (
-    <span class="block font-display text-base font-semibold text-neutral-950">{eyebrow}</span>
-  )}
-  {heading && (
-    <h2 class="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl">
-      {heading}
-    </h2>
-  )}
-  <div class="text-xl whitespace-pre-line text-neutral-600">
-    {body}
+
+<FadeIn as="section" class="grid grid-cols-1 gap-x-8 border-t border-white/20 py-10 lg:grid-cols-12 lg:py-14">
+  {eyebrow && <span class="section-code lg:col-span-3">{eyebrow}</span>}
+  <div class="mt-8 lg:col-span-7 lg:col-start-5 lg:mt-0">
+    {heading && (
+      <h2 class="cosmic-text type-wide font-display text-4xl leading-[0.98] font-medium tracking-[-0.035em] text-balance sm:text-5xl">
+        {heading}
+      </h2>
+    )}
+    <div class="mt-8 text-xl whitespace-pre-line text-neutral-700">{body}</div>
   </div>
 </FadeIn>

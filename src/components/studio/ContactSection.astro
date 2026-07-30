@@ -2,7 +2,6 @@
 import Container from './Container.astro';
 import FadeIn from './FadeIn.astro';
 import Button from './Button.astro';
-// Studio ContactSection — black rounded-4xl invitation panel. eddndev copy + real contact data.
 interface Props {
   title?: string;
   buttonText?: string;
@@ -18,35 +17,36 @@ const {
 const hasLede = Astro.slots.has('default');
 ---
 <Container class:list={['mt-24 sm:mt-32 lg:mt-40', className]}>
-  <FadeIn class="-mx-6 rounded-4xl panel-brand px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
-    <div class="mx-auto max-w-4xl">
-      <div class="max-w-xl">
-        <h2 class="font-display text-3xl font-medium text-balance text-white sm:text-4xl">{title}</h2>
-        {hasLede && <div class="mt-6 text-base text-neutral-300"><slot /></div>}
-        <div class="mt-6 flex">
+  <FadeIn class="border-y border-white/20 py-16 sm:py-20 lg:py-28">
+    <div class="grid grid-cols-1 gap-x-8 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="section-code">Siguiente paso</p>
+        <h2 class="type-wide mt-10 font-display text-[clamp(2.75rem,6vw,6.5rem)] leading-[0.9] font-medium tracking-[-0.045em] text-balance text-white">{title}</h2>
+        {hasLede && <div class="mt-8 max-w-xl text-lg text-neutral-300"><slot /></div>}
+        <div class="mt-10 flex">
           <Button href={buttonHref} invert>{buttonText}</Button>
         </div>
-        <div class="mt-10 border-t border-white/10 pt-10">
-          <h3 class="font-display text-base font-semibold text-white">Contacto directo</h3>
-          <ul role="list" class="mt-6 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2">
+      </div>
+      <div class="mt-16 border-t border-white/20 pt-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
+          <h3 class="section-code">Contacto directo</h3>
+          <ul role="list" class="mt-10 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2 lg:grid-cols-1">
             <li>
-              <strong class="text-white">Correo</strong><br />
-              <a href="mailto:contacto@eddndev.com" class="transition hover:text-white">contacto@eddndev.com</a>
+              <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Correo</strong>
+              <a href="mailto:contacto@eddndev.com" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">contacto@eddndev.com</a>
             </li>
             <li>
-              <strong class="text-white">WhatsApp</strong><br />
-              <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">+52 56 1943 3938</a>
+              <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">WhatsApp</strong>
+              <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">+52 56 1943 3938</a>
             </li>
             <li>
-              <strong class="text-white">Ubicación</strong><br />
-              CDMX, México · remoto
+              <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Ubicación</strong>
+              <span class="mt-1 block">CDMX, México, remoto</span>
             </li>
             <li>
-              <strong class="text-white">Respuesta</strong><br />
-              En menos de 24 horas
+              <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Respuesta</strong>
+              <span class="mt-1 block">Seguimiento directo</span>
             </li>
           </ul>
-        </div>
       </div>
     </div>
   </FadeIn>
