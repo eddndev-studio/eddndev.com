@@ -195,7 +195,9 @@ export function createElectricPulses(seed) {
     render(context, rowPaths, time, mobile) {
       updatePulses(state, time, rowPaths.length, mobile, random);
       state.items.forEach((pulse) => {
-        drawElectricPulse(context, pulse, rowPaths[pulse.index], time, mobile);
+        const path = rowPaths[pulse.index];
+        if (!path) return;
+        drawElectricPulse(context, pulse, path, time, mobile);
       });
       return state.items
         .filter((pulse) => pulse.foreground)

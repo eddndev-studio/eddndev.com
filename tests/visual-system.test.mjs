@@ -88,6 +88,7 @@ test('the background is a deforming kinetic canvas', () => {
   assert.match(script, /const repelX = pointerDx \* repulsionInfluence/);
   assert.match(script, /foldX \* fold \+ repelX \* pointer\.active/);
   assert.doesNotMatch(script, /pointerPull/);
+  assert.match(electricity, /const path = rowPaths\[pulse\.index\];\s*if \(!path\) return;/);
   assert.match(script, /function drawForegroundPath/);
   assert.match(script, /foregroundContext/);
   assert.match(script, /const foregroundLifts =[\s\S]*?electricPulses\.render/);
