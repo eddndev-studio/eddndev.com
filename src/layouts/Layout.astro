@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-    title = "edd n' dev | Desarrollo de software independiente",
-    description = "Soy Eduardo Alonso. Diseño y construyo sitios medibles, automatizaciones y software a medida desde México.",
+    title = "edd n' dev | Estudio de diseño y software",
+    description = "Somos un estudio independiente. Diseñamos y construimos sitios, automatizaciones y software alrededor de procesos concretos.",
     image,
     project,
     breadcrumbs = [],
@@ -24,27 +24,25 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// JSON-LD: Person (independent developer)
-const personLD = {
+// JSON-LD: the commercial site represents the studio. Eduardo remains its technical lead.
+const organizationLD = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Eduardo Alonso",
-    "alternateName": "eddndev",
-    "jobTitle": "Desarrollador de software independiente",
+    "@type": "Organization",
+    "name": "edd n' dev",
+    "alternateName": ["eddndev", "eddndev-studio"],
     "url": "https://eddndev.com",
-    "image": "https://eddndev.com/favicon.png",
-    "description": "Desarrollador de software independiente en México. Sitios medibles, automatización y software a medida.",
+    "logo": "https://eddndev.com/favicon.png",
+    "description": "Estudio independiente de diseño y software en México. Construimos sitios, automatizaciones y productos alrededor de procesos concretos.",
+    "founder": {
+        "@type": "Person",
+        "name": "Eduardo Alonso",
+        "alternateName": "eddndev",
+        "url": "https://eddn.dev"
+    },
     "sameAs": [
-        "https://github.com/eddndev",
-        "https://www.linkedin.com/in/eddndev",
-        "https://x.com/eddndev",
-        "https://instagram.com/eddn.dev",
-        "https://tiktok.com/@eddndev",
-        "https://threads.net/@eddn.dev",
-        "https://eddn.dev"
+        "https://github.com/eddndev-studio"
     ],
-    "email": "contacto@eddndev.com",
-    "knowsLanguage": ["es", "en"]
+    "email": "contacto@eddndev.com"
 };
 
 // JSON-LD: WebSite (only on homepage)
@@ -55,7 +53,12 @@ const webSiteLD = isHome ? {
     "name": "edd n' dev",
     "url": "https://eddndev.com",
     "description": description,
-    "inLanguage": "es"
+    "inLanguage": "es",
+    "publisher": {
+        "@type": "Organization",
+        "name": "edd n' dev",
+        "url": "https://eddndev.com"
+    }
 } : null;
 
 // JSON-LD: BreadcrumbList (when breadcrumbs provided)
@@ -133,7 +136,7 @@ if (typeof resolvedImage === 'string') {
         <link rel="preload" href="/fonts/Mona-Sans.var.woff2" as="font" type="font/woff2" crossorigin />
 
         <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json" set:html={JSON.stringify(personLD)} />
+        <script type="application/ld+json" set:html={JSON.stringify(organizationLD)} />
         {webSiteLD && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
         {breadcrumbLD && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLD)} />}
 

@@ -14,79 +14,79 @@ import profileImg from '../assets/images/profile.jpg';
 
 const values = [
   {
-    title: 'Responsabilidad técnica clara',
-    body: 'El alcance deja por escrito qué construyo, qué opero y qué queda en manos de cada proveedor. Así también queda claro quién responde cuando algo requiere atención.',
+    title: 'Responsabilidad técnica',
+    body: 'Antes de comenzar, dejamos por escrito qué construimos, qué operamos y qué depende de cada proveedor. Cuando algo requiere atención, la persona responsable está identificada.',
   },
   {
-    title: 'Automatización con criterio',
+    title: 'Automatización revisable',
     body: 'Los flujos sensibles conservan bitácoras, permisos y puntos de aprobación. Automatizar tiene sentido cuando el equipo puede entender y controlar lo que ocurre.',
   },
   {
     title: 'Rendimiento medido',
-    body: 'Defino objetivos de carga y reviso el comportamiento real antes de publicar. Las decisiones de infraestructura se apoyan en datos del proyecto.',
+    body: 'Definimos objetivos de carga y revisamos el comportamiento real antes de publicar. Las decisiones de infraestructura se apoyan en datos del proyecto.',
   },
   {
-    title: 'Continuidad',
-    body: 'Documento decisiones, preparo despliegues repetibles y ofrezco mantenimiento cuando el proyecto necesita acompañamiento después de su lanzamiento.',
+    title: 'Continuidad acordada',
+    body: 'Documentamos decisiones, preparamos despliegues repetibles y separamos la estabilización inicial del mantenimiento que un proyecto pueda necesitar después.',
   },
 ];
 
 const process = [
   {
-    title: 'Entender antes de proponer',
-    body: 'Primero reviso cómo funciona el proceso actual, dónde se detiene y qué resultado importa. Si basta con una solución más simple, esa será mi recomendación.',
+    title: 'Revisar el trabajo actual',
+    body: 'Primero revisamos cómo funciona el proceso actual, dónde se detiene y qué resultado importa. Si basta con una solución más simple, esa será nuestra recomendación.',
   },
   {
-    title: 'Definir una primera etapa',
-    body: 'Convierto el problema en un alcance, entregables, supuestos y señales de éxito. También señalo las dependencias que pueden cambiar el costo o el calendario.',
+    title: 'Acotar la primera entrega',
+    body: 'Convertimos el problema en entregables, supuestos y señales de éxito. También señalamos las dependencias que pueden cambiar el costo o el calendario.',
   },
   {
-    title: 'Construir y comprobar',
-    body: 'Desarrollo por incrementos revisables, pruebo los recorridos importantes y preparo la publicación con observabilidad suficiente para detectar problemas.',
+    title: 'Construir y medir',
+    body: 'Desarrollamos por incrementos revisables, probamos los recorridos importantes y comparamos el resultado con los objetivos acordados.',
   },
   {
-    title: 'Estabilizar y acompañar',
-    body: 'Después de publicar corrijo incidencias dentro del periodo acordado. Si hace falta operación continua, la definimos como un servicio separado y visible.',
+    title: 'Publicar y estabilizar',
+    body: 'Después de publicar corregimos incidencias dentro del periodo acordado. Si hace falta operación continua, la definimos como un servicio separado y visible.',
   },
 ];
 ---
 
 <Layout
-    title="Perfil | edd n' dev"
-    description="Soy Eduardo Alonso, desarrollador de software independiente en México. Construyo y opero productos web, móviles y backends."
-    breadcrumbs={[{ name: "Perfil", url: "/profile" }]}
+    title="Estudio | edd n' dev"
+    description="edd n' dev es un estudio independiente de diseño y software en México. Construimos productos web, aplicaciones, automatizaciones y backends."
+    breadcrumbs={[{ name: "Estudio", url: "/profile" }]}
 >
   <!-- HERO -->
-  <PageIntro eyebrow="eddndev · Desarrollo de software · México" title="Trabajo técnico con responsabilidad clara.">
+  <PageIntro eyebrow="Estudio independiente · Diseño y software · México" title="Quienes proponen también construyen.">
     <p>
-      Diseño, construyo y opero productos web, aplicaciones y backends. Trabajo directamente contigo desde el primer alcance hasta la estabilización.
+      Diseñamos, construimos y operamos productos web, aplicaciones y backends. Las personas que revisan el problema participan en las decisiones técnicas y acompañan la publicación.
     </p>
   </PageIntro>
 
-  <!-- QUIÉN SOY -->
+  <!-- EL ESTUDIO -->
   <SectionIntro
-    eyebrow="Quién soy"
-    title="Una persona a cargo del recorrido completo."
+    eyebrow="El estudio"
+    title="Del backend a la interfaz."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
-    <p>Construyo sistemas completos: desde la infraestructura donde vive tu proyecto hasta la interfaz que tocan tus usuarios.</p>
+    <p>Trabajamos en el recorrido que conecta infraestructura, datos, lógica de producto y la interfaz que usan las personas.</p>
   </SectionIntro>
   <Container class="mt-16">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
       <FadeIn class="lg:col-span-5">
         <StylizedImage src={profileImg} alt="Eduardo Alonso, eddndev" shape={1} />
-        <p class="section-code mt-5">Eduardo Alonso / México / desde 2020</p>
+        <p class="section-code mt-5">Eduardo Alonso / Dirección técnica / México</p>
       </FadeIn>
-      <FadeIn class="border-t border-neutral-950/20 pt-8 lg:col-span-5 lg:col-start-8">
+      <FadeIn class="lg:col-span-5 lg:col-start-8">
         <div class="typography text-neutral-700">
           <p>
-            Soy <strong class="font-semibold text-neutral-950">Eduardo Alonso</strong>, también eddndev. Soy desarrollador de software independiente en México. Trabajo en productos completos, desde el backend y la infraestructura hasta la interfaz que usan las personas.
+            <strong class="font-semibold text-neutral-950">Eduardo Alonso</strong>, también eddndev, lleva la dirección técnica del estudio. La composición del equipo cambia según el proyecto y las responsabilidades acordadas.
           </p>
           <p>
-            Mi experiencia se concentra en sistemas que conectan operación, datos y producto. Cuando el alcance incluye servidores, despliegues, rendimiento o mantenimiento, esas responsabilidades quedan descritas desde el inicio.
+            El estudio trabaja en sistemas que conectan operación, datos y producto. Cuando un proyecto incluye servidores, despliegues, rendimiento o mantenimiento, cada responsabilidad se acuerda antes de construir.
           </p>
           <p>
-            ¿Te interesa el detalle técnico? Documento cómo pienso y construyo en
+            El trabajo técnico y las decisiones de ingeniería se documentan en
             <a href="https://eddn.dev" target="_blank" rel="noopener noreferrer" class="font-semibold text-neutral-950 underline decoration-1 underline-offset-2">eddn.dev</a>.
           </p>
         </div>
@@ -94,13 +94,13 @@ const process = [
     </div>
   </Container>
 
-  <!-- LO QUE ME IMPORTA -->
+  <!-- LO QUE NOS IMPORTA -->
   <SectionIntro
-    eyebrow="Lo que me importa"
-    title="Criterios que sostienen el trabajo."
+    eyebrow="Lo que nos importa"
+    title="Cómo tomamos decisiones técnicas."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
-    <p>Cuatro criterios para tomar decisiones técnicas y mantener expectativas claras.</p>
+    <p>Cuatro criterios para decidir qué construir, cómo comprobarlo y quién se ocupa de operarlo.</p>
   </SectionIntro>
   <Container class="mt-16">
     <GridList class="lg:grid-cols-2">
@@ -110,14 +110,14 @@ const process = [
     </GridList>
   </Container>
 
-  <!-- CÓMO TRABAJO -->
+  <!-- CÓMO TRABAJAMOS -->
   <SectionIntro
     eyebrow="Proceso"
-    title="Cómo trabajo."
+    title="Cómo trabajamos."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>
-      Cada proyecto empieza con una necesidad concreta, un alcance revisable y una forma de saber si la primera etapa funcionó.
+      Cada proyecto empieza con una necesidad concreta, una primera entrega revisable y una forma de saber si produjo el resultado esperado.
     </p>
   </SectionIntro>
   <Container class="mt-16">
@@ -132,18 +132,18 @@ const process = [
 
   <!-- FILOSOFÍA -->
   <SectionIntro
-    eyebrow="Alcance"
-    title="Cada responsabilidad queda visible."
+    eyebrow="Responsabilidades"
+    title="Qué incluye cada etapa."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>
-      Código, infraestructura, seguridad y mantenimiento se dimensionan según el proyecto. Antes de comenzar sabrás qué incluye la etapa y qué requiere una decisión posterior.
+      Código, infraestructura, seguridad y mantenimiento se dimensionan según el proyecto. La propuesta indica qué incluye la etapa, qué depende de terceros y qué se decide después.
     </p>
   </SectionIntro>
 
   <!-- CTA -->
   <ContactSection
-    title="Cuéntame qué necesitas volver más claro."
-    buttonText="Platicar el contexto"
+    title="Hablemos del trabajo actual."
+    buttonText="Platicar el proyecto"
   />
 </Layout>

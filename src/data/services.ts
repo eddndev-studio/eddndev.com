@@ -15,10 +15,10 @@ export const services: Service[] = [
     title: 'Automatización con IA',
     tagline: 'Procesos repetibles con control y trazabilidad',
     description:
-      'Construyo agentes, integraciones y reglas para clasificar información, preparar trabajo y ejecutar acciones dentro de permisos definidos. Los pasos sensibles pueden quedar sujetos a revisión humana.',
+      'Construimos agentes, integraciones y reglas para clasificar información, preparar trabajo y ejecutar acciones dentro de permisos definidos. Los pasos sensibles pueden quedar sujetos a revisión humana.',
     highlights: [
       'Tareas y seguimientos repetitivos',
-      'Agentes que clasifican, preparan y ejecutan',
+      'Agentes que clasifican, preparan y ejecutan dentro de permisos definidos',
       'Integraciones con correo, formularios, CRM y sistemas internos',
       'Bitácoras, alertas y puntos de aprobación',
     ],
@@ -28,9 +28,9 @@ export const services: Service[] = [
     id: 'sitios-web',
     number: '02',
     title: 'Sitios web',
-    tagline: 'Una presencia clara que permite medir interés real',
+    tagline: 'Una oferta comprensible con acciones que se pueden medir',
     description:
-      'Diseño y desarrollo sitios que explican una oferta, cargan rápido y registran las acciones importantes. El alcance puede incluir formularios, analítica y un panel privado para seguimiento.',
+      'Desarrollamos sitios que organizan una oferta y definimos objetivos de rendimiento antes de publicar. El alcance puede incluir formularios, medición de acciones y un panel privado para seguimiento.',
     highlights: [
       'Arquitectura de información y diseño propio',
       'Rendimiento, accesibilidad y preparación para buscadores',
@@ -45,7 +45,7 @@ export const services: Service[] = [
     title: 'Catálogos y comercio',
     tagline: 'Productos, reservas y compras con una operación definida',
     description:
-      'Construyo catálogos, solicitudes de reserva y flujos de compra. Los pagos se integran con un proveedor existente y sus comisiones, condiciones y disponibilidad se presentan desde el alcance.',
+      'Construimos catálogos, solicitudes de reserva y flujos de compra. Los pagos se integran con un proveedor existente y sus comisiones, condiciones y disponibilidad se presentan desde el alcance.',
     highlights: [
       'Catálogo, filtros y fichas de producto o servicio',
       'Panel para contenido, pedidos o solicitudes',
@@ -58,9 +58,9 @@ export const services: Service[] = [
     id: 'software-a-medida',
     number: '04',
     title: 'Software a medida',
-    tagline: 'Herramientas que reflejan cómo trabaja tu organización',
+    tagline: 'Backends, aplicaciones y paneles alrededor de un proceso concreto',
     description:
-      'Desarrollo backends, aplicaciones móviles, paneles y herramientas internas para procesos que requieren cuentas, permisos, información estructurada e integraciones.',
+      'Desarrollamos backends, aplicaciones móviles, paneles y herramientas internas para procesos que requieren cuentas, permisos, información estructurada e integraciones.',
     highlights: [
       'Paneles internos y herramientas de gestión',
       'Conexiones y automatizaciones entre tus herramientas',

@@ -1,10 +1,70 @@
+.home-hero {
+  display: grid;
+  min-height: calc(100vh - 6.25rem);
+  min-height: calc(100svh - 6.25rem);
+  min-height: calc(100dvh - 6.25rem);
+}
+
+.home-hero__frame,
+.home-hero__frame > div {
+  display: grid;
+}
+
+.home-hero__copy {
+  align-self: center;
+  padding-block: clamp(1rem, 4vh, 3rem);
+  padding-block: clamp(1rem, 4dvh, 3rem);
+}
+
+.home-hero__title {
+  font-size: clamp(3.75rem, min(9vw, 22dvh), 11rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+
+.home-hero__intro {
+  display: grid;
+  max-width: 34rem;
+  gap: 0.7rem;
+  margin-top: clamp(1.75rem, 4vw, 3rem);
+  color: var(--moonlight);
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.home-hero__intro-team,
+.home-hero__intro strong {
+  color: var(--starlight);
+  font-weight: 500;
+}
+
+@media (min-width: 900px) {
+  .home-hero__statement {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .home-hero__title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .home-hero__intro {
+    grid-column: 9 / -1;
+    grid-row: 1;
+    align-self: end;
+    margin-top: 0;
+    margin-bottom: clamp(0.125rem, 1.1vw, 1.25rem);
+  }
+}
+
 .kinetic-canvas {
   position: absolute;
   top: 15rem;
   right: 0;
   left: 0;
-  height: min(36rem, 44vw);
-  min-height: 24rem;
+  height: clamp(24rem, max(44vw, 62dvh), 44rem);
   overflow: hidden;
   pointer-events: none;
   opacity: 0.78;
@@ -54,8 +114,7 @@
 @media (max-width: 720px) {
   .kinetic-canvas {
     top: 18rem;
-    height: 24rem;
-    min-height: 0;
+    height: clamp(24rem, 62dvh, 40rem);
     opacity: 0.68;
   }
 

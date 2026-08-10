@@ -16,26 +16,123 @@ export default function initStudioStatement() {
 
   sections.forEach((section) => {
     const words = gsap.utils.toArray('[data-studio-word]', section);
+    const accentGroups = gsap.utils.toArray('[data-studio-accent-group]', section);
     if (!words.length) return;
+
+    const markedScrubStart = words.findIndex((word) => word.hasAttribute('data-studio-scrub-start'));
+    const scrubStartIndex = markedScrubStart >= 0 ? markedScrubStart : 0;
+    const leadWords = words.slice(0, scrubStartIndex);
+    const scrubWords = words.slice(scrubStartIndex);
+    const scrollStartWord = scrubWords[0] || section;
 
     section.dataset.karaokeReady = 'true';
     gsap.set(words, { color: MUTED });
+    gsap.set(leadWords, { color: complete });
+
+    const accentControllers = accentGroups.map((group) => {
+      const accent = group.querySelector('[data-studio-accent]');
+      const accentWord = group.querySelector('[data-studio-accent-word]');
+      const accentWordIndex = words.indexOf(accentWord);
+      const anchorIndex = Number.parseInt(group.dataset.studioAccentAnchorIndex, 10);
+
+      if (!accent || !accentWord || accentWordIndex < 0 || !Number.isInteger(anchorIndex)) return null;
+
+      return {
+        group,
+        accent,
+        accentWord,
+        anchorIndex,
+        tail: words.slice(accentWordIndex),
+        layoutProgress: 0,
+        push: 0,
+        revealProgress: 1,
+        visible: false,
+        motion: null,
+      };
+    }).filter(Boolean);
+
+    const applyTailOffsets = () => {
+      const offsets = new Map();
+
+      accentControllers.forEach((controller) => {
+        const hiddenPush = controller.push * (1 - controller.layoutProgress);
+        if (hiddenPush <= 0.01) return;
+
+        const accentLine = controller.accentWord.getBoundingClientRect().top;
+        controller.tail.forEach((word) => {
+          if (Math.abs(word.getBoundingClientRect().top - accentLine) >= 1) return;
+          offsets.set(word, (offsets.get(word) || 0) - hiddenPush);
+        });
+      });
+
+      words.forEach((word) => gsap.set(word, { x: offsets.get(word) || 0 }));
+    };
+
+    const refreshAccentGeometry = () => {
+      accentControllers.forEach((controller) => {
+        controller.push = controller.accentWord.offsetLeft - controller.group.offsetLeft;
+      });
+      applyTailOffsets();
+    };
+
+    const syncAccents = (progress) => {
+      accentControllers.forEach((controller) => {
+        const shouldReveal = progress >= controller.revealProgress;
+        if (shouldReveal === controller.visible || !controller.motion) return;
+
+        controller.visible = shouldReveal;
+        if (shouldReveal) controller.motion.play();
+        else controller.motion.reverse();
+      });
+    };
 
     const timeline = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
-        trigger: section,
-        start: 'top 82%',
-        end: 'bottom 60%',
+        trigger: scrollStartWord,
+        start: 'top 80%',
+        endTrigger: section,
+        end: 'bottom 80%',
         scrub: true,
         invalidateOnRefresh: true,
+        onUpdate: ({ progress }) => syncAccents(progress),
+        onRefresh: ({ progress }) => {
+          refreshAccentGeometry();
+          syncAccents(progress);
+        },
       },
     });
 
-    words.forEach((word, index) => {
+    scrubWords.forEach((word, index) => {
       timeline.to(word, { color: active, duration: 0.34 }, index);
       timeline.to(word, { color: complete, duration: 0.66 }, index + 0.34);
     });
+
+    accentControllers.forEach((controller) => {
+      gsap.set(controller.accent, { autoAlpha: 0, scale: 0.28, rotation: -8 });
+      const revealAt = controller.anchorIndex - scrubStartIndex + 1;
+      controller.revealProgress = Math.max(0.001, revealAt / timeline.duration());
+      controller.motion = gsap.timeline({ paused: true })
+        .fromTo(
+          controller.accent,
+          { scale: 0.28, rotation: -8 },
+          { scale: 1, rotation: 0, duration: 0.92, ease: 'sine.inOut' },
+          0,
+        )
+        .to(
+          controller.accent,
+          { autoAlpha: 1, duration: 0.48, ease: 'sine.out' },
+          0.38,
+        )
+        .to(
+          controller,
+          { layoutProgress: 1, duration: 0.56, ease: 'sine.inOut', onUpdate: applyTailOffsets },
+          0,
+        );
+    });
+
+    refreshAccentGeometry();
+    syncAccents(timeline.scrollTrigger.progress);
   });
 
   onPageCleanup(() => {

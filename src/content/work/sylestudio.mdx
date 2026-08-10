@@ -1,17 +1,17 @@
 ---
 title: "Syle Studio"
-description: "Colaboración técnica en curso para construir la presencia digital de un estudio creativo en dos superficies públicas."
+description: "Colaboración técnica en curso entre sylestudio.com, la presencia pública de la marca, y syle.studio, su estudio personal."
 year: "2024-2026"
 status: "En desarrollo"
-signal: "Dos superficies públicas que evolucionan por etapas"
+signal: "Dos sitios con identidades propias que evolucionan en paralelo"
 category: "Colaboración web"
 role: "Arquitectura, desarrollo y operación"
 color: "#ffffff"
-stack: ["Astro", "Laravel", "TypeScript", "Media pipelines"]
+stack: ["Astro", "Rust", "Laravel", "Media pipelines"]
 cover: "../../assets/images/projects/syle/hero.png"
 links:
   Live Site: "https://sylestudio.com"
-  Work in progress: "https://syle.studio"
+  Personal studio: "https://syle.studio"
   GitHub: "https://github.com/sylestudio"
 featured: true
 ---
@@ -25,42 +25,42 @@ import projectsImg from '../../assets/images/projects/syle/proyectos.png';
 <TextBlock
   number="01"
   section="Contexto"
-  heading="Una colaboración en curso"
-  body="Syle Studio reúne moda, fotografía, eventos y archivo creativo. El trabajo digital avanza por etapas y hoy vive en dos superficies: sylestudio.com como presencia pública del proyecto y syle.studio como laboratorio editorial. Ambas siguen en desarrollo."
+  heading="Dos sitios, una colaboración continua"
+  body="Syle Studio es una colaboración técnica en curso. sylestudio.com conserva la presencia pública, los proyectos y el archivo de la marca. syle.studio desarrolla un estudio más personal para fotografía, dirección y diseño. Ambos sitios tienen objetivos e identidades propios y continúan evolucionando en paralelo."
 />
 
 <ImageFull
   src={heroImg}
-  alt="Hero de Syle Studio mostrando fotografía editorial de vitrales."
-  caption="Estética cinematográfica como primer impacto."
+  alt="Portada de Syle Studio con una fotografía editorial de vitrales."
+  caption="Portada editorial de sylestudio.com."
 />
 
 <StatsGrid
   items={[
-    {value: '2', label: 'Superficies públicas'},
-    {value: 'Activo', label: 'Desarrollo'},
-    {value: 'Web', label: 'Producto actual'},
-    {value: 'Editorial', label: 'Dirección visual'},
+    {value: '2', label: 'Sitios con propósitos distintos'},
+    {value: 'Activa', label: 'Colaboración técnica'},
+    {value: 'Astro/Rust', label: 'syle.studio'},
+    {value: 'Laravel', label: 'sylestudio.com'},
   ]}
 />
 
 <TextBlock
   number="02"
   section="Alcance actual"
-  heading="Identidad, archivo y evolución"
-  body={`Mi trabajo abarca arquitectura de información, implementación web, tratamiento de medios, rendimiento y despliegue. La tienda todavía no está presentada como una capacidad terminada y cualquier integración de pagos se definirá con un proveedor existente cuando esa etapa entre en alcance.
+  heading="Identidad, publicación y operación"
+  body={`La colaboración abarca arquitectura de información, implementación web, tratamiento de medios, herramientas de publicación, rendimiento y despliegue. syle.studio reúne un sitio público en Astro, una API en Axum y un administrador en Leptos dentro de un workspace en Rust. sylestudio.com conserva el contenido y la identidad que ya tiene publicados.
 
-El caso documenta el proceso real: una identidad que se prueba, una superficie pública que ya existe y un producto que continúa tomando forma.`}
+La tienda sigue en desarrollo. Cuando los pagos entren en esa etapa, la integración se definirá con un proveedor existente y sus comisiones y condiciones quedarán indicadas en el alcance.`}
 />
 
 <ImageFull
   src={navImg}
   alt="Grid de navegación principal del sitio."
-  caption="Navegación inmersiva: Nosotros, Tienda, Proyectos."
+  caption="Navegación publicada en sylestudio.com."
 />
 
 <ImageFull
   src={projectsImg}
   alt="Grid de proyectos creativos."
-  caption="Galería de eventos y colecciones."
+  caption="Archivo público de eventos y colecciones."
 />

@@ -24,12 +24,16 @@ export async function getStaticPaths() {
 const { entry, projects } = Astro.props;
 const { Content } = await entry.render();
 
-const role = entry.data.role ?? 'Diseño & construcción';
+const role = entry.data.role ?? 'Diseño y construcción';
 
 const LINK_LABELS: Record<string, string> = {
     'Live Site': 'Sitio en vivo',
-    'Work in progress': 'Sitio en desarrollo',
+    'Personal studio': 'Estudio personal',
     'Documentation': 'Documentación',
+    'Repository': 'Repositorio',
+    'Release v0.1.2': 'Release v0.1.2',
+    'Three VMs article': 'Artículo sobre las tres máquinas',
+    'ProveIR article': 'Artículo sobre ProveIR',
 };
 const links = Object.entries(entry.data.links ?? {});
 ---
@@ -56,7 +60,7 @@ const links = Object.entries(entry.data.links ?? {});
             <StatListItem label="Rol" value={role} />
         </StatList>
 
-        <div class="mt-12 grid grid-cols-1 gap-10 border-t border-neutral-950/20 pt-8 lg:grid-cols-12">
+        <div class="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
         <FadeIn class="lg:col-span-5">
             <h2 class="section-code">Stack</h2>
             <TagList class="mt-6">
@@ -99,5 +103,5 @@ const links = Object.entries(entry.data.links ?? {});
     <NextProject current={entry} projects={projects} />
 
     <!-- CTA -->
-    <ContactSection title="¿Necesitas algo con un alcance parecido?" buttonText="Platicar el contexto" />
+    <ContactSection title="¿Necesitas construir algo con un recorrido parecido?" buttonText="Platicar el proyecto" />
 </Layout>

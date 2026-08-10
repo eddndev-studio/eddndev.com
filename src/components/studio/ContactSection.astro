@@ -9,7 +9,7 @@ interface Props {
   class?: string;
 }
 const {
-  title = 'Cuéntame sobre tu proyecto',
+  title = 'Cuéntanos sobre tu proyecto',
   buttonText = 'Hablemos',
   buttonHref = '/contact',
   class: className,
@@ -17,7 +17,7 @@ const {
 const hasLede = Astro.slots.has('default');
 ---
 <Container class:list={['mt-24 sm:mt-32 lg:mt-40', className]}>
-  <FadeIn class="border-y border-white/20 py-16 sm:py-20 lg:py-28">
+  <FadeIn class="py-16 sm:py-20 lg:py-28">
     <div class="grid grid-cols-1 gap-x-8 lg:grid-cols-12">
       <div class="lg:col-span-7">
         <p class="section-code">Siguiente paso</p>
@@ -27,7 +27,7 @@ const hasLede = Astro.slots.has('default');
           <Button href={buttonHref} invert>{buttonText}</Button>
         </div>
       </div>
-      <div class="mt-16 border-t border-white/20 pt-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
+      <div class="mt-16 lg:col-span-4 lg:col-start-9 lg:mt-0">
           <h3 class="section-code">Contacto directo</h3>
           <ul role="list" class="mt-10 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2 lg:grid-cols-1">
             <li>

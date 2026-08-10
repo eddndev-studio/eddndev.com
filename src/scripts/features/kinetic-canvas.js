@@ -38,26 +38,28 @@ function deformPoint(x, y, width, height, time, pointer, pathPhase) {
   const [flow, fold, shear] = modeWeights(time + pathPhase);
   const autoX = 0.5 + Math.sin(time * 0.00017 + pathPhase) * 0.22;
   const autoY = 0.52 + Math.cos(time * 0.00021 + pathPhase) * 0.18;
-  const focusX = lerp(autoX, pointer.x, pointer.active);
-  const focusY = lerp(autoY, pointer.y, pointer.active);
-  const dx = nx - focusX;
-  const dy = ny - focusY;
-  const gravity = Math.exp(-(dx * dx * 10 + dy * dy * 7));
+  const autoDx = nx - autoX;
+  const autoDy = ny - autoY;
+  const pointerDx = nx - pointer.x;
+  const pointerDy = ny - pointer.y;
+  const foldInfluence = Math.exp(-(autoDx * autoDx * 10 + autoDy * autoDy * 7));
+  const repulsionInfluence = Math.exp(-(pointerDx * pointerDx * 14 + pointerDy * pointerDy * 10));
   const split = 0.5 + Math.sin(time * 0.00023 + pathPhase) * 0.14;
   const cut = Math.tanh((nx - split) * 11);
   const scale = Math.min(width / 1200, height / 420);
 
   const flowX = Math.sin(ny * TAU * 1.55 - time * 0.00032) * 18 * scale;
   const flowY = Math.sin(nx * TAU * 1.35 + ny * 2.2 + time * 0.00037) * 22 * scale;
-  const foldX = -dx * gravity * 210 * scale;
-  const foldY = -dy * gravity * 145 * scale;
+  const foldX = -autoDx * foldInfluence * 210 * scale;
+  const foldY = -autoDy * foldInfluence * 145 * scale;
+  const repelX = pointerDx * repulsionInfluence * 210 * scale;
+  const repelY = pointerDy * repulsionInfluence * 145 * scale;
   const shearX = cut * (ny - 0.5) * 78 * scale;
   const shearY = (-cut * 12 + Math.sin(ny * TAU * 2.7 + time * 0.0005) * 5) * scale;
-  const pointerPull = gravity * pointer.active;
 
   return {
-    x: x + flowX * flow + foldX * (fold + pointerPull * 0.7) + shearX * shear,
-    y: y + flowY * flow + foldY * (fold + pointerPull * 0.7) + shearY * shear,
+    x: x + flowX * flow + foldX * fold + repelX * pointer.active + shearX * shear,
+    y: y + flowY * flow + foldY * fold + repelY * pointer.active + shearY * shear,
   };
 }
 

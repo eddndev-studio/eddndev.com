@@ -1,4 +1,6 @@
 ---
+import ArrowRightIcon from './ArrowRightIcon.astro';
+
 interface Props {
   href?: string;
   invert?: boolean;
@@ -18,11 +20,11 @@ const classes = [
 {href ? (
   <a href={href} class:list={classes} {...rest}>
     <span><slot /></span>
-    <span class="ml-6 text-base transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+    <ArrowRightIcon size="sm" class="ml-6 transition-transform duration-300 group-hover:translate-x-1" />
   </a>
 ) : (
   <button type={type} class:list={classes} {...rest}>
     <span><slot /></span>
-    <span class="ml-6 text-base transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+    <ArrowRightIcon size="sm" class="ml-6 transition-transform duration-300 group-hover:translate-x-1" />
   </button>
 )}

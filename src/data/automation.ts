@@ -74,7 +74,7 @@ export const capabilities: Capability[] = [
   },
   {
     tag: 'Conecta',
-    title: 'Conecta y escala',
+    title: 'Conecta sistemas',
     description: 'Se integra con CRM, ERP, correo, formularios y hojas de cálculo mediante contratos que se pueden probar y observar.',
     icon: '<path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>',
   },
@@ -87,12 +87,12 @@ export const useCases: UseCase[] = [
     icon: '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>',
   },
   {
-    title: 'Calificación de leads',
+    title: 'Calificación de prospectos',
     description: 'Recopila criterios acordados, organiza solicitudes y las dirige hacia la persona o etapa correspondiente.',
     icon: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
   },
   {
-    title: 'Data entry y documentos',
+    title: 'Captura de datos y documentos',
     description: 'Extrae campos, valida formatos y prepara registros o documentos para su revisión y distribución.',
     icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
   },
@@ -102,7 +102,7 @@ export const useCases: UseCase[] = [
     icon: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
   },
   {
-    title: 'Workflows internos',
+    title: 'Flujos internos',
     description: 'Conecta aprobaciones, notificaciones y cambios de estado entre las herramientas que ya usa el equipo.',
     icon: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>',
   },
@@ -117,7 +117,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '01',
     title: 'Diagnóstico',
-    description: 'Mapeo el flujo actual, sus excepciones, responsables y costos antes de proponer una automatización.',
+    description: 'Mapeamos el flujo actual, sus excepciones, responsables y costos antes de proponer una automatización.',
     icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
   },
   {
@@ -129,7 +129,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '03',
     title: 'Construcción',
-    description: 'Construyo el flujo, preparo pruebas y valido su comportamiento con casos reales controlados.',
+    description: 'Construimos el flujo, preparamos pruebas y validamos su comportamiento con casos reales controlados.',
     icon: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
   },
   {

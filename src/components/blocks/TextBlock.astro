@@ -12,7 +12,7 @@ const { heading, body, section, number } = Astro.props;
 const eyebrow = section ? `${number ? `${number} · ` : ''}${section}` : undefined;
 ---
 
-<FadeIn as="section" class="grid grid-cols-1 gap-x-8 border-t border-white/20 py-10 lg:grid-cols-12 lg:py-14">
+<FadeIn as="section" class="grid grid-cols-1 gap-x-8 py-10 lg:grid-cols-12 lg:py-14">
   {eyebrow && <span class="section-code lg:col-span-3">{eyebrow}</span>}
   <div class="mt-8 lg:col-span-7 lg:col-start-5 lg:mt-0">
     {heading && (

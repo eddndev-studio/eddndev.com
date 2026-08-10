@@ -36,6 +36,34 @@ test('section labels use a rule without a decorative marker', () => {
   assert.doesNotMatch(styles, /\.section-code::before/);
 });
 
+test('section boundaries use whitespace while lists retain separators', () => {
+  const sectionShells = [
+    'src/components/blocks/TextBlock.astro',
+    'src/components/studio/ContactSection.astro',
+    'src/components/studio/Footer.astro',
+    'src/components/studio/PageIntro.astro',
+    'src/components/studio/SectionIntro.astro',
+    'src/components/studio/SiteNav.astro',
+    'src/components/work/NextProject.astro',
+  ].map(read).join('\n');
+  const sectionPages = [
+    'src/pages/contact.astro',
+    'src/pages/index.astro',
+    'src/pages/profile.astro',
+    'src/pages/work/[slug].astro',
+  ].map(read).join('\n');
+  const global = read('src/styles/global.css');
+  const interactions = read('src/styles/interactions.css');
+
+  assert.doesNotMatch(sectionShells, /\bborder-(?:t|b|y)\b|scroll-rule/);
+  assert.doesNotMatch(sectionPages, /\bborder-t\b/);
+  assert.doesNotMatch(global, /\.section-plane\s*\{[^}]*border-/s);
+  assert.doesNotMatch(interactions, /\.studio-statement__track\s*\{[^}]*border-/s);
+  assert.match(global, /\.editorial-grid,[\s\S]*?border-top/);
+  assert.match(global, /\[data-editorial-row\][\s\S]*?border-bottom/);
+  assert.match(read('src/components/work/ProjectGrid.astro'), /<dl[^>]*border-t/);
+});
+
 test('the background is a deforming kinetic canvas', () => {
   const componentPath = 'src/components/studio/KineticCanvas.astro';
   const scriptPath = 'src/scripts/features/kinetic-canvas.js';
@@ -57,6 +85,9 @@ test('the background is a deforming kinetic canvas', () => {
   assert.match(script, /function buildRow/);
   assert.match(script, /function buildColumn/);
   assert.match(script, /function deformPoint/);
+  assert.match(script, /const repelX = pointerDx \* repulsionInfluence/);
+  assert.match(script, /foldX \* fold \+ repelX \* pointer\.active/);
+  assert.doesNotMatch(script, /pointerPull/);
   assert.match(script, /function drawForegroundPath/);
   assert.match(script, /foregroundContext/);
   assert.match(script, /const foregroundLifts =[\s\S]*?electricPulses\.render/);
@@ -98,14 +129,35 @@ test('primary collections are rendered as editorial rows', () => {
   assert.doesNotMatch(sources, /rounded-|shadow-|bg-white\/\[/);
 });
 
+test('alternating project media uses one desktop column start at a time', () => {
+  const projectGrid = read('src/components/work/ProjectGrid.astro');
+
+  assert.match(projectGrid, /index % 2 === 1 \? 'lg:col-start-1' : 'lg:col-start-8'/);
+  assert.doesNotMatch(projectGrid, /lg:col-start-8'\s*,\s*index % 2 === 1/);
+});
+
 test('the homepage communicates the offer through a pointer-driven ASCII fluid field', () => {
   const home = read('src/pages/index.astro');
   const field = read('src/scripts/features/service-field.js');
+  const space = read('src/styles/space.css');
 
-  assert.match(home, />Sitios\.<\/span>/);
-  assert.match(home, />Sistemas\.<\/span>/);
-  assert.match(home, />Automatización\.<\/span>/);
-  assert.match(home, /<h2[^>]*>Qué ofrezco<\/h2>/);
+  assert.match(home, />Estudio de diseño<\/span>/);
+  assert.match(home, />e ingeniería<\/span>/);
+  assert.match(home, />digital\.<\/span>/);
+  assert.match(home, /Somos un equipo de ingenieros y diseñadores\./);
+  assert.match(home, /Creamos sitios, sistemas y automatizaciones para proyectos y organizaciones/);
+  assert.match(home, /para que el diseño y la ingeniería sean su ventaja\./);
+  assert.doesNotMatch(home, />Sitios\.|>Sistemas\.|>Automatización\./);
+  assert.match(home, /<section class="home-hero">/);
+  assert.doesNotMatch(home, /<Container class="mt-24 sm:mt-32 lg:mt-40">/);
+  assert.match(space, /\.home-hero\s*\{[^}]*min-height:\s*calc\(100dvh - 6\.25rem\)/s);
+  assert.match(space, /\.home-hero__copy\s*\{[^}]*align-self:\s*center/s);
+  assert.match(space, /\.home-hero__title\s*\{[^}]*clamp\(3\.75rem, min\(9vw, 22dvh\), 11rem\)/s);
+  assert.doesNotMatch(space, /\.home-hero__title-(?:accent|tail)/);
+  assert.match(space, /@media \(min-width: 900px\)[\s\S]*?\.home-hero__intro\s*\{[^}]*grid-column:\s*9 \/ -1/s);
+  assert.match(space, /\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, max\(44vw, 62dvh\), 44rem\)/s);
+  assert.match(space, /@media \(max-width: 720px\)[\s\S]*?\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, 62dvh, 40rem\)/s);
+  assert.match(home, /<h2[^>]*>Qué hacemos<\/h2>/);
   assert.match(home, /data-services-section[\s\S]*<ServiceField \/>[\s\S]*<Container/);
   assert.match(home, /data-service-explorer/);
   assert.match(home, /data-service-row/);
@@ -116,6 +168,22 @@ test('the homepage communicates the offer through a pointer-driven ASCII fluid f
   assert.match(field, /pointermove/);
   assert.match(field, /IntersectionObserver/);
   assert.doesNotMatch(field, /pointerenter|focusin|targetMode|setMode/);
+});
+
+test('directional links use the shared SVG arrow instead of text glyphs', () => {
+  const arrow = read('src/components/studio/ArrowRightIcon.astro');
+  const sources = [
+    'src/components/studio/Button.astro',
+    'src/components/studio/SiteNav.astro',
+    'src/pages/index.astro',
+  ].map(read).join('\n');
+
+  assert.match(arrow, /inline-flex shrink-0 items-center justify-center/);
+  assert.match(arrow, /size === 'sm' \? 'size-4' : 'size-5'/);
+  assert.match(arrow, /M16\.72 7\.72a\.75\.75/);
+  assert.match(arrow, /fill="currentColor"/);
+  assert.match(sources, /<ArrowRightIcon/);
+  assert.doesNotMatch(sources, />-&gt;<|>-&gt;</);
 });
 
 test('the homepage introduces the studio with a scroll-driven statement before services', () => {
@@ -131,21 +199,61 @@ test('the homepage introduces the studio with a scroll-driven statement before s
   const main = read('src/scripts/main.js');
   const layout = read('src/layouts/Layout.astro');
   const interactions = read('src/styles/interactions.css');
-  const statement = "edd n'dev nació para desarrollar ideas propias. Hoy seguimos uniendo al equipo adecuado para hacer realidad soluciones.";
+  const statement = "edd n'dev nació para desarrollar ideas propias. Hoy es también un estudio para construir productos y colaborar con otros equipos desde la idea hasta su publicación.";
 
   assert.ok(home.indexOf('<StudioStatement />') < home.indexOf('<section id="services"'));
   assert.ok(component.includes(statement));
   assert.match(component, /data-studio-statement/);
   assert.match(component, /data-studio-word/);
+  assert.match(component, /data-studio-accent-anchor/);
+  assert.match(component, /studio-statement__accent-group/);
+  assert.match(component, /anchor: 'equipos', kind: 'team'/);
+  assert.match(component, /data-studio-accent/);
+  assert.match(component, /data-studio-accent-word/);
+  assert.match(component, /data-studio-scrub-start/);
+  assert.match(component, /<feGaussianBlur stdDeviation="1\.35"/);
+  assert.match(component, /<feGaussianBlur stdDeviation="14\.4"/);
+  assert.match(component, /#3ea8ff[\s\S]*?#53dfc3[\s\S]*?#a7f3d0/);
+  assert.match(component, /M12 \.75a8\.25 8\.25/);
+  assert.match(component, /M64\.12,147\.8a4,4/);
   assert.match(component, /class="sr-only"/);
   assert.match(animation, /gsap\.timeline/);
   assert.match(animation, /scrub:\s*true/);
-  assert.match(animation, /end:\s*'bottom 60%'/);
+  assert.match(animation, /trigger:\s*scrollStartWord/);
+  assert.match(animation, /start:\s*'top 80%'/);
+  assert.match(animation, /endTrigger:\s*section/);
+  assert.match(animation, /end:\s*'bottom 80%'/);
   assert.match(animation, /prefersReduced/);
+  assert.match(animation, /accentGroups\.map/);
+  assert.match(animation, /const leadWords = words\.slice\(0, scrubStartIndex\)/);
+  assert.match(animation, /const scrubWords = words\.slice\(scrubStartIndex\)/);
+  assert.match(animation, /const scrollStartWord = scrubWords\[0\] \|\| section/);
+  assert.match(animation, /gsap\.set\(leadWords, \{ color: complete \}\)/);
+  assert.match(animation, /scrubWords\.forEach/);
+  assert.match(animation, /words\.slice\(accentWordIndex\)/);
+  assert.match(animation, /controller\.anchorIndex - scrubStartIndex \+ 1/);
+  assert.match(animation, /Math\.max\(0\.001, revealAt \/ timeline\.duration\(\)\)/);
+  assert.match(animation, /applyTailOffsets/);
+  assert.match(animation, /offsets\.set\(word, \(offsets\.get\(word\) \|\| 0\) - hiddenPush\)/);
+  assert.match(animation, /controller\.accentWord\.offsetLeft - controller\.group\.offsetLeft/);
+  assert.match(animation, /gsap\.timeline\(\{ paused: true \}\)/);
+  assert.match(animation, /onUpdate:\s*\(\{ progress \}\) => syncAccents\(progress\)/);
+  assert.match(animation, /controller\.motion\.play\(\)/);
+  assert.match(animation, /controller\.motion\.reverse\(\)/);
+  assert.match(animation, /refreshAccentGeometry/);
+  assert.match(animation, /scale:\s*1, rotation:\s*0, duration:\s*0\.92, ease:\s*'sine\.inOut'/);
+  assert.match(animation, /autoAlpha:\s*1, duration:\s*0\.48, ease:\s*'sine\.out'[\s\S]*?0\.38,/);
+  assert.match(animation, /layoutProgress:\s*1, duration:\s*0\.56, ease:\s*'sine\.inOut'/);
   assert.match(main, /initStudioStatement/);
   assert.match(layout, /page-surface[^"\n]*overflow-x-clip/);
   assert.doesNotMatch(layout, /page-surface[^"\n]*overflow-hidden/);
   assert.match(interactions, /\.studio-statement__layout/);
+  assert.match(interactions, /\.studio-statement__accent-group\s*\{[^}]*white-space:\s*nowrap/s);
+  assert.match(interactions, /\.studio-statement__word\s*\{[^}]*display:\s*inline-block/s);
+  assert.match(interactions, /\.studio-statement__accent\s*\{[^}]*inline-size:[^}]*opacity:\s*0/s);
+  assert.doesNotMatch(interactions, /\.studio-statement__accent\s*\{[^}]*margin-inline-end/s);
+  assert.match(interactions, /\.studio-statement__accent--team\s*\{[^}]*inline-size:\s*1em/s);
+  assert.match(interactions, /\.studio-statement__accent-symbol\s*\{[^}]*overflow:\s*visible/s);
   assert.doesNotMatch(interactions, /\.studio-statement__[^{]+\{[^}]*position:\s*sticky/);
 });
 
@@ -154,6 +262,7 @@ test('focused interface files remain maintainable', () => {
     'src/styles/global.css',
     'src/styles/space.css',
     'src/components/studio/KineticCanvas.astro',
+    'src/components/studio/ArrowRightIcon.astro',
     'src/components/studio/StudioStatement.astro',
     'src/scripts/features/kinetic-canvas.js',
     'src/scripts/animations/studio-statement.js',

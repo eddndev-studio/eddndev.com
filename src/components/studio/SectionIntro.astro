@@ -16,8 +16,7 @@ const hasLede = Astro.slots.has('default');
 ---
 
 <Container class={className} {...rest}>
-  <FadeIn class="scroll-shift relative grid grid-cols-1 gap-x-8 pt-9 lg:grid-cols-12">
-    <span class="scroll-rule absolute top-0 left-0 h-px w-full bg-white/20" aria-hidden="true"></span>
+  <FadeIn class="scroll-shift relative grid grid-cols-1 gap-x-8 lg:grid-cols-12">
     <h2 class="lg:col-span-8">
       {eyebrow && (
         <>
@@ -35,7 +34,7 @@ const hasLede = Astro.slots.has('default');
       </span>
     </h2>
     {hasLede && (
-      <div class="mt-10 border-t border-white/15 pt-6 text-lg text-neutral-700 lg:col-span-4 lg:col-start-9 lg:mt-14">
+      <div class="mt-10 text-lg text-neutral-700 lg:col-span-4 lg:col-start-9 lg:mt-14">
         <slot />
       </div>
     )}

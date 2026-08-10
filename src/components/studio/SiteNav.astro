@@ -3,10 +3,11 @@ import Container from './Container.astro';
 import Button from './Button.astro';
 import Brand from './Brand.astro';
 import SocialMedia from './SocialMedia.astro';
+import ArrowRightIcon from './ArrowRightIcon.astro';
 
 const rows = [
   [{ code: '01', label: 'Trabajo', href: '/work' }, { code: '02', label: 'Servicios', href: '/services' }],
-  [{ code: '03', label: 'Automatización', href: '/automation' }, { code: '04', label: 'Perfil', href: '/profile' }],
+  [{ code: '03', label: 'Automatización', href: '/automation' }, { code: '04', label: 'Estudio', href: '/profile' }],
 ];
 ---
 <header>
@@ -45,7 +46,7 @@ const rows = [
   >
     <div class="bg-[var(--night)]">
       <!-- Inverted bar with close control -->
-      <div class="border-b border-white/15 pt-12 pb-12 sm:pt-14 sm:pb-16">
+      <div class="pt-12 pb-12 sm:pt-14 sm:pb-16">
         <Container>
           <div class="flex items-center justify-between">
             <Brand brand />
@@ -83,7 +84,7 @@ const rows = [
                     <span class="section-code">{item.code}</span>
                     <span class="flex items-end justify-between gap-6">
                       <span class="type-wide text-[clamp(2.5rem,6vw,5.5rem)] leading-none transition-transform duration-500 group-hover:translate-x-2">{item.label}</span>
-                      <span class="mb-1 text-xl text-neutral-500 transition duration-300 group-hover:translate-x-1 group-hover:text-white" aria-hidden="true">-&gt;</span>
+                      <ArrowRightIcon class="mb-1 text-neutral-500 transition duration-300 group-hover:translate-x-1 group-hover:text-white" />
                     </span>
                   </a>
                 ))}
@@ -94,7 +95,7 @@ const rows = [
       </nav>
 
       <!-- Contact and social links -->
-      <div class="relative mt-3 border-t border-white/15">
+      <div class="relative mt-3">
         <Container>
           <div class="grid grid-cols-1 gap-y-10 pt-10 pb-16 sm:grid-cols-2 sm:pt-16">
             <div>
@@ -115,7 +116,7 @@ const rows = [
               </ul>
             </div>
             <div class="sm:border-l sm:border-transparent sm:pl-16">
-              <h2 class="font-display text-base font-semibold text-white">Sígueme</h2>
+              <h2 class="font-display text-base font-semibold text-white">Redes</h2>
               <SocialMedia class="mt-6" invert />
             </div>
           </div>

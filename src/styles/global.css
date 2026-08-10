@@ -157,7 +157,6 @@ body::before {
 .section-plane {
   position: relative;
   background: rgba(20, 17, 25, 0.72);
-  border-block: 1px solid var(--hairline);
 }
 
 .cut-corner {

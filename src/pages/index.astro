@@ -4,11 +4,11 @@ import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
 import FadeInStagger from '../components/studio/FadeInStagger.astro';
-import Button from '../components/studio/Button.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
 import ServiceField from '../components/studio/ServiceField.astro';
 import StudioStatement from '../components/studio/StudioStatement.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
+import ArrowRightIcon from '../components/studio/ArrowRightIcon.astro';
 import ProjectGrid from '../components/work/ProjectGrid.astro';
 import { services } from '../data/services';
 
@@ -26,29 +26,32 @@ const ordered = preferredOrder
 ---
 
 <Layout
-  title="edd n' dev | Desarrollo de software independiente"
-  description="Diseño y construyo sitios medibles, sistemas operativos y automatizaciones con alcance, pruebas y seguimiento claros."
+  title="edd n' dev | Estudio de diseño y software"
+  description="Diseñamos y construimos sitios, automatizaciones y software para presentar una oferta, ordenar un proceso o lanzar un producto."
 >
-  <Container class="mt-24 sm:mt-32 lg:mt-40">
-    <FadeIn class="relative grid min-h-[50rem] grid-cols-1 content-start gap-x-8 lg:min-h-[55rem] lg:grid-cols-12">
-      <div class="relative lg:col-span-12">
-        <p class="section-code">Desarrollo independiente / México / Proyectos selectos</p>
-        <h1 class="type-wide mt-12 font-display text-[clamp(3rem,12.5vw,11rem)] leading-[0.76] font-medium tracking-[-0.07em] text-white sm:text-[clamp(4rem,11.5vw,11rem)]">
-          <span class="block">Sitios.</span>
-          <span class="block lg:ml-[16vw]">Sistemas.</span>
-          <span class="block text-[var(--signal-on-dark)]">Automatización.</span>
-        </h1>
-      </div>
-      <div class="relative mt-16 border-t border-white/20 pt-6 lg:col-span-4 lg:col-start-8 lg:mt-20">
-        <p class="text-xl text-neutral-700">Soy Eduardo. Diseño y construyo productos digitales para negocios que necesitan ordenar un proceso, atender mejor o lanzar una idea propia.</p>
-        <p class="mt-5 text-base text-neutral-500">El alcance, la evidencia y la responsabilidad quedan visibles desde el inicio.</p>
-        <div class="mt-8 flex flex-wrap items-center gap-6">
-          <Button href="/contact">Platicar una necesidad</Button>
-          <a href="#work" class="type-narrow border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">Ver trabajo verificable</a>
+  <section class="home-hero">
+    <Container class="home-hero__frame">
+      <FadeIn class="home-hero__copy relative">
+        <div class="relative">
+          <p class="section-code">México / Proyectos selectos</p>
+          <div class="home-hero__statement mt-12">
+            <h1 class="home-hero__title type-wide font-display font-medium text-white">
+              <span class="block">Estudio de diseño</span>
+              <span class="block text-[var(--signal-on-dark)]">e ingeniería</span>
+              <span class="block text-[var(--signal-on-dark)]">digital.</span>
+            </h1>
+            <p class="home-hero__intro">
+              <span class="home-hero__intro-team">Somos un equipo de ingenieros y diseñadores.</span>
+              <span>
+                Creamos sitios, sistemas y automatizaciones para proyectos y organizaciones
+                <strong>para que el diseño y la ingeniería sean su ventaja.</strong>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
-    </FadeIn>
-  </Container>
+      </FadeIn>
+    </Container>
+  </section>
 
   <StudioStatement />
 
@@ -58,9 +61,9 @@ const ordered = preferredOrder
       <FadeIn class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
         <div class="lg:col-span-8">
           <p class="section-code">Servicios</p>
-          <h2 class="type-wide mt-8 max-w-5xl font-display text-[clamp(3rem,7vw,7.5rem)] leading-[0.84] font-medium tracking-[-0.06em] text-white">Qué ofrezco</h2>
+          <h2 class="type-wide mt-8 max-w-5xl font-display text-[clamp(3rem,7vw,7.5rem)] leading-[0.84] font-medium tracking-[-0.06em] text-white">Qué hacemos</h2>
         </div>
-        <p class="max-w-md text-lg text-neutral-700 lg:col-span-4">Diseño, desarrollo y operación para presentar una oferta, conectar herramientas o construir un producto propio.</p>
+        <p class="max-w-md text-lg text-neutral-700 lg:col-span-4">Ayudamos a presentar una oferta, conectar herramientas, automatizar un flujo o construir software propio.</p>
       </FadeIn>
 
       <div data-service-explorer class="service-explorer mt-20">
@@ -82,7 +85,7 @@ const ordered = preferredOrder
                   <p class="max-w-lg text-lg text-neutral-700">{service.tagline}.</p>
                   <p class="type-narrow mt-7 text-xs tracking-[0.08em] text-neutral-500 uppercase">{service.highlights.slice(0, 2).join(' / ')}</p>
                 </div>
-                <span class="service-row__arrow text-sm text-neutral-500" aria-hidden="true">-&gt;</span>
+                <ArrowRightIcon size="sm" class="service-row__arrow text-neutral-500" />
               </a>
             </FadeIn>
           ))}
@@ -91,8 +94,8 @@ const ordered = preferredOrder
     </Container>
   </section>
 
-  <SectionIntro eyebrow="Evidencia" title="Trabajo que se puede revisar." id="work" class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
-    <p>Cada caso indica su estado actual. Los resultados aparecen únicamente cuando existen datos verificables y permiso para publicarlos.</p>
+  <SectionIntro eyebrow="Trabajo" title="Casos que se pueden revisar." id="work" class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
+    <p>Cada caso distingue lo que está publicado, lo que sigue en desarrollo y los resultados que ya cuentan con datos compartibles.</p>
   </SectionIntro>
   <Container class="mt-16">
     <ProjectGrid projects={ordered} />
@@ -101,7 +104,7 @@ const ordered = preferredOrder
     </FadeIn>
   </Container>
 
-  <SectionIntro id="pricing" eyebrow="Inversión" title="Tres puntos de entrada." class="mt-24 scroll-mt-20 sm:mt-32 lg:mt-40">
+  <SectionIntro id="pricing" eyebrow="Inversión" title="Puntos de entrada para proyectos web." class="mt-24 scroll-mt-20 sm:mt-32 lg:mt-40">
     <p>Precios base para proyectos web. Comercio, software a medida e integraciones se cotizan después de revisar el proceso.</p>
   </SectionIntro>
   <Container class="mt-16">
@@ -123,5 +126,5 @@ const ordered = preferredOrder
     </FadeIn>
   </Container>
 
-  <ContactSection title="Cuéntame dónde se atasca el trabajo." buttonText="Iniciar conversación" />
+  <ContactSection title="¿Qué necesitas construir o mejorar?" buttonText="Iniciar conversación" />
 </Layout>

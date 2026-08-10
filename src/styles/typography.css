@@ -125,9 +125,9 @@
 
   /* <hr> */
   :where(hr) {
-    border-color: --theme(--color-neutral-950 / 0.1);
-    margin-top: --spacing(24);
-    margin-bottom: --spacing(24);
+    height: 0;
+    border: 0;
+    margin: 0;
   }
 
   /* Inline text */

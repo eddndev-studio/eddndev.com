@@ -39,7 +39,7 @@ const facts = [
 
 const socials = [
   { label: 'LinkedIn', url: 'https://linkedin.com/in/eddndev' },
-  { label: 'GitHub', url: 'https://github.com/eddndev' },
+  { label: 'GitHub', url: 'https://github.com/eddndev-studio' },
   { label: 'Instagram', url: 'https://instagram.com/eddn.dev' },
   { label: 'Achronyme', url: 'https://github.com/achronyme' },
 ];
@@ -47,13 +47,13 @@ const socials = [
 
 <Layout
     title="Contacto | edd n' dev"
-    description="Escríbeme con el proceso actual, el resultado que buscas y las restricciones principales."
+    description="Escríbenos con el proceso actual, el resultado que buscas y las restricciones principales."
     breadcrumbs={[{ name: "Contacto", url: "/contact" }]}
 >
   <!-- HERO -->
-  <PageIntro eyebrow="Primera conversación" title="Cuéntame dónde se atasca el trabajo.">
+  <PageIntro eyebrow="Primera conversación" title="Cuéntanos dónde se atasca el trabajo.">
     <p>
-      Puedes empezar con el proceso actual, el resultado que buscas y una restricción importante. Con eso puedo preparar preguntas útiles y un posible primer alcance.
+      Puedes empezar con el proceso actual, el resultado que buscas y una restricción importante. Con eso podemos preparar preguntas útiles y un posible punto de partida.
     </p>
   </PageIntro>
 
@@ -61,7 +61,7 @@ const socials = [
   <Container class="mt-24 sm:mt-32 lg:mt-40">
     <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-12">
       <div class="lg:col-span-8">
-        <FadeIn class="border-t border-neutral-950/20 pt-8">
+        <FadeIn>
           <h2 class="section-code">Canales directos</h2>
         </FadeIn>
         <div class="editorial-list mt-10 grid grid-cols-1">
@@ -88,7 +88,7 @@ const socials = [
         </div>
       </div>
 
-      <FadeIn class="border-t border-neutral-950/20 pt-8 lg:col-span-3 lg:col-start-10">
+      <FadeIn class="lg:col-span-3 lg:col-start-10">
           <h2 class="section-code">Para empezar</h2>
           <dl class="mt-10 grid grid-cols-1 gap-8">
             {facts.map((fact) => (
@@ -109,7 +109,7 @@ const socials = [
   <!-- ANTES DE ESCRIBIR -->
   <SectionIntro
     eyebrow="Antes de escribir"
-    title="Qué me ayuda a responderte mejor."
+    title="Qué nos ayuda a responderte mejor."
     class="mt-24 sm:mt-32 lg:mt-40"
   >
     <p>Un mensaje breve con estos puntos basta para iniciar. El detalle se construye durante la conversación.</p>
@@ -127,7 +127,7 @@ const socials = [
   <!-- REDES -->
   <SectionIntro
     eyebrow="Redes"
-    title="También me encuentras aquí."
+    title="También nos encuentras aquí."
     class="mt-24 sm:mt-32 lg:mt-40"
   />
   <Container class="mt-12">

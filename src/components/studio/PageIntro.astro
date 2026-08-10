@@ -25,7 +25,7 @@ const { eyebrow, title, centered = false } = Astro.props;
         {title}
       </span>
     </h1>
-    <div class:list={['relative mt-14 max-w-2xl border-t border-white/20 pt-6 text-lg text-neutral-700 sm:text-xl lg:col-span-5 lg:col-start-8 lg:mt-20', centered && 'mx-auto']}>
+    <div class:list={['relative mt-14 max-w-2xl text-lg text-neutral-700 sm:text-xl lg:col-span-5 lg:col-start-8 lg:mt-20', centered && 'mx-auto']}>
       <slot />
     </div>
   </FadeIn>
