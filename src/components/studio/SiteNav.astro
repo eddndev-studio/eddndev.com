@@ -39,14 +39,13 @@ const rows = [
   <div
     id="nav-panel"
     data-nav-panel
-    class="relative z-50 overflow-hidden bg-[var(--void)] pt-2"
-    style="height: 0.5rem"
+    class="fixed inset-0 z-50 h-dvh overflow-x-hidden overflow-y-auto overscroll-contain bg-[var(--void)] pt-2 will-change-transform"
     aria-hidden="true"
     inert
   >
-    <div class="bg-[var(--night)]">
+    <div class="min-h-dvh bg-[var(--night)]">
       <!-- Inverted bar with close control -->
-      <div class="pt-12 pb-12 sm:pt-14 sm:pb-16">
+      <div class="pt-12 pb-8 sm:pt-14 sm:pb-10">
         <Container>
           <div class="flex items-center justify-between">
             <Brand brand />
@@ -69,17 +68,16 @@ const rows = [
       </div>
 
       <!-- Big navigation -->
-      <nav class="py-3 font-display text-5xl font-medium tracking-tight text-white sm:py-5">
+      <nav class="py-1 font-display text-5xl font-medium tracking-tight text-white sm:py-2">
         {rows.map((row) => (
           <div>
             <Container>
-              <div class="editorial-grid grid grid-cols-1 sm:grid-cols-2">
+              <div class="grid grid-cols-1 sm:grid-cols-2">
                 {row.map((item) => (
                   <a
                     href={item.href}
                     data-nav-link
-                    data-editorial-row
-                    class="group relative -mx-2 flex min-h-40 flex-col justify-between overflow-hidden px-2 py-8 sm:mx-0 sm:min-h-52 sm:px-8 sm:py-10 sm:[&:nth-child(odd)]:pl-0"
+                    class="group relative -mx-2 flex min-h-36 flex-col justify-between overflow-hidden px-2 py-6 sm:mx-0 sm:min-h-44 sm:px-8 sm:py-8 sm:[&:nth-child(odd)]:pl-0"
                   >
                     <span class="section-code">{item.code}</span>
                     <span class="flex items-end justify-between gap-6">
@@ -95,9 +93,9 @@ const rows = [
       </nav>
 
       <!-- Contact and social links -->
-      <div class="relative mt-3">
+      <div class="relative mt-1">
         <Container>
-          <div class="grid grid-cols-1 gap-y-10 pt-10 pb-16 sm:grid-cols-2 sm:pt-16">
+          <div class="grid grid-cols-1 gap-y-8 pt-8 pb-10 sm:grid-cols-2 sm:pt-10 sm:pb-12">
             <div>
               <h2 class="font-display text-base font-semibold text-white">Contacto</h2>
               <ul role="list" class="mt-6 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2">
@@ -108,10 +106,6 @@ const rows = [
                 <li>
                   <strong class="text-white">WhatsApp</strong><br />
                   <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">+52 56 1943 3938</a>
-                </li>
-                <li>
-                  <strong class="text-white">Ubicación</strong><br />
-                  CDMX, México, remoto
                 </li>
               </ul>
             </div>

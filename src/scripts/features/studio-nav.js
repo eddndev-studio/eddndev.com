@@ -3,15 +3,7 @@ import { onPageCleanup } from '../core/lifecycle';
 import { lenis } from '../core/lenis';
 import { prefersReduced } from '../core/dom';
 
-/**
- * Studio navigation - a dark panel that expands from an 8px sliver to its full
- * height. The page plane sits below it in normal flow, so animating the panel
- * height produces the push-down movement without manual offsets.
- *
- * Replicates framer-motion's layout animation exactly: the height tween runs
- * framer's defaultLayoutTransition - 0.45s, cubic-bezier(0.4, 0, 0.1, 1).
- */
-const COLLAPSED = '0.5rem';
+const COLLAPSED_EDGE = 8;
 
 export default function initStudioNav() {
   const panel = document.querySelector('[data-nav-panel]');
@@ -21,13 +13,30 @@ export default function initStudioNav() {
   if (!panel || !openBtn || !closeBtn || !bar) return;
 
   const html = document.documentElement;
+  const body = document.body;
   const duration = () => (prefersReduced() ? 0 : 0.45);
   let isOpen = false;
+  let lockedScrollY = 0;
+
+  function collapsedOffset() {
+    return -(panel.clientHeight - COLLAPSED_EDGE);
+  }
 
   function lockScroll(lock) {
-    html.classList.toggle('nav-open', lock);
-    document.body.classList.toggle('nav-open', lock);
-    if (lock) lenis.stop(); else lenis.start();
+    if (lock) {
+      lockedScrollY = window.scrollY;
+      body.style.setProperty('--nav-scroll-offset', `-${lockedScrollY}px`);
+      html.classList.add('nav-open');
+      body.classList.add('nav-open');
+      lenis.stop();
+      return;
+    }
+
+    html.classList.remove('nav-open');
+    body.classList.remove('nav-open');
+    body.style.removeProperty('--nav-scroll-offset');
+    window.scrollTo(0, lockedScrollY);
+    lenis.start();
   }
 
   function open() {
@@ -39,8 +48,9 @@ export default function initStudioNav() {
     bar.setAttribute('aria-hidden', 'true');
     openBtn.setAttribute('aria-expanded', 'true');
     lockScroll(true);
+    panel.scrollTop = 0;
     gsap.killTweensOf(panel);
-    gsap.to(panel, { height: 'auto', duration: duration(), ease: 'framerLayout' });
+    gsap.to(panel, { y: 0, duration: duration(), ease: 'framerLayout' });
     requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
   }
 
@@ -58,10 +68,19 @@ export default function initStudioNav() {
     lockScroll(false);
     gsap.killTweensOf(panel);
     if (instant) {
-      gsap.set(panel, { height: COLLAPSED });
+      gsap.set(panel, { y: collapsedOffset() });
+      panel.scrollTop = 0;
       settleClosed();
     } else {
-      gsap.to(panel, { height: COLLAPSED, duration: duration(), ease: 'framerLayout', onComplete: settleClosed });
+      gsap.to(panel, {
+        y: collapsedOffset(),
+        duration: duration(),
+        ease: 'framerLayout',
+        onComplete: () => {
+          panel.scrollTop = 0;
+          settleClosed();
+        },
+      });
       if (focusOpen) requestAnimationFrame(() => openBtn.focus({ preventScroll: true }));
     }
   }
@@ -93,11 +112,15 @@ export default function initStudioNav() {
   };
   window.addEventListener('keydown', onKey);
 
+  const onResize = () => {
+    if (!isOpen) gsap.set(panel, { y: collapsedOffset() });
+  };
+  window.addEventListener('resize', onResize);
+
   onPageCleanup(() => {
     window.removeEventListener('keydown', onKey);
-    // Never carry a locked scroll into the next page.
-    html.classList.remove('nav-open');
-    document.body.classList.remove('nav-open');
-    lenis.start();
+    window.removeEventListener('resize', onResize);
+    gsap.killTweensOf(panel);
+    if (isOpen) lockScroll(false);
   });
 }

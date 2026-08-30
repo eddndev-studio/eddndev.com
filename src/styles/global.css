@@ -174,8 +174,20 @@ body::before {
   color: var(--starlight);
 }
 
-html.nav-open,
+[data-nav-panel] {
+  transform: translate3d(0, calc(-100% + 0.5rem), 0);
+}
+
+html.nav-open {
+  overflow: hidden;
+}
+
 body.nav-open {
+  position: fixed;
+  top: var(--nav-scroll-offset);
+  right: 0;
+  left: 0;
+  width: 100%;
   overflow: hidden;
 }
 
