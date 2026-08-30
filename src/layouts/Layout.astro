@@ -12,6 +12,7 @@ interface Props {
     image?: string | ImageMetadata;
     project?: { title: string };
     breadcrumbs?: { name: string; url: string }[];
+    noindex?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
     image,
     project,
     breadcrumbs = [],
+    noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -108,7 +110,9 @@ if (typeof resolvedImage === 'string') {
         <!-- SEO / Metadata -->
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={canonicalURL} />
+        {noindex
+            ? <meta name="robots" content="noindex, follow" />
+            : <link rel="canonical" href={canonicalURL} />}
         <meta name="generator" content={Astro.generator} />
         <meta name="theme-color" content="#0b0910" />
 

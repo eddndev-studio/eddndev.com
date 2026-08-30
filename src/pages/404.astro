@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/studio/Container.astro';
+---
+
+<Layout
+  title="Página no encontrada | edd n' dev"
+  description="La dirección solicitada no existe en eddndev.com."
+  noindex
+>
+  <Container class="flex min-h-[65vh] flex-col justify-center py-24 sm:py-32">
+    <p class="section-code">Error 404</p>
+    <h1 class="type-wide mt-8 max-w-5xl font-display text-[clamp(3.5rem,9vw,8rem)] leading-[0.84] font-medium tracking-[-0.06em] text-white">
+      Página no encontrada.
+    </h1>
+    <p class="mt-10 max-w-xl text-lg text-neutral-400">
+      La dirección cambió o dejó de formar parte del sitio.
+    </p>
+    <a href="/" class="type-narrow mt-10 w-fit border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">
+      Volver al inicio
+    </a>
+  </Container>
+</Layout>
