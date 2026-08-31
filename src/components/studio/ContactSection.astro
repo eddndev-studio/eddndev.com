@@ -22,21 +22,21 @@ const hasLede = Astro.slots.has('default');
       <div class="lg:col-span-7">
         <p class="section-code">Siguiente paso</p>
         <h2 class="type-wide mt-10 font-display text-[clamp(2.75rem,6vw,6.5rem)] leading-[0.9] font-medium tracking-[-0.045em] text-balance text-white">{title}</h2>
-        {hasLede && <div class="mt-8 max-w-xl text-lg text-neutral-300"><slot /></div>}
+        {hasLede && <div class="mt-8 max-w-xl text-xl text-neutral-300"><slot /></div>}
         <div class="mt-10 flex">
           <Button href={buttonHref} invert>{buttonText}</Button>
         </div>
       </div>
       <div class="mt-16 lg:col-span-4 lg:col-start-9 lg:mt-0">
           <h3 class="section-code">Contacto directo</h3>
-          <ul role="list" class="mt-10 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2 lg:grid-cols-1">
+          <ul role="list" class="mt-10 grid grid-cols-1 gap-8 text-base text-neutral-300 sm:grid-cols-2 lg:grid-cols-1">
             <li>
               <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Correo</strong>
               <a href="mailto:contacto@eddndev.com" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">contacto@eddndev.com</a>
             </li>
             <li>
               <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">WhatsApp</strong>
-              <a href="https://wa.me/525619433938" target="_blank" rel="noopener noreferrer" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">+52 56 1943 3938</a>
+              <a href="https://wa.me/525560223906" target="_blank" rel="noopener noreferrer" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">+52 55 6022 3906</a>
             </li>
             <li>
               <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Ubicación</strong>

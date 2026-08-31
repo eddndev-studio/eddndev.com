@@ -278,6 +278,7 @@ test('focused interface files remain maintainable', () => {
     'src/components/studio/KineticStatementIcon.astro',
     'src/scripts/features/kinetic-canvas.js',
     'src/scripts/animations/kinetic-statements.js',
+    'src/scripts/animations/studio-services-transition.js',
     'src/scripts/animations/service-perforations.js',
     'src/components/work/ProjectGrid.astro',
     'src/pages/index.astro',

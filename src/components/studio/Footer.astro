@@ -44,7 +44,7 @@ const columns = [
         <h2 class="type-wide mt-10 font-display text-5xl leading-[0.94] font-medium tracking-[-0.04em] text-white sm:text-6xl">
           Empecemos por el trabajo actual.
         </h2>
-        <p class="mt-7 max-w-md text-neutral-300">Cuéntanos qué ocurre hoy, qué resultado buscas y qué restricciones ya conoces. Con eso podemos preparar el siguiente paso.</p>
+        <p class="mt-7 max-w-md text-lg text-neutral-300">Cuéntanos qué ocurre hoy, qué resultado buscas y qué restricciones ya conoces. Con eso podemos preparar el siguiente paso.</p>
         <div class="mt-8"><Button href="/contact">Iniciar conversación</Button></div>
       </div>
       <nav class="lg:col-span-6 lg:col-start-7">
@@ -52,7 +52,7 @@ const columns = [
           {columns.map((section) => (
             <li data-editorial-row class="min-h-56 py-6 sm:px-6 sm:first:pl-0 sm:last:pr-0">
               <div class="section-code">{section.title}</div>
-              <ul role="list" class="mt-10 text-sm text-neutral-300">
+              <ul role="list" class="mt-10 text-base text-neutral-300">
                 {section.links.map((link) => (
                   <li class="mt-4 first:mt-0">
                     <a href={link.href} class="transition-colors hover:text-[var(--aurora)]">{link.title}</a>
@@ -66,7 +66,7 @@ const columns = [
     </div>
     <div class="mt-20 grid grid-cols-1 items-end gap-6 sm:grid-cols-2">
       <Brand />
-      <p class="type-narrow text-sm text-neutral-300 sm:text-right">(c) 2020-{currentYear} eddndev. Todos los derechos reservados.</p>
+      <p class="type-narrow text-base text-neutral-300 sm:text-right">(c) 2020-{currentYear} eddndev. Todos los derechos reservados.</p>
     </div>
   </FadeIn>
 </Container>

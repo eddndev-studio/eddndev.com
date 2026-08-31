@@ -4,6 +4,7 @@
   --service-meta: var(--night);
 
   position: relative;
+  z-index: 2;
   isolation: isolate;
   background: var(--color-brand);
   color: var(--service-heading);
@@ -163,7 +164,8 @@
 
 .service-scene__tagline {
   color: var(--service-body);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
+  line-height: 1.8rem;
 }
 
 .service-scene__highlights {
@@ -171,6 +173,7 @@
   color: var(--service-meta);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+  line-height: 1rem;
   text-transform: uppercase;
 }
 
@@ -259,11 +262,12 @@
   }
 
   .service-scene__tagline {
-    font-size: 0.95rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .service-scene__highlights {
-    font-size: 0.67rem;
+    font-size: 0.75rem;
   }
 
   .service-scene__arrow {

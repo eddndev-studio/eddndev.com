@@ -29,7 +29,7 @@
   gap: 0.7rem;
   margin-top: clamp(1.75rem, 4vw, 3rem);
   color: var(--moonlight);
-  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  font-size: clamp(1.125rem, 1.15vw, 1.25rem);
   line-height: 1.5;
 }
 

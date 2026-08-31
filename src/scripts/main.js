@@ -5,6 +5,7 @@ import { startLifecycle } from './core/lifecycle';
 import initStudioNav from './features/studio-nav';
 import initKineticCanvas from './features/kinetic-canvas';
 import initStudioReveals from './animations/studio-reveals';
+import initStudioServicesTransition from './animations/studio-services-transition';
 import initKineticStatements from './animations/kinetic-statements';
 import initServicePerforations from './animations/service-perforations';
 
@@ -12,6 +13,7 @@ import initServicePerforations from './animations/service-perforations';
 startLifecycle([
   initStudioNav,
   initKineticCanvas,
+  initStudioServicesTransition,
   initKineticStatements,
   initServicePerforations,
   initStudioReveals,
