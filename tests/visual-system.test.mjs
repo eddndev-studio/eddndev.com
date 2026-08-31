@@ -151,7 +151,7 @@ test('the homepage communicates the offer through an editorial perforated field'
   assert.doesNotMatch(home, />Sitios\.|>Sistemas\.|>Automatización\./);
   assert.match(home, /<section class="home-hero">/);
   assert.doesNotMatch(home, /<Container class="mt-24 sm:mt-32 lg:mt-40">/);
-  assert.match(space, /\.home-hero\s*\{[^}]*min-height:\s*calc\(100dvh - 6\.25rem\)/s);
+  assert.match(space, /\.home-hero\s*\{[^}]*min-height:\s*100dvh/s);
   assert.match(space, /\.home-hero__copy\s*\{[^}]*align-self:\s*center/s);
   assert.match(space, /\.home-hero__title\s*\{[^}]*clamp\(3\.75rem, min\(9vw, 22dvh\), 11rem\)/s);
   assert.doesNotMatch(space, /\.home-hero__title-(?:accent|tail)/);

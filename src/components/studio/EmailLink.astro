@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+  'data-nav-link'?: boolean | string;
+}
+
+const { class: className, ...attributes } = Astro.props;
+---
+
+<!--email_off-->
+<a href="mailto:contacto@eddndev.com" class={className} {...attributes}>contacto@eddndev.com</a>
+<!--/email_off-->

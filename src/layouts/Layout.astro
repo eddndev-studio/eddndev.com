@@ -153,9 +153,8 @@ if (typeof resolvedImage === 'string') {
 
         <SiteNav />
 
-        <!-- Normal flow lets the expanding menu push the page plane down. -->
-        <div data-nav-content class="page-surface relative flex flex-auto overflow-x-clip pt-14">
-            <div class="relative isolate flex w-full flex-col pt-9">
+        <div data-nav-content class="page-surface relative flex flex-auto overflow-x-clip">
+            <div class="relative isolate flex w-full flex-col">
                 <KineticCanvas path={Astro.url.pathname} />
                 <main id="main-content" class="relative z-10 w-full flex-auto" data-project-title={project?.title}>
                     <slot />

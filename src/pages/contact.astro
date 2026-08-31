@@ -8,6 +8,7 @@ import List from '../components/studio/List.astro';
 import ListItem from '../components/studio/ListItem.astro';
 import TagList from '../components/studio/TagList.astro';
 import TagListItem from '../components/studio/TagListItem.astro';
+import EmailLink from '../components/studio/EmailLink.astro';
 
 const briefing = [
   'Qué ocurre hoy y en qué momento se detiene el trabajo.',
@@ -27,7 +28,6 @@ const methods = [
     label: 'Chat directo',
     value: '+52 55 6022 3906',
     href: 'https://wa.me/525560223906',
-    external: true,
     detail: 'Útil para una primera pregunta, revisar si hay encaje o coordinar una llamada breve.',
   },
 ];
@@ -69,18 +69,18 @@ const socials = [
             <FadeIn data-editorial-row class="grid grid-cols-1 gap-8 py-9 sm:grid-cols-2 sm:py-11">
               <div>
                 <h3 class="section-code">{method.label}</h3>
-                <a
-                  href={method.href}
-                  {...(method.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  class:list={[
-                    'mt-10 block font-display font-medium text-neutral-950 transition hover:text-brand',
-                    method.label === 'Correo'
-                      ? 'type-narrow whitespace-nowrap text-[clamp(1.25rem,6vw,1.875rem)] tracking-[-0.025em]'
-                      : 'type-wide text-2xl tracking-tight sm:text-3xl',
-                  ]}
-                >
-                  {method.value}
-                </a>
+                {method.label === 'Correo' ? (
+                  <EmailLink class="type-narrow mt-10 block whitespace-nowrap font-display text-[clamp(1.25rem,6vw,1.875rem)] font-medium tracking-[-0.025em] text-neutral-950 transition hover:text-brand" />
+                ) : (
+                  <a
+                    href={method.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="type-wide mt-10 block font-display text-2xl font-medium tracking-tight text-neutral-950 transition hover:text-brand sm:text-3xl"
+                  >
+                    {method.value}
+                  </a>
+                )}
               </div>
               <p class="text-base text-neutral-700 sm:self-end">{method.detail}</p>
             </FadeIn>

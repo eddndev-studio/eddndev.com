@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
-import FadeInStagger from '../components/studio/FadeInStagger.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
 import ServicePerforations from '../components/studio/ServicePerforations.astro';
 import StudioStatement from '../components/studio/StudioStatement.astro';
@@ -11,12 +10,6 @@ import ProcessStatement from '../components/studio/ProcessStatement.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
 import ProjectGrid from '../components/work/ProjectGrid.astro';
 import { services } from '../data/services';
-
-const offers = [
-  { number: '01', title: 'Landing medible', price: 'Desde $20,000 MXN', time: '2 a 3 semanas', body: 'Una página con diseño propio, acciones medibles, publicación y panel privado.' },
-  { number: '02', title: 'Landing de captación', price: 'Desde $35,000 MXN', time: '3 a 5 semanas', body: 'Oferta, formulario con reglas, seguimiento de solicitudes y una integración comercial.' },
-  { number: '03', title: 'Sitio profesional', price: 'Desde $55,000 MXN', time: '5 a 8 semanas', body: 'Varias páginas, contenido administrable, medición y un panel para operar el sitio.' },
-];
 
 const projects = await getCollection('work');
 const preferredOrder = ['ataulfo', 'sylestudio', 'achronyme'];
@@ -79,28 +72,6 @@ const ordered = preferredOrder
   </Container>
 
   <ProcessStatement />
-
-  <SectionIntro id="pricing" eyebrow="Inversión" title="Puntos de entrada para proyectos web." class="mt-24 scroll-mt-20 sm:mt-32 lg:mt-40">
-    <p>Precios base para proyectos web. Comercio, software a medida e integraciones se cotizan después de revisar el proceso.</p>
-  </SectionIntro>
-  <Container class="mt-16">
-    <FadeInStagger class="editorial-list grid grid-cols-1">
-      {offers.map((offer) => (
-        <FadeIn as="article" data-editorial-row class="grid grid-cols-1 gap-x-8 gap-y-5 py-8 sm:grid-cols-2 sm:py-10 lg:grid-cols-12 lg:items-center">
-          <p class="section-code lg:col-span-1">{offer.number}</p>
-          <h3 class="type-wide font-display text-3xl font-semibold text-white lg:col-span-3">{offer.title}</h3>
-          <p class="text-lg text-neutral-700 lg:col-span-4">{offer.body}</p>
-          <div class="sm:text-right lg:col-span-3 lg:col-start-10">
-            <p class="font-display text-xl font-semibold text-white">{offer.price}</p>
-            <p class="mt-1 text-sm text-neutral-500">{offer.time}</p>
-          </div>
-        </FadeIn>
-      ))}
-    </FadeInStagger>
-    <FadeIn class="mt-8 max-w-3xl text-sm text-neutral-600">
-      <p>Los montos son precios de entrada en MXN. Dominio, pauta, suscripciones, contenido especializado e integraciones externas se dimensionan por separado.</p>
-    </FadeIn>
-  </Container>
 
   <ContactSection title="¿Qué necesitas construir o mejorar?" buttonText="Iniciar conversación" />
 </Layout>

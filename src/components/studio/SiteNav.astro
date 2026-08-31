@@ -4,6 +4,7 @@ import Button from './Button.astro';
 import Brand from './Brand.astro';
 import SocialMedia from './SocialMedia.astro';
 import ArrowRightIcon from './ArrowRightIcon.astro';
+import EmailLink from './EmailLink.astro';
 
 const rows = [
   [{ code: '01', label: 'Trabajo', href: '/work' }, { code: '02', label: 'Servicios', href: '/services' }],
@@ -12,7 +13,7 @@ const rows = [
 ---
 <header>
   <!-- Collapsed bar -->
-  <div class="absolute top-2 right-0 left-0 z-40 pt-12 sm:pt-14" data-nav-bar>
+  <div class="absolute top-0 right-0 left-0 z-40 pt-12 sm:pt-14" data-nav-bar>
     <Container>
       <div class="flex items-center justify-between">
         <Brand />
@@ -39,7 +40,7 @@ const rows = [
   <div
     id="nav-panel"
     data-nav-panel
-    class="fixed inset-0 z-50 h-dvh overflow-x-hidden overflow-y-auto overscroll-contain bg-[var(--void)] pt-2 will-change-transform"
+    class="fixed inset-0 z-50 h-dvh overflow-x-hidden overflow-y-auto overscroll-contain bg-[var(--void)] will-change-transform"
     aria-hidden="true"
     inert
   >
@@ -101,7 +102,7 @@ const rows = [
               <ul role="list" class="mt-6 grid grid-cols-1 gap-8 text-sm text-neutral-300 sm:grid-cols-2">
                 <li>
                   <strong class="text-white">Correo</strong><br />
-                  <a href="mailto:contacto@eddndev.com" data-nav-link class="transition hover:text-white">contacto@eddndev.com</a>
+                  <EmailLink data-nav-link class="transition hover:text-white" />
                 </li>
                 <li>
                   <strong class="text-white">WhatsApp</strong><br />
