@@ -25,15 +25,42 @@ test('contact surfaces use the current WhatsApp number', () => {
 });
 
 test('contact surfaces use the studio email domain', () => {
-  const surfaces = [
+  const sourcesOfTruthPaths = [
     'src/pages/contact.astro',
     'src/layouts/Layout.astro',
+    'src/components/studio/EmailLink.astro',
+  ];
+  const sourcesOfTruth = sourcesOfTruthPaths.map(read);
+  const surfaces = [
+    ...sourcesOfTruthPaths,
     'src/components/studio/ContactSection.astro',
     'src/components/studio/SiteNav.astro',
   ].map(read);
 
+  for (const source of sourcesOfTruth) {
+    assert.match(source, /contacto@eddndev\.com/);
+  }
+
   for (const surface of surfaces) {
-    assert.match(surface, /contacto@eddndev\.com/);
     assert.doesNotMatch(surface, /contacto@eddn\.dev/);
+  }
+});
+
+test('public email links opt out of Cloudflare obfuscation without JavaScript', () => {
+  const emailLink = read('src/components/studio/EmailLink.astro');
+  const visibleSurfaces = [
+    'src/pages/contact.astro',
+    'src/components/studio/ContactSection.astro',
+    'src/components/studio/SiteNav.astro',
+  ].map(read);
+
+  assert.match(emailLink, /<!--email_off-->\s*<a\b/s);
+  assert.match(emailLink, /href="mailto:contacto@eddndev\.com"/);
+  assert.match(emailLink, />contacto@eddndev\.com<\/a>\s*<!--\/email_off-->/s);
+  assert.doesNotMatch(emailLink, /data-cfemail|email-decode|javascript:/i);
+
+  for (const surface of visibleSurfaces) {
+    assert.match(surface, /import EmailLink from ['"]\.\.?.*EmailLink\.astro['"]/);
+    assert.match(surface, /<EmailLink\b/);
   }
 });

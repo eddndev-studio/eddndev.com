@@ -2,6 +2,7 @@
 import Container from './Container.astro';
 import FadeIn from './FadeIn.astro';
 import Button from './Button.astro';
+import EmailLink from './EmailLink.astro';
 interface Props {
   title?: string;
   buttonText?: string;
@@ -32,7 +33,7 @@ const hasLede = Astro.slots.has('default');
           <ul role="list" class="mt-10 grid grid-cols-1 gap-8 text-base text-neutral-300 sm:grid-cols-2 lg:grid-cols-1">
             <li>
               <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">Correo</strong>
-              <a href="mailto:contacto@eddndev.com" class="mt-1 block transition hover:text-[var(--signal-on-dark)]">contacto@eddndev.com</a>
+              <EmailLink class="mt-1 block transition hover:text-[var(--signal-on-dark)]" />
             </li>
             <li>
               <strong class="type-narrow block text-xs tracking-[0.12em] text-white uppercase">WhatsApp</strong>
