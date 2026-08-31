@@ -1,0 +1,284 @@
+.service-section {
+  --service-heading: var(--void);
+  --service-body: var(--color-brand-deep);
+  --service-meta: var(--night);
+
+  position: relative;
+  isolation: isolate;
+  background: var(--color-brand);
+  color: var(--service-heading);
+}
+
+.service-section .section-code {
+  color: var(--service-body);
+}
+
+.service-section__title {
+  color: var(--service-heading);
+}
+
+.service-section__intro {
+  color: var(--service-body);
+}
+
+.service-section__content {
+  position: relative;
+  z-index: 1;
+}
+
+.service-perforations {
+  position: relative;
+  margin-top: clamp(5rem, 9vw, 9rem);
+}
+
+.service-perforations__connector {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.service-perforations__connector-path {
+  fill: none;
+  stroke: var(--service-heading);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.service-perforations__scenes {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+}
+
+.service-scene {
+  position: relative;
+  display: flex;
+  min-block-size: clamp(30rem, 68vh, 44rem);
+  align-items: center;
+}
+
+.service-perforations__circle {
+  --perforation-size: clamp(22rem, 34vw, 34rem);
+
+  position: absolute;
+  z-index: 0;
+  top: calc(50% - (var(--perforation-size) / 2));
+  display: block;
+  inline-size: var(--perforation-size);
+  block-size: var(--perforation-size);
+  border: 0;
+  border-radius: 50%;
+  background: var(--void);
+  pointer-events: none;
+}
+
+.service-perforations__icon {
+  position: relative;
+  display: block;
+  inline-size: clamp(18rem, 30vw, 25rem);
+  block-size: clamp(18rem, 30vw, 25rem);
+  color: var(--color-brand);
+}
+
+.service-perforations__viewport-icon {
+  --service-mask-x: 50%;
+  --service-mask-y: 50%;
+  --service-mask-radius: 0px;
+  --service-icon-x: 50%;
+
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  clip-path: circle(
+    var(--service-mask-radius) at var(--service-mask-x) var(--service-mask-y)
+  );
+  pointer-events: none;
+}
+
+.service-perforations__viewport-anchor {
+  position: absolute;
+  left: var(--service-icon-x);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.service-scene[data-perforation-side='left'] .service-perforations__circle {
+  left: clamp(0rem, 2.5vw, 2.5rem);
+}
+
+.service-scene[data-perforation-side='right'] .service-perforations__circle {
+  right: clamp(0rem, 2.5vw, 2.5rem);
+}
+
+.service-scene__copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  inline-size: min(48%, 42rem);
+  min-block-size: 18rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: center;
+  column-gap: 2rem;
+  color: var(--service-heading);
+  text-decoration: none;
+  opacity: 0.88;
+  transition: opacity 320ms ease;
+}
+
+.service-scene[data-perforation-side='left'] .service-scene__copy {
+  margin-inline-start: auto;
+}
+
+.service-scene[data-perforation-side='right'] .service-scene__copy {
+  margin-inline-end: auto;
+}
+
+.service-scene__heading,
+.service-scene__detail {
+  grid-column: 1;
+}
+
+.service-scene__title {
+  margin-top: 2rem;
+  color: var(--service-heading);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.25vw, 5.5rem);
+  font-variation-settings: 'wdth' 112;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.service-scene__detail {
+  max-inline-size: 34rem;
+  margin-top: 2.5rem;
+}
+
+.service-scene__tagline {
+  color: var(--service-body);
+  font-size: 1.125rem;
+}
+
+.service-scene__highlights {
+  margin-top: 1.5rem;
+  color: var(--service-meta);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-scene__arrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  color: var(--service-meta);
+  transition: color 300ms ease, transform 400ms var(--ease-layout);
+}
+
+.service-scene__copy:hover,
+.service-scene__copy:focus-visible {
+  opacity: 1;
+}
+
+.service-scene__copy:hover .service-scene__arrow,
+.service-scene__copy:focus-visible .service-scene__arrow {
+  color: var(--service-heading);
+  transform: translateX(0.4rem);
+}
+
+.service-perforations[data-reveal-ready='true'] .service-perforations__circle,
+.service-perforations[data-reveal-ready='true'] .service-perforations__icon,
+.service-perforations[data-reveal-ready='true'] .service-scene__copy {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 639px) {
+  .service-perforations__connector {
+    display: none;
+  }
+
+  .service-perforations {
+    margin-top: 4rem;
+  }
+
+  .service-scene {
+    min-block-size: clamp(38rem, 96svh, 46rem);
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 3rem;
+  }
+
+  .service-perforations__circle {
+    --perforation-size: clamp(19rem, 88vw, 28rem);
+
+    position: relative;
+    top: auto;
+    order: 2;
+    flex: 0 0 auto;
+    align-self: center;
+    margin-top: 3.5rem;
+  }
+
+  .service-perforations__icon {
+    inline-size: min(68vw, 21rem);
+    block-size: min(68vw, 21rem);
+  }
+
+  .service-scene[data-perforation-side='left'] .service-perforations__circle,
+  .service-scene[data-perforation-side='right'] .service-perforations__circle {
+    left: auto;
+    right: auto;
+  }
+
+  .service-scene__copy {
+    order: 1;
+    inline-size: 100%;
+    min-block-size: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-scene__title {
+    margin-top: 1.5rem;
+    font-size: clamp(1.85rem, 8.25vw, 3.2rem);
+  }
+
+  .service-scene__detail {
+    margin-top: 2rem;
+  }
+
+  .service-scene__tagline {
+    font-size: 0.95rem;
+  }
+
+  .service-scene__highlights {
+    font-size: 0.67rem;
+  }
+
+  .service-scene__arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-perforations__circle,
+  .service-perforations__icon,
+  .service-scene__copy {
+    visibility: visible;
+    opacity: 1;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .service-scene__copy,
+  .service-scene__arrow {
+    transition: none;
+  }
+}

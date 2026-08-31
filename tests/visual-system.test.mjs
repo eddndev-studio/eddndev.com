@@ -58,7 +58,7 @@ test('section boundaries use whitespace while lists retain separators', () => {
   assert.doesNotMatch(sectionShells, /\bborder-(?:t|b|y)\b|scroll-rule/);
   assert.doesNotMatch(sectionPages, /\bborder-t\b/);
   assert.doesNotMatch(global, /\.section-plane\s*\{[^}]*border-/s);
-  assert.doesNotMatch(interactions, /\.studio-statement__track\s*\{[^}]*border-/s);
+  assert.doesNotMatch(interactions, /\.kinetic-statement__track\s*\{[^}]*border-/s);
   assert.match(global, /\.editorial-grid,[\s\S]*?border-top/);
   assert.match(global, /\[data-editorial-row\][\s\S]*?border-bottom/);
   assert.match(read('src/components/work/ProjectGrid.astro'), /<dl[^>]*border-t/);
@@ -137,9 +137,9 @@ test('alternating project media uses one desktop column start at a time', () => 
   assert.doesNotMatch(projectGrid, /lg:col-start-8'\s*,\s*index % 2 === 1/);
 });
 
-test('the homepage communicates the offer through a pointer-driven ASCII fluid field', () => {
+test('the homepage communicates the offer through an editorial perforated field', () => {
   const home = read('src/pages/index.astro');
-  const field = read('src/scripts/features/service-field.js');
+  const perforations = read('src/components/studio/ServicePerforations.astro');
   const space = read('src/styles/space.css');
 
   assert.match(home, />Estudio de diseño<\/span>/);
@@ -159,16 +159,14 @@ test('the homepage communicates the offer through a pointer-driven ASCII fluid f
   assert.match(space, /\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, max\(44vw, 62dvh\), 44rem\)/s);
   assert.match(space, /@media \(max-width: 720px\)[\s\S]*?\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, 62dvh, 40rem\)/s);
   assert.match(home, /<h2[^>]*>Qué hacemos<\/h2>/);
-  assert.match(home, /data-services-section[\s\S]*<ServiceField \/>[\s\S]*<Container/);
-  assert.match(home, /data-service-explorer/);
-  assert.match(home, /data-service-row/);
-  assert.match(field, /ASCII_GLYPHS/);
-  assert.match(field, /function advect/);
-  assert.match(field, /function project/);
-  assert.match(field, /function renderAscii/);
-  assert.match(field, /pointermove/);
-  assert.match(field, /IntersectionObserver/);
-  assert.doesNotMatch(field, /pointerenter|focusin|targetMode|setMode/);
+  assert.match(home, /data-services-section[\s\S]*<Container[\s\S]*<ServicePerforations services={services} \/>/);
+  assert.doesNotMatch(home, /<ServiceField \/>/);
+  assert.match(perforations, /data-service-perforations/);
+  assert.match(perforations, /data-service-scene/);
+  assert.match(perforations, /data-service-row/);
+  assert.match(perforations, /data-service-copy/);
+  assert.match(perforations, /data-perforation-depth/);
+  assert.doesNotMatch(perforations, /canvas|img|picture|video/);
 });
 
 test('directional links use the shared SVG arrow instead of text glyphs', () => {
@@ -188,14 +186,18 @@ test('directional links use the shared SVG arrow instead of text glyphs', () => 
 });
 
 test('the homepage introduces the studio with a scroll-driven statement before services', () => {
-  const componentPath = 'src/components/studio/StudioStatement.astro';
-  const animationPath = 'src/scripts/animations/studio-statement.js';
+  const componentPath = 'src/components/studio/KineticStatement.astro';
+  const iconPath = 'src/components/studio/KineticStatementIcon.astro';
+  const animationPath = 'src/scripts/animations/kinetic-statements.js';
 
   assert.ok(existsSync(join(projectRoot, componentPath)));
+  assert.ok(existsSync(join(projectRoot, iconPath)));
   assert.ok(existsSync(join(projectRoot, animationPath)));
 
   const home = read('src/pages/index.astro');
   const component = read(componentPath);
+  const icons = read(iconPath);
+  const studio = read('src/components/studio/StudioStatement.astro');
   const animation = read(animationPath);
   const main = read('src/scripts/main.js');
   const layout = read('src/layouts/Layout.astro');
@@ -203,20 +205,25 @@ test('the homepage introduces the studio with a scroll-driven statement before s
   const statement = "edd n'dev nació para desarrollar ideas propias. Hoy es también un estudio para construir productos y colaborar con otros equipos desde la idea hasta su publicación.";
 
   assert.ok(home.indexOf('<StudioStatement />') < home.indexOf('<section id="services"'));
-  assert.ok(component.includes(statement));
-  assert.match(component, /data-studio-statement/);
-  assert.match(component, /data-studio-word/);
-  assert.match(component, /data-studio-accent-anchor/);
-  assert.match(component, /studio-statement__accent-group/);
-  assert.match(component, /anchor: 'equipos', kind: 'team'/);
-  assert.match(component, /data-studio-accent/);
-  assert.match(component, /data-studio-accent-word/);
-  assert.match(component, /data-studio-scrub-start/);
-  assert.match(component, /<feGaussianBlur stdDeviation="1\.35"/);
-  assert.match(component, /<feGaussianBlur stdDeviation="14\.4"/);
-  assert.match(component, /#3ea8ff[\s\S]*?#53dfc3[\s\S]*?#a7f3d0/);
-  assert.match(component, /M12 \.75a8\.25 8\.25/);
-  assert.match(component, /M64\.12,147\.8a4,4/);
+  assert.ok(studio.includes(statement));
+  assert.match(component, /data-kinetic-statement/);
+  assert.match(component, /data-kinetic-word/);
+  assert.match(component, /data-kinetic-accent-anchor/);
+  assert.match(component, /kinetic-statement__accent-group/);
+  assert.match(studio, /anchor: 'equipos', kind: 'user-group'/);
+  assert.match(component, /data-kinetic-accent/);
+  assert.match(component, /data-kinetic-accent-word/);
+  assert.match(component, /data-kinetic-scrub-start/);
+  assert.match(component, /idPrefix={`\$\{id\}-\$\{index\}`}/);
+  assert.match(icons, /viewBox="0 0 24 24"/);
+  assert.match(icons, /fill="none"/);
+  assert.match(icons, /data-icon-family="heroicons"/);
+  assert.match(icons, /M12 \.75a8\.25 8\.25/);
+  assert.match(icons, /M8\.25 6\.75a3\.75 3\.75/);
+  assert.match(icons, /<linearGradient/);
+  assert.match(icons, /<feGaussianBlur stdDeviation="1\.35"/);
+  assert.match(icons, /#49adff[\s\S]*?#3ea8ff[\s\S]*?#53dfc3[\s\S]*?#a7f3d0/);
+  assert.doesNotMatch(icons, /stroke=/);
   assert.match(component, /class="sr-only"/);
   assert.match(animation, /gsap\.timeline/);
   assert.match(animation, /scrub:\s*true/);
@@ -243,19 +250,19 @@ test('the homepage introduces the studio with a scroll-driven statement before s
   assert.match(animation, /controller\.motion\.reverse\(\)/);
   assert.match(animation, /refreshAccentGeometry/);
   assert.match(animation, /scale:\s*1, rotation:\s*0, duration:\s*0\.92, ease:\s*'sine\.inOut'/);
-  assert.match(animation, /autoAlpha:\s*1, duration:\s*0\.48, ease:\s*'sine\.out'[\s\S]*?0\.38,/);
+  assert.match(animation, /autoAlpha:\s*1, duration:\s*0\.48, ease:\s*'sine\.out'[\s\S]*?0\.38\)/);
   assert.match(animation, /layoutProgress:\s*1, duration:\s*0\.56, ease:\s*'sine\.inOut'/);
-  assert.match(main, /initStudioStatement/);
+  assert.match(main, /initKineticStatements/);
   assert.match(layout, /page-surface[^"\n]*overflow-x-clip/);
   assert.doesNotMatch(layout, /page-surface[^"\n]*overflow-hidden/);
-  assert.match(interactions, /\.studio-statement__layout/);
-  assert.match(interactions, /\.studio-statement__accent-group\s*\{[^}]*white-space:\s*nowrap/s);
-  assert.match(interactions, /\.studio-statement__word\s*\{[^}]*display:\s*inline-block/s);
-  assert.match(interactions, /\.studio-statement__accent\s*\{[^}]*inline-size:[^}]*opacity:\s*0/s);
-  assert.doesNotMatch(interactions, /\.studio-statement__accent\s*\{[^}]*margin-inline-end/s);
-  assert.match(interactions, /\.studio-statement__accent--team\s*\{[^}]*inline-size:\s*1em/s);
-  assert.match(interactions, /\.studio-statement__accent-symbol\s*\{[^}]*overflow:\s*visible/s);
-  assert.doesNotMatch(interactions, /\.studio-statement__[^{]+\{[^}]*position:\s*sticky/);
+  assert.match(interactions, /\.kinetic-statement__layout/);
+  assert.match(interactions, /\.kinetic-statement__accent-group\s*\{[^}]*white-space:\s*nowrap/s);
+  assert.match(interactions, /\.kinetic-statement__word\s*\{[^}]*display:\s*inline-block/s);
+  assert.match(interactions, /\.kinetic-statement__accent\s*\{[^}]*inline-size:[^}]*opacity:\s*0/s);
+  assert.doesNotMatch(interactions, /\.kinetic-statement__accent\s*\{[^}]*margin-inline-end/s);
+  assert.match(interactions, /\.kinetic-statement__accent\s*\{[^}]*inline-size:\s*0\.84em/s);
+  assert.match(interactions, /\.kinetic-statement__accent-symbol\s*\{[^}]*overflow:\s*visible/s);
+  assert.doesNotMatch(interactions, /\.kinetic-statement__[^{]+\{[^}]*position:\s*sticky/);
 });
 
 test('focused interface files remain maintainable', () => {
@@ -265,8 +272,13 @@ test('focused interface files remain maintainable', () => {
     'src/components/studio/KineticCanvas.astro',
     'src/components/studio/ArrowRightIcon.astro',
     'src/components/studio/StudioStatement.astro',
+    'src/components/studio/ProcessStatement.astro',
+    'src/components/studio/ServicePerforations.astro',
+    'src/components/studio/KineticStatement.astro',
+    'src/components/studio/KineticStatementIcon.astro',
     'src/scripts/features/kinetic-canvas.js',
-    'src/scripts/animations/studio-statement.js',
+    'src/scripts/animations/kinetic-statements.js',
+    'src/scripts/animations/service-perforations.js',
     'src/components/work/ProjectGrid.astro',
     'src/pages/index.astro',
   ];

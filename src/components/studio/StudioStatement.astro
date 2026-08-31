@@ -1,98 +1,16 @@
 ---
-import Container from './Container.astro';
+import KineticStatement from './KineticStatement.astro';
 
 const statement = "edd n'dev nació para desarrollar ideas propias. Hoy es también un estudio para construir productos y colaborar con otros equipos desde la idea hasta su publicación.";
-const words = statement.split(' ');
-const scrubStartIndex = words.indexOf('propias.');
-const accents = [
-  { anchor: 'ideas', kind: 'bulb' },
-  { anchor: 'equipos', kind: 'team' },
-].map((accent) => ({
-  ...accent,
-  anchorIndex: words.indexOf(accent.anchor),
-})).filter(({ anchorIndex }) => anchorIndex >= 0 && anchorIndex < words.length - 1);
-const accentByWordIndex = new Map(accents.map((accent) => [accent.anchorIndex + 1, accent]));
-const accentAnchorIndexes = new Set(accents.map(({ anchorIndex }) => anchorIndex));
 ---
 
-<section id="studio" data-studio-statement class="studio-statement scroll-mt-20" aria-labelledby="studio-statement-label">
-  <Container class="studio-statement__track">
-    <div class="studio-statement__layout">
-      <p id="studio-statement-label" class="section-code studio-statement__label">Estudio</p>
-      <p data-studio-copy class="studio-statement__copy type-wide font-display font-semibold">
-        <span class="sr-only">{statement}</span>
-        <span aria-hidden="true">
-          {words.map((word, index) => accentByWordIndex.has(index) ? (
-            <>
-              <span
-                data-studio-accent-group={accentByWordIndex.get(index)?.kind}
-                data-studio-accent-anchor-index={accentByWordIndex.get(index)?.anchorIndex}
-                class="studio-statement__accent-group"
-              >
-                <span
-                  data-studio-accent
-                  class={`studio-statement__accent studio-statement__accent--${accentByWordIndex.get(index)?.kind}`}
-                >
-                  {accentByWordIndex.get(index)?.kind === 'bulb' ? (
-                    <svg viewBox="0 0 24 24" class="studio-statement__accent-symbol" focusable="false">
-                      <defs>
-                        <linearGradient id="studio-statement-bulb-gradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
-                          <stop offset="0" stop-color="#49adff" />
-                          <stop offset="0.5" stop-color="var(--signal-on-dark)" />
-                          <stop offset="1" stop-color="var(--signal)" />
-                        </linearGradient>
-                        <filter id="studio-statement-bulb-glow" filterUnits="userSpaceOnUse" x="-6" y="-6" width="36" height="36">
-                          <feGaussianBlur stdDeviation="1.35" />
-                        </filter>
-                        <g id="studio-statement-bulb-shape">
-                          <path d="M12 .75a8.25 8.25 0 0 0-4.135 15.39c.686.398 1.115 1.008 1.134 1.623a.75.75 0 0 0 .577.706c.352.083.71.148 1.074.195.323.041.6-.218.6-.544v-4.661a6.714 6.714 0 0 1-.937-.171.75.75 0 1 1 .374-1.453 5.261 5.261 0 0 0 2.626 0 .75.75 0 1 1 .374 1.452 6.712 6.712 0 0 1-.937.172v4.66c0 .327.277.586.6.545.364-.047.722-.112 1.074-.195a.75.75 0 0 0 .577-.706c.02-.615.448-1.225 1.134-1.623A8.25 8.25 0 0 0 12 .75Z" />
-                          <path fill-rule="evenodd" d="M9.013 19.9a.75.75 0 0 1 .877-.597 11.319 11.319 0 0 0 4.22 0 .75.75 0 1 1 .28 1.473 12.819 12.819 0 0 1-4.78 0 .75.75 0 0 1-.597-.876ZM9.754 22.344a.75.75 0 0 1 .824-.668 13.682 13.682 0 0 0 2.844 0 .75.75 0 1 1 .156 1.492 15.156 15.156 0 0 1-3.156 0 .75.75 0 0 1-.668-.824Z" clip-rule="evenodd" />
-                        </g>
-                      </defs>
-                      <use href="#studio-statement-bulb-shape" fill="url(#studio-statement-bulb-gradient)" opacity="0.68" filter="url(#studio-statement-bulb-glow)" />
-                      <use href="#studio-statement-bulb-shape" fill="url(#studio-statement-bulb-gradient)" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 256 256" class="studio-statement__accent-symbol" focusable="false">
-                      <defs>
-                        <linearGradient id="studio-statement-team-gradient" x1="32" y1="224" x2="224" y2="32" gradientUnits="userSpaceOnUse">
-                          <stop offset="0" stop-color="#3ea8ff" />
-                          <stop offset="0.52" stop-color="#53dfc3" />
-                          <stop offset="1" stop-color="#a7f3d0" />
-                        </linearGradient>
-                        <filter id="studio-statement-team-glow" filterUnits="userSpaceOnUse" x="-64" y="-64" width="384" height="384">
-                          <feGaussianBlur stdDeviation="14.4" />
-                        </filter>
-                        <g id="studio-statement-team-shape">
-                          <path d="M64.12,147.8a4,4,0,0,1-4,4.2H16a8,8,0,0,1-7.8-6.17,8.35,8.35,0,0,1,1.62-6.93A67.79,67.79,0,0,1,37,117.51a40,40,0,1,1,66.46-35.8,3.94,3.94,0,0,1-2.27,4.18A64.08,64.08,0,0,0,64,144C64,145.28,64,146.54,64.12,147.8Zm182-8.91A67.76,67.76,0,0,0,219,117.51a40,40,0,1,0-66.46-35.8,3.94,3.94,0,0,0,2.27,4.18A64.08,64.08,0,0,1,192,144c0,1.28,0,2.54-.12,3.8a4,4,0,0,0,4,4.2H240a8,8,0,0,0,7.8-6.17A8.33,8.33,0,0,0,246.17,138.89Zm-89,43.18a48,48,0,1,0-58.37,0A72.13,72.13,0,0,0,65.07,212,8,8,0,0,0,72,224H184a8,8,0,0,0,6.93-12A72.15,72.15,0,0,0,157.19,182.07Z" />
-                        </g>
-                      </defs>
-                      <use href="#studio-statement-team-shape" fill="url(#studio-statement-team-gradient)" opacity="0.68" filter="url(#studio-statement-team-glow)" />
-                      <use href="#studio-statement-team-shape" fill="url(#studio-statement-team-gradient)" />
-                    </svg>
-                  )}
-                </span>
-                <span
-                  data-studio-word
-                  data-studio-accent-word
-                  data-studio-scrub-start={index === scrubStartIndex ? 'true' : undefined}
-                  class="studio-statement__word"
-                >{word}</span>
-              </span>
-              {index < words.length - 1 ? ' ' : ''}
-            </>
-          ) : (
-            <>
-              <span
-                data-studio-word
-                data-studio-accent-anchor={accentAnchorIndexes.has(index) ? 'true' : undefined}
-                class="studio-statement__word"
-              >{word}</span>
-              {index < words.length - 1 ? ' ' : ''}
-            </>
-          ))}
-        </span>
-      </p>
-    </div>
-  </Container>
-</section>
+<KineticStatement
+  id="studio"
+  label="Estudio"
+  statement={statement}
+  scrubStart="propias."
+  accents={[
+    { anchor: 'ideas', kind: 'light-bulb' },
+    { anchor: 'equipos', kind: 'user-group' },
+  ]}
+/>

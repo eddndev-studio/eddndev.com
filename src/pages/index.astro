@@ -5,10 +5,10 @@ import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
 import FadeInStagger from '../components/studio/FadeInStagger.astro';
 import SectionIntro from '../components/studio/SectionIntro.astro';
-import ServiceField from '../components/studio/ServiceField.astro';
+import ServicePerforations from '../components/studio/ServicePerforations.astro';
 import StudioStatement from '../components/studio/StudioStatement.astro';
+import ProcessStatement from '../components/studio/ProcessStatement.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
-import ArrowRightIcon from '../components/studio/ArrowRightIcon.astro';
 import ProjectGrid from '../components/work/ProjectGrid.astro';
 import { services } from '../data/services';
 
@@ -55,42 +55,16 @@ const ordered = preferredOrder
 
   <StudioStatement />
 
-  <section id="services" data-services-section class="service-section section-plane scroll-mt-20 py-24 sm:py-32 lg:py-40">
-    <ServiceField />
+  <section id="services" data-services-section class="service-section scroll-mt-20 py-24 sm:py-32 lg:py-40">
     <Container class="service-section__content">
       <FadeIn class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
         <div class="lg:col-span-8">
           <p class="section-code">Servicios</p>
-          <h2 class="type-wide mt-8 max-w-5xl font-display text-[clamp(3rem,7vw,7.5rem)] leading-[0.84] font-medium tracking-[-0.06em] text-white">Qué hacemos</h2>
+          <h2 class="service-section__title type-wide mt-8 max-w-5xl font-display text-[clamp(3rem,7vw,7.5rem)] leading-[0.84] font-medium tracking-[-0.06em]">Qué hacemos</h2>
         </div>
-        <p class="max-w-md text-lg text-neutral-700 lg:col-span-4">Ayudamos a presentar una oferta, conectar herramientas, automatizar un flujo o construir software propio.</p>
+        <p class="service-section__intro max-w-md text-lg lg:col-span-4">Ayudamos a presentar una oferta, conectar herramientas, automatizar un flujo o construir software propio.</p>
       </FadeIn>
-
-      <div data-service-explorer class="service-explorer mt-20">
-        <FadeInStagger as="ol" class="service-explorer__list editorial-list">
-          {services.map((service, index) => (
-            <FadeIn
-              as="li"
-              data-service-row
-              data-service-index={index}
-              data-editorial-row
-              class="service-row group py-10 sm:py-12"
-            >
-              <a href={`/services#${service.id}`} class="service-row__link">
-                <div class="service-row__heading">
-                  <p class="section-code">{service.number}</p>
-                  <h3 class="type-wide mt-8 font-display text-[clamp(2.4rem,5vw,5rem)] leading-[0.9] font-medium tracking-[-0.045em] text-white">{service.title}</h3>
-                </div>
-                <div class="service-row__detail">
-                  <p class="max-w-lg text-lg text-neutral-700">{service.tagline}.</p>
-                  <p class="type-narrow mt-7 text-xs tracking-[0.08em] text-neutral-500 uppercase">{service.highlights.slice(0, 2).join(' / ')}</p>
-                </div>
-                <ArrowRightIcon size="sm" class="service-row__arrow text-neutral-500" />
-              </a>
-            </FadeIn>
-          ))}
-        </FadeInStagger>
-      </div>
+      <ServicePerforations services={services} />
     </Container>
   </section>
 
@@ -103,6 +77,8 @@ const ordered = preferredOrder
       <a href="/work" class="type-narrow border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">Ver todo el trabajo</a>
     </FadeIn>
   </Container>
+
+  <ProcessStatement />
 
   <SectionIntro id="pricing" eyebrow="Inversión" title="Puntos de entrada para proyectos web." class="mt-24 scroll-mt-20 sm:mt-32 lg:mt-40">
     <p>Precios base para proyectos web. Comercio, software a medida e integraciones se cotizan después de revisar el proceso.</p>

@@ -3,6 +3,7 @@
 @import "./motion.css" layer(components);
 @import "./space.css" layer(components);
 @import "./interactions.css" layer(components);
+@import "./service-perforations.css";
 
 @font-face {
   font-family: 'Mona Sans';
@@ -60,8 +61,8 @@
   --color-neutral-900: #e6e0e9;
   --color-neutral-950: #f1edf4;
 
-  --color-brand: #9e88df;
-  --color-brand-button: #9e88df;
+  --color-brand: #9c7ae6;
+  --color-brand-button: #9c7ae6;
   --color-brand-mid: #b5a6e6;
   --color-brand-deep: #1b1625;
 
