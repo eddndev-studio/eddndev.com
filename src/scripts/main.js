@@ -4,16 +4,16 @@ import { startLifecycle } from './core/lifecycle';
 
 import initStudioNav from './features/studio-nav';
 import initKineticCanvas from './features/kinetic-canvas';
-import initServiceFields from './features/service-field';
 import initStudioReveals from './animations/studio-reveals';
-import initStudioStatement from './animations/studio-statement';
+import initKineticStatements from './animations/kinetic-statements';
+import initServicePerforations from './animations/service-perforations';
 
 // Per-page modules - initialized once per page, reverted on view-transition swap.
 startLifecycle([
   initStudioNav,
   initKineticCanvas,
-  initStudioStatement,
-  initServiceFields,
+  initKineticStatements,
+  initServicePerforations,
   initStudioReveals,
 ]);
 

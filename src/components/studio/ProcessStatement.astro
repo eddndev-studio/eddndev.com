@@ -1,0 +1,33 @@
+---
+import KineticStatement from './KineticStatement.astro';
+
+const statement = 'Cada proyecto empieza por entender el problema. Después definimos el alcance, damos forma al sistema, probamos sus recorridos y publicamos con una operación clara.';
+const stages = [
+  { number: '01', label: 'Entender' },
+  { number: '02', label: 'Diseñar' },
+  { number: '03', label: 'Construir' },
+  { number: '04', label: 'Publicar' },
+];
+---
+
+<KineticStatement
+  id="process"
+  label="Proceso"
+  statement={statement}
+  scrubStart="Después"
+  variant="process"
+  accents={[
+    { anchor: 'alcance,', kind: 'viewfinder-circle' },
+    { anchor: 'sistema,', kind: 'squares-plus' },
+    { anchor: 'publicamos', kind: 'rocket-launch' },
+  ]}
+>
+  <ol slot="footer" class="kinetic-statement__stages" aria-label="Etapas del proceso">
+    {stages.map((stage) => (
+      <li data-kinetic-stage class="kinetic-statement__stage">
+        <span class="kinetic-statement__stage-number">{stage.number}</span>
+        <span class="kinetic-statement__stage-label">{stage.label}</span>
+      </li>
+    ))}
+  </ol>
+</KineticStatement>

@@ -4,22 +4,21 @@ import { prefersReduced } from '../core/dom';
 
 const MUTED = 'rgba(241, 237, 244, 0.18)';
 
-export default function initStudioStatement() {
-  const sections = gsap.utils.toArray('[data-studio-statement]');
-  if (!sections.length) return;
-
-  if (prefersReduced()) return;
+export default function initKineticStatements() {
+  const sections = gsap.utils.toArray('[data-kinetic-statement]');
+  if (!sections.length || prefersReduced()) return;
 
   const rootStyles = getComputedStyle(document.documentElement);
   const active = rootStyles.getPropertyValue('--signal-on-dark').trim() || '#b7a6ec';
   const complete = rootStyles.getPropertyValue('--starlight').trim() || '#f1edf4';
 
   sections.forEach((section) => {
-    const words = gsap.utils.toArray('[data-studio-word]', section);
-    const accentGroups = gsap.utils.toArray('[data-studio-accent-group]', section);
+    const words = gsap.utils.toArray('[data-kinetic-word]', section);
+    const accentGroups = gsap.utils.toArray('[data-kinetic-accent-group]', section);
+    const stages = gsap.utils.toArray('[data-kinetic-stage]', section);
     if (!words.length) return;
 
-    const markedScrubStart = words.findIndex((word) => word.hasAttribute('data-studio-scrub-start'));
+    const markedScrubStart = words.findIndex((word) => word.hasAttribute('data-kinetic-scrub-start'));
     const scrubStartIndex = markedScrubStart >= 0 ? markedScrubStart : 0;
     const leadWords = words.slice(0, scrubStartIndex);
     const scrubWords = words.slice(scrubStartIndex);
@@ -30,10 +29,10 @@ export default function initStudioStatement() {
     gsap.set(leadWords, { color: complete });
 
     const accentControllers = accentGroups.map((group) => {
-      const accent = group.querySelector('[data-studio-accent]');
-      const accentWord = group.querySelector('[data-studio-accent-word]');
+      const accent = group.querySelector('[data-kinetic-accent]');
+      const accentWord = group.querySelector('[data-kinetic-accent-word]');
       const accentWordIndex = words.indexOf(accentWord);
-      const anchorIndex = Number.parseInt(group.dataset.studioAccentAnchorIndex, 10);
+      const anchorIndex = Number.parseInt(group.dataset.kineticAccentAnchorIndex, 10);
 
       if (!accent || !accentWord || accentWordIndex < 0 || !Number.isInteger(anchorIndex)) return null;
 
@@ -119,17 +118,28 @@ export default function initStudioStatement() {
           { scale: 1, rotation: 0, duration: 0.92, ease: 'sine.inOut' },
           0,
         )
-        .to(
-          controller.accent,
-          { autoAlpha: 1, duration: 0.48, ease: 'sine.out' },
-          0.38,
-        )
+        .to(controller.accent, { autoAlpha: 1, duration: 0.48, ease: 'sine.out' }, 0.38)
         .to(
           controller,
           { layoutProgress: 1, duration: 0.56, ease: 'sine.inOut', onUpdate: applyTailOffsets },
           0,
         );
     });
+
+    if (stages.length) {
+      gsap.fromTo(
+        stages,
+        { autoAlpha: 0, y: 20 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.09,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: stages[0], start: 'top 88%', once: true },
+        },
+      );
+    }
 
     refreshAccentGeometry();
     syncAccents(timeline.scrollTrigger.progress);

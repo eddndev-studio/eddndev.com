@@ -1,0 +1,101 @@
+---
+import Container from './Container.astro';
+import KineticStatementIcon from './KineticStatementIcon.astro';
+
+type AccentKind = 'light-bulb' | 'user-group' | 'viewfinder-circle' | 'squares-plus' | 'rocket-launch';
+
+interface Accent {
+  anchor: string;
+  kind: AccentKind;
+}
+
+interface Props {
+  id: string;
+  label: string;
+  statement: string;
+  scrubStart?: string;
+  accents?: Accent[];
+  variant?: 'studio' | 'process';
+  class?: string;
+}
+
+const {
+  id,
+  label,
+  statement,
+  scrubStart,
+  accents = [],
+  variant = 'studio',
+  class: className,
+} = Astro.props;
+const words = statement.split(' ');
+const markedScrubStart = scrubStart ? words.indexOf(scrubStart) : 0;
+const scrubStartIndex = markedScrubStart >= 0 ? markedScrubStart : 0;
+const resolvedAccents = accents.map((accent) => ({
+  ...accent,
+  anchorIndex: words.indexOf(accent.anchor),
+})).filter(({ anchorIndex }) => anchorIndex >= 0 && anchorIndex < words.length - 1);
+const accentByWordIndex = new Map(resolvedAccents.map((accent) => [accent.anchorIndex + 1, accent]));
+const accentAnchorIndexes = new Set(resolvedAccents.map(({ anchorIndex }) => anchorIndex));
+const labelId = `${id}-statement-label`;
+const hasFooter = Astro.slots.has('footer');
+---
+
+<section
+  id={id}
+  data-kinetic-statement
+  class:list={['kinetic-statement scroll-mt-20', `kinetic-statement--${variant}`, className]}
+  aria-labelledby={labelId}
+>
+  <Container class="kinetic-statement__track">
+    <div class="kinetic-statement__layout">
+      <p id={labelId} class="section-code kinetic-statement__label">{label}</p>
+      <p data-kinetic-copy class="kinetic-statement__copy type-wide font-display font-semibold">
+        <span class="sr-only">{statement}</span>
+        <span aria-hidden="true">
+          {words.map((word, index) => accentByWordIndex.has(index) ? (
+            <>
+              <span
+                data-kinetic-accent-group={accentByWordIndex.get(index)?.kind}
+                data-kinetic-accent-anchor-index={accentByWordIndex.get(index)?.anchorIndex}
+                class="kinetic-statement__accent-group"
+              >
+                <span
+                  data-kinetic-accent
+                  class={`kinetic-statement__accent kinetic-statement__accent--${accentByWordIndex.get(index)?.kind}`}
+                >
+                  <KineticStatementIcon
+                    kind={accentByWordIndex.get(index)?.kind as AccentKind}
+                    idPrefix={`${id}-${index}`}
+                  />
+                </span>
+                <span
+                  data-kinetic-word
+                  data-kinetic-accent-word
+                  data-kinetic-scrub-start={index === scrubStartIndex ? 'true' : undefined}
+                  class="kinetic-statement__word"
+                >{word}</span>
+              </span>
+              {index < words.length - 1 ? ' ' : ''}
+            </>
+          ) : (
+            <>
+              <span
+                data-kinetic-word
+                data-kinetic-accent-anchor={accentAnchorIndexes.has(index) ? 'true' : undefined}
+                data-kinetic-scrub-start={index === scrubStartIndex ? 'true' : undefined}
+                class="kinetic-statement__word"
+              >{word}</span>
+              {index < words.length - 1 ? ' ' : ''}
+            </>
+          ))}
+        </span>
+      </p>
+    </div>
+    {hasFooter && (
+      <div data-kinetic-footer class="kinetic-statement__footer">
+        <slot name="footer" />
+      </div>
+    )}
+  </Container>
+</section>
