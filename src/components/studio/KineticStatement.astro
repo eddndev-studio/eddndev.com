@@ -16,6 +16,7 @@ interface Props {
   scrubStart?: string;
   accents?: Accent[];
   variant?: 'studio' | 'process';
+  pinTarget?: string;
   class?: string;
 }
 
@@ -26,6 +27,7 @@ const {
   scrubStart,
   accents = [],
   variant = 'studio',
+  pinTarget,
   class: className,
 } = Astro.props;
 const words = statement.split(' ');
@@ -44,6 +46,7 @@ const hasFooter = Astro.slots.has('footer');
 <section
   id={id}
   data-kinetic-statement
+  data-kinetic-pin-target={pinTarget}
   class:list={['kinetic-statement scroll-mt-20', `kinetic-statement--${variant}`, className]}
   aria-labelledby={labelId}
 >

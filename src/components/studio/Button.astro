@@ -12,7 +12,7 @@ interface Props {
 
 const { href, invert: _invert, brand: _brand, type = 'button', class: className, ...rest } = Astro.props;
 const classes = [
-  'group inline-flex min-h-11 items-center border-b border-white/40 py-2 font-display text-xs font-bold tracking-[0.12em] text-white uppercase transition duration-300 hover:border-brand hover:text-[var(--signal-on-dark)]',
+  'group inline-flex min-h-11 items-center border-b border-white/40 py-2 font-display text-sm font-bold tracking-[0.12em] text-white uppercase transition duration-300 hover:border-brand hover:text-[var(--signal-on-dark)]',
   className,
 ];
 ---

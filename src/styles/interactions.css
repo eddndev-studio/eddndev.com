@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.kinetic-statement[data-kinetic-pin-target] {
+  z-index: 1;
+}
+
 .kinetic-statement--process {
   margin-top: clamp(7rem, 13vw, 13rem);
   background: rgba(20, 17, 25, 0.72);
