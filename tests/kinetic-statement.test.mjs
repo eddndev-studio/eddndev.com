@@ -10,7 +10,7 @@ function read(relativePath) {
   return readFileSync(join(projectRoot, relativePath), 'utf8');
 }
 
-test('the homepage places a kinetic process statement between work and pricing', () => {
+test('the homepage places a kinetic process statement between work and contact', () => {
   const componentPath = 'src/components/studio/ProcessStatement.astro';
 
   assert.ok(existsSync(join(projectRoot, componentPath)));
@@ -20,7 +20,8 @@ test('the homepage places a kinetic process statement between work and pricing',
   const processPosition = home.indexOf('<ProcessStatement />');
 
   assert.ok(processPosition > home.indexOf('<ProjectGrid'));
-  assert.ok(processPosition < home.indexOf('<SectionIntro id="pricing"'));
+  assert.ok(processPosition < home.indexOf('<ContactSection'));
+  assert.doesNotMatch(home, /id="pricing"|eyebrow="Inversión"|const offers =/);
   assert.match(process, /Cada proyecto empieza por entender el problema\./);
   assert.match(process, /Después definimos el alcance, damos forma al sistema, probamos sus recorridos y publicamos con una operación clara\./);
   assert.match(process, /01[\s\S]*Entender/);

@@ -17,7 +17,6 @@ test('homepage marketing copy uses the larger readable type ramp', () => {
 
   assert.match(space, /\.home-hero__intro\s*\{[^}]*font-size:\s*clamp\(1\.125rem, 1\.15vw, 1\.25rem\)/s);
   assert.match(home, /service-section__intro[^"\n]*text-xl/);
-  assert.match(home, /<p class="text-lg text-neutral-700 lg:col-span-4">\{offer\.body\}<\/p>/);
   assert.match(services, /\.service-scene__tagline\s*\{[^}]*font-size:\s*1\.25rem[^}]*line-height:\s*1\.8rem/s);
   assert.match(services, /@media \(max-width: 639px\)[\s\S]*?\.service-scene__tagline\s*\{[^}]*font-size:\s*1\.125rem/s);
   assert.match(services, /@media \(max-width: 639px\)[\s\S]*?\.service-scene__highlights\s*\{[^}]*font-size:\s*0\.75rem/s);
