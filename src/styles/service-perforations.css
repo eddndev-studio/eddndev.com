@@ -83,6 +83,7 @@
   display: block;
   inline-size: clamp(18rem, 30vw, 25rem);
   block-size: clamp(18rem, 30vw, 25rem);
+  overflow: visible;
   color: var(--color-brand);
 }
 
@@ -230,6 +231,10 @@
     block-size: min(68vw, 21rem);
   }
 
+  .service-perforations__viewport-icon {
+    z-index: 1;
+  }
+
   .service-scene[data-perforation-side='left'] .service-perforations__circle,
   .service-scene[data-perforation-side='right'] .service-perforations__circle {
     left: auto;
@@ -237,6 +242,7 @@
   }
 
   .service-scene__copy {
+    z-index: 2;
     order: 1;
     inline-size: 100%;
     min-block-size: 0;

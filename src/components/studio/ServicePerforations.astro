@@ -54,7 +54,10 @@ const iconKinds = {
               class="service-perforations__viewport-anchor"
               data-service-viewport-anchor
             >
-              <ServicePerforationIcon kind={iconKinds[service.id] ?? 'command-line'} />
+              <ServicePerforationIcon
+                kind={iconKinds[service.id] ?? 'command-line'}
+                idPrefix={`service-${service.id}`}
+              />
             </span>
           </span>
           <a
