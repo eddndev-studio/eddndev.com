@@ -176,10 +176,16 @@ body::before {
 }
 
 [data-nav-panel] {
-  transform: translate3d(0, calc(-100% + 0.5rem), 0);
+  scrollbar-width: none;
+  transform: translate3d(0, -100%, 0);
+}
+
+[data-nav-panel]::-webkit-scrollbar {
+  display: none;
 }
 
 html.nav-open {
+  scrollbar-gutter: auto;
   overflow: hidden;
 }
 

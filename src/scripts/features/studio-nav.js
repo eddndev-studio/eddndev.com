@@ -3,8 +3,6 @@ import { onPageCleanup } from '../core/lifecycle';
 import { lenis } from '../core/lenis';
 import { prefersReduced } from '../core/dom';
 
-const COLLAPSED_EDGE = 8;
-
 export default function initStudioNav() {
   const panel = document.querySelector('[data-nav-panel]');
   const openBtn = document.querySelector('[data-nav-open]');
@@ -19,7 +17,7 @@ export default function initStudioNav() {
   let lockedScrollY = 0;
 
   function collapsedOffset() {
-    return -(panel.clientHeight - COLLAPSED_EDGE);
+    return -panel.clientHeight;
   }
 
   function lockScroll(lock) {
@@ -62,6 +60,10 @@ export default function initStudioNav() {
     openBtn.setAttribute('aria-expanded', 'false');
   }
 
+  function focusOpenButton() {
+    requestAnimationFrame(() => openBtn.focus({ preventScroll: true }));
+  }
+
   function close({ instant = false, focusOpen = true } = {}) {
     if (!isOpen) return;
     isOpen = false;
@@ -71,6 +73,7 @@ export default function initStudioNav() {
       gsap.set(panel, { y: collapsedOffset() });
       panel.scrollTop = 0;
       settleClosed();
+      if (focusOpen) focusOpenButton();
     } else {
       gsap.to(panel, {
         y: collapsedOffset(),
@@ -79,9 +82,9 @@ export default function initStudioNav() {
         onComplete: () => {
           panel.scrollTop = 0;
           settleClosed();
+          if (focusOpen) focusOpenButton();
         },
       });
-      if (focusOpen) requestAnimationFrame(() => openBtn.focus({ preventScroll: true }));
     }
   }
 

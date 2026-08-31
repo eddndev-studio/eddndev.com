@@ -1,8 +1,8 @@
 .home-hero {
   display: grid;
-  min-height: calc(100vh - 6.25rem);
-  min-height: calc(100svh - 6.25rem);
-  min-height: calc(100dvh - 6.25rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 }
 
 .home-hero__frame,
