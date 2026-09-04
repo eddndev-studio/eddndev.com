@@ -15,7 +15,7 @@ export const FOOTER_FILM = Object.freeze({
 const wideFilm = Object.freeze({
   ...FOOTER_FILM,
   name: 'wide', minWidth: 640,
-  speed: 12, ignitionDelay: 0.6, extinctionDelay: 0.25,
+  speed: 6, ignitionDelay: 1.2, extinctionDelay: 1.1,
   ignitionDuration: 380, extinctionDuration: 600, morphDuration: 240,
 });
 

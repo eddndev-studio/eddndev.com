@@ -11,7 +11,7 @@ El perfil depende del ancho del dibujo, no del ancho total del navegador.
 | --- | --- | --- | --- |
 | `compact` | Menos de 480 px | 48 × 24 | 4 px/s |
 | `medium` | De 480 a menos de 640 px | 72 × 36 | 6 px/s |
-| `wide` | Desde 640 px | 96 × 48 | 12 px/s |
+| `wide` | Desde 640 px | 96 × 48 | 6 px/s |
 
 ## Controles por perfil
 
@@ -27,8 +27,8 @@ El perfil depende del ancho del dibujo, no del ancho total del navegador.
 | `ledSize`, `pitch` | Definen el diámetro máximo y la distancia entre centros antes del ajuste al contenedor. |
 | `sizes` | Define multiplicadores del diámetro por estado, del borde tenue al núcleo brillante. |
 
-Ledding 2.1 mide los `Delay` en fotogramas de actualización, no en milisegundos.
-La animación trabaja a 30 FPS: `ignitionDelay: 0.6` representa unos 20 ms por fila
+Ledding mide los `Delay` en fotogramas de actualización, no en milisegundos.
+La animación trabaja a 30 FPS: `ignitionDelay: 1.2` representa unos 40 ms por fila
 antes del redondeo a fotogramas. Las filas acumulan ese retraso según la dirección.
 Por ejemplo, cambiar `compact.ignitionDelay` de `0.8` a `0.9` separa más su encendido.
 
@@ -36,11 +36,27 @@ En pantallas pequeñas, conserva tiempo suficiente entre columnas para que los
 LEDs terminen de encenderse. Una velocidad alta, muchos puntos y retrasos largos
 pueden volver a producir parpadeo.
 
+## Cambios de estado durante el desplazamiento
+
+Desde Ledding 2.1.1, el color se interpola desde el tono que ya muestra cada LED,
+independientemente de su opacidad. Un nuevo estado activo durante la espera
+conserva el retraso pendiente de la fila. Si ya está encendiéndose, conserva el
+momento previsto de finalización y se dirige al nuevo tono en el tiempo restante.
+
+Si sale del dibujo antes de empezar a encenderse, cancela ese encendido. Si ya
+empezó, conserva su aspecto durante el retraso de apagado y después se desvanece
+desde ese punto usando `extinctionDuration`. Los estados anteriores no se encolan.
+
+`morphDuration` controla los cambios entre estados activos una vez terminado el
+encendido. El parche conserva la continuidad del color, tamaño y opacidad; no
+garantiza una velocidad de transición constante cuando cambia el objetivo. Un
+cambio de tono muy cerca del final del encendido todavía puede ser rápido.
+
 ## Dirección, patrón y forma
 
 En [`footer-signal-runtime.js`](../src/scripts/features/footer-signal-runtime.js),
 el bloque `animation` controla el desplazamiento hacia la izquierda, la aparición
-en cascada hacia arriba y la desaparición en cascada hacia abajo. El bloque
+en cascada hacia abajo y la desaparición en cascada hacia arriba. El bloque
 `transitions` controla las curvas de suavizado; `pixelRatio: 'auto'` conserva la
 resolución de la pantalla.
 

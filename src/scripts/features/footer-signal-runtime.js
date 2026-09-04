@@ -79,12 +79,12 @@ export function mountFooterSignal(signal, loadLedding = () => import('ledding'))
           scroll: { direction: Directions.TO_LEFT, speed: profile.speed },
           ignition: {
             pattern: Pattern.CASCADE,
-            direction: Directions.TO_TOP,
+            direction: Directions.TO_BOTTOM,
             delay: profile.ignitionDelay,
           },
           extinction: {
             pattern: Pattern.CASCADE,
-            direction: Directions.TO_BOTTOM,
+            direction: Directions.TO_TOP,
             delay: profile.extinctionDelay,
           },
         },

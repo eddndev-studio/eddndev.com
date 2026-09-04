@@ -111,7 +111,7 @@ test('one fixed film scrolls left and only plays while visible', async t => {
   assert.equal(instance.running, false);
   assert.deepEqual(instance.options.artPattern, createFooterFilm());
   assert.equal(instance.options.animation.scroll.direction, 'to-left');
-  assert.equal(instance.options.animation.scroll.speed, 12);
+  assert.equal(instance.options.animation.scroll.speed, 6);
   assert.equal(instance.options.grid.fill, true, 'the moving exposure keeps a persistent LED lattice');
   assert.equal(h.classes.has('is-enhanced'), false, 'fallback remains until a canvas frame exists');
   h.visible();
@@ -150,7 +150,7 @@ test('the film uses fewer, larger dots as its available width decreases', () => 
   assert.equal(getFooterFilmProfile(640).name, wide.name);
 });
 
-test('small films move slowly enough to complete an upward ignition before the next column', async t => {
+test('small films move slowly enough to complete a downward ignition before the next column', async t => {
   for (const width of [290, 480]) {
     await t.test(`${width}px film`, async t => {
       const h = harness(t, { width });
@@ -160,15 +160,15 @@ test('small films move slowly enough to complete an upward ignition before the n
       const columns = artPattern[0].length;
       const pitch = ledSize + ledGap;
       const columnTravelMs = width / ((columns - 1) * pitch + ledSize) * pitch / animation.scroll.speed * 1000;
-      const firstLitRow = artPattern.findIndex(row => row.some(Boolean));
+      const lastLitRow = artPattern.findLastIndex(row => row.some(Boolean));
       const lastIgnitionFrame = AnimationEngine.calculateDelay(
-        { gridPosition: { i: 0, j: firstLitRow } }, columns + 2, rows + 2, animation.ignition,
+        { gridPosition: { i: 0, j: lastLitRow } }, columns + 2, rows + 2, animation.ignition,
       );
       assert.ok(columnTravelMs > Math.ceil(lastIgnitionFrame) / fps * 1000 + transitions.ignition.duration);
       assert.equal(animation.scroll.direction, 'to-left');
-      assert.equal(animation.ignition.direction, 'to-top');
+      assert.equal(animation.ignition.direction, 'to-bottom');
       assert.equal(animation.extinction.pattern, 'cascade');
-      assert.equal(animation.extinction.direction, 'to-bottom');
+      assert.equal(animation.extinction.direction, 'to-top');
       assert.ok(transitions.extinction.duration > transitions.ignition.duration);
       assert.equal(pixelRatio, 'auto', 'canvas uses the screen resolution instead of a fixed ratio');
     });
@@ -210,7 +210,7 @@ test('a resize during import uses the latest density without duplicating the can
   assert.equal(h.instances[0].options.artPattern[0].length, 48);
 });
 
-test('ignition cascades upward across the film in roughly one second', async t => {
+test('ignition cascades downward across the film in roughly two seconds', async t => {
   const h = harness(t);
   h.visible(); await h.settle();
   const { animation, transitions, sizes, fps } = h.instances[0].options;
@@ -221,16 +221,16 @@ test('ignition cascades upward across the film in roughly one second', async t =
     )
   ));
   const delays = delaysAt(0);
-  assert.equal(delays.at(-1), 0, 'the bottom row ignites first');
-  assert.ok(delays.every((delay, row) => row === 0 || delay < delays[row - 1]), 'each higher row ignites later');
-  const sweepMs = Math.ceil(delays[0]) * 1000 / fps;
-  assert.ok(sweepMs >= 900 && sweepMs <= 1050, 'the cascade has a longer, bounded interval');
+  assert.equal(delays[0], 0, 'the top row ignites first');
+  assert.ok(delays.every((delay, row) => row === 0 || delay > delays[row - 1]), 'each lower row ignites later');
+  const sweepMs = Math.ceil(delays.at(-1)) * 1000 / fps;
+  assert.ok(sweepMs >= 1800 && sweepMs <= 2000, 'the cascade has a longer, bounded interval');
   assert.deepEqual(delaysAt(FOOTER_FILM.columns - 1), delays, 'row timing stays fixed as LEDs move horizontally');
   assert.deepEqual(transitions.ignition, { duration: 380, easing: 'ease-out-cubic' });
   assert.deepEqual(sizes.states, { 1: 0.35, 2: 0.6, 3: 0.85, 4: 1 });
 });
 
-test('every density extinguishes from top to bottom with a slower fade', async t => {
+test('every density extinguishes from bottom to top with a slower fade', async t => {
   for (const width of [360, 540, 764]) {
     await t.test(`${width}px film`, async t => {
       const h = harness(t, { width });
@@ -244,11 +244,12 @@ test('every density extinguishes from top to bottom with a slower fade', async t
         )
       ));
       const delays = delaysAt(0);
-      assert.equal(delays[0], 0, 'the top row extinguishes first');
-      assert.ok(delays.every((delay, row) => row === 0 || delay > delays[row - 1]));
+      assert.equal(delays.at(-1), 0, 'the bottom row extinguishes first');
+      assert.ok(delays.every((delay, row) => row === 0 || delay < delays[row - 1]));
       assert.deepEqual(delaysAt(columns - 1), delays, 'each row keeps its timing across columns');
-      const sweepMs = Math.ceil(delays.at(-1)) * 1000 / fps;
-      assert.ok(sweepMs >= 300 && sweepMs <= 450);
+      const sweepMs = Math.ceil(delays[0]) * 1000 / fps;
+      const [minSweep, maxSweep] = width >= 640 ? [1600, 1800] : [300, 450];
+      assert.ok(sweepMs >= minSweep && sweepMs <= maxSweep);
       assert.ok(transitions.extinction.duration > transitions.ignition.duration);
     });
   }
