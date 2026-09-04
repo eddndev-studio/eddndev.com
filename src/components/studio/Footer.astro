@@ -2,11 +2,15 @@
 import Container from './Container.astro';
 import FadeIn from './FadeIn.astro';
 import Brand from './Brand.astro';
-import Button from './Button.astro';
+import EmailLink from './EmailLink.astro';
+import ArrowRightIcon from './ArrowRightIcon.astro';
+import FooterContactIcon from './FooterContactIcon.astro';
+import SocialMedia from './SocialMedia.astro';
+import FooterSignal from './FooterSignal.astro';
 
 const currentYear = new Date().getFullYear();
 
-const columns = [
+const linkGroups = [
   {
     title: 'Explora',
     links: [
@@ -24,49 +28,72 @@ const columns = [
       { title: 'Achronyme', href: 'https://github.com/achronyme' },
     ],
   },
-  {
-    title: 'Conecta',
-    links: [
-      { title: 'GitHub', href: 'https://github.com/eddndev-studio' },
-      { title: 'LinkedIn', href: 'https://linkedin.com/in/eddndev' },
-      { title: 'X', href: 'https://x.com/eddndev' },
-      { title: 'Instagram', href: 'https://instagram.com/eddn.dev' },
-    ],
-  },
 ];
 ---
 
-<Container as="footer" class="relative z-10 mt-24 w-full sm:mt-32 lg:mt-40">
-  <FadeIn class="py-12 sm:py-16 lg:py-20">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-12">
-      <div class="lg:col-span-5">
+<footer data-footer-colophon class="footer-colophon relative z-10 w-full">
+  <Container>
+    <div class="footer-colophon__opening">
+      <FadeIn class="footer-colophon__copy">
         <p class="section-code">Contacto</p>
-        <h2 class="type-wide mt-10 font-display text-5xl leading-[0.94] font-medium tracking-[-0.04em] text-white sm:text-6xl">
+        <h2 class="footer-colophon__title type-wide font-display font-medium text-balance">
           Empecemos por el trabajo actual.
         </h2>
-        <p class="mt-7 max-w-md text-lg text-neutral-300">Cuéntanos qué ocurre hoy, qué resultado buscas y qué restricciones ya conoces. Con eso podemos preparar el siguiente paso.</p>
-        <div class="mt-8"><Button href="/contact">Iniciar conversación</Button></div>
-      </div>
-      <nav class="lg:col-span-6 lg:col-start-7">
-        <ul role="list" class="editorial-grid grid grid-cols-1 sm:grid-cols-3">
-          {columns.map((section) => (
-            <li data-editorial-row class="min-h-56 py-6 sm:px-6 sm:first:pl-0 sm:last:pr-0">
-              <div class="section-code">{section.title}</div>
-              <ul role="list" class="mt-10 text-base text-neutral-300">
-                {section.links.map((link) => (
-                  <li class="mt-4 first:mt-0">
-                    <a href={link.href} class="transition-colors hover:text-[var(--aurora)]">{link.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <p class="footer-colophon__lede text-lg">
+          Cuéntanos qué ocurre hoy, qué resultado buscas y qué restricciones ya conoces. Con eso podemos preparar el siguiente paso.
+        </p>
+        <a data-footer-cta href="/contact" class="footer-cta" aria-label="Iniciar conversación">
+          <span class="footer-cta__label">Iniciar conversación</span>
+          <span class="footer-cta__disc" aria-hidden="true">
+            <ArrowRightIcon class="footer-cta__arrow" />
+          </span>
+        </a>
+      </FadeIn>
+      <FooterSignal />
     </div>
-    <div class="mt-20 grid grid-cols-1 items-end gap-6 sm:grid-cols-2">
+
+    <section class="footer-contact" aria-label="Contacto directo">
+      <dl class="footer-contact__details text-base">
+        <div class="footer-contact__item footer-contact__item--email">
+          <FooterContactIcon kind="envelope" />
+          <dt>Correo</dt>
+          <dd><EmailLink class="footer-contact__link" /></dd>
+        </div>
+        <div class="footer-contact__item footer-contact__item--whatsapp">
+          <FooterContactIcon kind="chat" />
+          <dt>WhatsApp</dt>
+          <dd><a href="https://wa.me/525560223906" target="_blank" rel="noopener noreferrer" class="footer-contact__link">+52 55 6022 3906</a></dd>
+        </div>
+        <div class="footer-contact__item footer-contact__item--location">
+          <FooterContactIcon kind="map-pin" />
+          <dt>Ubicación</dt>
+          <dd>CDMX, México, remoto</dd>
+        </div>
+      </dl>
+    </section>
+
+    <nav class="footer-index text-base" aria-label="Enlaces del pie de página">
+      <ul role="list" class="footer-index__list">
+        {linkGroups.map((row) => (
+          <li data-footer-index-row class="footer-index__row">
+            <div class="section-code footer-index__title">{row.title}</div>
+            <ul role="list" class="footer-index__links">
+              {row.links.map((link) => (
+                <li><a href={link.href}>{link.title}</a></li>
+              ))}
+            </ul>
+          </li>
+        ))}
+        <li data-footer-index-row class="footer-index__row">
+          <div class="section-code footer-index__title">Conecta</div>
+          <SocialMedia class="footer-index__socials" />
+        </li>
+      </ul>
+    </nav>
+
+    <div class="footer-colophon__signature">
       <Brand />
-      <p class="type-narrow text-base text-neutral-300 sm:text-right">(c) 2020-{currentYear} eddndev. Todos los derechos reservados.</p>
+      <p class="type-narrow text-sm sm:text-right">(c) 2020-{currentYear} eddndev. Todos los derechos reservados.</p>
     </div>
-  </FadeIn>
-</Container>
+  </Container>
+</footer>

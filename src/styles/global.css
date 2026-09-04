@@ -4,6 +4,7 @@
 @import "./space.css" layer(components);
 @import "./interactions.css" layer(components);
 @import "./service-perforations.css";
+@import "./footer.css";
 
 @font-face {
   font-family: 'Mona Sans';
@@ -91,7 +92,7 @@ html {
 }
 
 body {
-  min-width: 20rem;
+  min-width: min(20rem, 100%);
   background: var(--void);
   color: var(--starlight);
   font-family: var(--font-sans);

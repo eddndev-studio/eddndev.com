@@ -35,11 +35,11 @@ test('shared marketing surfaces increase prose without enlarging editorial label
   assert.match(global, /--text-xl:\s*1\.25rem/);
   assert.match(sectionIntro, /mt-10 text-xl text-neutral-700/);
   assert.match(projects, /mt-7 max-w-xl text-xl text-neutral-700/);
-  assert.match(contact, /mt-8 max-w-xl text-xl text-neutral-300/);
-  assert.match(contact, /gap-8 text-base text-neutral-300/);
-  assert.match(footer, /mt-7 max-w-md text-lg text-neutral-300/);
-  assert.match(footer, /mt-10 text-base text-neutral-300/);
-  assert.match(footer, /type-narrow text-base text-neutral-300/);
+  assert.match(contact, /closing-prompt__lede[^"\n]*text-lg text-neutral-300/);
+  assert.match(footer, /footer-colophon__lede[^"\n]*text-lg/);
+  assert.match(footer, /footer-contact__details[^"\n]*text-base/);
+  assert.match(footer, /footer-index__links/);
+  assert.match(footer, /type-narrow text-sm/);
   assert.match(button, /font-display text-sm font-bold/);
   assert.match(global, /\.section-code\s*\{[^}]*font-size:\s*0\.72rem/s);
 });

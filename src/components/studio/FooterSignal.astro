@@ -1,0 +1,35 @@
+---
+import { createFooterFilm, FOOTER_FILM_PROFILES } from '../../scripts/features/footer-film.js';
+
+const films = FOOTER_FILM_PROFILES.map(profile => {
+  const { columns, rows, pitch, ledSize } = profile;
+  return {
+    ...profile,
+    width: (columns - 1) * pitch + ledSize,
+    height: (rows - 1) * pitch + ledSize,
+    dots: createFooterFilm(profile).flatMap((row, y) => row.flatMap((state, x) => (
+      state ? [{ x: x * pitch + ledSize / 2, y: y * pitch + ledSize / 2, state }] : []
+    ))),
+  };
+});
+---
+
+<div class="footer-signal-scene">
+  <div data-footer-signal aria-hidden="true" class="footer-signal">
+    {films.map(film => (
+      <svg data-footer-signal-fallback data-footer-film={film.name} aria-hidden="true" class="footer-signal__fallback" viewBox={`0 0 ${film.width} ${film.height}`}>
+        {film.dots.map(dot => (
+          <circle cx={dot.x} cy={dot.y} r={film.ledSize * film.sizes[dot.state] / 2} fill={film.colors[dot.state]} />
+        ))}
+      </svg>
+    ))}
+    <div id="footer-signal-surface" data-footer-signal-surface class="footer-signal__surface"></div>
+  </div>
+  <button data-footer-motion type="button" class="footer-signal__toggle" aria-label="Pausar animación" aria-pressed="false" hidden>
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+      <path class="footer-signal__pause-icon" d="M4 3h2v10H4zm6 0h2v10h-2z" />
+      <path class="footer-signal__play-icon" d="m4 2 9 6-9 6z" />
+    </svg>
+    <span>Animación</span>
+  </button>
+</div>

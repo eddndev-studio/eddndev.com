@@ -4,7 +4,9 @@
 
 The SVG paths in `src/components/studio/KineticStatementIcon.astro` and
 `src/components/studio/ServicePerforationIcon.astro` are copied from the
-Heroicons 24px solid collection:
+Heroicons 24px solid collection. The SVG paths in
+`src/components/studio/FooterContactIcon.astro` are copied from the Heroicons
+24px outline collection:
 https://github.com/tailwindlabs/heroicons
 
 MIT License
