@@ -1,0 +1,294 @@
+.contact-desk {
+  --contact-error: #f2ada9;
+  position: relative;
+  background: var(--void);
+  padding-top: clamp(5rem, 9vw, 9rem);
+  scroll-margin-top: 2rem;
+}
+
+.contact-desk--standalone {
+  padding-top: clamp(11rem, 17vw, 16rem);
+}
+
+.kinetic-statement--process:has(+ .contact-desk) {
+  background: var(--void);
+}
+
+.kinetic-statement--process:has(+ .contact-desk) .kinetic-statement__footer {
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+.contact-desk [hidden] {
+  display: none !important;
+}
+.contact-desk__eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.contact-desk__presence {
+  color: var(--moonlight);
+  font-size: 0.75rem;
+  font-variation-settings: "wdth" 84;
+  font-weight: 550;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-desk__title {
+  margin-top: clamp(2.5rem, 5vw, 5rem);
+  font-size: clamp(4rem, 11.4vw, 10.9rem);
+  font-weight: 550;
+  line-height: 0.84;
+  letter-spacing: -0.065em;
+}
+
+.contact-desk__title > span {
+  display: block;
+}
+.contact-desk__title > span + span {
+  margin-top: 0.07em;
+  margin-left: 16.6667%;
+  color: var(--signal-on-dark);
+}
+.contact-desk__period {
+  transition: color 240ms ease;
+}
+.contact-desk[data-contact-ready="true"] .contact-desk__period {
+  color: var(--starlight);
+}
+
+.contact-desk__intro {
+  margin-top: 2.5rem;
+  margin-left: 33.3333%;
+  color: var(--moonlight);
+  font-size: clamp(1.125rem, 1.35vw, 1.375rem);
+  line-height: 1.5;
+}
+
+.contact-desk__workspace {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding-top: 2.75rem;
+  margin-top: clamp(3rem, 5vw, 5rem);
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.contact-desk__aside {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4rem;
+  padding-bottom: 2rem;
+}
+
+.contact-desk__aside .section-code {
+  font-size: 0.6875rem;
+}
+.contact-desk__aside .section-code::after {
+  display: none;
+}
+.contact-desk__aside-title {
+  margin-block: 1.5rem 1.75rem;
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+.contact-desk__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.5rem;
+  min-height: 2.75rem;
+  width: fit-content;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-decoration-color: var(--hairline-strong);
+  text-underline-offset: 0.35em;
+  transition: color 180ms ease;
+}
+.contact-desk__link span {
+  color: var(--moonlight);
+}
+.contact-desk__link:hover {
+  color: var(--signal-on-dark);
+}
+.contact-desk__meter {
+  max-width: 16rem;
+}
+.contact-desk__meter-track {
+  display: flex;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+.contact-desk__meter-track i {
+  width: 2.5rem;
+  height: 0.3rem;
+  background: var(--hairline-strong);
+  transition: background-color 200ms ease;
+}
+.contact-desk__meter-track .is-complete {
+  background: var(--signal-on-dark);
+}
+.contact-desk__meter p {
+  color: var(--moonlight);
+  font-size: 0.75rem;
+  font-variation-settings: "wdth" 84;
+  letter-spacing: 0.02em;
+}
+.contact-desk__meter p span {
+  color: var(--starlight);
+}
+.contact-desk__meter-caption {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--moonlight);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.contact-desk__end {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+  margin-top: clamp(3rem, 6vw, 6rem);
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--hairline);
+  color: var(--moonlight);
+  font-size: 0.6875rem;
+  font-variation-settings: "wdth" 84;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-desk__end span:first-child {
+  color: var(--signal-on-dark);
+}
+.footer-colophon--compact {
+  padding-top: 0;
+}
+.footer-colophon--compact .footer-index {
+  margin-top: 0;
+  padding-top: 2.5rem;
+}
+
+@media (max-width: 899px) {
+  .contact-desk__workspace {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .contact-desk__aside {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: row;
+    align-items: end;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .contact-desk__aside-title {
+    display: none;
+  }
+  .contact-desk__direct .section-code {
+    margin-bottom: 0.75rem;
+  }
+  .contact-desk__meter-caption {
+    display: none;
+  }
+  .contact-desk__intro {
+    margin-left: 16.6667%;
+  }
+}
+
+@media (max-width: 599px) {
+  .contact-desk {
+    padding-top: 4.5rem;
+  }
+  .contact-desk--standalone {
+    padding-top: 10rem;
+  }
+  .contact-desk__eyebrow {
+    display: block;
+  }
+  .contact-desk__presence {
+    display: block;
+    margin-top: 0.875rem;
+    font-size: 0.6875rem;
+  }
+  .contact-desk__title {
+    font-size: clamp(3.1rem, 12.8vw, 4.8rem);
+    margin-top: 2.75rem;
+    line-height: 0.9;
+  }
+  .contact-desk__title > span + span {
+    margin-left: 0;
+    margin-top: 0.12em;
+  }
+  .contact-desk__intro {
+    margin-left: 0;
+    margin-top: 1.75rem;
+    font-size: 1rem;
+  }
+  .contact-desk__intro br {
+    display: none;
+  }
+  .contact-desk__workspace {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+  }
+  .contact-desk__aside {
+    display: block;
+  }
+  .contact-desk__meter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: none;
+    margin-top: 1.5rem;
+  }
+  .contact-desk__meter-track {
+    margin: 0;
+    gap: 0.25rem;
+  }
+  .contact-desk__meter-track i {
+    width: 1rem;
+  }
+  .contact-desk__end {
+    align-items: start;
+    gap: 1rem;
+    line-height: 1.6;
+    margin-top: 3rem;
+  }
+  .contact-desk__end span:last-child {
+    max-width: 22ch;
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-desk *,
+  .contact-desk *::before,
+  .contact-desk *::after {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .contact-desk {
+    background: Canvas;
+    color: CanvasText;
+  }
+  .contact-desk__meter-track i {
+    border: 1px solid CanvasText;
+  }
+  .contact-desk__meter-track .is-complete {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+}

@@ -1,0 +1,25 @@
+---
+import Container from '../studio/Container.astro';
+import ArrowRightIcon from '../studio/ArrowRightIcon.astro';
+import SignalMatrix from './SignalMatrix.astro';
+const stages = [
+  { number: '01', title: 'Entender.', description: 'El trabajo actual, la meta y las restricciones. Definimos qué necesita resolverse.' },
+  { number: '02', title: 'Diseñar.', description: 'El alcance, los recorridos y la forma del sistema. Cada decisión tiene un propósito.' },
+  { number: '03', title: 'Construir.', description: 'Conectamos las piezas y probamos los recorridos antes de ponerlos en operación.' },
+  { number: '04', title: 'Publicar.', description: 'Preparamos el despliegue, la documentación y el seguimiento acordado.' },
+];
+---
+<section class="services-method" data-services-method aria-labelledby="services-method-title">
+  <Container>
+    <div class="services-method__header"><p class="section-code">Cómo lo hacemos</p><SignalMatrix id="services-method-signal" /></div>
+    <h2 id="services-method-title" class="services-method__title type-wide"><span data-method-line>Buenas preguntas.</span><span data-method-line>Decisiones claras.</span></h2>
+    <p class="services-method__intro">El punto de partida es entender el problema.<br />La tecnología viene después.</p>
+    <ol class="services-method__stages">
+      {stages.map(stage => <li data-method-stage>
+        <span class="services-method__rule" aria-hidden="true"><span data-method-progress /></span>
+        <span class="services-meta">{stage.number}</span><h3>{stage.title}</h3><p>{stage.description}</p>
+      </li>)}
+    </ol>
+    <a href="/work" class="services-method__work services-text-link">Las ideas puestas en práctica. Ver proyectos<ArrowRightIcon class="services-diagonal-arrow" /></a>
+  </Container>
+</section>

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
+import HomeConcordance from '../components/studio/HomeConcordance.astro';
 import ServicePerforations from '../components/studio/ServicePerforations.astro';
 import StudioStatement from '../components/studio/StudioStatement.astro';
 import ProcessStatement from '../components/studio/ProcessStatement.astro';
@@ -18,10 +19,12 @@ const ordered = preferredOrder
 ---
 
 <Layout
+  contactEnding
   title="edd n' dev | Estudio de diseño y software"
   description="Diseñamos y construimos sitios, automatizaciones y software para presentar una oferta, ordenar un proceso o lanzar un producto."
 >
   <section class="home-hero">
+    <HomeConcordance />
     <Container class="home-hero__frame">
       <FadeIn class="home-hero__copy relative">
         <div class="relative">
@@ -64,5 +67,5 @@ const ordered = preferredOrder
 
   <ProcessStatement />
 
-  <ContactSection title="¿Qué necesitas construir o mejorar?" />
+  <ContactSection form />
 </Layout>

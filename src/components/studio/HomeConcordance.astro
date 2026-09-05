@@ -1,0 +1,25 @@
+---
+import { createInitial } from '../../scripts/features/concordance/model.js';
+import { svgMarkup } from '../../scripts/features/concordance/markup.js';
+import '../../styles/home-concordance.css';
+
+const plates = [
+  { variant: 'desktop', state: createInitial({ width: 14, height: 8, maxReach: 16 }) },
+  { variant: 'mobile', state: createInitial({ width: 6, height: 10, maxReach: 12 }) },
+];
+---
+<div class="home-concordance" data-home-concordance>
+  {plates.map(({ variant, state }) => (
+    <div class={`home-concordance__plate home-concordance__plate--${variant}`}
+      data-concordance-variant={variant} data-concordance-state={JSON.stringify(state)}
+      aria-hidden="true" set:html={svgMarkup(state, { id: `home-concordance-${variant}` })} />
+  ))}
+  <button class="home-concordance__toggle type-narrow" type="button"
+    data-concordance-toggle aria-pressed="false" hidden>
+    <span data-concordance-label>Pausar animación</span>
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path class="home-concordance__pause-icon" d="M4 3h2v10H4zm6 0h2v10h-2z" />
+      <path class="home-concordance__play-icon" d="m5 3 8 5-8 5z" />
+    </svg>
+  </button>
+</div>

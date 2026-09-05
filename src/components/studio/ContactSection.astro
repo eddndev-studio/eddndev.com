@@ -1,28 +1,39 @@
 ---
 import Container from './Container.astro';
 import FadeIn from './FadeIn.astro';
+import ContactDesk from './ContactDesk.astro';
 
 interface Props {
   title?: string;
   class?: string;
+  form?: boolean;
+  headingLevel?: 'h1' | 'h2';
+  standalone?: boolean;
 }
 
 const {
   title = 'Cuéntanos sobre tu proyecto',
   class: className,
+  form = false,
+  headingLevel = 'h2',
+  standalone = false,
 } = Astro.props;
 const hasLede = Astro.slots.has('default');
 ---
-<Container
-  as="section"
-  data-closing-prompt
-  class:list={['closing-prompt mt-24 sm:mt-32 lg:mt-40', className]}
->
-  <FadeIn class="closing-prompt__inner grid grid-cols-1 gap-x-8 gap-y-6 py-10 lg:grid-cols-12 lg:items-start lg:py-12">
-    <p class="section-code lg:col-span-2">Siguiente paso</p>
-    <div class="lg:col-span-8 lg:col-start-4">
-      <h2 class="closing-prompt__title type-wide font-display font-medium text-balance text-white">{title}</h2>
-      {hasLede && <div class="closing-prompt__lede mt-6 max-w-2xl text-lg text-neutral-300"><slot /></div>}
-    </div>
-  </FadeIn>
-</Container>
+{form ? (
+  <ContactDesk headingLevel={headingLevel} standalone={standalone} />
+) : (
+  <Container
+    as="section"
+    data-closing-prompt
+    class:list={['closing-prompt mt-24 sm:mt-32 lg:mt-40', className]}
+  >
+    <FadeIn class="closing-prompt__inner grid grid-cols-1 gap-x-8 gap-y-6 py-10 lg:grid-cols-12 lg:items-start lg:py-12">
+      <p class="section-code lg:col-span-2">Siguiente paso</p>
+      <div class="lg:col-span-8 lg:col-start-4">
+        <h2 class="closing-prompt__title type-wide font-display font-medium text-balance text-white">{title}</h2>
+        {hasLede && <div class="closing-prompt__lede mt-6 max-w-2xl text-lg text-neutral-300"><slot /></div>}
+      </div>
+    </FadeIn>
+  </Container>
+)}

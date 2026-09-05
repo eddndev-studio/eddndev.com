@@ -1,0 +1,11 @@
+---
+interface Props { id: string; }
+const { id } = Astro.props;
+---
+<span id={id} class="service-signal" data-service-signal aria-hidden="true">
+  <svg class="service-signal__fallback" viewBox="0 0 40 40">
+    {Array.from({ length: 16 }, (_, i) => (
+      <circle cx={5 + i % 4 * 10} cy={5 + Math.floor(i / 4) * 10} r="2.5" fill="currentColor" opacity={i % 5 === 0 || i % 3 === 0 ? 1 : 0.22} />
+    ))}
+  </svg>
+</span>

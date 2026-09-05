@@ -9,6 +9,8 @@ import SocialMedia from './SocialMedia.astro';
 import FooterSignal from './FooterSignal.astro';
 
 const currentYear = new Date().getFullYear();
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
 
 const linkGroups = [
   {
@@ -31,9 +33,9 @@ const linkGroups = [
 ];
 ---
 
-<footer data-footer-colophon class="footer-colophon relative z-10 w-full">
+<footer data-footer-colophon class:list={['footer-colophon relative z-10 w-full', { 'footer-colophon--compact': compact }]}>
   <Container>
-    <div class="footer-colophon__opening">
+    {!compact && <div class="footer-colophon__opening">
       <FadeIn class="footer-colophon__copy">
         <p class="section-code">Contacto</p>
         <h2 class="footer-colophon__title type-wide font-display font-medium text-balance">
@@ -50,9 +52,9 @@ const linkGroups = [
         </a>
       </FadeIn>
       <FooterSignal />
-    </div>
+    </div>}
 
-    <section class="footer-contact" aria-label="Contacto directo">
+    {!compact && <section class="footer-contact" aria-label="Contacto directo">
       <dl class="footer-contact__details text-base">
         <div class="footer-contact__item footer-contact__item--email">
           <FooterContactIcon kind="envelope" />
@@ -70,7 +72,7 @@ const linkGroups = [
           <dd>CDMX, México, remoto</dd>
         </div>
       </dl>
-    </section>
+    </section>}
 
     <nav class="footer-index text-base" aria-label="Enlaces del pie de página">
       <ul role="list" class="footer-index__list">

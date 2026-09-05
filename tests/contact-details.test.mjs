@@ -12,7 +12,7 @@ function read(relativePath) {
 
 test('contact surfaces use the current WhatsApp number', () => {
   const surfaces = [
-    'src/pages/contact.astro',
+    'src/components/studio/ContactDesk.astro',
     'src/components/studio/Footer.astro',
     'src/components/studio/SiteNav.astro',
   ].map(read);
@@ -26,7 +26,8 @@ test('contact surfaces use the current WhatsApp number', () => {
 
 test('contact surfaces use the studio email domain', () => {
   const sourcesOfTruthPaths = [
-    'src/pages/contact.astro',
+    'src/components/studio/ContactForm.astro',
+    'src/scripts/features/contact-model.js',
     'src/layouts/Layout.astro',
     'src/components/studio/EmailLink.astro',
   ];
@@ -49,7 +50,8 @@ test('contact surfaces use the studio email domain', () => {
 test('public email links opt out of Cloudflare obfuscation without JavaScript', () => {
   const emailLink = read('src/components/studio/EmailLink.astro');
   const visibleSurfaces = [
-    'src/pages/contact.astro',
+    'src/components/studio/ContactDesk.astro',
+    'src/components/studio/ContactForm.astro',
     'src/components/studio/Footer.astro',
     'src/components/studio/SiteNav.astro',
   ].map(read);

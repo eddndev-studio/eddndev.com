@@ -1,0 +1,67 @@
+---
+import Container from '../studio/Container.astro';
+import ArrowRightIcon from '../studio/ArrowRightIcon.astro';
+import SignalMatrix from './SignalMatrix.astro';
+import { services } from '../../data/services';
+import { getHeroTilePose } from '../../scripts/animations/services-hero-motion.js';
+const names = ['Automatización', 'Sitios web', 'Comercio', 'Software'];
+---
+<section class="services-hero" data-services-hero aria-labelledby="services-title">
+  <Container class="services-hero__frame">
+    <div class="services-hero__eyebrow">
+      <p class="section-code">Servicios / edd n'dev</p>
+      <span class="services-meta">Diseño + ingeniería digital</span>
+    </div>
+    <div class="services-hero__composition">
+      <div class="services-hero__copy">
+        <h1 id="services-title" class="services-hero__title type-wide">
+          <span class="services-hero__line"><span data-hero-line>Hacemos</span></span>
+          <span class="services-hero__line"><span data-hero-line>que <em>encaje.</em></span></span>
+        </h1>
+        <div class="services-hero__intro">
+          <svg class="services-hero__asterisk" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 2v36M2 20h36M7 7l26 26M7 33 33 7" stroke="currentColor" stroke-width="3" /></svg>
+          <p>Una idea, un proceso, un negocio.<br />Diseñamos y construimos las piezas<br class="services-desktop-break" /> que necesita para funcionar.</p>
+        </div>
+      </div>
+      <div class="services-assembly" aria-hidden="true">
+        <div class="services-assembly__coordinates"><span>FIG. 01</span><span>DE LAS PARTES AL TODO</span></div>
+        <div class="services-assembly__field">
+          <div class="services-assembly__grid" data-assembly>
+            {Array.from({ length: 16 }, (_, i) => {
+              const pose = getHeroTilePose(i);
+              return <span class:list={['services-assembly__tile', `services-assembly__tile--${i % 4}`]} data-assembly-tile style={`--tile-x: ${pose.xPercent}%; --tile-y: ${pose.yPercent}%; --tile-rotation: ${pose.rotation}deg;`}>
+                <svg viewBox="0 0 100 100">
+                  {i % 4 === 0 && <path d="M0 100V0h100A100 100 0 0 1 0 100Z" fill="currentColor" />}
+                  {i % 4 === 1 && <><path d="M0 0h100v100H0Z" fill="currentColor" /><circle cx="50" cy="50" r="28" fill="var(--void)" /></>}
+                  {i % 4 === 2 && <>{[16, 38, 60, 82].map(x => <path d={`M${x} 0v100`} stroke="currentColor" stroke-width="10" />)}</>}
+                  {i % 4 === 3 && <path d="M0 0h50v50h50v50H0Z" fill="currentColor" />}
+                </svg>
+              </span>;
+            })}
+          </div>
+          <span class="services-assembly__cross services-assembly__cross--a">+</span>
+          <span class="services-assembly__cross services-assembly__cross--b">+</span>
+        </div>
+        <div class="services-assembly__caption"><span>4 disciplinas. Un mismo criterio.</span><SignalMatrix id="services-hero-signal" /></div>
+      </div>
+    </div>
+    <div class="services-hero__bottom">
+      <a class="services-scroll-cue" href="#service-catalogue"><ArrowRightIcon class="services-down-arrow" /> Explora lo que hacemos</a>
+      <button class="services-motion-toggle services-meta" type="button" data-services-motion-toggle aria-pressed="false" hidden>
+        <span class="services-motion-toggle__icon" aria-hidden="true">Ⅱ</span>
+        <span data-services-motion-label>Reducir movimiento</span>
+      </button>
+    </div>
+  </Container>
+</section>
+<nav class="services-index" aria-label="Índice de servicios" data-services-index>
+  <Container>
+    <ol class="services-index__list">
+      {services.map((service, index) => (
+        <li><a href={`#${service.id}`} class="services-index__link">
+          <span class="services-meta">{service.number}</span><span>{names[index]}</span><ArrowRightIcon class="services-index__arrow services-diagonal-arrow" />
+        </a></li>
+      ))}
+    </ol>
+  </Container>
+</nav>

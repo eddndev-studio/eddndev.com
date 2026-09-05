@@ -5,6 +5,8 @@
 @import "./interactions.css" layer(components);
 @import "./service-perforations.css";
 @import "./footer.css";
+@import "./contact.css";
+@import "./contact-form.css";
 
 @font-face {
   font-family: 'Mona Sans';

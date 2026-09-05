@@ -1,0 +1,50 @@
+---
+interface Props { index: number; }
+const { index } = Astro.props;
+---
+<svg class="service-drawing" viewBox="0 0 600 520" fill="none" aria-hidden="true" data-service-drawing>
+  <defs><pattern id={`service-grid-${index}`} width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" stroke="currentColor" stroke-opacity=".1" /></pattern></defs>
+  <rect width="600" height="520" fill={`url(#service-grid-${index})`} />
+  <path d="M20 32V20h12M568 20h12v12M20 488v12h12M568 500h12v-12" stroke="currentColor" opacity=".5" />
+  {index === 0 && <>
+    <g stroke="currentColor" stroke-width="1.5" data-drawing-trace><path pathLength="1" d="M90 120h110v140h70M90 260h180M90 400h110V260M330 260h80V140h100M410 260v140h100" /></g>
+    {[120,260,400].map(y => <g data-drawing-part><rect x="52" y={y-28} width="56" height="56" class="service-drawing__surface" stroke="currentColor" /><path d={`M68 ${y-6}h24M68 ${y+6}h16`} stroke="currentColor" /></g>)}
+    <g data-drawing-rotor><rect x="230" y="190" width="140" height="140" class="service-drawing__accent" /><path d="M262 260h76M300 222v76M273 233l54 54M273 287l54-54" stroke="var(--void)" stroke-width="12" /></g>
+    {[140,400].map(y => <g data-drawing-part><circle cx="510" cy={y} r="30" class="service-drawing__surface" stroke="currentColor" /><path d={`M497 ${y}l9 9 17-18`} stroke="currentColor" stroke-width="2" /></g>)}
+    <g class="service-drawing__labels"><text x="52" y="70">ENTRADAS</text><text x="248" y="362">CRITERIO + REGLAS</text><text x="454" y="88">ACCIONES</text><text x="428" y="462">REVISIÓN HUMANA</text></g>
+    <circle r="5" fill="currentColor" data-drawing-pulse cx="160" cy="120" />
+  </>}
+  {index === 1 && <>
+    <g data-drawing-part><rect x="72" y="80" width="456" height="348" class="service-drawing__surface" stroke="currentColor" /><path d="M72 112h456M94 96h4m10 0h4m10 0h4" stroke="currentColor" /></g>
+    <g data-drawing-part><rect x="104" y="148" width="224" height="168" class="service-drawing__accent" /><text x="119" y="242" class="service-drawing__big-type" fill="var(--void)">Aa</text></g>
+    <g data-drawing-part stroke="currentColor"><path d="M360 158h136M360 174h104M360 210h136M360 226h136M360 242h96" /><rect x="360" y="276" width="96" height="32" /><path d="M376 292h61m-6-5 5 5-5 5" /></g>
+    <g data-drawing-part>{[104,240,376].map(x => <rect x={x} y="344" width="120" height="56" stroke="currentColor" opacity=".4" />)}</g>
+    <g stroke="currentColor" stroke-dasharray="4 6" opacity=".6" data-drawing-trace><path pathLength="1" d="M104 52v404M328 52v404M496 52v404M44 148h512M44 316h512" /></g>
+    <g data-drawing-cursor><path d="m438 304 2 49 13-14 14 25 12-7-15-25 20-3Z" class="service-drawing__accent" stroke="var(--void)" stroke-width="2" /></g>
+    <g class="service-drawing__labels"><text x="72" y="472">FORMA</text><text x="262" y="472">FUNCIÓN</text><text x="448" y="472">MEDICIÓN</text></g>
+  </>}
+  {index === 2 && <>
+    {[0,1,2].map(i => <g data-drawing-part>
+      <rect x={66+i*160} y={146-i*24} width="148" height="230" class="service-drawing__surface" stroke="currentColor" />
+      <rect x={82+i*160} y={162-i*24} width="116" height="130" class="service-drawing__accent" opacity={.25+i*.25} />
+      <g stroke="currentColor" stroke-width="2">
+        {i === 0 && <><circle cx="140" cy="227" r="34" /><path d="M106 227h68M140 193v68" /></>}
+        {i === 1 && <path d="m300 165 40 70h-80Z" />}
+        {i === 2 && <rect x="434" y="154" width="52" height="52" transform="rotate(45 460 180)" />}
+      </g>
+      <path d={`M${82+i*160} ${314-i*24}h82m-82 15h52`} stroke="currentColor" /><path d={`M${180+i*160} ${345-i*24}h16m-8-8v16`} stroke="currentColor" />
+    </g>)}
+    <path d="M140 402v30h320v-78M300 380v52" stroke="currentColor" data-drawing-trace pathLength="1" />
+    <g data-drawing-part><rect x="220" y="414" width="160" height="36" class="service-drawing__accent" /><text x="247" y="437" class="service-drawing__labels service-drawing__labels--inverse">PEDIDO / RESERVA</text></g>
+    <g class="service-drawing__labels"><text x="66" y="80">UN CATÁLOGO.</text><text x="334" y="80">TODA UNA OPERACIÓN.</text></g>
+  </>}
+  {index === 3 && <>
+    {[0,1,2].map(i => <g data-drawing-layer>
+      <path d={`M300 ${264-i*86} 516 ${374-i*86} 300 ${484-i*86} 84 ${374-i*86}Z`} class:list={['service-drawing__surface', i === 1 && 'service-drawing__layer-accent']} stroke="currentColor" />
+      <path d={`m132 ${374-i*86} 168 86 168-86`} stroke="currentColor" opacity=".25" /><text x="300" y={432-i*86} text-anchor="middle" class="service-drawing__labels">{['DATOS + INTEGRACIONES','LÓGICA + PERMISOS','INTERFAZ'][i]}</text>
+    </g>)}
+    <path d="M300 100v380M84 202v172M516 202v172" stroke="currentColor" stroke-dasharray="3 7" opacity=".5" data-drawing-trace pathLength="1" />
+    <g data-drawing-part><path d="m276 82-18 18 18 18m48-36 18 18-18 18m-17-42-14 48" stroke="currentColor" stroke-width="4" /></g>
+    <g class="service-drawing__labels"><text x="34" y="62">ARQUITECTURA A MEDIDA</text><text x="430" y="478">CADA CAPA CUENTA</text></g>
+  </>}
+</svg>

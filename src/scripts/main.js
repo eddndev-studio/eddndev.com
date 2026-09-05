@@ -4,22 +4,28 @@ import { startLifecycle } from './core/lifecycle';
 
 import initStudioNav from './features/studio-nav';
 import initKineticCanvas from './features/kinetic-canvas';
+import initHomeConcordance from './features/home-concordance';
 import initFooterSignal from './features/footer-signal';
 import initWorkShowcase from './features/work-showcase';
+import initContactForm from './features/contact-form';
 import initStudioReveals from './animations/studio-reveals';
 import initStudioServicesTransition from './animations/studio-services-transition';
 import initKineticStatements from './animations/kinetic-statements';
 import initServicePerforations from './animations/service-perforations';
+import initServicesExperience from './animations/services-experience';
 
 // Per-page modules - initialized once per page, reverted on view-transition swap.
 startLifecycle([
   initStudioNav,
   initKineticCanvas,
+  initHomeConcordance,
   initFooterSignal,
   initWorkShowcase,
+  initContactForm,
   initStudioServicesTransition,
   initKineticStatements,
   initServicePerforations,
+  initServicesExperience,
   initStudioReveals,
 ]);
 

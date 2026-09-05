@@ -1,0 +1,110 @@
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.home-hero__frame {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero__frame > div {
+  padding-block: clamp(8rem, 15svh, 12rem) 5rem;
+}
+
+.home-concordance {
+  /* Blue accents match the studio's service icons. */
+  --concordance-blue: #49adff;
+  --concordance-cobalt: #2f7fff;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-concordance__plate {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  opacity: .30;
+}
+
+.home-concordance__plate--mobile {
+  display: none;
+}
+
+.concordance-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  contain: layout style;
+  shape-rendering: geometricPrecision;
+}
+
+.home-concordance__toggle {
+  position: absolute;
+  z-index: 2;
+  right: max(1.25rem, calc((100% - 96rem) / 2 + 1.25rem));
+  bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 2.75rem;
+  padding: .5rem;
+  color: var(--moonlight);
+  font-size: .625rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.home-concordance__toggle:hover {
+  color: var(--signal-on-dark);
+}
+
+.home-concordance__toggle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.home-concordance__toggle[hidden],
+.home-concordance__play-icon,
+.home-concordance__toggle[aria-pressed='true'] .home-concordance__pause-icon {
+  display: none;
+}
+
+.home-concordance__toggle[aria-pressed='true'] .home-concordance__play-icon {
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .home-concordance__toggle {
+    right: max(2rem, calc((100% - 96rem) / 2 + 2rem));
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-concordance__toggle {
+    right: max(3rem, calc((100% - 96rem) / 2 + 3rem));
+  }
+}
+
+@media (max-width: 899px) {
+  .home-concordance__plate--desktop {
+    display: none;
+  }
+
+  .home-concordance__plate--mobile {
+    display: block;
+    opacity: .23;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (forced-colors: active) {
+  .home-concordance__toggle {
+    display: none;
+  }
+}

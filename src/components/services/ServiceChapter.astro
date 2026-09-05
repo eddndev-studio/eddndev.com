@@ -1,0 +1,39 @@
+---
+import Container from '../studio/Container.astro';
+import ArrowRightIcon from '../studio/ArrowRightIcon.astro';
+import SignalMatrix from './SignalMatrix.astro';
+import ServiceDrawing from './ServiceDrawing.astro';
+import type { Service } from '../../data/services';
+interface Props { service: Service; index: number; }
+const { service, index } = Astro.props;
+const titles = [['Automatización', 'con IA.'], ['Sitios', 'web.'], ['Catálogos', 'y comercio.'], ['Software', 'a medida.']];
+const labels = ['Menos repetición. Más criterio.', 'Una oferta que se entiende.', 'Del producto a la operación.', 'Tu proceso define el sistema.'];
+const notes = ['Control / Bitácora y aprobación', 'Base / Medición y accesibilidad', 'Pagos / Proveedor acordado', 'Alcance / Definido por etapas'];
+const links = [
+  { href: '/automation', label: 'Explorar automatización' },
+  { href: '/work/ataulfo', label: 'Conocer Ataulfo' },
+  { href: '/work/sylestudio', label: 'Ver Syle Studio, en desarrollo' },
+  { href: '/work/achronyme', label: 'Conocer Achronyme' },
+];
+---
+<section id={service.id} class:list={['service-chapter', index === 1 && 'service-chapter--light']} data-service-chapter aria-labelledby={`${service.id}-title`} tabindex="-1">
+  <Container>
+    <div class="service-chapter__masthead"><p class="section-code">{service.number} / {service.title}</p><SignalMatrix id={`services-signal-${service.number}`} /></div>
+    <div class="service-chapter__layout">
+      <div class="service-chapter__visual" data-chapter-visual>
+        <span class="service-chapter__number type-narrow" aria-hidden="true" data-chapter-number>{service.number}</span>
+        <div class="service-chapter__drawing"><ServiceDrawing index={index} /></div>
+        <p class="service-chapter__visual-note services-meta">{notes[index]}<ArrowRightIcon class="services-diagonal-arrow" /></p>
+      </div>
+      <div class="service-chapter__copy">
+        <h2 id={`${service.id}-title`} class="service-chapter__title type-wide" data-chapter-title>{titles[index].map(line => <span>{line}</span>)}</h2>
+        <p class="service-chapter__tagline">{labels[index]}</p>
+        <p class="service-chapter__description">{service.description}</p>
+        <ul class="service-chapter__scope" aria-label={`Alcance de ${service.title}`}>
+          {service.highlights.map((highlight, i) => <li data-scope-item><span class="services-meta" aria-hidden="true">0{i + 1}</span><span>{highlight}</span></li>)}
+        </ul>
+        <a href={links[index].href} class="services-text-link">{links[index].label}<ArrowRightIcon class="services-diagonal-arrow" /></a>
+      </div>
+    </div>
+  </Container>
+</section>

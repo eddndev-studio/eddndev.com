@@ -1,0 +1,85 @@
+---
+import ArrowRightIcon from './ArrowRightIcon.astro';
+import EmailLink from './EmailLink.astro';
+
+interface Props { receiptHeading?: 'h2' | 'h3'; }
+const { receiptHeading: ReceiptHeading = 'h3' } = Astro.props;
+
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
+const services = ['Sitio web', 'Producto digital', 'Software / sistemas', 'Automatización'];
+---
+
+<div class="contact-form-shell">
+  <form data-contact-form data-endpoint={endpoint} class="contact-form" aria-label="Iniciar un proyecto" action="mailto:contacto@eddndev.com" method="post" enctype="text/plain">
+    <fieldset class="contact-form__services">
+      <legend><span class="contact-form__number" aria-hidden="true">01</span> ¿Qué tienes en mente? <span class="contact-form__optional">Opcional</span></legend>
+      <div class="contact-form__choices">
+        {services.map((service) => (
+          <label class="contact-choice">
+            <input type="checkbox" name="services" value={service} />
+            <span class="contact-choice__mark" aria-hidden="true"></span>
+            <span>{service}</span>
+          </label>
+        ))}
+      </div>
+      <p class="contact-form__hint">Puedes elegir más de uno o dejarlo por definir.</p>
+    </fieldset>
+
+    <fieldset class="contact-form__identity">
+      <legend><span class="contact-form__number" aria-hidden="true">02</span> ¿Con quién hablamos?</legend>
+      <div class="contact-form__identity-fields">
+        <div class="contact-field" data-contact-field="name">
+          <label for="contact-name">Tu nombre <span aria-hidden="true">*</span></label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Cómo te llamas" required maxlength="100" aria-describedby="contact-name-error" />
+          <p class="contact-field__error" id="contact-name-error" data-contact-error="name" hidden></p>
+        </div>
+        <div class="contact-field" data-contact-field="email">
+          <label for="contact-email">Tu correo <span aria-hidden="true">*</span></label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="nombre@proyecto.com" required maxlength="254" aria-describedby="contact-email-error" />
+          <p class="contact-field__error" id="contact-email-error" data-contact-error="email" hidden></p>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="contact-form__project">
+      <legend><span class="contact-form__number" aria-hidden="true">03</span> El punto de partida</legend>
+      <div class="contact-field contact-field--message" data-contact-field="message">
+        <label for="contact-message">¿Qué quieres construir o mejorar? <span aria-hidden="true">*</span></label>
+        <textarea id="contact-message" name="message" rows="4" required maxlength="3000" placeholder="Una idea, un problema o algo que ya existe y puede funcionar mejor…" aria-describedby="contact-message-hint contact-message-error"></textarea>
+        <div class="contact-field__notes">
+          <p id="contact-message-hint">Unas líneas bastan. El detalle lo conversamos.</p>
+          <span data-contact-character-count aria-hidden="true">0 / 3000</span>
+        </div>
+        <p class="contact-field__error" id="contact-message-error" data-contact-error="message" hidden></p>
+      </div>
+    </fieldset>
+
+    <div class="contact-form__dispatch">
+      <p class="contact-form__required">* Campos obligatorios</p>
+      <div class="contact-form__alert" data-contact-alert role="alert" hidden></div>
+      <button class="contact-submit" type="submit" data-contact-submit>
+        <span class="contact-submit__copy">
+          <span class="contact-submit__label" data-contact-submit-label>{endpoint ? 'Iniciar conversación' : 'Preparar conversación'}</span>
+          <span class="contact-submit__detail" data-contact-submit-detail>{endpoint ? 'Tu próximo proyecto empieza aquí' : 'Continuarás en tu correo para enviarla'}</span>
+        </span>
+        <span class="contact-submit__direction" aria-hidden="true"><ArrowRightIcon /></span>
+      </button>
+      <p class="contact-form__privacy">Usaremos tus datos solo para responder a tu consulta.</p>
+      <noscript><p class="contact-form__no-js">Este formulario abre tu aplicación de correo. También puedes escribir directamente a <EmailLink />.</p></noscript>
+    </div>
+  </form>
+
+  <section class="contact-receipt" data-contact-receipt hidden aria-labelledby="contact-receipt-title">
+    <p class="section-code" data-contact-receipt-code></p>
+    <ReceiptHeading id="contact-receipt-title" class="contact-receipt__title type-wide" tabindex="-1" data-contact-receipt-title></ReceiptHeading>
+    <p class="contact-receipt__copy" data-contact-receipt-copy></p>
+    <a class="contact-submit" data-contact-mailto hidden>
+      <span class="contact-submit__copy"><span class="contact-submit__label">Abrir mi correo</span><span class="contact-submit__detail">Revisa el mensaje y envíalo desde ahí</span></span>
+      <span class="contact-submit__direction" aria-hidden="true"><ArrowRightIcon /></span>
+    </a>
+    <p class="contact-receipt__fallback" data-contact-receipt-fallback hidden>Si no se abre tu correo, <button type="button" data-contact-copy>copia el mensaje</button> y envíalo a <EmailLink />.</p>
+    <p data-contact-copy-status role="status"></p>
+    <button type="button" class="contact-receipt__reset" data-contact-reset>Volver al mensaje</button>
+  </section>
+  <p class="sr-only" data-contact-status role="status" aria-live="polite"></p>
+</div>

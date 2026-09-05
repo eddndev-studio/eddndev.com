@@ -1,0 +1,45 @@
+---
+import Container from './Container.astro';
+import ContactForm from './ContactForm.astro';
+import EmailLink from './EmailLink.astro';
+
+interface Props {
+  headingLevel?: 'h1' | 'h2';
+  standalone?: boolean;
+}
+const { headingLevel: Heading = 'h2', standalone = false } = Astro.props;
+---
+
+<section id="contact" data-contact-desk class:list={['contact-desk', { 'contact-desk--standalone': standalone }]} aria-labelledby="contact-title">
+  <Container>
+    <header class="contact-desk__header">
+      <div class="contact-desk__eyebrow">
+        <p class="section-code">Contacto / El siguiente paso</p>
+        <span class="contact-desk__presence">CDMX · Trabajo remoto</span>
+      </div>
+      <Heading id="contact-title" class="contact-desk__title type-wide">
+        <span>Hagamos</span>
+        <span>que suceda<span class="contact-desk__period">.</span></span>
+      </Heading>
+      <p class="contact-desk__intro">Productos digitales, sistemas y experiencias web.{' '}<br />Cuéntanos qué quieres poner en marcha.</p>
+    </header>
+
+    <div class="contact-desk__workspace">
+      <ContactForm receiptHeading={Heading === 'h1' ? 'h2' : 'h3'} />
+      <aside class="contact-desk__aside" aria-label="Contacto directo">
+        <div class="contact-desk__direct">
+          <p class="section-code">De persona a persona</p>
+          <p class="contact-desk__aside-title type-wide">La conversación<br />empieza contigo.</p>
+          <EmailLink class="contact-desk__link" />
+          <a class="contact-desk__link" href="https://wa.me/525560223906" target="_blank" rel="noopener noreferrer">WhatsApp <span>+52 55 6022 3906</span></a>
+        </div>
+        <div class="contact-desk__meter" data-contact-progress hidden>
+          <div class="contact-desk__meter-track" aria-hidden="true"><i></i><i></i><i></i></div>
+          <p><span data-contact-count>0 de 3</span> campos completos</p>
+          <span class="contact-desk__meter-caption">Un punto de partida es suficiente.</span>
+        </div>
+      </aside>
+    </div>
+    <div class="contact-desk__end" aria-hidden="true"><span>edd n'dev</span><span>Diseño + ingeniería · De principio a fin.</span></div>
+  </Container>
+</section>
