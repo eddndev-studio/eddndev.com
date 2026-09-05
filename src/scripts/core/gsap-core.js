@@ -2,6 +2,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+// The page lifecycle owns asset readiness and responsive pin measurements.
+ScrollTrigger.config({ autoRefreshEvents: 'none', ignoreMobileResize: true });
 
 /* Cubic-bezier to easing function (WebKit UnitBezier, Newton-Raphson + bisection).
    Lets us register framer-motion's exact curves as native GSAP eases. */

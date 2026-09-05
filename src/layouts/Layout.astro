@@ -5,6 +5,7 @@ import { ClientRouter } from 'astro:transitions';
 import SiteNav from '../components/studio/SiteNav.astro';
 import Footer from '../components/studio/Footer.astro';
 import KineticCanvas from '../components/studio/KineticCanvas.astro';
+import PageLoader from '../components/studio/PageLoader.astro';
 
 interface Props {
 	title?: string;
@@ -149,6 +150,7 @@ if (typeof resolvedImage === 'string') {
         <ClientRouter />
 	</head>
 	<body class="flex min-h-full flex-col bg-[var(--void)] text-white antialiased">
+        <PageLoader />
         <a href="#main-content" class="cut-corner sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:bg-[var(--void)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
             Saltar al contenido
         </a>

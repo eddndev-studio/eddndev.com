@@ -1,0 +1,84 @@
+---
+import {
+  getLayerTransform,
+  matrix,
+} from '../../scripts/features/ensamble/model.js';
+---
+
+<svg
+  class="ensamble-object"
+  id="ensamble-object"
+  viewBox="0 0 720 720"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <path
+      id="ensamble-profile"
+      d="M -174 168 L -174 -155 L -74 -155 L -74 -109 C -43 -148 -4 -166 44 -166 C 128 -166 175 -112 175 -25 L 175 168 L 65 168 L 65 -14 C 65 -53 49 -75 17 -75 C -23 -75 -64 -39 -64 6 L -64 168 Z"
+    ></path>
+    <path
+      id="ensamble-apostrophe"
+      d="M 204 -166 L 271 -166 L 271 -112 L 231 -69 L 204 -69 L 226 -112 L 204 -112 Z"
+    ></path>
+    <linearGradient id="ensamble-face" x1="0" y1="0" x2="1" y2="1"
+      ><stop offset="0" stop-color="#e5d9f5"></stop><stop
+        offset=".26"
+        stop-color="#c9b5ee"></stop><stop offset=".64" stop-color="#a18bc8"
+      ></stop><stop offset="1" stop-color="#756898"></stop></linearGradient
+    >
+    <linearGradient id="ensamble-edge" x1="0" y1="0" x2=".8" y2="1"
+      ><stop stop-color="#c5b2ec"></stop><stop offset=".44" stop-color="#8d77b4"
+      ></stop><stop offset="1" stop-color="#435bb9"></stop></linearGradient
+    >
+    <linearGradient id="ensamble-body-metal" x1="0" y1="0" x2="1" y2=".8"
+      ><stop stop-color="#7a68a3"></stop><stop offset=".26" stop-color="#242033"
+      ></stop><stop offset=".6" stop-color="#514464"></stop><stop
+        offset="1"
+        stop-color="#526ae6"></stop></linearGradient
+    >
+  </defs>
+  <g
+    class="ensamble-structure-guides"
+    fill="none"
+    stroke="#7c88f5"
+    stroke-width=".75"
+    ><path
+      d="M105 160H625M105 560H625M135 125V595M585 125V595"
+      stroke-dasharray="3 7"></path><circle
+      cx="360"
+      cy="360"
+      r="238"
+      stroke-dasharray="2 12"></circle><path
+      d="M100 360H620M360 100V620"
+      stroke-opacity=".5"></path></g
+  >
+  <g class="ensamble-laminae">
+    {
+      Array.from({ length: 38 }, (_, index) => {
+        const fill = `url(#ensamble-${index === 37 ? 'face' : index > 29 ? 'edge' : 'body-metal'})`;
+        return (
+          <g
+            class="ensamble-lamina"
+            transform={matrix(getLayerTransform({ index }))}
+          >
+            <use
+              href="#ensamble-profile"
+              fill={fill}
+              stroke="#a58fce"
+              stroke-opacity=".67"
+              stroke-width=".8"
+            />
+            <use
+              href="#ensamble-apostrophe"
+              fill={fill}
+              stroke="#a58fce"
+              stroke-opacity=".67"
+              stroke-width=".7"
+            />
+          </g>
+        );
+      })
+    }
+  </g>
+</svg>

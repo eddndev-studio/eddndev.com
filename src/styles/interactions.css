@@ -4,6 +4,7 @@
 
 .kinetic-statement[data-kinetic-pin-target] {
   z-index: 1;
+  margin-bottom: clamp(18rem, 40svh, 28rem);
 }
 
 .kinetic-statement--process {

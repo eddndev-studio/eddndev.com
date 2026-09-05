@@ -1,0 +1,57 @@
+<script is:inline>
+  (() => {
+    if (window.__pageLayout) return;
+    const root = document.documentElement;
+    const navigation = performance.getEntriesByType('navigation')[0]?.type;
+    const restoring = navigation === 'reload' || navigation === 'back_forward';
+    let y = restoring ? history.state?.scrollY || window.scrollY : 0;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem('eddndev-scroll-position'));
+      if (restoring && saved?.url === location.href) y = saved.y;
+    } catch { /* Restoring from history also works without storage. */ }
+    history.scrollRestoration = 'manual';
+    root.setAttribute('data-layout-loading', '');
+    const boot = window.__pageLayout = { restoring, position: { y }, release: () => root.removeAttribute('data-layout-loading') };
+    // The document remains usable if the application bundle cannot load.
+    boot.watchdog = setTimeout(() => boot.release(), 8000);
+    addEventListener('pagehide', () => {
+      try {
+        const y = root.hasAttribute('data-layout-loading') ? boot.position.y : window.scrollY;
+        sessionStorage.setItem('eddndev-scroll-position', JSON.stringify({ url: location.href, y }));
+      } catch { /* Storage is optional. */ }
+    });
+  })();
+</script>
+
+<div class="page-loader" data-page-loader role="status" aria-live="polite" aria-atomic="true">
+  <div class="page-loader__content">
+    <span class="page-loader__brand" aria-hidden="true">edd n'dev</span>
+    <span class="page-loader__line" aria-hidden="true"></span>
+    <span class="page-loader__label" data-page-loader-label>Preparando la página</span>
+  </div>
+</div>
+
+<style is:global>
+  .page-loader {
+    position: fixed;
+    z-index: 20000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: #0b0910;
+    color: #f1edf4;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease, visibility 160ms;
+  }
+  html[data-layout-loading] { overflow-anchor: none; scroll-behavior: auto !important; }
+  html[data-layout-loading] .page-loader { visibility: visible; opacity: 1; pointer-events: auto; transition: none; }
+  .page-loader__content { display: grid; justify-items: center; gap: 1.5rem; }
+  .page-loader__brand { font-size: 1.65rem; font-weight: 650; letter-spacing: -0.065em; }
+  .page-loader__line { width: 3rem; height: 1px; background: #b7a6ec; }
+  .page-loader__label { color: #b7afbc; font-size: 0.75rem; letter-spacing: 0.03em; }
+  @media (prefers-reduced-motion: reduce) { .page-loader { transition: none; } }
+  @media (forced-colors: active) { .page-loader { background: Canvas; color: CanvasText; } .page-loader__label { color: CanvasText; } }
+  @media print { .page-loader { display: none !important; } }
+</style>

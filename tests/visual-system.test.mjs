@@ -137,25 +137,22 @@ test('alternating project media uses one desktop column start at a time', () => 
   assert.doesNotMatch(projectGrid, /lg:col-start-8'\s*,\s*index % 2 === 1/);
 });
 
-test('the homepage communicates the offer through an editorial perforated field', () => {
+test('the homepage integrates Ensamble above the existing studio and services', () => {
   const home = read('src/pages/index.astro');
   const perforations = read('src/components/studio/ServicePerforations.astro');
   const space = read('src/styles/space.css');
 
-  assert.match(home, />Estudio de diseño<\/span>/);
-  assert.match(home, />e ingeniería<\/span>/);
-  assert.match(home, />digital\.<\/span>/);
-  assert.match(home, /Somos un equipo de ingenieros y diseñadores\./);
-  assert.match(home, /Creamos sitios, sistemas y automatizaciones para proyectos y organizaciones/);
-  assert.match(home, /para que el diseño y la ingeniería sean su ventaja\./);
-  assert.doesNotMatch(home, />Sitios\.|>Sistemas\.|>Automatización\./);
-  assert.match(home, /<section class="home-hero">/);
-  assert.doesNotMatch(home, /<Container class="mt-24 sm:mt-32 lg:mt-40">/);
-  assert.match(space, /\.home-hero\s*\{[^}]*min-height:\s*100dvh/s);
-  assert.match(space, /\.home-hero__copy\s*\{[^}]*align-self:\s*center/s);
-  assert.match(space, /\.home-hero__title\s*\{[^}]*clamp\(3\.75rem, min\(9vw, 22dvh\), 11rem\)/s);
-  assert.doesNotMatch(space, /\.home-hero__title-(?:accent|tail)/);
-  assert.match(space, /@media \(min-width: 900px\)[\s\S]*?\.home-hero__intro\s*\{[^}]*grid-column:\s*9 \/ -1/s);
+  const hero = read('src/components/studio/HomeEnsamble.astro');
+  assert.match(home, /<HomeEnsamble \/>/);
+  assert.doesNotMatch(home, /HomeConcordance/);
+  assert.match(hero, /Carácter\./);
+  assert.doesNotMatch(hero, /Una idea|Desde dentro/);
+  assert.match(hero, /código\./);
+  assert.match(hero, /Diseñamos y construimos sitios, software y automatizaciones/);
+  assert.match(hero, /data-astro-reload\s+href="#work"/);
+  assert.match(hero, /data-astro-reload\s+href="#studio"/);
+  assert.match(hero, /aria-controls="ensamble-object"/);
+  assert.match(home, /<HomeEnsamble \/>[\s\S]*<StudioStatement \/>/);
   assert.match(space, /\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, max\(44vw, 62dvh\), 44rem\)/s);
   assert.match(space, /@media \(max-width: 720px\)[\s\S]*?\.kinetic-canvas\s*\{[^}]*height:\s*clamp\(24rem, 62dvh, 40rem\)/s);
   assert.match(home, /<h2[^>]*>Qué hacemos<\/h2>/);
@@ -227,8 +224,9 @@ test('the homepage introduces the studio with a scroll-driven statement before s
   assert.match(component, /class="sr-only"/);
   assert.match(animation, /gsap\.timeline/);
   assert.match(animation, /scrub:\s*true/);
-  assert.match(animation, /trigger:\s*scrollStartWord/);
-  assert.match(animation, /start:\s*'top 80%'/);
+  assert.match(animation, /trigger:\s*section/);
+  assert.match(animation, /offsetWithin\(scrollStartWord, section\)/);
+  assert.match(animation, /node\.offsetTop/);
   assert.match(animation, /endTrigger:\s*section/);
   assert.match(animation, /end:\s*'bottom 80%'/);
   assert.match(animation, /prefersReduced/);

@@ -4,6 +4,12 @@ import { prefersReduced } from '../core/dom';
 
 const MUTED = 'rgba(241, 237, 244, 0.18)';
 
+function offsetWithin(element, section) {
+  let top = 0;
+  for (let node = element; node && node !== section; node = node.offsetParent) top += node.offsetTop;
+  return top;
+}
+
 export default function initKineticStatements() {
   const sections = gsap.utils.toArray('[data-kinetic-statement]');
   if (!sections.length || prefersReduced()) return;
@@ -77,10 +83,12 @@ export default function initKineticStatements() {
     const syncAccents = (progress) => {
       accentControllers.forEach((controller) => {
         const shouldReveal = progress >= controller.revealProgress;
-        if (shouldReveal === controller.visible || !controller.motion) return;
+        const restoring = document.documentElement.hasAttribute('data-layout-loading');
+        if (!controller.motion || (shouldReveal === controller.visible && !restoring)) return;
 
         controller.visible = shouldReveal;
-        if (shouldReveal) controller.motion.play();
+        if (restoring) controller.motion.progress(shouldReveal ? 1 : 0).pause();
+        else if (shouldReveal) controller.motion.play();
         else controller.motion.reverse();
       });
     };
@@ -88,8 +96,10 @@ export default function initKineticStatements() {
     const timeline = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
-        trigger: scrollStartWord,
-        start: 'top 80%',
+        id: `${section.id}-karaoke`,
+        // Layout offsets exclude the animated track's scale and translation.
+        trigger: section,
+        start: () => `top+=${offsetWithin(scrollStartWord, section)} 80%`,
         endTrigger: section,
         end: 'bottom 80%',
         scrub: true,

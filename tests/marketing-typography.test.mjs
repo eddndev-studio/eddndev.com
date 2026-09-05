@@ -12,10 +12,10 @@ function read(relativePath) {
 
 test('homepage marketing copy uses the larger readable type ramp', () => {
   const home = read('src/pages/index.astro');
-  const space = read('src/styles/space.css');
+  const ensamble = read('src/styles/home-ensamble.css');
   const services = read('src/styles/service-perforations.css');
 
-  assert.match(space, /\.home-hero__intro\s*\{[^}]*font-size:\s*clamp\(1\.125rem, 1\.15vw, 1\.25rem\)/s);
+  assert.match(ensamble, /\.ensamble-intro\s*\{[^}]*font-size:\s*clamp\(1\.125rem, 1\.15vw, 1\.25rem\)/s);
   assert.match(home, /service-section__intro[^"\n]*text-xl/);
   assert.match(services, /\.service-scene__tagline\s*\{[^}]*font-size:\s*1\.25rem[^}]*line-height:\s*1\.8rem/s);
   assert.match(services, /@media \(max-width: 639px\)[\s\S]*?\.service-scene__tagline\s*\{[^}]*font-size:\s*1\.125rem/s);

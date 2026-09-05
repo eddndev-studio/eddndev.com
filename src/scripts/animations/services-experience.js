@@ -1,6 +1,6 @@
 import { gsap, ScrollTrigger } from '../core/gsap-core';
 import { lenis } from '../core/lenis';
-import { onPageCleanup } from '../core/lifecycle';
+import { onPageCleanup, requestLayoutRefresh } from '../core/lifecycle';
 import { mountServiceSignal } from '../features/service-signal.js';
 import { createHeroTimeline, getHeroScrollConfig } from './services-hero-motion.js';
 
@@ -81,8 +81,6 @@ export default function initServicesExperience() {
   const toggleLabel = toggle.querySelector('[data-services-motion-label]');
   let userReduced = false;
   try { userReduced = sessionStorage.getItem('services-reduced-motion') === 'true'; } catch { /* Storage is optional. */ }
-  let disposed = false;
-  let initialHashHandled = false;
 
   function setMotionState(reduced) {
     root.dataset.servicesMotion = reduced ? 'reduced' : 'full';
@@ -130,8 +128,7 @@ export default function initServicesExperience() {
   function toggleMotion() {
     userReduced = !userReduced;
     try { sessionStorage.setItem('services-reduced-motion', String(userReduced)); } catch { /* Storage is optional. */ }
-    bindMotion();
-    ScrollTrigger.refresh();
+    requestLayoutRefresh();
   }
   toggle.addEventListener('click', toggleMotion);
 
@@ -151,18 +148,7 @@ export default function initServicesExperience() {
   }
   root.addEventListener('click', onAnchor, true);
 
-  // Font metrics affect the pin and deep links. Refresh after the font settles.
-  document.fonts.ready.then(() => {
-    if (disposed) return;
-    ScrollTrigger.refresh();
-    if (!initialHashHandled && location.hash) {
-      initialHashHandled = true;
-      const target = document.getElementById(location.hash.slice(1));
-      if (target && root.contains(target)) lenis.scrollTo(target, { immediate: true, offset: -32 });
-    }
-  });
   onPageCleanup(() => {
-    disposed = true;
     root.removeEventListener('click', onAnchor, true);
     toggle.removeEventListener('click', toggleMotion);
     media?.revert();

@@ -3,6 +3,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import gsapPackage from 'gsap/dist/gsap.js';
+import { createStudioExit } from '../src/scripts/animations/studio-transition-motion.js';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 
@@ -38,13 +40,25 @@ test('the studio statement pins while the services surface moves above it', () =
   assert.match(animation, /end:\s*'top top'/);
   assert.match(animation, /scrub:\s*0\.55/);
   assert.match(animation, /refreshPriority:\s*1/);
-  assert.match(animation, /yPercent:/);
-  assert.match(animation, /scale:/);
-  assert.match(animation, /autoAlpha:\s*0/);
+  assert.match(animation, /createStudioExit/);
   assert.match(main, /initStudioServicesTransition/);
   assert.ok(main.indexOf('initStudioServicesTransition,') < main.indexOf('initKineticStatements,'));
   assert.match(interactions, /\.kinetic-statement\[data-kinetic-pin-target\]\s*\{[^}]*z-index:\s*1/s);
   assert.match(services, /\.service-section\s*\{[^}]*z-index:\s*2/s);
+});
+
+test('Estudio holds the completed statement before the services handoff fades it', () => {
+  const track = { yPercent: 0, scale: 1, autoAlpha: 1 };
+  const animation = createStudioExit(gsapPackage.gsap, track, () => false);
+  animation.progress(0.35);
+  assert.equal(track.autoAlpha, 1);
+  assert.equal(track.scale, 1);
+  animation.progress(0.75);
+  assert.ok(track.autoAlpha > 0 && track.autoAlpha < 1);
+  animation.progress(1);
+  assert.equal(track.autoAlpha, 0);
+  animation.kill();
+  assert.match(read('src/styles/interactions.css'), /\[data-kinetic-pin-target\][^{]*\{[^}]*margin-bottom:\s*clamp\(/s);
 });
 
 test('the studio transition stays decorative and leaves reduced motion static', () => {

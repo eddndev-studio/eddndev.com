@@ -1,0 +1,110 @@
+---
+import EnsambleObject from './EnsambleObject.astro';
+import ArrowRightIcon from './ArrowRightIcon.astro';
+import '../../styles/home-ensamble.css';
+---
+
+<section
+  class="home-ensamble"
+  data-home-ensamble
+  id="inicio"
+  aria-labelledby="hero-title"
+>
+  <div class="ensamble-stage">
+    <div class="ensamble-body">
+      <p class="ensamble-eyebrow ensamble-mono">
+        <span class="ensamble-mini-mark" aria-hidden="true"></span>Diseño +
+        ingeniería <span class="ensamble-divide" aria-hidden="true"></span><span
+          class="ensamble-location">Desde México</span
+        >
+      </p>
+      <h1 class="ensamble-title" id="hero-title">
+        <span class="ensamble-title-line ensamble-first">Carácter.</span>
+        <span class="ensamble-title-line ensamble-second"
+          ><span class="ensamble-conjunction">Y</span> código.</span
+        >
+      </h1>
+      <figure
+        class="ensamble-sculpture"
+        aria-label="Ensamble: la n de edd n'dev, construida en capas. Una pieza que une diseño y estructura."
+      >
+        <div class="ensamble-details" aria-hidden="true">
+          <div class="ensamble-object-frame"></div>
+          <p class="ensamble-registration ensamble-mono">
+            <i></i>n’ / Ensamble
+          </p>
+          <p class="ensamble-object-label ensamble-mono">
+            <b>01</b> Forma<br /><b>02</b> Sistema
+          </p>
+        </div>
+        <div class="ensamble-object-stage">
+          <EnsambleObject />
+        </div>
+      </figure>
+      <div class="ensamble-bottom">
+        <p class="ensamble-intro">
+          <strong>Lo que se ve. Y lo que lo hace funcionar.</strong><br
+          />Diseñamos y construimos sitios, software y automatizaciones como un
+          mismo sistema.
+        </p>
+        <div class="ensamble-actions">
+          <a class="ensamble-cta" data-astro-reload href="#work"
+            >Explorar el trabajo <svg
+              class="ensamble-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg
+            ></a
+          >
+          <a class="ensamble-text-link" href="mailto:contacto@eddndev.com"
+            >Cuéntanos tu idea <ArrowRightIcon
+              class="ensamble-arrow ensamble-arrow-diagonal"
+            /></a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="ensamble-foot">
+      <p class="ensamble-foot-left ensamble-mono">
+        <span class="ensamble-number">01</span> De la forma al sistema
+      </p>
+      <a
+        class="ensamble-scroll-cue ensamble-mono"
+        data-astro-reload
+        href="#studio"
+        ><svg
+          viewBox="0 0 14 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+          aria-hidden="true"><path d="M7 2v18m-5-5 5 5 5-5"></path></svg
+        ><span>Conoce el estudio</span></a
+      >
+      <div class="ensamble-controls">
+        <button
+          class="ensamble-control ensamble-structure"
+          type="button"
+          aria-pressed="false"
+          aria-controls="ensamble-object"
+          hidden
+          ><span class="ensamble-status-dot" aria-hidden="true"></span><span
+            >Ver estructura</span
+          ></button
+        >
+        <button
+          class="ensamble-control ensamble-pause"
+          type="button"
+          aria-pressed="false"
+          aria-label="Pausar animación automática"
+          hidden
+          ><span class="ensamble-pause-symbol" aria-hidden="true"
+            ><i></i><i></i></span
+          ><span class="ensamble-pause-label">Pausar</span></button
+        >
+      </div>
+    </div>
+    <div class="ensamble-exit-rule" aria-hidden="true"></div>
+  </div>
+</section>

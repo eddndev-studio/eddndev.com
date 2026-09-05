@@ -44,7 +44,8 @@ test('the navigation does not reserve a top strip above page content', () => {
   assert.doesNotMatch(navigation, /data-nav-panel[^>]*class="[^"]*\bpt-2\b/);
   assert.doesNotMatch(layout, /data-nav-content[^>]*class="[^"]*\bpt-\d+\b/);
   assert.doesNotMatch(layout, /flex w-full flex-col pt-9/);
-  assert.match(space, /\.home-hero\s*\{[^}]*min-height:\s*100dvh/s);
+  const ensamble = read('src/styles/home-ensamble.css');
+  assert.match(ensamble, /\.ensamble-stage\s*\{[^}]*min-height:\s*100svh/s);
   assert.doesNotMatch(space, /100(?:s|d)?vh - 6\.25rem/);
 });
 
