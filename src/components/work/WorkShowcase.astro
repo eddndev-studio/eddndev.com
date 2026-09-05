@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Container from '../studio/Container.astro';
+import ArrowRightIcon from '../studio/ArrowRightIcon.astro';
+import WorkProject from './WorkProject.astro';
+import '../../styles/work-showcase.css';
+
+interface Props { projects: CollectionEntry<'work'>[] }
+const { projects } = Astro.props;
+const total = String(projects.length).padStart(2, '0');
+---
+
+<section id="work" data-work-showcase class="work-showcase mt-24 scroll-mt-24 sm:mt-32 lg:mt-40" aria-labelledby="work-title">
+  <Container>
+    <header class="work-showcase__heading">
+      <div>
+        <p class="section-code">Productos propios / Colaboraciones</p>
+        <h2 id="work-title" class="work-showcase__title type-wide">Trabajo<span class="work-showcase__period">.</span><sup class="type-narrow">({total})</sup></h2>
+      </div>
+      <p class="work-showcase__intro">Del diseño a la arquitectura y el desarrollo. Una selección de lo que estamos construyendo.</p>
+    </header>
+
+    <div class="work-showcase__body">
+      <aside class="work-showcase__rail">
+        <div class="work-showcase__position type-narrow" aria-hidden="true">
+          <span data-work-count class="work-showcase__count type-wide">01</span>
+          <span class="work-showcase__total">/ {total}</span>
+        </div>
+        <nav aria-label="Proyectos seleccionados" class="work-showcase__index">
+          {projects.map((project, index) => (
+            <a data-work-index data-astro-reload href={`#work-${project.slug}`} class="work-showcase__index-link">
+              <span class="type-narrow">{String(index + 1).padStart(2, '0')}</span>
+              <span>{project.data.title}</span>
+            </a>
+          ))}
+        </nav>
+        <p class="work-showcase__rail-note type-narrow">Diseño e ingeniería<br />en la misma dirección.</p>
+      </aside>
+
+      <div class="work-showcase__projects">
+        {projects.map((project, index) => <WorkProject project={project} index={index} />)}
+      </div>
+    </div>
+
+    <div class="work-showcase__ending">
+      <p>Cada caso documenta su alcance, su estado y el trabajo realizado.</p>
+      <a href="/work" class="work-showcase__archive type-narrow">
+        Ver todo el trabajo <ArrowRightIcon />
+      </a>
+    </div>
+  </Container>
+</section>

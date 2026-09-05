@@ -16,5 +16,7 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 lenis.on('scroll', ScrollTrigger.update);
+// Astro swaps page content while this scroller persists across routes.
+ScrollTrigger.addEventListener('refresh', () => lenis.resize());
 
 export { lenis };

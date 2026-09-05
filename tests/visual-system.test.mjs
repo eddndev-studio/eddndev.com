@@ -281,6 +281,12 @@ test('focused interface files remain maintainable', () => {
     'src/scripts/animations/studio-services-transition.js',
     'src/scripts/animations/service-perforations.js',
     'src/components/work/ProjectGrid.astro',
+    'src/components/work/WorkShowcase.astro',
+    'src/components/work/WorkProject.astro',
+    'src/styles/work-showcase.css',
+    'src/scripts/features/work-showcase.js',
+    'src/scripts/features/work-index.js',
+    'src/scripts/animations/work-motion.js',
     'src/pages/index.astro',
   ];
 

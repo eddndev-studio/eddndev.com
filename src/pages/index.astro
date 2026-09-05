@@ -3,12 +3,11 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/studio/Container.astro';
 import FadeIn from '../components/studio/FadeIn.astro';
-import SectionIntro from '../components/studio/SectionIntro.astro';
 import ServicePerforations from '../components/studio/ServicePerforations.astro';
 import StudioStatement from '../components/studio/StudioStatement.astro';
 import ProcessStatement from '../components/studio/ProcessStatement.astro';
 import ContactSection from '../components/studio/ContactSection.astro';
-import ProjectGrid from '../components/work/ProjectGrid.astro';
+import WorkShowcase from '../components/work/WorkShowcase.astro';
 import { services } from '../data/services';
 
 const projects = await getCollection('work');
@@ -61,15 +60,7 @@ const ordered = preferredOrder
     </Container>
   </section>
 
-  <SectionIntro eyebrow="Trabajo" title="Casos que se pueden revisar." id="work" class="mt-24 scroll-mt-24 sm:mt-32 lg:mt-40">
-    <p>Cada caso distingue lo que está publicado, lo que sigue en desarrollo y los resultados que ya cuentan con datos compartibles.</p>
-  </SectionIntro>
-  <Container class="mt-16">
-    <ProjectGrid projects={ordered} />
-    <FadeIn class="mt-10 flex justify-end">
-      <a href="/work" class="type-narrow border-b border-white/30 text-sm font-bold tracking-[0.08em] text-white uppercase transition-colors hover:border-brand hover:text-brand">Ver todo el trabajo</a>
-    </FadeIn>
-  </Container>
+  <WorkShowcase projects={ordered} />
 
   <ProcessStatement />
 

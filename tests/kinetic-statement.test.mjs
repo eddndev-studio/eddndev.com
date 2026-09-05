@@ -19,7 +19,8 @@ test('the homepage places a kinetic process statement between work and contact',
   const process = read(componentPath);
   const processPosition = home.indexOf('<ProcessStatement />');
 
-  assert.ok(processPosition > home.indexOf('<ProjectGrid'));
+  assert.ok(home.includes('<WorkShowcase'));
+  assert.ok(processPosition > home.indexOf('<WorkShowcase'));
   assert.ok(processPosition < home.indexOf('<ContactSection'));
   assert.doesNotMatch(home, /id="pricing"|eyebrow="Inversión"|const offers =/);
   assert.match(process, /Cada proyecto empieza por entender el problema\./);

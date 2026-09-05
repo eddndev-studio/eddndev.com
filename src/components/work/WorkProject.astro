@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArrowRightIcon from '../studio/ArrowRightIcon.astro';
+
+interface Props { project: CollectionEntry<'work'>; index: number }
+const { project, index } = Astro.props;
+const number = String(index + 1).padStart(2, '0');
+const captions: Record<string, string> = {
+  ataulfo: 'Canales, asistentes y trabajo compartido',
+  sylestudio: 'Dos sitios. Una colaboración continua.',
+  achronyme: 'Un lenguaje. Tres máquinas.',
+};
+---
+
+<article id={`work-${project.slug}`} data-work-project class:list={['work-project', `work-project--${project.slug}`]} aria-labelledby={`work-title-${project.slug}`}>
+  <div class="work-project__eyebrow type-narrow">
+    <p>{number} <span aria-hidden="true">/</span> {project.data.category}</p>
+    <p class="work-project__status">{project.data.status}</p>
+  </div>
+
+  <h3 id={`work-title-${project.slug}`} class="work-project__title type-wide" data-work-title>
+    <a href={`/work/${project.slug}`} class="work-project__link">
+      {project.data.title}<span class="work-project__title-arrow"><ArrowRightIcon /></span>
+    </a>
+  </h3>
+
+  <div class="work-project__spread">
+    <p class="work-project__year type-narrow">{project.data.year}<span aria-hidden="true"></span>{project.data.category}</p>
+    {project.data.cover && (
+      <figure class="work-project__figure">
+        <div class="work-project__visual" data-work-visual>
+          <Image src={project.data.cover} alt={`Vista del proyecto ${project.data.title}`} loading="lazy" decoding="async" class="work-project__image" data-work-image />
+          <div class="work-project__shutters" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map(() => <span data-work-shutter></span>)}
+          </div>
+        </div>
+        <figcaption class="work-project__caption type-narrow"><span>{captions[project.slug] || project.data.category}</span><span aria-hidden="true">[ {number} ]</span></figcaption>
+      </figure>
+    )}
+  </div>
+
+  <div class="work-project__details">
+    <p class="work-project__description">{project.data.description}</p>
+    <dl class="work-project__facts">
+      <div><dt class="type-narrow">Nuestro trabajo</dt><dd>{project.data.role || project.data.category}</dd></div>
+      <div><dt class="type-narrow">En el proyecto</dt><dd>{project.data.signal}</dd></div>
+    </dl>
+  </div>
+</article>
