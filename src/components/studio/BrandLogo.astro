@@ -1,0 +1,14 @@
+---
+import Symbol from '../../assets/images/eddndev.svg';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={['brand-logo', className]} aria-hidden="true">
+  <Symbol class="brand-logo__symbol" aria-hidden="true" focusable="false" />
+  <span class="brand-logo__wordmark">edd n'dev</span>
+</span>
