@@ -203,40 +203,12 @@
 }
 .ensamble-object-stage {
   position: absolute;
-  inset: 0;
+  inset: -12% -9%;
   transform-origin: 50% 52%;
 }
 .ensamble-details {
   position: absolute;
   inset: 0;
-}
-.ensamble-object-frame {
-  position: absolute;
-  left: 10%;
-  right: 8%;
-  top: 8%;
-  bottom: 11%;
-  border: 1px solid var(--hairline);
-}
-.ensamble-object-frame::before,
-.ensamble-object-frame::after {
-  content: '+';
-  position: absolute;
-  color: var(--moonlight);
-  font: 17px/1 monospace;
-  background: var(--void);
-  width: 12px;
-  height: 12px;
-  display: grid;
-  place-content: center;
-}
-.ensamble-object-frame::before {
-  top: -7px;
-  left: -7px;
-}
-.ensamble-object-frame::after {
-  bottom: -6px;
-  right: -6px;
 }
 .ensamble-registration {
   position: absolute;
@@ -452,7 +424,7 @@
     align-self: center;
   }
   .ensamble-object-stage {
-    inset: -10% 0;
+    inset: -14% -7%;
   }
   .ensamble-bottom {
     align-self: center;
@@ -502,20 +474,11 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: clamp(220px, 62vw, 310px);
+    height: clamp(250px, 78vw, 400px);
     margin-top: 14px;
     flex: none;
     order: 2;
     align-self: center;
-  }
-  .ensamble-object-stage {
-    inset: -12% 0;
-  }
-  .ensamble-object-frame {
-    left: 9%;
-    right: 8%;
-    top: 6%;
-    bottom: 9%;
   }
   .ensamble-registration {
     top: 0;

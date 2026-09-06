@@ -3,6 +3,7 @@ import {
   getLayout,
   getProgress,
   getLayerTransform,
+  getLayerIndices,
   matrix,
 } from './model.js';
 import { createExitView } from './exit-view.js';
@@ -21,8 +22,9 @@ export function mountEnsamble(
   const stage = track.querySelector('.ensamble-stage');
   const art = track.querySelector('.ensamble-sculpture');
   const exitView = createExitView(track, next);
-  const layers = Array.from(track.querySelectorAll('.ensamble-lamina'));
-  const faces = layers.map((layer) =>
+  const allLayers = Array.from(track.querySelectorAll('.ensamble-lamina'));
+  let layers = allLayers;
+  let faces = layers.map((layer) =>
     Array.from(layer.querySelectorAll('use')),
   );
   const pause = track.querySelector('.ensamble-pause');
@@ -90,6 +92,15 @@ export function mountEnsamble(
     measurePending = false;
     // A menu overlay fixes the body temporarily; it is not a new page geometry.
     if (document.documentElement.classList.contains('nav-open')) return;
+    const indices = getLayerIndices({ mobile: mobile.matches });
+    if (layers.length !== indices.length) {
+      allLayers.forEach((layer, index) => {
+        layer.style.display = indices.includes(index) ? '' : 'none';
+      });
+      layers = indices.map(index => allLayers[index]);
+      faces = layers.map(layer => Array.from(layer.querySelectorAll('use')));
+      paintedStructure = -1;
+    }
     const previousSize = height + runway - overlap;
     height = stage.offsetHeight;
     top = track.getBoundingClientRect().top + window.scrollY;
@@ -127,12 +138,13 @@ export function mountEnsamble(
     for (let index = 0; index < layers.length; index++) {
       const transform = getLayerTransform({
         index,
+        count: layers.length,
         time,
         structure,
         pointer,
         progress,
       });
-      const departure = exitView.layer(index, progress);
+      const departure = exitView.layer(index, progress, layers.length);
       transform[4] += departure.x;
       transform[5] += departure.y;
       layers[index].setAttribute('transform', matrix(transform));
@@ -328,6 +340,7 @@ export function mountEnsamble(
       delay,
       overlap,
       frames,
+      layerCount: layers.length,
     }),
     destroy() {
       if (!alive) return;
@@ -344,6 +357,7 @@ export function mountEnsamble(
       track.style.removeProperty('--ensamble-pin-top');
       track.style.removeProperty('--ensamble-overlap');
       exitView.destroy();
+      for (const layer of allLayers) layer.style.removeProperty('display');
       pause.hidden = structureButton.hidden = true;
     },
   };

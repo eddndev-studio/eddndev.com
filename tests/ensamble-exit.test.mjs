@@ -5,7 +5,7 @@ import {
   getLayerDeparture,
   getSceneDeparture,
 } from '../src/scripts/features/ensamble/exit.js';
-import { getLayerTransform } from '../src/scripts/features/ensamble/model.js';
+import { getLayerTransform, getLayerIndices } from '../src/scripts/features/ensamble/model.js';
 
 const desktop = {
   width: 1440,
@@ -45,14 +45,15 @@ test('every layer actually clears the viewport without scaling or opacity tricks
     { ...desktop, width: 2560, height: 1440 },
   ]) {
     const scene = getSceneDeparture({ ...viewport, progress: 1 });
-    for (let index = 0; index < 38; index++) {
-      const matrix = getLayerTransform({ index, progress: 1, time: 0 });
-      const departure = getLayerDeparture({ ...viewport, progress: 1, index });
+    const count = getLayerIndices({ mobile: viewport.width <= 600 }).length;
+    for (let index = 0; index < count; index++) {
+      const matrix = getLayerTransform({ index, count, progress: 1, time: 0 });
+      const departure = getLayerDeparture({ ...viewport, progress: 1, index, count });
       const corners = [
-        [-174, -166],
-        [271, -166],
-        [271, 168],
-        [-174, 168],
+        [-192, -120],
+        [192, -120],
+        [192, 120],
+        [-192, 120],
       ].map(([x, y]) => ({
         x:
           viewport.svg.x +
@@ -82,9 +83,23 @@ test('layer departures are staggered and fully reversible', () => {
     y: 0,
   });
   const outer = getLayerDeparture({ ...desktop, index: 0, progress: 0.7 });
-  const inner = getLayerDeparture({ ...desktop, index: 18, progress: 0.7 });
+  const inner = getLayerDeparture({ ...desktop, index: 11, progress: 0.7 });
   assert.ok(Math.hypot(outer.x, outer.y) > Math.hypot(inner.x, inner.y));
   const forward = getSceneDeparture({ ...desktop, progress: 0.5 });
   getSceneDeparture({ ...desktop, progress: 1 });
   assert.deepEqual(getSceneDeparture({ ...desktop, progress: 0.5 }), forward);
+});
+
+test('the logo centers independently of the layer budget', () => {
+  for (const viewport of [desktop, mobile]) {
+    const scene = getSceneDeparture({ ...viewport, progress: 0.6 });
+    assert.ok(Math.abs(viewport.svg.x + 360 * viewport.svg.scale + scene.objectX - viewport.width * 0.5) < 0.001);
+    assert.ok(Math.abs(viewport.svg.y + 360 * viewport.svg.scale + scene.objectY - viewport.height * 0.46) < 0.001);
+  }
+  for (const edge of [0, 1]) {
+    assert.deepEqual(
+      getLayerDeparture({ ...mobile, index: edge * 15, count: 16, progress: 0.75 }),
+      getLayerDeparture({ ...mobile, index: edge * 23, count: 24, progress: 0.75 }),
+    );
+  }
 });

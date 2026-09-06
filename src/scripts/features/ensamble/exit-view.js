@@ -38,8 +38,8 @@ export function createExitView(track, next) {
         },
       };
     },
-    layer(index, progress) {
-      return getLayerDeparture({ ...geometry, index, progress });
+    layer(index, progress, count) {
+      return getLayerDeparture({ ...geometry, index, progress, count });
     },
     paint(progress, enabled) {
       const phases = getExitPhases(progress);

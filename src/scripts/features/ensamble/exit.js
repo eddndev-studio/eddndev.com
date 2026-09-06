@@ -1,4 +1,4 @@
-import { smooth } from './model.js';
+import { LAYER_COUNT, smooth } from './model.js';
 
 export function getExitPhases(progress) {
   return {
@@ -16,22 +16,22 @@ export function getSceneDeparture({ progress, width, height, svg }) {
     copyX: -(width + 80) * phases.copy,
     detailsX: portrait ? 0 : (width + 80) * phases.details,
     detailsY: portrait ? (height + 80) * phases.details : 0,
-    // The optical center includes the apostrophe and the depth of the stack.
-    objectX: (width * 0.5 - (svg.x + 435 * svg.scale)) * phases.center,
-    objectY: (height * 0.46 - (svg.y + 365 * svg.scale)) * phases.center,
+    objectX: (width * 0.5 - (svg.x + 360 * svg.scale)) * phases.center,
+    objectY: (height * 0.46 - (svg.y + 360 * svg.scale)) * phases.center,
   };
 }
 
 /** Send the outer planes first, then the inner pair, along the depth axis. */
-export function getLayerDeparture({ index, progress, width, height, svg }) {
-  const rank = Math.abs(index - 18.5) / 18.5;
+export function getLayerDeparture({ index, count = LAYER_COUNT, progress, width, height, svg }) {
+  const position = index / Math.max(1, count - 1);
+  const rank = Math.abs(position - 0.5) * 2;
   const departure = smooth(
     0.48 + (1 - rank) * 0.18,
     0.84 + (1 - rank) * 0.15,
     progress,
   );
   if (!departure) return { x: 0, y: 0 };
-  const direction = index < 18.5 ? -1 : 1;
+  const direction = position < 0.5 ? -1 : 1;
   const distance = (Math.hypot(width, height) + 720 * svg.scale) / svg.scale;
   return {
     x: -0.86 * direction * distance * departure,

@@ -39,6 +39,9 @@ class Element extends EventTarget {
     return this.children.get(selector);
   }
   querySelectorAll(selector) {
+    if (selector === '.ensamble-lamina') {
+      return Array.from({ length: 24 }, (_, index) => this.querySelector(`${selector}-${index}`));
+    }
     return [
       this.querySelector(selector + '-1'),
       this.querySelector(selector + '-2'),
@@ -152,6 +155,30 @@ function scene(t, options = {}) {
     queue,
   };
 }
+
+test('mobile paints only its active layers and restores desktop layers on resize', (t) => {
+  const s = scene(t);
+  s.api.setPaused(true);
+  s.tick(2);
+  const layers = s.track.querySelectorAll('.ensamble-lamina');
+  const front = layers.at(-1).getAttribute('transform');
+  assert.equal(s.api.getState().layerCount, 24);
+  s.media('max-width', true);
+  s.tick(2);
+  assert.equal(s.api.getState().layerCount, 16);
+  const hidden = layers.filter(layer => layer.style.display === 'none');
+  assert.equal(hidden.length, 8);
+  assert.equal(layers.at(-1).getAttribute('transform'), front);
+  const hiddenTransforms = hidden.map(layer => layer.getAttribute('transform'));
+  s.window.scrollY = 400;
+  s.window.dispatchEvent(new Event('scroll'));
+  s.tick(2);
+  assert.deepEqual(hidden.map(layer => layer.getAttribute('transform')), hiddenTransforms);
+  s.media('max-width', false);
+  s.tick(2);
+  assert.equal(s.api.getState().layerCount, 24);
+  assert.ok(layers.every(layer => layer.style.display !== 'none'));
+});
 
 test('mobile browser chrome can change without changing the CSS viewport runway', (t) => {
   const s = scene(t, { getViewportHeight: () => 768 });

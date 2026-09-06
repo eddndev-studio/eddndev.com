@@ -1,8 +1,13 @@
 ---
 import {
   getLayerTransform,
+  LAYER_COUNT,
   matrix,
 } from '../../scripts/features/ensamble/model.js';
+import logo from '../../assets/images/eddndev.svg?raw';
+
+const profile = logo.match(/<path\b[^>]*\bd="([^"]+)"/)?.[1];
+if (!profile) throw new Error('The ensamble requires the vector brand profile.');
 ---
 
 <svg
@@ -15,11 +20,9 @@ import {
   <defs>
     <path
       id="ensamble-profile"
-      d="M -174 168 L -174 -155 L -74 -155 L -74 -109 C -43 -148 -4 -166 44 -166 C 128 -166 175 -112 175 -25 L 175 168 L 65 168 L 65 -14 C 65 -53 49 -75 17 -75 C -23 -75 -64 -39 -64 6 L -64 168 Z"
-    ></path>
-    <path
-      id="ensamble-apostrophe"
-      d="M 204 -166 L 271 -166 L 271 -112 L 231 -69 L 204 -69 L 226 -112 L 204 -112 Z"
+      d={profile}
+      transform="translate(-192 -120)"
+      fill-rule="evenodd"
     ></path>
     <linearGradient id="ensamble-face" x1="0" y1="0" x2="1" y2="1"
       ><stop offset="0" stop-color="#e5d9f5"></stop><stop
@@ -55,8 +58,8 @@ import {
   >
   <g class="ensamble-laminae">
     {
-      Array.from({ length: 38 }, (_, index) => {
-        const fill = `url(#ensamble-${index === 37 ? 'face' : index > 29 ? 'edge' : 'body-metal'})`;
+      Array.from({ length: LAYER_COUNT }, (_, index) => {
+        const fill = `url(#ensamble-${index === LAYER_COUNT - 1 ? 'face' : index >= Math.floor(LAYER_COUNT * 0.8) ? 'edge' : 'body-metal'})`;
         return (
           <g
             class="ensamble-lamina"
@@ -68,13 +71,6 @@ import {
               stroke="#a58fce"
               stroke-opacity=".67"
               stroke-width=".8"
-            />
-            <use
-              href="#ensamble-apostrophe"
-              fill={fill}
-              stroke="#a58fce"
-              stroke-opacity=".67"
-              stroke-width=".7"
             />
           </g>
         );

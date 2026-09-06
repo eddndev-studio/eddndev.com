@@ -4,6 +4,8 @@ import {
   getLayout,
   getProgress,
   getLayerTransform,
+  getLayerIndices,
+  LAYER_COUNT,
 } from '../src/scripts/features/ensamble/model.js';
 
 test('short viewports read the whole hero before a bottom-aligned pin starts', () => {
@@ -53,10 +55,35 @@ test('a normal-flow hero does not scrub away content while readers reach its con
   assert.equal(getProgress({ scroll: 400, top: 0, height: 940, runway: 0 }), 0);
 });
 
+test('the layer budget is smaller on mobile while retaining both faces', () => {
+  const desktop = getLayerIndices();
+  const mobile = getLayerIndices({ mobile: true });
+  assert.equal(desktop.length, 24);
+  assert.equal(mobile.length, 16);
+  for (const indices of [desktop, mobile]) {
+    assert.equal(indices[0], 0);
+    assert.equal(indices.at(-1), LAYER_COUNT - 1);
+    assert.equal(new Set(indices).size, indices.length);
+    assert.ok(indices.every(index => Number.isInteger(index) && desktop.includes(index)));
+  }
+});
+
+test('responsive layer counts retain the same depth and front face position', () => {
+  for (const progress of [0, 0.4, 1]) {
+    for (const structure of [0, 1]) {
+      for (const edge of [0, 1]) {
+        const desktop = getLayerTransform({ index: edge * 23, count: 24, progress, structure, time: 12 });
+        const mobile = getLayerTransform({ index: edge * 15, count: 16, progress, structure, time: 12 });
+        assert.deepEqual(mobile, desktop);
+      }
+    }
+  }
+});
+
 test('scroll preserves the shape and projected area of every layer', () => {
   for (const structure of [0, 1]) {
     for (const progress of [0, 0.5, 1]) {
-      for (let index = 0; index < 38; index++) {
+      for (let index = 0; index < LAYER_COUNT; index++) {
         const values = getLayerTransform({
           index,
           progress,
