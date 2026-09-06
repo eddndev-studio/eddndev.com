@@ -1,4 +1,5 @@
 import { getExitPhases, getLayerDeparture, getSceneDeparture } from './exit.js';
+import { createDrawingView } from './drawing-view.js';
 
 export function createExitView(track, next) {
   const stage = track.querySelector('.ensamble-stage');
@@ -11,6 +12,7 @@ export function createExitView(track, next) {
     track.querySelector(selector),
   );
   const rule = track.querySelector('.ensamble-exit-rule');
+  const drawing = createDrawingView(track);
   if (next) next.dataset.ensambleNext = 'true';
   let geometry;
 
@@ -37,11 +39,13 @@ export function createExitView(track, next) {
           scale,
         },
       };
+      drawing.measure(geometry);
     },
     layer(index, progress, count) {
       return getLayerDeparture({ ...geometry, index, progress, count });
     },
     paint(progress, enabled) {
+      drawing.paint(progress, enabled);
       const phases = getExitPhases(progress);
       const motion = getSceneDeparture({ ...geometry, progress });
       for (const element of copy)
@@ -58,6 +62,7 @@ export function createExitView(track, next) {
       if (next) next.style.opacity = String(enabled ? phases.next : 1);
     },
     destroy() {
+      drawing.destroy();
       for (const element of [...copy, ...details, object])
         element.style.removeProperty('transform');
       rule.style.removeProperty('opacity');

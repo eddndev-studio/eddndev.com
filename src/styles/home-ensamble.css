@@ -58,6 +58,7 @@
 
 .ensamble-body {
   position: relative;
+  z-index: 1;
   display: grid;
   flex: 1;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);

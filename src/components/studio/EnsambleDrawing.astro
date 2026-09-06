@@ -1,0 +1,50 @@
+---
+import { driveGear, drivenGear } from '../../scripts/features/ensamble/drawing-glyphs.js';
+import '../../styles/ensamble-drawing.css';
+---
+
+<svg class="ensamble-drawing" aria-hidden="true" focusable="false" fill="none">
+  <path data-drawing-path="datum" class="drawing-datum" stroke-dasharray="2 6" />
+  <g class="drawing-design">
+    <g data-drawing-view="design">
+      <g class="drawing-guides">
+        <path d="M-92 54V-76M92 -54V76M-112 0H112" />
+        <circle cx="-92" cy="-76" r="4" />
+        <circle cx="92" cy="76" r="4" />
+      </g>
+      <path class="drawing-trace" pathLength="1" d="M-92 54C-92-76 92 76 92-54" />
+      <path class="drawing-trace" pathLength="1" d="M-97 49h10v10h-10ZM87-59h10v10H87Z" />
+    </g>
+    <text data-drawing-label="design">01 / Diseño</text>
+  </g>
+  <g class="drawing-engineering">
+    <path data-drawing-path="toEngineering" class="drawing-trace drawing-connection" pathLength="1" />
+    <g data-drawing-view="engineering">
+      <g class="drawing-guides" stroke-dasharray="2 5">
+        <circle cx="-34" cy="-22" r="55" />
+        <circle cx="42.21" cy="22" r="33" />
+        <path d="M-109-22H41M-34-97V53M-3 22H87M42.21-23V67" />
+      </g>
+      <path class="drawing-trace" pathLength="1" d={driveGear} />
+      <path class="drawing-trace" pathLength="1" d={drivenGear} />
+      <circle class="drawing-trace" pathLength="1" cx="-34" cy="-22" r="19" />
+      <circle class="drawing-trace" pathLength="1" cx="42.21" cy="22" r="11" />
+    </g>
+    <text data-drawing-label="engineering">02 / Ingeniería</text>
+  </g>
+  <g class="drawing-product">
+    <path data-drawing-path="toProduct" class="drawing-trace drawing-connection" pathLength="1" />
+    <g data-drawing-view="product">
+      <path class="drawing-trace" pathLength="1" d="M-90-72H90Q100-72 100-62V62Q100 72 90 72H-90Q-100 72-100 62V-62Q-100-72-90-72ZM-100-46H100" />
+      <g class="drawing-guides">
+        <circle cx="-82" cy="-59" r="2" />
+        <circle cx="-71" cy="-59" r="2" />
+        <circle cx="-60" cy="-59" r="2" />
+        <path d="M-110-46H110M-22-36V61" stroke-dasharray="2 5" />
+      </g>
+      <path class="drawing-trace" pathLength="1" d="M-80-25h44v61h-44ZM-18-25H76M-18-10H53M-18 5H64M-18 28H15V42H-18Z" />
+      <path class="drawing-trace" pathLength="1" d="M43 15V61L54 49L66 73L76 68L64 45L83 42Z" />
+    </g>
+    <text data-drawing-label="product">03 / Producto</text>
+  </g>
+</svg>

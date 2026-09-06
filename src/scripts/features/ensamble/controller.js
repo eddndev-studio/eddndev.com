@@ -7,6 +7,7 @@ import {
   matrix,
 } from './model.js';
 import { createExitView } from './exit-view.js';
+import { createLayerMaterial } from './material.js';
 
 export function mountEnsamble(
   track,
@@ -24,9 +25,7 @@ export function mountEnsamble(
   const exitView = createExitView(track, next);
   const allLayers = Array.from(track.querySelectorAll('.ensamble-lamina'));
   let layers = allLayers;
-  let faces = layers.map((layer) =>
-    Array.from(layer.querySelectorAll('use')),
-  );
+  let material = createLayerMaterial(layers);
   const pause = track.querySelector('.ensamble-pause');
   const structureButton = track.querySelector('.ensamble-structure');
   const pauseLabel = pause.querySelector('.ensamble-pause-label');
@@ -53,8 +52,7 @@ export function mountEnsamble(
   let pointer = { x: 0, y: 0 },
     aim = { x: 0, y: 0 };
   let showStructure = false,
-    structure = 0,
-    paintedStructure = -1;
+    structure = 0;
   let structureSelected = false,
     hovered = false;
   let height = 0,
@@ -98,8 +96,7 @@ export function mountEnsamble(
         layer.style.display = indices.includes(index) ? '' : 'none';
       });
       layers = indices.map(index => allLayers[index]);
-      faces = layers.map(layer => Array.from(layer.querySelectorAll('use')));
-      paintedStructure = -1;
+      material = createLayerMaterial(layers);
     }
     const previousSize = height + runway - overlap;
     height = stage.offsetHeight;
@@ -149,32 +146,7 @@ export function mountEnsamble(
       transform[5] += departure.y;
       layers[index].setAttribute('transform', matrix(transform));
     }
-    if (
-      Math.abs(paintedStructure - structure) > 0.002 ||
-      structure === 0 ||
-      structure === 1
-    ) {
-      if (paintedStructure !== structure) {
-        layers.forEach((layer, index) => {
-          const front = index === layers.length - 1;
-          layer.style.opacity = String(
-            index % 3 === 0 || front ? 1 : 1 - structure * 0.91,
-          );
-          for (const face of faces[index]) {
-            face.setAttribute(
-              'fill-opacity',
-              (1 - structure * (front ? 0.985 : 0.96)).toFixed(3),
-            );
-            face.setAttribute(
-              'stroke-opacity',
-              (0.67 + structure * 0.21).toFixed(3),
-            );
-            face.setAttribute('stroke', showStructure ? '#a398e8' : '#a58fce');
-          }
-        });
-        paintedStructure = structure;
-      }
-    }
+    material.paint({ structure, progress });
     exitView.paint(progress, runway > 0);
     dirty = false;
     frames++;

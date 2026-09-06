@@ -194,6 +194,32 @@ test('mobile browser chrome can change without changing the CSS viewport runway'
   assert.equal(after.progress, before.progress);
 });
 
+test('scroll makes faces transparent, preserves outlines and restores the solid logo on return', (t) => {
+  const s = scene(t);
+  s.api.setPaused(true);
+  s.tick(2);
+  const front = s.track.querySelectorAll('.ensamble-lamina').at(-1).querySelectorAll('use')[0];
+  assert.equal(front.getAttribute('fill-opacity'), '1.000');
+  for (const progress of [.35, .7]) {
+    s.window.scrollY = s.api.getState().runway * progress;
+    s.window.dispatchEvent(new Event('scroll'));
+    s.tick(2);
+    assert.ok(Number(front.getAttribute('fill-opacity')) < (progress < .5 ? .8 : .04));
+    assert.ok(Number(front.getAttribute('stroke-opacity')) >= .67);
+    assert.ok(Number(s.track.querySelector('.ensamble-drawing').style['--drawing-opacity']) > 0);
+  }
+  s.media('reduced-motion', true);
+  s.tick(2);
+  assert.equal(front.getAttribute('fill-opacity'), '1.000');
+  assert.equal(s.track.querySelector('.ensamble-drawing').style['--drawing-opacity'], '0');
+  s.media('reduced-motion', false);
+  s.window.scrollY = 0;
+  s.window.dispatchEvent(new Event('scroll'));
+  s.tick(2);
+  assert.equal(front.getAttribute('fill-opacity'), '1.000');
+  assert.equal(s.track.querySelector('.ensamble-drawing').style['--drawing-opacity'], '0');
+});
+
 test('hover reveals the structure and pointer leave restores the solid sculpture', (t) => {
   const s = scene(t),
     art = s.track.querySelector('.ensamble-sculpture');
