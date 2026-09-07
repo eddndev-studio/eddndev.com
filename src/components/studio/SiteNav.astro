@@ -7,8 +7,8 @@ import ArrowRightIcon from './ArrowRightIcon.astro';
 import EmailLink from './EmailLink.astro';
 
 const rows = [
-  [{ code: '01', label: 'Trabajo', href: '/work' }, { code: '02', label: 'Servicios', href: '/services' }],
-  [{ code: '03', label: 'Automatización', href: '/automation' }, { code: '04', label: 'Estudio', href: '/profile' }],
+  [{ code: '01', label: 'Trabajo', href: '/work/' }, { code: '02', label: 'Servicios', href: '/services/' }],
+  [{ code: '03', label: 'Automatización', href: '/automation/' }, { code: '04', label: 'Estudio', href: '/profile/' }],
 ];
 ---
 <header>
@@ -18,7 +18,7 @@ const rows = [
       <div class="flex items-center justify-between">
         <Brand />
         <div class="flex items-center gap-x-8">
-          <span class="hidden sm:block"><Button href="/contact" brand>Hablemos</Button></span>
+          <span class="hidden sm:block"><Button href="/contact/" brand>Hablemos</Button></span>
           <button
             type="button"
             data-nav-open
@@ -51,7 +51,7 @@ const rows = [
           <div class="flex items-center justify-between">
             <Brand brand />
             <div class="flex items-center gap-x-8">
-              <span class="hidden sm:block"><Button href="/contact" brand>Hablemos</Button></span>
+              <span class="hidden sm:block"><Button href="/contact/" brand>Hablemos</Button></span>
               <button
                 type="button"
                 data-nav-close

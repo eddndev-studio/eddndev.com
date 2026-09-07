@@ -21,7 +21,7 @@ const { projects } = Astro.props;
             <p class="type-narrow text-xs tracking-[0.1em] text-neutral-500 uppercase">{project.data.status}</p>
           </div>
           <h3 class="type-wide mt-12 font-display text-[clamp(3rem,6vw,6.5rem)] leading-[0.86] font-medium tracking-[-0.05em] text-white">
-            <a href={`/work/${project.slug}`}>
+            <a href={`/work/${project.slug}/`}>
               <span class="absolute inset-0"></span>
               {project.data.title}
             </a>

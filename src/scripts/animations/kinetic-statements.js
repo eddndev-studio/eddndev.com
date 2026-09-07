@@ -2,7 +2,8 @@ import { gsap } from '../core/gsap-core';
 import { onPageCleanup } from '../core/lifecycle';
 import { prefersReduced } from '../core/dom';
 
-const MUTED = 'rgba(241, 237, 244, 0.18)';
+// Keep the unrevealed words readable while the scroll highlight progresses.
+const MUTED = 'rgba(241, 237, 244, 0.48)';
 
 function offsetWithin(element, section) {
   let top = 0;

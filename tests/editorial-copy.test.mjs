@@ -74,7 +74,7 @@ test('the commercial site speaks as a studio instead of an individual provider',
   assert.match(layout, /const organizationLD/);
   assert.match(layout, /"@type": "Organization"/);
   assert.doesNotMatch(layout, /const personLD/);
-  assert.match(navigation, /label: 'Estudio', href: '\/profile'/);
+  assert.match(navigation, /label: 'Estudio', href: '\/profile\/'/);
 });
 
 test('the Achronyme case cites the current release and technical evidence', () => {

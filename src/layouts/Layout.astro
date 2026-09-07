@@ -15,29 +15,41 @@ interface Props {
     breadcrumbs?: { name: string; url: string }[];
     noindex?: boolean;
     contactEnding?: boolean;
+    structuredData?: Record<string, unknown>;
 }
 
 const {
     title = "edd n' dev | Estudio de diseño y software",
-    description = "Somos un estudio independiente. Diseñamos y construimos sitios, automatizaciones y software alrededor de procesos concretos.",
+    description = "Diseño web, software y automatización en México. edd n' dev forma parte de The Dash Studios: de la idea a la publicación de tu proyecto.",
     image,
     project,
     breadcrumbs = [],
     noindex = false,
     contactEnding = false,
+    structuredData,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalPath = (path: string) => path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
+const canonicalURL = new URL(canonicalPath(Astro.url.pathname), Astro.site);
+const organizationId = 'https://eddndev.com/#organization';
+const websiteId = 'https://eddndev.com/#website';
 
 // JSON-LD: the commercial site represents the studio. Eduardo remains its technical lead.
 const organizationLD = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId,
     "name": "edd n' dev",
     "alternateName": ["eddndev", "eddndev-studio"],
-    "url": "https://eddndev.com",
+    "url": "https://eddndev.com/",
     "logo": "https://eddndev.com/favicon.png",
-    "description": "Estudio independiente de diseño y software en México. Construimos sitios, automatizaciones y productos alrededor de procesos concretos.",
+    "description": "Estudio de diseño web, software y automatización en México que forma parte de The Dash Studios.",
+    "parentOrganization": {
+        "@type": "Organization",
+        "@id": "https://thedashstudios.mx/#organization",
+        "name": "The Dash Studios",
+        "url": "https://thedashstudios.mx/"
+    },
     "founder": {
         "@type": "Person",
         "name": "Eduardo Alonso",
@@ -50,33 +62,51 @@ const organizationLD = {
     "email": "contacto@eddndev.com"
 };
 
-// JSON-LD: WebSite (only on homepage)
+// Stable entity identifiers connect the studio, its parent and every page.
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
-const webSiteLD = isHome ? {
+const webSiteLD = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": websiteId,
     "name": "edd n' dev",
-    "url": "https://eddndev.com",
+    "url": "https://eddndev.com/",
+    "inLanguage": "es-MX",
+    "publisher": { "@id": organizationId }
+};
+
+const webPageLD = {
+    "@context": "https://schema.org",
+    "@type": Astro.url.pathname.startsWith('/profile/') ? 'AboutPage' : Astro.url.pathname.startsWith('/contact/') ? 'ContactPage' : 'WebPage',
+    "@id": `${canonicalURL.href}#webpage`,
+    "url": canonicalURL.href,
+    "name": title,
     "description": description,
-    "inLanguage": "es",
-    "publisher": {
-        "@type": "Organization",
-        "name": "edd n' dev",
-        "url": "https://eddndev.com"
-    }
-} : null;
+    "inLanguage": "es-MX",
+    "isPartOf": { "@id": websiteId },
+    "about": { "@id": organizationId },
+    ...((project || structuredData) ? { "mainEntity": { "@id": `${canonicalURL.href}#main-entity` } } : {}),
+    ...(breadcrumbs.length ? { "breadcrumb": { "@id": `${canonicalURL.href}#breadcrumb` } } : {}),
+};
+
+const mainEntityLD = structuredData || (project ? {
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": description,
+    "creator": { "@id": organizationId },
+} : null);
 
 // JSON-LD: BreadcrumbList (when breadcrumbs provided)
 const breadcrumbLD = breadcrumbs.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${canonicalURL.href}#breadcrumb`,
     "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://eddndev.com" },
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://eddndev.com/" },
         ...breadcrumbs.map((crumb, i) => ({
             "@type": "ListItem",
             "position": i + 2,
             "name": crumb.name,
-            "item": new URL(crumb.url, "https://eddndev.com").href
+            "item": new URL(canonicalPath(crumb.url), "https://eddndev.com").href
         }))
     ]
 } : null;
@@ -122,7 +152,8 @@ if (typeof resolvedImage === 'string') {
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:site_name" content="edd n' dev" />
         <meta property="og:locale" content="es_MX" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -134,19 +165,27 @@ if (typeof resolvedImage === 'string') {
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:url" content={canonicalURL} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={socialImageURL} />
         <meta property="twitter:image:alt" content={`Portada de: ${title}`} />
 
         <!-- Fonts (self-hosted) -->
-        <link rel="preload" href="/fonts/Mona-Sans.var.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/Mona-Sans-upright.var.woff2" as="font" type="font/woff2" crossorigin />
 
         <!-- JSON-LD Structured Data -->
         <script type="application/ld+json" set:html={JSON.stringify(organizationLD)} />
-        {webSiteLD && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
-        {breadcrumbLD && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLD)} />}
+        {!noindex && <script type="application/ld+json" set:html={JSON.stringify(webSiteLD)} />}
+        {!noindex && <script type="application/ld+json" set:html={JSON.stringify(webPageLD)} />}
+        {!noindex && breadcrumbLD && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLD)} />}
+        {!noindex && mainEntityLD && <script type="application/ld+json" set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            ...mainEntityLD,
+            '@id': `${canonicalURL.href}#main-entity`,
+            url: canonicalURL.href,
+            mainEntityOfPage: { '@id': `${canonicalURL.href}#webpage` },
+        }).replace(/</g, '\\u003c')} />}
 
         <ClientRouter />
 	</head>

@@ -7,10 +7,17 @@ interface Props {
   caption?: string;
 }
 const { src, alt, caption } = Astro.props;
+const widths = src.format === 'svg' ? undefined : [...new Set([400, 640, 800, 1200, 1600, src.width].filter(width => width <= src.width))].sort((a, b) => a - b);
 ---
 <FadeIn as="figure" class="space-y-4">
   <div class="media-frame">
-    <Image src={src} alt={alt} class="scroll-media w-full object-cover" />
+    <Image
+      src={src}
+      alt={alt}
+      widths={widths}
+      sizes={widths && '(min-width: 1536px) 1440px, (min-width: 1024px) calc(100vw - 6rem), (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2.5rem)'}
+      class="scroll-media w-full object-cover"
+    />
   </div>
   {caption && (
     <figcaption class="type-narrow flex items-center justify-end gap-3 text-sm tracking-wide text-neutral-600">

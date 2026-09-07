@@ -20,7 +20,7 @@ test('the page ending is one question-and-answer sequence with a single primary 
 
   assert.match(footer, /data-footer-colophon/);
   assert.match(footer, />\s*Empecemos por el trabajo actual\./);
-  assert.match(footer, /data-footer-cta[^>]*href="\/contact"/);
+  assert.match(footer, /data-footer-cta[^>]*href="\/contact\/"/);
   assert.equal((`${contact}\n${footer}`.match(/>Iniciar conversación</g) || []).length, 1);
   assert.doesNotMatch(footer, />Contacto directo<|>Respuesta<|Seguimiento directo/);
   assert.match(footer, /<EmailLink/);

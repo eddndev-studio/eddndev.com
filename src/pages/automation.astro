@@ -12,7 +12,14 @@ import CtaSection from '../components/automation/CtaSection.astro';
 <Layout
     title="Automatización con IA | edd n' dev"
     description="Construimos automatizaciones y agentes con reglas, permisos, bitácoras y puntos de aprobación para procesos operativos."
-    breadcrumbs={[{ name: "Automatización", url: "/automation" }]}
+    breadcrumbs={[{ name: "Automatización", url: "/automation/" }]}
+    structuredData={{
+        '@type': 'Service',
+        name: 'Automatización con IA',
+        description: 'Automatizaciones, agentes e integraciones para procesos operativos, con reglas, permisos y bitácoras.',
+        serviceType: 'Automatización de procesos con inteligencia artificial',
+        provider: { '@id': 'https://eddndev.com/#organization' },
+    }}
 >
     <AutomationHero />
     <ProblemSection />

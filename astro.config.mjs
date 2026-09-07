@@ -9,6 +9,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://eddndev.com',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()],
     build: {
@@ -22,5 +23,5 @@ export default defineConfig({
     },
   },
 
-  integrations: [mdx(), sitemap()]
+  integrations: [mdx(), sitemap({ filter: (page) => !page.endsWith('/404/') && !page.endsWith('/404.html') })]
 });

@@ -5,9 +5,7 @@ interface Props { label: string; value: string; invert?: boolean }
 const { label, value } = Astro.props;
 ---
 
-<FadeIn data-editorial-row>
-  <div class="flex min-h-40 flex-col-reverse justify-between py-7 sm:min-h-44 sm:px-6 sm:py-9 sm:first:pl-0">
-    <dt class="section-code mt-8">{label}</dt>
-    <dd class="type-wide font-display text-3xl font-semibold text-white sm:text-4xl">{value}</dd>
-  </div>
+<FadeIn data-editorial-row class="flex min-h-40 flex-col-reverse justify-between py-7 sm:min-h-44 sm:pr-6 sm:py-9">
+  <dt class="section-code mt-8">{label}</dt>
+  <dd class="type-wide font-display text-3xl font-semibold text-white sm:text-4xl">{value}</dd>
 </FadeIn>

@@ -126,7 +126,7 @@ test('the homepage gallery keeps real content, native links and static media', (
   assert.match(showcase, /id="work"/);
   assert.match(showcase, /href=\{`#work-\$\{project.slug\}`\}/);
   assert.match(project, /<article/);
-  assert.match(project, /href=\{`\/work\/\$\{project.slug\}`\}/);
+  assert.match(project, /href=\{`\/work\/\$\{project.slug\}\/`\}/);
   assert.match(project, /project.data.status/);
   assert.match(project, /project.data.description/);
   assert.match(project, /project.data.signal/);

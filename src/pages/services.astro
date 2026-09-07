@@ -8,9 +8,23 @@ import '../styles/services-page.css';
 ---
 
 <Layout
-  title="Servicios | edd n' dev"
-  description="Sitios medibles, automatización, catálogos y software con alcance, operación y seguimiento definidos."
-  breadcrumbs={[{ name: 'Servicios', url: '/services' }]}
+  title="Diseño web, software y automatización | edd n' dev"
+  description="Diseño y desarrollo de sitios web, automatización con IA, comercio electrónico y software a medida en México. Una práctica de The Dash Studios."
+  breadcrumbs={[{ name: 'Servicios', url: '/services/' }]}
+  structuredData={{
+    '@type': 'OfferCatalog',
+    name: 'Servicios de edd n\' dev',
+    itemListElement: services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: service.title,
+        description: service.description,
+        url: `https://eddndev.com/services/#${service.id}`,
+        provider: { '@id': 'https://eddndev.com/#organization' },
+      },
+    })),
+  }}
 >
   <div class="services-page" data-services-page>
     <ServicesHero />

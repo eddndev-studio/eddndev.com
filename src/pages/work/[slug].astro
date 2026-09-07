@@ -41,11 +41,10 @@ const links = Object.entries(entry.data.links ?? {});
 <Layout
     title={`${entry.data.title} | edd n' dev`}
     description={entry.data.description}
-    image={entry.data.cover}
     project={{ title: entry.data.title }}
     breadcrumbs={[
-        { name: "Proyectos", url: "/work" },
-        { name: entry.data.title, url: `/work/${entry.slug}` }
+        { name: "Proyectos", url: "/work/" },
+        { name: entry.data.title, url: `/work/${entry.slug}/` }
     ]}
 >
     <!-- HERO -->

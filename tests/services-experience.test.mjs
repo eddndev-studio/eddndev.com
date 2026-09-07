@@ -12,7 +12,7 @@ test('the services catalogue preserves linkable services and their complete scop
   assert.match(chapter, /service.description/);
   assert.match(chapter, /service.highlights.map/);
   assert.match(page, /services.map/);
-  assert.match(page, /breadcrumbs=\{\[\{ name: 'Servicios', url: '\/services' \}\]\}/);
+  assert.match(page, /breadcrumbs=\{\[\{ name: 'Servicios', url: '\/services\/' \}\]\}/);
   assert.match(read('src/components/services/ServicesHero.astro'), /href=\{`#\$\{service.id\}`\}/);
 });
 

@@ -7,6 +7,7 @@ import ArrowRightIcon from './ArrowRightIcon.astro';
 import FooterContactIcon from './FooterContactIcon.astro';
 import SocialMedia from './SocialMedia.astro';
 import FooterSignal from './FooterSignal.astro';
+import TheDashMark from '../../assets/brand/the-dash-studios-mark.svg';
 
 const currentYear = new Date().getFullYear();
 interface Props { compact?: boolean; }
@@ -16,16 +17,16 @@ const linkGroups = [
   {
     title: 'Explora',
     links: [
-      { title: 'Trabajo', href: '/work' },
-      { title: 'Servicios', href: '/services' },
-      { title: 'Automatización', href: '/automation' },
-      { title: 'Estudio', href: '/profile' },
+      { title: 'Trabajo', href: '/work/' },
+      { title: 'Servicios', href: '/services/' },
+      { title: 'Automatización', href: '/automation/' },
+      { title: 'Estudio', href: '/profile/' },
     ],
   },
   {
     title: 'eddndev',
     links: [
-      { title: 'Contacto', href: '/contact' },
+      { title: 'Contacto', href: '/contact/' },
       { title: 'Blog técnico: eddn.dev', href: 'https://eddn.dev' },
       { title: 'Achronyme', href: 'https://github.com/achronyme' },
     ],
@@ -44,7 +45,7 @@ const linkGroups = [
         <p class="footer-colophon__lede text-lg">
           Cuéntanos qué ocurre hoy, qué resultado buscas y qué restricciones ya conoces. Con eso podemos preparar el siguiente paso.
         </p>
-        <a data-footer-cta href="/contact" class="footer-cta" aria-label="Iniciar conversación">
+        <a data-footer-cta href="/contact/" class="footer-cta" aria-label="Iniciar conversación">
           <span class="footer-cta__label">Iniciar conversación</span>
           <span class="footer-cta__disc" aria-hidden="true">
             <ArrowRightIcon class="footer-cta__arrow" />
@@ -94,7 +95,16 @@ const linkGroups = [
     </nav>
 
     <div class="footer-colophon__signature">
-      <Brand />
+      <div class="footer-colophon__brands">
+        <Brand />
+        <a class="footer-affiliation" href="https://thedashstudios.mx/">
+          <TheDashMark class="footer-affiliation__mark" width="32" height="32" aria-hidden="true" focusable="false" />
+          <span class="footer-affiliation__copy">
+            <span class="footer-affiliation__label">Parte de la organización</span>
+            <span class="footer-affiliation__name">The Dash Studios</span>
+          </span>
+        </a>
+      </div>
       <p class="type-narrow text-sm sm:text-right">(c) 2020-{currentYear} eddndev. Todos los derechos reservados.</p>
     </div>
   </Container>

@@ -294,11 +294,62 @@
 
 .footer-colophon__signature {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
   margin-top: 3.5rem;
   color: var(--moonlight);
+}
+
+.footer-colophon__brands {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.footer-affiliation {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-affiliation__mark {
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  color: var(--signal-on-dark);
+}
+
+.footer-affiliation__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  line-height: 1.4;
+}
+
+.footer-affiliation__label {
+  color: var(--moonlight);
+  font-size: var(--text-xs);
+}
+
+.footer-affiliation__name {
+  color: var(--starlight);
+  font-size: var(--text-sm);
+  font-weight: 550;
+}
+
+.footer-affiliation:hover .footer-affiliation__name,
+.footer-affiliation:focus-visible .footer-affiliation__name {
+  color: var(--signal-on-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.footer-affiliation:focus-visible {
+  outline: 2px solid var(--signal-on-dark);
+  outline-offset: 6px;
 }
 
 @media (max-width: 1023px) {
@@ -405,6 +456,12 @@
   }
 
   .footer-cta {
+    color: LinkText;
+  }
+
+  .footer-affiliation__mark,
+  .footer-affiliation__label,
+  .footer-affiliation__name {
     color: LinkText;
   }
 }

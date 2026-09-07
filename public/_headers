@@ -6,3 +6,13 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Keep Cloudflare deployment aliases out of search results.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+/fonts/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
