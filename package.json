@@ -25,5 +25,22 @@
   },
   "devDependencies": {
     "parse5": "^7.3.0"
+  },
+  "overrides": {
+    "@astrojs/mdx": {
+      "defu": "6.1.5"
+    },
+    "astro": {
+      "defu": "6.1.5"
+    },
+    "defu": {
+      "defu": "6.1.5"
+    },
+    "h3": {
+      "defu": "6.1.5"
+    },
+    "unstorage": {
+      "defu": "6.1.5"
+    }
   }
 }
