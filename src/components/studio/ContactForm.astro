@@ -10,7 +10,7 @@ const services = ['Sitio web', 'Producto digital', 'Software / sistemas', 'Autom
 ---
 
 <div class="contact-form-shell">
-  <form data-contact-form data-endpoint={endpoint} class="contact-form" aria-label="Iniciar un proyecto" action="mailto:contacto@eddndev.com" method="post" enctype="text/plain">
+  <form data-contact-form data-endpoint={endpoint} class="contact-form" aria-label="Iniciar un proyecto" action="/contact/" method="post">
     <fieldset class="contact-form__services">
       <legend><span class="contact-form__number" aria-hidden="true">01</span> ¿Qué tienes en mente? <span class="contact-form__optional">Opcional</span></legend>
       <div class="contact-form__choices">
@@ -57,7 +57,7 @@ const services = ['Sitio web', 'Producto digital', 'Software / sistemas', 'Autom
     <div class="contact-form__dispatch">
       <p class="contact-form__required">* Campos obligatorios</p>
       <div class="contact-form__alert" data-contact-alert role="alert" hidden></div>
-      <button class="contact-submit" type="submit" data-contact-submit>
+      <button class="contact-submit" type="submit" data-contact-submit disabled>
         <span class="contact-submit__copy">
           <span class="contact-submit__label" data-contact-submit-label>{endpoint ? 'Iniciar conversación' : 'Preparar conversación'}</span>
           <span class="contact-submit__detail" data-contact-submit-detail>{endpoint ? 'Tu próximo proyecto empieza aquí' : 'Continuarás en tu correo para enviarla'}</span>
@@ -65,9 +65,12 @@ const services = ['Sitio web', 'Producto digital', 'Software / sistemas', 'Autom
         <span class="contact-submit__direction" aria-hidden="true"><ArrowRightIcon /></span>
       </button>
       <p class="contact-form__privacy">Usaremos tus datos solo para responder a tu consulta.</p>
-      <noscript><p class="contact-form__no-js">Este formulario abre tu aplicación de correo. También puedes escribir directamente a <EmailLink />.</p></noscript>
     </div>
   </form>
+  <noscript>
+    <style is:inline>[data-contact-form] { display: none !important; }</style>
+    <p class="contact-form__no-js">Escríbenos a <EmailLink /> y cuéntanos qué quieres construir.</p>
+  </noscript>
 
   <section class="contact-receipt" data-contact-receipt hidden aria-labelledby="contact-receipt-title">
     <p class="section-code" data-contact-receipt-code></p>

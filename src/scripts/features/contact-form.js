@@ -148,5 +148,7 @@ export default function initContactForm() {
   }, options);
 
   updateProgress();
+  // Native submission stays unavailable until the draft/delivery handler is ready.
+  submit.disabled = false;
   onPageCleanup(() => { events.abort(); request?.abort(); });
 }
